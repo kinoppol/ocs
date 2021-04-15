@@ -37,7 +37,7 @@
     <link href="<?php print site_url();?>template/adminbsb/plugins/bootstrap-select/css/bootstrap-select.css" rel="stylesheet" />
 
     <!-- Custom Css -->
-    <link href="<?php print site_url();?>template/adminbsb/css/style.css" rel="stylesheet">
+    <link href="<?php print site_url();?>template/adminbsb/css/style.css?lo=th" rel="stylesheet">
 
     <!-- AdminBSB Themes. You can choose a theme from css/themes instead of get all themes -->
     <link href="<?php print site_url();?>template/adminbsb/css/themes/all-themes.css" rel="stylesheet" />
@@ -148,9 +148,9 @@
                         <ul class="dropdown-menu pull-right">
                             <li><a href="<?php print site_url('public/user/profile'); ?>"><i class="material-icons">person</i>โปรไฟล์</a></li>
                             <!-- <li role="separator" class="divider"></li>
-                            <li><a href="javascript:void(0);"><i class="material-icons">group</i>Followers</a></li>
-                            <li><a href="javascript:void(0);"><i class="material-icons">shopping_cart</i>Sales</a></li>
-                            <li><a href="javascript:void(0);"><i class="material-icons">favorite</i>Likes</a></li>-->
+                            <li><a href="javascript:void(0);"><i class="material-icons">group</i>Followers</a></li>-->
+                            <li><a href="javascript:void(0);"><i class="material-icons">book</i>คู่มือ</a></li>
+                            <li><a href="javascript:void(0);"><i class="material-icons">info</i>เกี่ยวกับระบบ</a></li>-->
                             <li role="separator" class="divider"></li>
                             <li><a href="<?php print site_url('public/user/logout'); ?>"><i class="material-icons">input</i>ออกจากระบบ</a></li>
                         </ul>
@@ -184,86 +184,44 @@
             <div class="tab-content">
                 <div role="tabpanel" class="tab-pane fade in active in active" id="skins">
                     <ul class="demo-choose-skin">
-                        <li data-theme="red" class="active">
-                            <div class="red"></div>
-                            <span>Red</span>
-                        </li>
-                        <li data-theme="pink">
-                            <div class="pink"></div>
-                            <span>Pink</span>
-                        </li>
-                        <li data-theme="purple">
-                            <div class="purple"></div>
-                            <span>Purple</span>
-                        </li>
-                        <li data-theme="deep-purple">
-                            <div class="deep-purple"></div>
-                            <span>Deep Purple</span>
-                        </li>
-                        <li data-theme="indigo">
-                            <div class="indigo"></div>
-                            <span>Indigo</span>
-                        </li>
-                        <li data-theme="blue">
-                            <div class="blue"></div>
-                            <span>Blue</span>
-                        </li>
-                        <li data-theme="light-blue">
-                            <div class="light-blue"></div>
-                            <span>Light Blue</span>
-                        </li>
-                        <li data-theme="cyan">
-                            <div class="cyan"></div>
-                            <span>Cyan</span>
-                        </li>
-                        <li data-theme="teal">
-                            <div class="teal"></div>
-                            <span>Teal</span>
-                        </li>
-                        <li data-theme="green">
-                            <div class="green"></div>
-                            <span>Green</span>
-                        </li>
-                        <li data-theme="light-green">
-                            <div class="light-green"></div>
-                            <span>Light Green</span>
-                        </li>
-                        <li data-theme="lime">
-                            <div class="lime"></div>
-                            <span>Lime</span>
-                        </li>
-                        <li data-theme="yellow">
-                            <div class="yellow"></div>
-                            <span>Yellow</span>
-                        </li>
-                        <li data-theme="amber">
-                            <div class="amber"></div>
-                            <span>Amber</span>
-                        </li>
-                        <li data-theme="orange">
-                            <div class="orange"></div>
-                            <span>Orange</span>
-                        </li>
-                        <li data-theme="deep-orange">
-                            <div class="deep-orange"></div>
-                            <span>Deep Orange</span>
-                        </li>
-                        <li data-theme="brown">
-                            <div class="brown"></div>
-                            <span>Brown</span>
-                        </li>
-                        <li data-theme="grey">
-                            <div class="grey"></div>
-                            <span>Grey</span>
-                        </li>
-                        <li data-theme="blue-grey">
-                            <div class="blue-grey"></div>
-                            <span>Blue Grey</span>
-                        </li>
-                        <li data-theme="black">
-                            <div class="black"></div>
-                            <span>Black</span>
-                        </li>
+                        <?php
+
+                        function genColorBar($def='red'){
+                            $ret='';
+                            $color=array(   'red'=>'Red',
+                                            'pink'=>'Pink',
+                                            'purple'=>'Purple',
+                                            'indigo'=>'Indigo',
+                                            'blue'=>'Blue',
+                                            'light-blue'=>'Light Blue',
+                                            'cyan'=>'Cyan',
+                                            'teal'=>'Teal',
+                                            'green'=>'Green',
+                                            'light-green'=>'Light Green',
+                                            'lime'=>'Lime',
+                                            'yellow'=>'Yellow',
+                                            'amber'=>'amber',
+                                            'orange'=>'Orange',
+                                            'brown'=>'Brown',
+                                            'grey'=>'Grey',
+                                            'blue-grey'=>'Blue Grey',
+                                            'black'=>'Black'
+                                        );
+                            foreach($color as $k=>$v){
+                                $active='';
+                                if($k==$def)$active=' class="active"';
+                                $ret.='
+                                <li data-theme="'.$k.'"'.$active.'>
+                                    <div class="'.$k.'"></div>
+                                    <span>'.$v.'</span>
+                                </li>
+                                ';
+                            }
+                            return $ret;
+                        }
+                        
+                        print genColorBar($def='indigo');
+                        ?>
                     </ul>
                 </div>
                 <div role="tabpanel" class="tab-pane fade" id="settings">
