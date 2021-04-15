@@ -1,5 +1,6 @@
 <?php
-
+ob_start();
+session_start();
 // Path to the front controller (this file)
 define('FCPATH', __DIR__ . DIRECTORY_SEPARATOR);
 
