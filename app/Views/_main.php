@@ -9,7 +9,7 @@
     <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
     <title><?php print $title;?></title>
     <!-- Favicon-->
-    <link rel="icon" href="favicon.ico" type="image/x-icon">
+    <link rel="icon" href="<?php print site_url();?>favicon.ico" type="image/x-icon">
 
     <!-- Google Fonts -->
     <link href="https://fonts.googleapis.com/css?family=Roboto:400,700&subset=latin,cyrillic-ext" rel="stylesheet" type="text/css">
@@ -65,15 +65,17 @@
     <div class="overlay"></div>
     <!-- #END# Overlay For Sidebars -->
     <!-- Search Bar -->
+    <form action="<?php print site_url('public/search/result'); ?>" method="POST">
     <div class="search-bar">
         <div class="search-icon">
             <i class="material-icons">search</i>
         </div>
-        <input type="text" placeholder="START TYPING...">
+        <input type="text" placeholder="พิมพ์คำค้น...">
         <div class="close-search">
             <i class="material-icons">close</i>
         </div>
     </div>
+</form>
     <!-- #END# Search Bar -->
     <!-- Top Bar -->
     <nav class="navbar">
@@ -81,7 +83,7 @@
             <div class="navbar-header">
                 <a href="javascript:void(0);" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar-collapse" aria-expanded="false"></a>
                 <a href="javascript:void(0);" class="bars"></a>
-                <a class="navbar-brand" href="<?php print site_url();?>template/adminbsb/index.html">
+                <a class="navbar-brand" href="<?php print site_url();?>">
                         <?php print $systemName;?></a>
             </div>
             <div class="collapse navbar-collapse" id="navbar-collapse">
@@ -139,18 +141,18 @@
                     <img src="<?php print site_url();?>template/adminbsb/images/user.png" width="48" height="48" alt="User" />
                 </div>
                 <div class="info-container">
-                    <div class="name" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">John Doe</div>
-                    <div class="email">john.doe@example.com</div>
+                    <div class="name" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><?php print $dispName; ?></div>
+                    <div class="email"><?php print $email; ?></div>
                     <div class="btn-group user-helper-dropdown">
                         <i class="material-icons" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">keyboard_arrow_down</i>
                         <ul class="dropdown-menu pull-right">
-                            <li><a href="javascript:void(0);"><i class="material-icons">person</i>Profile</a></li>
-                            <li role="separator" class="divider"></li>
+                            <li><a href="<?php print site_url('public/user/profile'); ?>"><i class="material-icons">person</i>โปรไฟล์</a></li>
+                            <!-- <li role="separator" class="divider"></li>
                             <li><a href="javascript:void(0);"><i class="material-icons">group</i>Followers</a></li>
                             <li><a href="javascript:void(0);"><i class="material-icons">shopping_cart</i>Sales</a></li>
-                            <li><a href="javascript:void(0);"><i class="material-icons">favorite</i>Likes</a></li>
+                            <li><a href="javascript:void(0);"><i class="material-icons">favorite</i>Likes</a></li>-->
                             <li role="separator" class="divider"></li>
-                            <li><a href="javascript:void(0);"><i class="material-icons">input</i>Sign Out</a></li>
+                            <li><a href="<?php print site_url('public/user/logout'); ?>"><i class="material-icons">input</i>ออกจากระบบ</a></li>
                         </ul>
                     </div>
                 </div>
@@ -164,10 +166,10 @@
             <!-- Footer -->
             <div class="legal">
                 <div class="copyright">
-                <b>Version: </b> 1.0.0 &copy; <?php print date('Y'); ?> <a href="javascript:void(0);">สำนักความร่วมมือ</a>
+                <b>Version: </b> 1.0.0 &copy; <?php print date('Y'); ?> <a href="http://boc2.vec.go.th" target="_blank">สำนักความร่วมมือ</a>
                 </div>
                 <div class="version">
-                <a href="#">สำนักงานคณะกรรมการการอาชีวศึกษา</a> 
+                <a href="http://www.vec.go.th" target="_blank">สำนักงานคณะกรรมการการอาชีวศึกษา</a> 
                 </div>
             </div>
             <!-- #Footer -->

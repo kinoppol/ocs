@@ -34,4 +34,12 @@ $app       = require realpath($bootstrap) ?: $bootstrap;
  * Now that everything is setup, it's time to actually fire
  * up the engines and make this app do its thang.
  */
+if(!isset($_COOKIE['current_user'])) {
+    if($_SERVER['PATH_INFO']!='/user/login'&&$_SERVER['PATH_INFO']!='/user/checkLogin'){
+        //print_r($_SERVER);
+        print '<meta http-equiv="refresh" content="0;url='.site_url('public/user/login').'">';
+        exit();
+    }
+}
 $app->run();
+

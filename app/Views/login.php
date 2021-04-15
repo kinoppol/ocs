@@ -10,7 +10,7 @@
                             print '<div class="msg" style="color:red;">'.$_SESSION['message'].'</div>';
                             $_SESSION['message']='';
                         }else{
-                            print '<div class="msg">Sign in to start your session</div>';
+                            print '<div class="msg">โปรดระบุข้อมูลของคุณเพื่อเข้าสู่ระบบ</div>';
                         }
                     ?>
                     <div class="input-group">
@@ -31,8 +31,8 @@
                     </div>
                     <div class="row">
                         <div class="col-xs-8 p-t-5">
-                            <input type="checkbox" name="rememberme" id="rememberme" class="filled-in chk-col-pink">
-                            <label for="rememberme">Remember Me</label>
+                            <input type="checkbox" name="rememberme" id="rememberme" class="filled-in chk-col-pink" value="yes">
+                            <label for="rememberme">ลงชื่อเข้าใช้ค้างไว้</label>
                         </div>
                         <div class="col-xs-4">
                             <button class="btn btn-block bg-pink waves-effect" type="submit">SIGN IN</button>
