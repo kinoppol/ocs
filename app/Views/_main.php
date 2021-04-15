@@ -37,7 +37,7 @@
     <link href="<?php print site_url();?>template/adminbsb/plugins/bootstrap-select/css/bootstrap-select.css" rel="stylesheet" />
 
     <!-- Custom Css -->
-    <link href="<?php print site_url();?>template/adminbsb/css/style.css" rel="stylesheet">
+    <link href="<?php print site_url();?>template/adminbsb/css/style.css?lo=th" rel="stylesheet">
 
     <!-- AdminBSB Themes. You can choose a theme from css/themes instead of get all themes -->
     <link href="<?php print site_url();?>template/adminbsb/css/themes/all-themes.css" rel="stylesheet" />
