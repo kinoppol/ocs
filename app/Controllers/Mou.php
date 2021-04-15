@@ -2,13 +2,13 @@
 
 namespace App\Controllers;
 
-class Admin extends BaseController
+class Mou extends BaseController
 {
-	public function systemSetting()
+	public function list()
 	{
 		helper('user');
 		$data=array(
-			'title'=>'ตั้งค่าระบบ',
+			'title'=>'รายการความร่วมมือ',
 			'systemName'=>'งานความร่วมมือ',
 			'email'=>current_user('email'),
 			'dispName'=>current_user('name').' '.current_user('surname'),
@@ -16,12 +16,12 @@ class Admin extends BaseController
 		);
 		return view('_main',$data);
 	}
-	public function userManage()
+	public function search()
 	{
 		
 		helper('user');
 		$data=array(
-			'title'=>'จัดการผู้ใช้',
+			'title'=>'ค้นห้าข้อมูลความร่วมมือ',
 			'systemName'=>'งานความร่วมมือ',
 			'email'=>current_user('email'),
 			'dispName'=>current_user('name').' '.current_user('surname'),

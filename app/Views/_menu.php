@@ -1,87 +1,67 @@
 <?php
-function genMainMenu($data){
-    $ret='';
+helper('menu');
 
-    $ret='<ul class="list">
-    <li class="header">เมนูหลัก</li>'.(is_array($data)?genMenu($data):'')
-    .'   
-    </li>
-    </ul>
-    ';
-    return $ret;
-}
-
-function genMenu($data){
-    $ret='';
-    foreach($data as $row){
-        if(isset($row['items'])&&is_array($row['items'])){
-            $ret.='<li>
-            <a href="javascript:void(0)" class="menu-toggle">
-                <i class="material-icons">'.$row['bullet'].'</i>
-                <span>'.$row['text'].'</span>
-            </a>
-            '.genSubMenu($row['items']).'
-            </li>';
-        }else{
-        $ret.='<li>
-                <a href="'.$row['url'].'">
-                    <i class="material-icons">'.$row['bullet'].'</i>
-                    <span>'.$row['text'].'</span>
-                </a>
-            </li>';
-        }
-    }
-    return $ret;
-}
 $data=array(
-    'home'=>array(
-        'text'=>'หน้าหลัก',
+    'dashboard'=>array(
+        'text'=>'ภาพรวม',
         'url'=>site_url(),
-        'bullet'=>'book',
+        'bullet'=>'dashboard',
+        'cond'=>true,/*
         'items'=>array(
             'dashboard'=>array(
                 'text'=>'ภาพรวม',
                 'url'=>site_url(),
                 'bullet'=>'book',
+                'cond'=>true,
                 'items'=>array(
                     'dashboard'=>array(
                         'text'=>'อีกๆ',
                         'url'=>site_url(),
                         'bullet'=>'book',
+                        'cond'=>true,
                         ),
                     ),
                 ),
-            ),
+            ),*/
         ),
-        
+    'mou'=>array(
+        'text'=>'การลงนามความร่วมมือ',
+        'url'=>site_url('public/mou/'),
+        'bullet'=>'description',
+        'cond'=>true,
+        'items'=>array(
+            'list'=>array(
+                'text'=>'รายการ MOU',
+                'url'=>site_url('public/mou/list'),
+                'cond'=>true,
+            ),
+            'search'=>array(
+                'text'=>'ค้นหา MOU',
+                'url'=>site_url('public/mou/search'),
+                'cond'=>true,
+            ),
+
+        ),
+    ),
     'manage'=>array(
         'text'=>'จัดการ',
         'url'=>site_url(),
-        'bullet'=>'swap_calls',
+        'bullet'=>'settings',
+        'cond'=>current_user('user_type')=='admin',
+        'items'=>array(
+            'systemManage'=>array(
+                'text'=>'ตั้งค่าระบบ',
+                'url'=>site_url('public/admin/systemSetting'),
+                'cond'=>true,
+                ),
+            'userManage'=>array(
+                'text'=>'จัดการผู้ใช้',
+                'url'=>site_url('public/admin/userManage'),
+                'cond'=>true,
+                ),
+            ),
         ),
 );
 
-function genSubMenu($data){
-    $ret='<ul class="ml-menu">';
-    foreach($data as $row){
-        if(isset($row['items'])&&is_array($row['items'])){
-        $ret.='
-            <li>
-                <a href="javascript:void(0);" class="menu-toggle">
-                    <span>'.$row['text'].'<span>
-                </a>
-                '.genSubMenu($row['items']).'
-            </li>
-            ';            
-        }else{
-        $ret.='
-            <li>
-                <a href="'.$row['url'].'">'.$row['text'].'</a>
-            </li>
-            ';
-        }
-    }
-    $ret.='</ul>';
-    return $ret;
-}
-print genMainMenu($data);
+
+print genMainMenu($data,$def=site_url('/public'.$_SERVER['PATH_INFO']));
