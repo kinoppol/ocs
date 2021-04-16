@@ -49,6 +49,16 @@ class User extends BaseController
 		return json_encode($result);
 	}
 
+	public function register(){
+		$data=array(
+			'title'=>'เข้าสู่ระบบ',
+			'systemName'=>'งานความร่วมมือ',
+			'mainMenu'=>view('_menu'),
+			'content'=>view('register')
+		);
+        return view('_main',$data);
+	}
+
 	public function checkLogin(){
 		$userModel = model('App\Models\UserModel');
         $data=array(

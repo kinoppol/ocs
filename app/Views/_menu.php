@@ -1,18 +1,13 @@
 <?php
 helper('menu');
+helper('user');
 
 $data=array(
-    'register'=>array(
-        'text'=>'ลงทะเบียน',
-        'url'=>site_url('public/user/register'),
-        'bullet'=>'portrait',
-        'cond'=>current_user('user_type')=='user',
-    ),
     'dashboard'=>array(
         'text'=>'ภาพรวม',
         'url'=>site_url(),
         'bullet'=>'dashboard',
-        'cond'=>current_user('user_type')!='user',/*
+        'cond'=>true,/*
         'items'=>array(
             'dashboard'=>array(
                 'text'=>'ภาพรวม',
@@ -29,7 +24,13 @@ $data=array(
                     ),
                 ),
             ),*/
-        ),
+        ),        
+    'register'=>array(
+        'text'=>'ลงทะเบียน',
+        'url'=>site_url('public/user/register'),
+        'bullet'=>'portrait',
+        'cond'=>current_user('user_type')=='user',
+    ),
     'mou'=>array(
         'text'=>'การลงนามความร่วมมือ',
         'url'=>site_url('public/mou/'),

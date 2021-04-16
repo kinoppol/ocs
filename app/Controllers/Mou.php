@@ -10,8 +10,6 @@ class Mou extends BaseController
 		$data=array(
 			'title'=>'รายการความร่วมมือ',
 			'systemName'=>'งานความร่วมมือ',
-			'email'=>current_user('email'),
-			'dispName'=>current_user('name').' '.current_user('surname'),
 			'mainMenu'=>view('_menu'),
 			'content'=>view('listMou'),
 		);
@@ -24,8 +22,6 @@ class Mou extends BaseController
 		$data=array(
 			'title'=>'ค้นห้าข้อมูลความร่วมมือ',
 			'systemName'=>'งานความร่วมมือ',
-			'email'=>current_user('email'),
-			'dispName'=>current_user('name').' '.current_user('surname'),
 			'mainMenu'=>view('_menu'),
 		);
 		return view('_main',$data);

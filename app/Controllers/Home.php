@@ -13,7 +13,7 @@ class Home extends BaseController
 	{
 		
 		$MouModel = model('App\Models\MouModel');
-		helper('user');
+		
 		
 		$currentYear=date('Y');
 		
@@ -28,8 +28,6 @@ class Home extends BaseController
 		$data=array(
 			'title'=>'ภาพรวม',
 			'systemName'=>'งานความร่วมมือ',
-			'email'=>current_user('email'),
-			'dispName'=>current_user('name').' '.current_user('surname'),
 			'mainMenu'=>view('_menu'),
 			'content'=>view('dashboard',$data),
 		);

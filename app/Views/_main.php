@@ -1,5 +1,5 @@
 <?php
-
+helper('user');
 ?>
 <!DOCTYPE html>
 <html>
@@ -98,7 +98,7 @@
                     <li class="dropdown">
                         <a href="javascript:void(0);" class="dropdown-toggle" data-toggle="dropdown" role="button">
                             <i class="material-icons">notifications</i>
-                            <span class="label-count">7</span>
+                            <!-- <span class="label-count">7</span> -->
                         </a>
                         <ul class="dropdown-menu">
                             <li class="header">แจ้งเตือน</li>
@@ -115,7 +115,7 @@
                     <li class="dropdown">
                         <a href="javascript:void(0);" class="dropdown-toggle" data-toggle="dropdown" role="button">
                             <i class="material-icons">flag</i>
-                            <span class="label-count">9</span>
+                            <!-- <span class="label-count">9</span> -->
                         </a>
                         <ul class="dropdown-menu">
                             <li class="header">TASKS</li>
@@ -141,11 +141,11 @@
             <!-- User Info -->
             <div class="user-info">
                 <div class="image">
-                    <img src="<?php print site_url();?>template/adminbsb/images/user.png" width="48" height="48" alt="User" />
+                    <img src="<?php print current_user('picture')!=''?current_user('picture'):site_url('template/adminbsb/images/user.png'); ?>" width="48" height="48" alt="User" />
                 </div>
                 <div class="info-container">
-                    <div class="name" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><?php print $dispName; ?></div>
-                    <div class="email"><?php print $email; ?></div>
+                    <div class="name" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><?php print current_user('name').' '.current_user('surname'); ?></div>
+                    <div class="email"><?php print current_user('email'); ?></div>
                     <div class="btn-group user-helper-dropdown">
                         <i class="material-icons" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">keyboard_arrow_down</i>
                         <ul class="dropdown-menu pull-right">
