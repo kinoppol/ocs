@@ -4,11 +4,13 @@ namespace App\Controllers;
 
 class Mou extends BaseController
 {
-	public function list()
+	public function list($year='')
 	{
+		if($year=='')$year=date('Y');
 		$mouModel = model('App\Models\MouModel');
 		$data=array(
-			'data'=>$mouModel->getMou(),
+			'data'=>$mouModel->getMou($year),
+			'year'=>$year,
 		);
 		$data=array(
 			'title'=>'รายการความร่วมมือ',
@@ -29,10 +31,12 @@ class Mou extends BaseController
 		return view('_main',$data);
 	}
 	
-	public function pdf()
+	public function pdf($id)
 	{		
 		$mouModel = model('App\Models\MouModel');
-		$data=array();
+		$data=array(
+			'id'=>$id,
+		);
 		return view('mouPDF',$data);
 	}
 }

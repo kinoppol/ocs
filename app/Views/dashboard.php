@@ -21,14 +21,14 @@ $data=array(
         'text'=>'ข้อมูล MOU ปี '.($year+543-1),
         'number'=>$mouLastYearCount,
         'icon'=>'folder',
-        'url'=>site_url('public/business/list'),
+        'url'=>site_url('public/mou/list/'.($year-1)),
     ),
     'mouYear'=>array(
         'color'=>'green',
         'text'=>'ข้อมูล MOU ปี '.($year+543),
         'number'=>$mouYearCount,
         'icon'=>'create_new_folder',
-        'url'=>site_url('public/business/list'),
+        'url'=>site_url('public/mou/list/'.$year),
     ),
 );
 

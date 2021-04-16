@@ -378,6 +378,10 @@ helper('user');
                 $('#addUserBtn').click(function(){
                     $('#newUserModal').modal('show');
                 });
+
+                $('#selectYearMou').on('change', function() {
+                    window.location.replace("<?php print site_url().'public/mou/list/'; ?>"+this.value);
+                });
             </script>
 </body>
 </html>

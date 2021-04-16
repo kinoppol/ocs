@@ -12,9 +12,10 @@ class MouModel extends Model
         $mouCount=count($mou);
         return $mouCount;
     }
-    public function getMou(){
+    public function getMou($year){
         $db = \Config\Database::connect();
         $builder = $db->table('mou');
+        $builder->like('mou_date',$year,'after');
         $mou=$builder->get()->getResult();
         $builder = $db->table('school');
         $schools=$builder->get()->getResult();
