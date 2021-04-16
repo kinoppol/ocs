@@ -5,7 +5,7 @@
     $userRows=array();
     foreach($users as $user){
         $user = get_object_vars($user);
-        array_push($user,'<button class="btn btn-xs btn-danger waves-effect"><i class="material-icons">edit</i> แก้ไข</button>');
+        array_push($user,'<button class="btn btn-xs btn-warning waves-effect"><i class="material-icons">edit</i> แก้ไข</button>');
         $userRows[]=$user;
     }
     $userArr=array('thead'=>array(

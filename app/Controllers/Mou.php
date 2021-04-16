@@ -6,24 +6,33 @@ class Mou extends BaseController
 {
 	public function list()
 	{
-		helper('user');
+		$mouModel = model('App\Models\MouModel');
+		$data=array(
+			'data'=>$mouModel->getMou(),
+		);
 		$data=array(
 			'title'=>'รายการความร่วมมือ',
 			'systemName'=>'งานความร่วมมือ',
 			'mainMenu'=>view('_menu'),
-			'content'=>view('listMou'),
+			'content'=>view('listMou',$data),
 		);
 		return view('_main',$data);
 	}
 	public function search()
 	{
-		
-		helper('user');
+	
 		$data=array(
-			'title'=>'ค้นห้าข้อมูลความร่วมมือ',
+			'title'=>'ค้นหาข้อมูลความร่วมมือ',
 			'systemName'=>'งานความร่วมมือ',
 			'mainMenu'=>view('_menu'),
 		);
 		return view('_main',$data);
+	}
+	
+	public function pdf()
+	{		
+		$mouModel = model('App\Models\MouModel');
+		$data=array();
+		return view('mouPDF',$data);
 	}
 }

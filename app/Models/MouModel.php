@@ -12,6 +12,29 @@ class MouModel extends Model
         $mouCount=count($mou);
         return $mouCount;
     }
+    public function getMou(){
+        $db = \Config\Database::connect();
+        $builder = $db->table('mou');
+        $mou=$builder->get()->getResult();
+        $builder = $db->table('school');
+        $schools=$builder->get()->getResult();
+            $school=array();
+            foreach($schools as $row){
+                $school[$row->school_id]=$row->school_name;
+            }
+        $builder = $db->table('business');
+        $businesss=$builder->get()->getResult();
+        $business=array();
+        foreach($businesss as $row){
+            $business[$row->business_id]=$row->business_name;
+        }
+        $result=array(
+            'mou'=>$mou,
+            'school'=>$school,
+            'business'=>$business,
+        );
+        return $result;
+    }
     public function getMouYearCount($year){
         $db = \Config\Database::connect();
         $builder = $db->table('mou');
