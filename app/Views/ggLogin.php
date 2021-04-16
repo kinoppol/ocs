@@ -6,7 +6,7 @@
                     <div class="card">
                     <div class="header">
                             <h2>
-                                ลงชื่อเข้าใช้งานระบบ   
+                                ลงชื่อเข้าใช้ระบบ<?php print $systemName; ?>   
                             </h2>
                             </div>
                             
