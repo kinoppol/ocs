@@ -13,6 +13,7 @@ class Mou extends BaseController
 			'email'=>current_user('email'),
 			'dispName'=>current_user('name').' '.current_user('surname'),
 			'mainMenu'=>view('_menu'),
+			'content'=>view('listMou'),
 		);
 		return view('_main',$data);
 	}

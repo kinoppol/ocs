@@ -12,9 +12,41 @@ class User extends BaseController
 			'systemName'=>'งานความร่วมมือ',
 		);
 		$data=array(
-            'content'=>view('login',$data)
+            //'content'=>view('login',$data)
+			'content'=>view('ggLogin',$data)
         );
         return view('_authen',$data);
+	}
+	public function checkGoogle(){
+		$userModel = model('App\Models\UserModel');
+		helper('google');
+		$result=checkToken($_POST);
+		if($result['status']=='ok'){
+			$user=$userModel->checkEmail($result['data']['email']);
+			
+			$loginTime=time()+3600;
+			if(count($user)>=1){
+				$data=array(
+					'name'=>$result['data']['given_name'],
+					'surname'=>$result['data']['family_name'],
+					'picture'=>$result['data']['picture'],
+				);
+				$userModel->updateUser($result['data']['email'],$data);
+			}else{
+				$data=array(
+				'username'=>$result['data']['email'],
+				'email'=>$result['data']['email'],
+				'name'=>$result['data']['given_name'],
+				'surname'=>$result['data']['family_name'],
+				'password'=>md5(time()),
+				'picture'=>$result['data']['picture'],
+			);				
+				$userModel->addUser($data);
+			}
+			$user=$userModel->checkEmail($result['data']['email']);
+			setcookie("current_user", serialize($user), $loginTime,'/');
+		}
+		return json_encode($result);
 	}
 
 	public function checkLogin(){

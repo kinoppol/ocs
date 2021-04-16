@@ -24,6 +24,9 @@
     <!-- Animation Css -->
     <link href="<?php print site_url();?>template/adminbsb/plugins/animate-css/animate.css" rel="stylesheet" />
 
+    <!-- JQuery DataTable Css -->
+    <link href="<?php print site_url();?>template/adminbsb/plugins/jquery-datatable/skin/bootstrap/css/dataTables.bootstrap.css" rel="stylesheet">
+
     <!-- Bootstrap Material Datetime Picker Css -->
     <link href="<?php print site_url();?>template/adminbsb/plugins/bootstrap-material-datetimepicker/css/bootstrap-material-datetimepicker.css" rel="stylesheet" />
 
@@ -281,10 +284,11 @@
     <section class="content">
         <div class="container-fluid">
             <div class="block-header">
-                <h2><?php print $title;?></h2>
+                <h2 style="text-align:left;float:left;"><?php print $title;?></h2><h2 style="text-align:right;float:right;"><?php print $_SERVER['PATH_INFO']; ?></h2>
+                <hr style="clear:both;"/>
             </div>
-       
-            <?php print $content;?>
+                        
+            <?php print $content; ?>
     </section>
 
     <!-- Jquery Core Js -->
@@ -302,6 +306,9 @@
     <!-- Waves Effect Plugin Js -->
     <script src="<?php print site_url();?>template/adminbsb/plugins/node-waves/waves.js"></script>
 
+    <!-- Jquery CountTo Plugin Js -->
+    <script src="<?php print site_url();?>template/adminbsb/plugins/jquery-countto/jquery.countTo.js"></script>
+
     <!-- Autosize Plugin Js -->
     <script src="<?php print site_url();?>template/adminbsb/plugins/autosize/autosize.js"></script>
 
@@ -314,11 +321,63 @@
     <!-- Bootstrap Datepicker Plugin Js -->
     <script src="<?php print site_url();?>template/adminbsb/plugins/bootstrap-datepicker/js/bootstrap-datepicker.js"></script>
 
+    <!-- Jquery DataTable Plugin Js -->
+    <script src="<?php print site_url();?>template/adminbsb/plugins/jquery-datatable/jquery.dataTables.js"></script>
+    <script src="<?php print site_url();?>template/adminbsb/plugins/jquery-datatable/skin/bootstrap/js/dataTables.bootstrap.js"></script>
+    <script src="<?php print site_url();?>template/adminbsb/plugins/jquery-datatable/extensions/export/dataTables.buttons.min.js"></script>
+    <script src="<?php print site_url();?>template/adminbsb/plugins/jquery-datatable/extensions/export/buttons.flash.min.js"></script>
+    <script src="<?php print site_url();?>template/adminbsb/plugins/jquery-datatable/extensions/export/jszip.min.js"></script>
+    <script src="<?php print site_url();?>template/adminbsb/plugins/jquery-datatable/extensions/export/pdfmake.min.js"></script>
+    <script src="<?php print site_url();?>template/adminbsb/plugins/jquery-datatable/extensions/export/vfs_fonts.js"></script>
+    <script src="<?php print site_url();?>template/adminbsb/plugins/jquery-datatable/extensions/export/buttons.html5.min.js"></script>
+    <script src="<?php print site_url();?>template/adminbsb/plugins/jquery-datatable/extensions/export/buttons.print.min.js"></script>
+
     <!-- Custom Js -->
     <script src="<?php print site_url();?>template/adminbsb/js/admin.js"></script>
     <script src="<?php print site_url();?>template/adminbsb/js/pages/forms/basic-form-elements.js"></script>
 
     <!-- Demo Js -->
     <script src="<?php print site_url();?>template/adminbsb/js/demo.js"></script>
+    <script>
+        $('.count-to').countTo({
+        formatter: function (value, options) {
+            return value.toFixed(options.decimals).replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+        }
+    });
+    $(function () {
+    $('.js-basic-example').DataTable( {
+                    "oLanguage": {
+                    "sLengthMenu": "แสดง _MENU_ รายการ ต่อหน้า",
+                    "sZeroRecords": "ไม่เจอข้อมูลที่ค้นหา",
+                    "sInfo": "แสดง _START_ ถึง _END_ ของ _TOTAL_ รายการ",
+                    "sInfoEmpty": "แสดง 0 ถึง 0 ของ 0 รายการ",
+                    "sInfoFiltered": "(จากรายการทั้งหมด _MAX_ รายการ)",
+                    "sSearch": "<i class=\"material-icons\">filter_list</i> กรอง :"
+                                  }
+                } );
+
+    //Exportable table
+    $('.js-exportable').DataTable({
+        "oLanguage": {
+                    "sLengthMenu": "แสดง _MENU_ รายการ ต่อหน้า",
+                    "sZeroRecords": "ไม่เจอข้อมูลที่ค้นหา",
+                    "sInfo": "แสดง _START_ ถึง _END_ ของ _TOTAL_ รายการ",
+                    "sInfoEmpty": "แสดง 0 ถึง 0 ของ 0 รายการ",
+                    "sInfoFiltered": "(จากรายการทั้งหมด _MAX_ รายการ)",
+                    "sSearch": "<i class=\"material-icons\">filter_list</i> กรอง :",
+                                  },
+        dom: 'Bfrtip',
+        responsive: true,
+        buttons: [
+             'excel', 'pdf', 'print'
+        ]
+    });
+});
+
+
+                $('#addUserBtn').click(function(){
+                    $('#newUserModal').modal('show');
+                });
+            </script>
 </body>
 </html>
