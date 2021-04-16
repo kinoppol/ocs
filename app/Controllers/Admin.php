@@ -16,7 +16,7 @@ class Admin extends BaseController
 	}
 	public function userManage()
 	{
-		$userModel = model('App\Models\userModel');
+		$userModel = model('App\Models\UserModel');
 		helper('user');
 		$data=array(
 			'users'=>$userModel->getUsers(),
