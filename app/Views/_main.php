@@ -379,6 +379,10 @@ helper('user');
                     $('#newUserModal').modal('show');
                 });
 
+                $('#addMou').click(function(){
+                    $('#addMouModal').modal('show');
+                });
+
                 $('#selectYearMou').on('change', function() {
                     window.location.replace("<?php print site_url().'public/mou/list/'; ?>"+this.value);
                 });

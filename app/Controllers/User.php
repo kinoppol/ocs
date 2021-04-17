@@ -51,7 +51,7 @@ class User extends BaseController
 
 	public function register(){
 		$data=array(
-			'title'=>'เข้าสู่ระบบ',
+			'title'=>'ลงทะเบียนผู้ใช้งาน',
 			'systemName'=>'งานความร่วมมือ',
 			'mainMenu'=>view('_menu'),
 			'content'=>view('register')

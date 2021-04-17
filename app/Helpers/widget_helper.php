@@ -1,4 +1,5 @@
 <?php
+helper('array');
 function genWidget($data){
     $ret='';
     if(is_marray($data)){
@@ -20,13 +21,4 @@ function genWidget($data){
     }
     if(isset($data['url']))$ret='<a href="'.$data['url'].'">'.$ret.'</a>';
     return $ret;
-}
-
-function is_marray($array){
-    if (count($array) == count($array, COUNT_RECURSIVE)){
-        return false;
-    }
-    else{
-        return true;
-    }
 }

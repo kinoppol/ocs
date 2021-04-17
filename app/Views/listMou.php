@@ -44,6 +44,7 @@
                                     print $option;
                                 ?>
                                 </select>  
+                        <button class="btn btn-primary" id="addMou"><i class="material-icons">add</i> เพิ่มข้อมูล MOU</button>
                         <div class="body">
                         <div class="table-responsive">
                         <?php
@@ -56,3 +57,17 @@
                     </div>
                     <script>
                     </script>
+                    
+                    <div class="modal fade" id="addMouModal" tabindex="-1" role="dialog">
+                <div class="modal-dialog" role="document">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h4 class="modal-title" id="defaultModalLabel">เพิ่มข้อมูล MOU</h4>
+                        </div>
+                        <div class="modal-body">
+                            โปรดรอสักครู่..
+                        </div>
+                        <div class="modal-footer">
+                        <button type="button" class="btn btn-link waves-effect" data-dismiss="modal">ปิด</button>
+                        </div>
+                    </div>
