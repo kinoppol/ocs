@@ -6,6 +6,7 @@ class Mou extends BaseController
 {
 	public function list($year='')
 	{
+		ini_set('memory_limit', '2048M');
 		if($year=='')$year=date('Y');
 		$mouModel = model('App\Models\MouModel');
 		$data=array(
