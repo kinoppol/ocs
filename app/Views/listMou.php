@@ -6,6 +6,7 @@
         $business=$data['business'];
         foreach($data['mou'] as $mou){
             $mou = get_object_vars($mou);
+            if(!isset($business[$mou['business_id']]))continue;
             $mouRows[]=array(
                 'business_id'=>$business[$mou['business_id']],
                 'school_id'=>$school[$mou['school_id']],
