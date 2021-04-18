@@ -31,11 +31,39 @@ $data=array(
         'bullet'=>'portrait',
         'cond'=>current_user('user_type')=='user',
     ),
+    'school'=>array(
+        'text'=>'ข้อมูลสถานศึกษา',
+        'url'=>site_url('public/school/detail'),
+        'bullet'=>'home',
+        'cond'=>current_user('user_type')=='school',
+
+    ),
+    'govBasic'=>array(
+        'text'=>'ข้อมูลพื้นฐานของ อ.กรอ.อศ.',
+        'url'=>site_url('public/school/detail'),
+        'bullet'=>'home',
+        'cond'=>current_user('user_type')=='gov',
+
+    ),
+    'instituteBasic'=>array(
+        'text'=>'ข้อมูลพื้นฐานของสถาบันฯ',
+        'url'=>site_url('public/institute/detail'),
+        'bullet'=>'home',
+        'cond'=>current_user('user_type')=='institute',
+
+    ),
+    'business'=>array(
+        'text'=>'ข้อมูลสถานประกอบการ',
+        'url'=>site_url('public/business/list'),
+        'bullet'=>'home',
+        'cond'=>current_user('user_type')!='board',
+
+    ),
     'mou'=>array(
         'text'=>'การลงนามความร่วมมือ',
         'url'=>site_url('public/mou/'),
         'bullet'=>'description',
-        'cond'=>current_user('user_type')!='user',
+        'cond'=>current_user('user_type')!='user'&&current_user('user_type')!='board',
         'items'=>array(
             'list'=>array(
                 'text'=>'รายการ MOU',
@@ -68,6 +96,61 @@ $data=array(
                 ),
             ),
         ),
+    
+        'gov'=>array(
+            'text'=>'การดำเนินงานของ อ.กรอ.อศ.',
+            'url'=>site_url(),
+            'bullet'=>'settings',
+            'cond'=>current_user('user_type')=='gov',
+            'items'=>array(
+                'menu1'=>array(
+                    'text'=>'งาน 1',
+                    'url'=>site_url('public/admin/systemSetting'),
+                    'cond'=>true,
+                    ),
+                'menu2'=>array(
+                    'text'=>'งาน 2',
+                    'url'=>site_url('public/admin/userManage'),
+                    'cond'=>true,
+                    ),
+                ),
+            ),
+            'boardSchool'=>array(
+                'text'=>'ข้อมูลสถานศึกษา',
+                'url'=>site_url(),
+                'bullet'=>'home',
+                'cond'=>current_user('user_type')=='board',
+                ),
+            'boardInstitute'=>array(
+                'text'=>'ข้อมูลสถาบันการอาชีวศึกษา',
+                'url'=>site_url(),
+                'bullet'=>'home',
+                'cond'=>current_user('user_type')=='board',
+                ),
+            'boardBusiness'=>array(
+                'text'=>'ข้อมูลสถานประกอบการ',
+                'url'=>site_url(),
+                'bullet'=>'home',
+                'cond'=>current_user('user_type')=='board',
+                ),
+            'boardGov'=>array(
+                'text'=>'ข้อมูล อ.กรอ.อศ.',
+                'url'=>site_url(),
+                'bullet'=>'people',
+                'cond'=>current_user('user_type')=='board',
+                ),
+            'boardMou'=>array(
+                'text'=>'ข้อมูลการลงนามความร่วมมือ',
+                'url'=>site_url(),
+                'bullet'=>'book',
+                'cond'=>current_user('user_type')=='board',
+                ),
+            'report'=>array(
+                'text'=>'รายงานผลการดำเนินงาน',
+                'url'=>site_url(),
+                'bullet'=>'book',
+                'cond'=>true,
+                ),
 );
 
 

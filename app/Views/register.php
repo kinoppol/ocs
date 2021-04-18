@@ -33,14 +33,38 @@ $orgData=array(
 );
 
 $userType=array(
-    'board'=>'ผู้บริหารสำนักงานคณะกรรมการอาชีวศึกษา',
-    'boc'=>'สำนักความร่วมมือ',
-    'gov'=>'เลขานุการ กรอ.อศ.',
+    'school'=>'สถานศึกษา',
+    'gov'=>'อ.กรอ.อศ.',
     'institute'=>'สถาบันการอาชีวศึกษา',
-    'school'=>'สถานศึกษา (งานความร่วมมือ)',
+    'boc'=>'สำนักความร่วมมือ',
+    'board'=>'ผู้บริหารสำนักงานคณะกรรมการอาชีวศึกษา',
 );
 
 $data=array(array(
+                    'label'=>'ชื่อ-นามสกุล',
+                    'type'=>'text',
+                    'id'=>'name',
+                    'required'=>true,
+                ),
+                array(
+                    'label'=>'ตำแหน่ง',
+                    'type'=>'text',
+                    'id'=>'position',
+                    'required'=>true,
+                ),
+                array(
+                    'label'=>'หมายเลขโทรศัพท์',
+                    'type'=>'text',
+                    'id'=>'tel',
+                    'required'=>true,
+                ),
+                array(
+                    'label'=>'อีเมล',
+                    'type'=>'email',
+                    'id'=>'email',
+                    'required'=>true,
+                ),
+                array(
                 'label'=>'ประเภทผู้ใช้งาน',
                 'type'=>'select',
                 'id'=>'user_type',
@@ -50,12 +74,12 @@ $data=array(array(
                 'def'=>isset($registerData->user_type)?$registerData->user_type:false,
             ),
             array(
-                'label'=>'ต้นสังกัด',
+                'label'=>'ต้นสังกัด/สถานศึกษา/กลุ่มอาชีพ',
                 'type'=>'select',
                 'id'=>'org_code',
                 //'class'=>'js-example-basic-single',
                 'items'=>$orgData,
-                'noneLabel'=>'โปรดเลือกต้นสังกัด',
+                'noneLabel'=>'โปรดเลือกต้นสังกัด/สถานศึกษา/กลุ่มอาชีพ',
                 'required'=>true,
                 'def'=>isset($registerData->org_code)?$registerData->org_code:false,
             ),
