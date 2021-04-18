@@ -44,6 +44,10 @@ helper('user');
 
     <!-- AdminBSB Themes. You can choose a theme from css/themes instead of get all themes -->
     <link href="<?php print site_url();?>template/adminbsb/css/themes/all-themes.css" rel="stylesheet" />
+    
+    <!-- Select 2 CSS
+    <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
+    -->
 </head>
 
 <body class="theme-indigo">
@@ -338,6 +342,10 @@ helper('user');
 
     <!-- Demo Js -->
     <script src="<?php print site_url();?>template/adminbsb/js/demo.js"></script>
+
+    <!-- Select2 js 
+    <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
+    -->
     <script>
         $('.count-to').countTo({
         formatter: function (value, options) {
@@ -345,6 +353,7 @@ helper('user');
         }
     });
     $(function () {
+    //$('.js-example-basic-single').select2();
     $('.js-basic-example').DataTable( {
                     "oLanguage": {
                     "sLengthMenu": "แสดง _MENU_ รายการ ต่อหน้า",

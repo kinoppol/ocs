@@ -50,11 +50,40 @@ class User extends BaseController
 	}
 
 	public function register(){
+		helper('user');
+
+		
+		$userModel = model('App\Models\UserModel');
+		//print_r($_POST);
+		if(isset($_POST)&&$_POST['user_type']!=''&&$_POST['org_code']!=''){
+			$data=array(
+				'user_id'=>current_user('user_id'),
+				'user_type'=>$_POST['user_type'],
+				'org_code'=>$_POST['org_code'],
+			);
+			$result=$userModel->register($data);
+			//print "REGISTER";
+		}
+
+		$orgModel = model('App\Models\OrgModel');
+
+		$schools=$orgModel->getSchool();
+		$govs=$orgModel->getGov();
+		$institute=$orgModel->getInstitute();
+
+		$registerData=$userModel->getRegister(current_user('user_id'));
+		//print "XXX".current_user('user_id');
+		$data=array(
+			'registerData'=>$registerData[0],
+			'schools'=>$schools,
+			'govs'=>$govs,
+			'institutes'=>$institute,
+		);
 		$data=array(
 			'title'=>'ลงทะเบียนผู้ใช้งาน',
 			'systemName'=>'งานความร่วมมือ',
 			'mainMenu'=>view('_menu'),
-			'content'=>view('register')
+			'content'=>view('register',$data),
 		);
         return view('_main',$data);
 	}

@@ -2,13 +2,39 @@
     //print_r($users);
     //exit();
     helper('table');
+    helper('user');
     $userRows=array();
+    if($user_status=='unregister'){
+    $userRegData=array();
+            foreach($registerData as $row){
+                $userRegData[$row->user_id]=array(
+                    'user_type'=>$row->user_type,
+                    'register_status'=>$row->register_status,
+                );
+            }
+            
+        }
+
     foreach($users as $user){
         $user = get_object_vars($user);
-        array_push($user,'<button class="btn btn-xs btn-warning waves-effect"><i class="material-icons">edit</i> แก้ไข</button>');
+        if($user_status=='registered'){
+            array_push($user,'<a href="'.site_url('public/admin/editUser/'.$user['user_id']).'" class="btn btn-xs btn-warning waves-effect"><i class="material-icons">edit</i> แก้ไข</a>');
+            $user['user_type']=user_type($user['user_type']);
+        }
+        else if($user_status=='unregister'){
+            
+
+            if($userRegData[$user['user_id']]['register_status']=='request'){array_push($user,'<a href="'.site_url('public/admin/approveUser/'.$user['user_id']).'" class="btn btn-xs btn-success waves-effect"><i class="material-icons">check</i> อนุมัติ</a>
+                                                             <a href="'.site_url('public/admin/disapproveUser/'.$user['user_id']).'" onClick="return confirm(\'ยืนยันการปฏิเสธการลงทะเบียน\')" class="btn btn-xs btn-danger waves-effect"><i class="material-icons">close</i> ปฏิเสธ</a>');
+            }else{
+                array_push($user,'<button class="btn btn-default">ผู้ใช้ยังไม่ลงทะเบียน</button>');
+            }
+                                                             $user['user_type']=user_type($userRegData[$user['user_id']]['user_type']);                                     
+            }
         $userRows[]=$user;
     }
     $userArr=array('thead'=>array(
+                            'ID',
                             'ชื่อผู้ใช้',
                             'ชื่อ',
                             'สกุล',
@@ -24,7 +50,7 @@
                     <div class="card">
                     <div class="header">
                             <h2>
-                                รายชื่อผู้ใช้งานระบบ   
+                                <?php print $title; ?>   
                             </h2>
                             <ul class="header-dropdown m-r--5">
                                 <li class="dropdown">

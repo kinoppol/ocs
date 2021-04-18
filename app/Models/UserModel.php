@@ -6,10 +6,27 @@ use CodeIgniter\Model;
 
 class UserModel extends Model
 {
-    public function getUsers(){
+    public function getUsers($onlyRegistered=false){
         $db = \Config\Database::connect();
         $builder = $db->table('userdata');
-        $builder->select(['username','name','surname','email','user_type']);
+        $builder->select(['user_id','username','name','surname','email','user_type']);
+        if($onlyRegistered)$builder->where('user_type !=','user');
+        $users = $builder->get()->getResult();
+        return $users;
+    }
+    
+    public function getUser($user_id){
+        $db = \Config\Database::connect();
+        $builder = $db->table('userdata');
+        $builder->where('user_id', $user_id);
+        $result=$builder->get()->getResult();
+        return $result[0];
+    }
+    public function getUnregisterUsers(){
+        $db = \Config\Database::connect();
+        $builder = $db->table('userdata');
+        $builder->select(['user_id','username','name','surname','email','user_type']);
+        $builder->where('user_type','user');
         $users = $builder->get()->getResult();
         return $users;
     }
@@ -34,6 +51,21 @@ class UserModel extends Model
         $builder = $db->table('userdata');
         $builder->where('email', $email);
         $result=$builder->update($data);
+        return $result;
+    }
+    public function register($data){
+        //print_r($data);
+        $db = \Config\Database::connect();
+        $builder = $db->table('user_register');
+        $result=$builder->replace($data);
+        return $result;
+    }
+    public function getRegister($user_id=false){
+        $db = \Config\Database::connect();
+        $builder = $db->table('user_register');
+        if($user_id)$builder->where('user_id', $user_id);
+        $result=$builder->get()->getResult();
+        //print_r($result);
         return $result;
     }
 }

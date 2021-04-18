@@ -8,7 +8,7 @@ function genForm($data){
             '.$data['formName'].'
         </h2>
         <div class="body">
-                            <form>'.
+                            <form action="'.$data['action'].'" method="'.$data['method'].'">'.
                             genInput($data['inputs'])
                             .'</form>
                             </div>
@@ -42,7 +42,7 @@ function genInput_textbox($data){
     $ret='<label for="'.$data['id'].'">'.$data['label'].(isset($data['required'])&&$data['required']?'*':'').'</label>
             <div class="form-group">
                 <div class="form-line">
-                    <input type="'.$data['type'].'" name="'.$data['id'].'" id="'.$data['id'].'" class="form-control" placeholder="'.$data['placeholder'].'" '.(isset($data['required'])&&$data['required']?'required':'').'/>
+                    <input type="'.$data['type'].'" name="'.$data['id'].'" id="'.$data['id'].'" class="form-control '.$data['class'].'" placeholder="'.$data['placeholder'].'" value="'.$data['def'].'" '.(isset($data['required'])&&$data['required']?'required':'').'/>
                 </div>
             </div>';
         return $ret;
@@ -53,7 +53,7 @@ function genInput_select($data){
     $ret='<label for="'.$data['id'].'">'.$data['label'].(isset($data['required'])&&$data['required']?'*':'').'</label>
             <div class="form-group">
                 <div class="form-line">
-                    <select name="'.$data['id'].'" id="'.$data['id'].'" class="form-control" '.(isset($data['required'])&&$data['required']?'required':'').'/>
+                    <select name="'.$data['id'].'" id="'.$data['id'].'" class="form-control '.$data['class'].'" '.(isset($data['required'])&&$data['required']?'required':'').'/>
                     '.genOption($data['items'],$data['def'],$data['noneLabel']).'
                     </select>
                 </div>
@@ -64,7 +64,18 @@ function genInput_select($data){
 function genOption($data,$def=false,$noneSelectLable=false){
     $ret='';
     if(!is_array($data)) return $ret;
-    if(isset($noneSelectLable))$ret.='<option value="">'.$noneSelectLable.'</option>';
+    
+    if(isset($noneSelectLable)&&$noneSelectLable!="")$ret.='<option value="">'.$noneSelectLable.'</option>';
+
+    if(is_marray($data)){
+        foreach($data as $k=>$v){
+            $ret.='<optgroup label="'.$k.'">';
+            $ret.=genOption($v,$def);
+            $ret.='</optgroup>
+            ';
+        }
+        return $ret;
+    }
     foreach($data as $k=>$v){
         $selected='';
         if($k==$def)$selected='selected';

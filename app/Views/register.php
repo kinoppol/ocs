@@ -1,10 +1,42 @@
 <?php
 helper('form');
+helper('user');
+//print_r($registerData);
+$vec=array(
+    '1300000000'=>'สำนักงานคณะกรรมการอาชีวศึกษา',
+    //'1300000001'=>'สำนักความร่วมมือ',
+);
+$orgs=$vec;
+$orgSchools=array();
+foreach($schools as $k=>$v){
+    $orgSchools[$k]=$v;
+    $orgs[$k]=$v;
+}
+
+$orgGovs=array();
+foreach($govs as $k=>$v){
+    $orgGovs[$k]=$v;
+    $orgs[$k]=$v;
+}
+
+$orgInstitutes=array();
+foreach($institutes as $k=>$v){
+    $orgInstitutes[$k]=$v;
+    $orgs[$k]=$v;
+}
+//print_r($orgData);
+$orgData=array(
+    'สอศ.'=>$vec,
+    'เลขานุการ กรอ.อศ.'=>$orgGovs,
+    'สถานศึกษา'=>$orgSchools,
+    'สถาบันการอาชีวศึกษา'=>$orgInstitutes,
+);
 
 $userType=array(
-    'board'=>'ผู้บริหาร สอศ.',
-    'gov'=>'เลขานุการ อ.กรอ.อศ.',
-    'instute'=>'สถาบันการอาชีวศึกษา',
+    'board'=>'ผู้บริหารสำนักงานคณะกรรมการอาชีวศึกษา',
+    'boc'=>'สำนักความร่วมมือ',
+    'gov'=>'เลขานุการ กรอ.อศ.',
+    'institute'=>'สถาบันการอาชีวศึกษา',
     'school'=>'สถานศึกษา (งานความร่วมมือ)',
 );
 
@@ -15,13 +47,17 @@ $data=array(array(
                 'items'=>$userType,
                 'noneLabel'=>'โปรดเลือกประเภทผู้ใช้งาน',
                 'required'=>true,
+                'def'=>isset($registerData->user_type)?$registerData->user_type:false,
             ),
             array(
-                'label'=>'สถานศึกษา',
-                'type'=>'text',
-                'id'=>'school',
-                'placeholder'=>'วิทยาลัย...',
+                'label'=>'ต้นสังกัด',
+                'type'=>'select',
+                'id'=>'org_code',
+                //'class'=>'js-example-basic-single',
+                'items'=>$orgData,
+                'noneLabel'=>'โปรดเลือกต้นสังกัด',
                 'required'=>true,
+                'def'=>isset($registerData->org_code)?$registerData->org_code:false,
             ),
             array(
                 'label'=>'ลงทะเบียนผู้ใช้งาน',
@@ -29,10 +65,39 @@ $data=array(array(
             ),
         );
 $form=array(
-    'formName'=>'ลงทะเบียนผู้ใช้งาน',
+    'formName'=>'ลงทะเบียนผู้ใช้งานใหม่/แกไขการลงทะเบียน',
     'inputs'=>$data,
     'action'=>site_url('public/user/register'),
     'method'=>'post',
 );
+?>
+<div class="card">
+    <div class="header">
+        <h2>
+            ข้อมูลการลงทะเบียน
+        </h2>
+        <div class="body">
+        <?php
+            if(!isset($registerData->user_type)){
+                print "คุณยังไม่ได้ลงทะเบียน กรุณาดำเนินการลงทะเบียนด้วยแบบฟอร์มด้านล่าง";
+            }else{
+                print "คุณได้ทำการลงทะเบียนในฐานะ <b>";
+                print user_type($registerData->user_type);
+                print "</b>";
+                print " สังกัด ".$orgs[$registerData->org_code];
+            }
+            print " สถานะ ";
+            switch($registerData->register_status){
+                case 'request' : print '<button class="btn btn-primary">รอการอนุมัติ</button>'; break;
+                case 'disapproval' : print '<button class="btn btn-danger">ปฏิเสธการลงทะเบียน</button> โปรดทำการลงทะเบียนใหม่'; break;
+                case 'banned' : print '<button class="btn btn-default">ห้ามลงทะเบียน</button>'; break;
+                case 'approved' : print '<a href="'.site_url('public/user/logout').'" class="btn btn-success">อนุมัติแล้ว</a> คลิกที่ปุ่มเพื่อเข้าสู่ระบบใหม่'; break;
+            }
+        ?>
+        </div>
+    </div>
+</div>
+<?php
+if($registerData->register_status!='banned'&&$registerData->register_status!='approved')
 print genForm($form);
 ?>
