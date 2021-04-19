@@ -55,6 +55,9 @@ class Mou extends BaseController
             );
         }else{
             $data=array(           
+                'province'=>array(),
+                'district'=>array(),
+                'subdistrict'=>array(),
                 'business'=>array(),
             );
         }
