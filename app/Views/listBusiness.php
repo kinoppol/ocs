@@ -1,15 +1,10 @@
 <?php
         helper('table');
-        $mouRows=array();
-        //print_r($data['mou']);
-        $school=$data['school'];
-        $business=$data['business'];
-        foreach($data['mou'] as $mou){
-            $mou = get_object_vars($mou);
-            if(!isset($business[$mou['business_id']]))continue;
+        $buninessRows=array();
+        foreach($business as $k=>$v){
             $buninessRows[]=array(
-                'business_id'=>$business[$mou['business_id']],
-                'address'=>$school[$mou['school_id']],
+                'business_name'=>$v['business_name'],
+                'address'=>'จังหวัด'.$province[$v['province_id']].' อำเภอ'.$district[$v['district_id']].' ตำบล'.$subdistrict[$v['subdistrict_id']].' ถนน'.($v['road']!=''?$v['road']:'-').' เลขที่ '.($v['address_no']!=''?$v['address_no']:'-'),
                 '<button class="btn btn-xs btn-warning waves-effect"><i class="material-icons">book</i>ทำ MOU</button>',
             );
         }
@@ -26,8 +21,27 @@
                 <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
                     <div class="card">
                     <div class="header">
-                               เลือกสถานประกอบการเพื่อทำ MOU
-                        <button class="btn btn-primary" id="addMou"><i class="material-icons">add</i> เพิ่มข้อมูลสถานประกอบการ</button>
+                               <form action="<?php print site_url('public/'.$_SERVER['PATH_INFO']); ?>" method="post">
+                                    <div class="row clearfix">
+                                      <div class="col-lg-8 col-md-6 col-sm-6 col-xs-3">
+                                        <div class="form-group">
+                                            <div class="form-line">
+                                                <input type="text" class="form-control" name="q" placeholder="ชื่อสถานประกอบการบางส่วน.." minlength="3" value="<?php print isset($_POST['q'])?$_POST['q']:''; ?>" required>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-1 col-md-2 col-sm-2 col-xs-3">
+                                        <div class="form-group">
+                                                <button class="btn btn-primary"><i class="material-icons">search</i> ค้นหา</button>
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-2 col-md-3 col-sm-3 col-xs-3">
+                                        <div class="form-group">
+                                                <button  type="button" class="btn btn-warning" id="addMou"><i class="material-icons">add</i> เพิ่มข้อมูลสถานประกอบการ</button>
+                                        </div>
+                                    </div>
+                                </div>
+                               </form>
                         <div class="body">
                         <div class="table-responsive">
                         <?php

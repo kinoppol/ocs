@@ -1,5 +1,6 @@
 <?php
 helper('user');
+helper('modal');
 ?>
 <!DOCTYPE html>
 <html>
@@ -50,7 +51,7 @@ helper('user');
     -->
 </head>
 
-<body class="theme-indigo">
+<body class="theme-orange">
     <!-- Page Loader -->
     <div class="page-loader-wrapper">
         <div class="loader">
@@ -91,7 +92,7 @@ helper('user');
                 <a href="javascript:void(0);" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar-collapse" aria-expanded="false"></a>
                 <a href="javascript:void(0);" class="bars"></a>
                 <a class="navbar-brand" href="<?php print site_url();?>">
-                        <?php print $systemName;?></a>
+                        <?php print SYSTEMNAME;?></a>
             </div>
             <div class="collapse navbar-collapse" id="navbar-collapse">
                 <ul class="nav navbar-nav navbar-right">
@@ -157,7 +158,7 @@ helper('user');
                             <!-- <li role="separator" class="divider"></li>
                             <li><a href="javascript:void(0);"><i class="material-icons">group</i>Followers</a></li>-->
                             <li><a href="javascript:void(0);"><i class="material-icons">book</i>คู่มือ</a></li>
-                            <li><a href="javascript:void(0);"><i class="material-icons">info</i>เกี่ยวกับระบบ</a></li>-->
+                            <li><a href="#" data-toggle="modal" data-target="#aboutSystem"><i class="material-icons">info</i>เกี่ยวกับระบบ</a></li>-->
                             <li role="separator" class="divider"></li>
                             <li><a href="<?php print site_url('public/user/logout'); ?>"><i class="material-icons">input</i>ออกจากระบบ</a></li>
                         </ul>
@@ -173,7 +174,7 @@ helper('user');
             <!-- Footer -->
             <div class="legal">
                 <div class="copyright">
-                <b>Version: </b> 1.0.0 &copy; <?php print date('Y'); ?> <a href="http://boc2.vec.go.th" target="_blank">สำนักความร่วมมือ</a>
+                <b>Version: </b> <?php print VERSION; ?> &copy; <?php print date('Y'); ?> <a href="http://boc2.vec.go.th" target="_blank">สำนักความร่วมมือ</a>
                 </div>
                 <div class="version">
                 <a href="http://www.vec.go.th" target="_blank">สำนักงานคณะกรรมการการอาชีวศึกษา</a> 
@@ -227,7 +228,7 @@ helper('user');
                             return $ret;
                         }
                         
-                        print genColorBar($def='indigo');
+                        print genColorBar($def='orange');
                         ?>
                     </ul>
                 </div>
@@ -294,7 +295,20 @@ helper('user');
                         
             <?php print $content; ?>
     </section>
-
+    <?php
+                    $data=array(
+                        'id'=>'aboutSystem',
+                        'title'=>'เกี่ยวกับระบบ',
+                        'content'=>'<h4>'.SYSTEMNAME.'</h4>
+                        Version: '.VERSION.' &copy;'.date('Y').' สำนักความร่วมมือ สำนักงานคณะกรรมการการอาชีวศึกษา
+                        <br><br>
+                        อำนวยการพัฒนาโดย <b>วิทยาลัยสารพัดช่างสมุทรปราการ</b> <a href="http://spkpoly.ac.th/">http://spkpoly.ac.th</a><br>
+                        พัฒนาระบบโดย <b>นายนพพล อินศร</b> ครูวิทยาลัยพณิชยการบางนา<br>
+                        <a href="mailto:noppol.ins@bncc.ac.th">noppol.ins@bncc.ac.th</a><br>
+                        โทร <a href="tel:+66919968266">09-1996-8266</a>',
+                    );
+                    print genModal($data);
+                    ?>
     <!-- Jquery Core Js -->
     <script src="<?php print site_url();?>template/adminbsb/plugins/jquery/jquery.min.js"></script>
 

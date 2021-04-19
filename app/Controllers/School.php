@@ -8,7 +8,7 @@ class School extends BaseController
 	{
         $data=array(
 			'title'=>'ข้อมูลสถานศึกษา',
-			'systemName'=>'งานความร่วมมือ',
+			'systemName'=>'ระบบฐานข้อมูลความร่วมมือ',
 			'mainMenu'=>view('_menu'),
 			'content'=>'-แสดงข้อมูลสถานศึกษา-',
 		);

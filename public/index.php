@@ -1,6 +1,8 @@
 <?php
 ob_start();
 session_start();
+define('SYSTEMNAME','ระบบฐานข้อมูลความร่วมมือ');
+define('VERSION','21.4.0');
 // Path to the front controller (this file)
 define('FCPATH', __DIR__ . DIRECTORY_SEPARATOR);
 
@@ -34,8 +36,14 @@ $app       = require realpath($bootstrap) ?: $bootstrap;
  * Now that everything is setup, it's time to actually fire
  * up the engines and make this app do its thang.
  */
+$allowNoneLoginUser=array(
+    '/user/login',
+    '/user/checkLogin',
+    '/user/checkGoogle',
+    '/newUser/register',
+);
 if(!isset($_COOKIE['current_user'])) {
-    if($_SERVER['PATH_INFO']!='/user/login'&&$_SERVER['PATH_INFO']!='/user/checkLogin'&&$_SERVER['PATH_INFO']!='/user/checkGoogle'){
+    if(!is_numeric(array_search($_SERVER['PATH_INFO'],$allowNoneLoginUser))){
         //print_r($_SERVER);
         print '<meta http-equiv="refresh" content="0;url='.site_url('public/user/login').'">';
         exit();

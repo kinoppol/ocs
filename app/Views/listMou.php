@@ -1,5 +1,6 @@
 <?php
         helper('table');
+        helper('modal');
         $mouRows=array();
         //print_r($data['mou']);
         $school=$data['school'];
@@ -31,8 +32,16 @@
                 <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
                     <div class="card">
                     <div class="header">
+                    <div class="row clearfix">
+                    <div class="col-lg-3 col-md-3 col-sm-3 col-xs-3">
+                                <div class="form-group" style="text-align:right;">
                                 แสดงรายชื่อ MOU ที่ลงนามในปี
-                                <select id="selectYearMou">
+                            </div>
+                        </div>
+                            <div class="col-lg-7 col-md-6 col-sm-6 col-xs-4">
+                                <div class="form-group">
+                                    <div class="form-line">
+                                <select id="selectYearMou" class="form-control">
                                 <?php
                                 $option='';
                                     for($i=date('Y');$i>date('Y')-10;$i--){
@@ -44,7 +53,15 @@
                                     print $option;
                                 ?>
                                 </select>  
-                        <button class="btn btn-primary" id="addMou"><i class="material-icons">add</i> เพิ่มข้อมูล MOU</button>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-lg-2 col-md-2 col-sm-2 col-xs-3">
+                                <div class="form-group">
+                                        <a href="<?php print site_url('public/mou/searchBusiness'); ?>" class="btn btn-primary" id="addMou"><i class="material-icons">add</i> เพิ่มข้อมูล MOU</a>
+                                </div>
+                            </div>
+                        </div>
                         <div class="body">
                         <div class="table-responsive">
                         <?php
@@ -58,16 +75,11 @@
                     <script>
                     </script>
                     
-                    <div class="modal fade" id="addMouModal" tabindex="-1" role="dialog">
-                <div class="modal-dialog" role="document">
-                    <div class="modal-content">
-                        <div class="modal-header">
-                            <h4 class="modal-title" id="defaultModalLabel">เพิ่มข้อมูล MOU</h4>
-                        </div>
-                        <div class="modal-body">
-                            โปรดรอสักครู่..
-                        </div>
-                        <div class="modal-footer">
-                        <button type="button" class="btn btn-link waves-effect" data-dismiss="modal">ปิด</button>
-                        </div>
-                    </div>
+                    <?php
+                    $data=array(
+                        'id'=>'addMouModal',
+                        'title'=>'เพิ่มข้อมูล MOU',
+                        'content'=>'โปรดรอสักครู่...',
+                    );
+                    print genModal($data);
+                    ?>

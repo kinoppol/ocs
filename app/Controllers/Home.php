@@ -27,7 +27,7 @@ class Home extends BaseController
 		);
 		$data=array(
 			'title'=>'ภาพรวม',
-			'systemName'=>'งานความร่วมมือ',
+			'systemName'=>'ระบบฐานข้อมูลความร่วมมือ',
 			'mainMenu'=>view('_menu'),
 			'content'=>view('dashboard',$data),
 		);

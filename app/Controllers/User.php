@@ -9,7 +9,7 @@ class User extends BaseController
         
         $data=array(
 			'title'=>'เข้าสู่ระบบ',
-			'systemName'=>'งานความร่วมมือ',
+			'systemName'=>'ระบบฐานข้อมูลความร่วมมือ',
 		);
 		$data=array(
             //'content'=>view('login',$data)
@@ -27,8 +27,8 @@ class User extends BaseController
 			$loginTime=time()+3600;
 			if(count($user)>=1){
 				$data=array(
-					'name'=>$result['data']['given_name'],
-					'surname'=>$result['data']['family_name'],
+					//'name'=>$result['data']['given_name'],
+					//'surname'=>$result['data']['family_name'],
 					'picture'=>$result['data']['picture'],
 				);
 				$userModel->updateUser($result['data']['email'],$data);
@@ -81,7 +81,7 @@ class User extends BaseController
 		);
 		$data=array(
 			'title'=>'ลงทะเบียนผู้ใช้งาน',
-			'systemName'=>'งานความร่วมมือ',
+			'systemName'=>'ระบบฐานข้อมูลความร่วมมือ',
 			'mainMenu'=>view('_menu'),
 			'content'=>view('register',$data),
 		);
