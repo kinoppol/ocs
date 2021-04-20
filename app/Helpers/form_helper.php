@@ -25,13 +25,15 @@ function genInput($data){
         }
     }else{
         if(!isset($data['type']))return '';
-        if(is_numeric(array_search($data['type'],array('text','password','email','date','time')))){
-            $ret.=genInput_textbox($data);
-        }else if(is_numeric(array_search($data['type'],array('select')))){
-            $ret.=genInput_select($data);
-        }else if(is_numeric(array_search($data['type'],array('submit')))){
-            $ret.=genInput_submit($data);
-        }
+            if(is_numeric(array_search($data['type'],array('text','password','email','date','time','number','file')))){
+                $ret.=genInput_textbox($data);
+            }else if(is_numeric(array_search($data['type'],array('select')))){
+                $ret.=genInput_select($data);
+            }else if(is_numeric(array_search($data['type'],array('submit')))){
+                $ret.=genInput_submit($data);
+            }else if(is_numeric(array_search($data['type'],array('hidden')))){
+                $ret.=genInput_hidden($data);
+            }
 
         }
     
@@ -39,21 +41,31 @@ function genInput($data){
 }
 
 function genInput_textbox($data){
-    $ret='<label for="'.$data['id'].'">'.$data['label'].(isset($data['required'])&&$data['required']?'*':'').'</label>
+    $min='';
+    $max='';
+    if(isset($data['min']))$min=' min="'.$data['min'].'"';
+    if(isset($data['max']))$max=' max="'.$data['max'].'"';
+    $ret='<label for="'.$data['id'].'">'.$data['label'].(isset($data['required'])&&$data['required']?'<span style="color:red;">*</span>':'').'</label>
             <div class="form-group">
                 <div class="form-line">
-                    <input type="'.$data['type'].'" name="'.$data['id'].'" id="'.$data['id'].'" class="form-control '.$data['class'].'" placeholder="'.$data['placeholder'].'" value="'.$data['def'].'" '.(isset($data['required'])&&$data['required']?'required':'').'/>
+                    <input type="'.$data['type'].'" name="'.$data['id'].'" id="'.$data['id'].'" class="form-control '.$data['class'].'" placeholder="'.$data['placeholder'].'" value="'.$data['def'].'" '.$min.$max.(isset($data['required'])&&$data['required']?'required':'').''.(isset($data['disabled'])&&$data['disabled']?'disabled':'').'/>
                 </div>
             </div>';
         return $ret;
 }
 
+function genInput_hidden($data){
+
+    $ret='<input type="hidden" name="'.$data['id'].'" id="'.$data['id'].'" value="'.$data['def'].'" />';
+        return $ret;
+}
+
 
 function genInput_select($data){
-    $ret='<label for="'.$data['id'].'">'.$data['label'].(isset($data['required'])&&$data['required']?'*':'').'</label>
+    $ret='<label for="'.$data['id'].'">'.$data['label'].(isset($data['required'])&&$data['required']?'<span style="color:red;">*</span>':'').'</label>
             <div class="form-group">
                 <div class="form-line">
-                    <select name="'.$data['id'].'" id="'.$data['id'].'" class="form-control '.$data['class'].'" '.(isset($data['required'])&&$data['required']?'required':'').'/>
+                    <select name="'.$data['id'].'" id="'.$data['id'].'" class="form-control '.$data['class'].'" '.(isset($data['required'])&&$data['required']?'required':'').''.(isset($data['disabled'])&&$data['disabled']?'disabled':'').'/>
                     '.genOption($data['items'],$data['def'],$data['noneLabel']).'
                     </select>
                 </div>

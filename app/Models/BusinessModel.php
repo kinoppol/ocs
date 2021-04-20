@@ -4,15 +4,18 @@ namespace App\Models;
 
 use CodeIgniter\Model;
 
-class MouModel extends Model
+class BusinessModel extends Model
 {
-    public function getBusiness(){
+    public function getBusiness($business_id=false){
         $db = \Config\Database::connect();
         $builder = $db->table('business');
+        if($business_id)$builder->where('business_id',$business_id);
         $data=$builder->get()->getResult();
+        if($business_id) return $data[0];
             $datas=array();
             foreach($data as $row){
                 $datas[$row->business_id]=array(
+                    'business_id'=>$row->business_id,
                     'business_name'=>$row->business_name,
                     'province_id'=>$row->province_id,
                     'district_id'=>$row->district_id,
@@ -31,6 +34,7 @@ class MouModel extends Model
             $datas=array();
             foreach($data as $row){
                 $datas[$row->business_id]=array(
+                    'business_id'=>$row->business_id,
                     'business_name'=>$row->business_name,
                     'province_id'=>$row->province_id,
                     'district_id'=>$row->district_id,

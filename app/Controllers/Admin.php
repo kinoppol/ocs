@@ -47,6 +47,7 @@ class Admin extends BaseController
 		//print_r($registerData);
 		$data=array(
 			'user_type'=>$registerData[0]->user_type,
+			'org_code'=>$registerData[0]->org_code,
 		);
 		$result=$userModel->updateUser($userData->email,$data);
 		$data=array(

@@ -2,15 +2,16 @@
         helper('table');
         helper('modal');
         $mouRows=array();
-        //print_r($data['mou']);
+        //print_r($data['gov']);
         $school=$data['school'];
         $business=$data['business'];
+        $gov=$data['gov'];
         foreach($data['mou'] as $mou){
             $mou = get_object_vars($mou);
             if(!isset($business[$mou['business_id']]))continue;
             $mouRows[]=array(
                 'business_id'=>$business[$mou['business_id']],
-                'school_id'=>$school[$mou['school_id']],
+                'school_id'=>isset($school[$mou['school_id']])?$school[$mou['school_id']]:isset($gov[$mou['school_id']])?$gov[$mou['school_id']]:$mou['school_id'],
                 'mou_date'=>$mou['mou_date'],
                 'mou_sign_place'=>$mou['mou_sign_place'],
                 '<button class="btn btn-xs btn-warning waves-effect"><i class="material-icons">edit</i></button>
@@ -80,6 +81,11 @@
                         'id'=>'addMouModal',
                         'title'=>'เพิ่มข้อมูล MOU',
                         'content'=>'โปรดรอสักครู่...',
+                        'size'=>'modal-lg',
                     );
                     print genModal($data);
+                    $_SESSION['FOOTSCRIPT'].='
+                    $("#addMou").click(function(){
+                        $("#addMouModal").modal("show");
+                    });';
                     ?>

@@ -89,7 +89,7 @@ $data=array(array(
             ),
         );
 $form=array(
-    'formName'=>'ลงทะเบียนผู้ใช้งานใหม่/แกไขการลงทะเบียน',
+    'formName'=>'ลงทะเบียนผู้ใช้งานใหม่/แก้ไขการลงทะเบียน',
     'inputs'=>$data,
     'action'=>site_url('public/user/register'),
     'method'=>'post',

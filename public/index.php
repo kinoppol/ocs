@@ -3,6 +3,7 @@ ob_start();
 session_start();
 define('SYSTEMNAME','ระบบฐานข้อมูลความร่วมมือ');
 define('VERSION','21.4.0');
+$_SESSION['FOOTSCRIPT']='';
 // Path to the front controller (this file)
 define('FCPATH', __DIR__ . DIRECTORY_SEPARATOR);
 

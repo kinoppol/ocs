@@ -29,10 +29,17 @@ class MouModel extends Model
         foreach($businesss as $row){
             $business[$row->business_id]=$row->business_name;
         }
+        $builder = $db->table('govdata');
+        $govs=$builder->get()->getResult();
+        $gov=array();
+        foreach($govs as $row){
+            $gov[$row->gov_id]=$row->gov_name;
+        }
         $result=array(
             'mou'=>$mou,
             'school'=>$school,
             'business'=>$business,
+            'gov'=>$gov,
         );
         return $result;
     }
@@ -52,5 +59,13 @@ class MouModel extends Model
         $business=$builder->get()->getResult();
         $businessCount=count($business);
         return $businessCount;
+    }
+    public function addMou($data){
+		//print_r($data);
+        $db = \Config\Database::connect();
+        $builder = $db->table('mou');
+        $result=$builder->insert($data);
+        //print $db->getLastQuery();
+        return $result;
     }
 }

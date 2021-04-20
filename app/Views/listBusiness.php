@@ -1,11 +1,12 @@
 <?php
         helper('table');
+        helper('modal');
         $buninessRows=array();
         foreach($business as $k=>$v){
             $buninessRows[]=array(
                 'business_name'=>$v['business_name'],
                 'address'=>'จังหวัด'.$province[$v['province_id']].' อำเภอ'.$district[$v['district_id']].' ตำบล'.$subdistrict[$v['subdistrict_id']].' ถนน'.($v['road']!=''?$v['road']:'-').' เลขที่ '.($v['address_no']!=''?$v['address_no']:'-'),
-                '<button class="btn btn-xs btn-warning waves-effect"><i class="material-icons">book</i>ทำ MOU</button>',
+                '<a href="'.site_url('public/mou/add/'.$v['business_id']).'" class="btn btn-xs btn-warning waves-effect"><i class="material-icons">book</i>เพิ่มข้อมูล MOU</a>',
             );
         }
         $businessArr=array('thead'=>array(
@@ -37,7 +38,7 @@
                                     </div>
                                     <div class="col-lg-2 col-md-3 col-sm-3 col-xs-3">
                                         <div class="form-group">
-                                                <button  type="button" class="btn btn-warning" id="addMou"><i class="material-icons">add</i> เพิ่มข้อมูลสถานประกอบการ</button>
+                                                <button  type="button" class="btn btn-warning" id="addBusiness"><i class="material-icons">add</i> เพิ่มข้อมูลสถานประกอบการ</button>
                                         </div>
                                     </div>
                                 </div>
@@ -55,16 +56,17 @@
                     <script>
                     </script>
                     
-                    <div class="modal fade" id="addMouModal" tabindex="-1" role="dialog">
-                <div class="modal-dialog" role="document">
-                    <div class="modal-content">
-                        <div class="modal-header">
-                            <h4 class="modal-title" id="defaultModalLabel">เพิ่มข้อมูล MOU</h4>
-                        </div>
-                        <div class="modal-body">
-                            โปรดรอสักครู่..
-                        </div>
-                        <div class="modal-footer">
-                        <button type="button" class="btn btn-link waves-effect" data-dismiss="modal">ปิด</button>
-                        </div>
-                    </div>
+                    
+                    <?php
+                    $data=array(
+                        'id'=>'addBusinessModal',
+                        'title'=>'เพิ่มข้อมูลสถานประกอบการ',
+                        'content'=>'โปรดรอสักครู่...',
+                        //'size'=>'modal-lg',
+                    );
+                    print genModal($data);
+                    $_SESSION['FOOTSCRIPT'].='
+                    $("#addBusiness").click(function(){
+                        $("#addBusinessModal").modal("show");
+                    });';
+                    ?>

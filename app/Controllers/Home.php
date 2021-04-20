@@ -11,7 +11,7 @@ class Home extends BaseController
 	}
 	public function dashboard()
 	{
-		
+		//print_r(unserialize($_COOKIE['current_user']));
 		$MouModel = model('App\Models\MouModel');
 		
 		
