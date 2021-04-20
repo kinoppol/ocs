@@ -11,6 +11,11 @@
                             </div>
                             
                         <div class="body">
+                        <?php
+                        if(isset($onlyMail)){
+                            print "หากท่านลืมรหัสผ่านท่านสามารถลงชื่อเข้าใช้ระบบผ่าน Gmail หรือติดต่อผู้ดูแลระบบ";
+                        }else{
+                        ?>
                         <form id="sign_in" action="<?php print site_url('public/user/checkLogin'); ?>" method="POST">
                     <?php
                         if(isset($_SESSION['message'])&&$_SESSION['message']!=''){
@@ -47,15 +52,17 @@
                     </div>
                     <div class="row m-t-15 m-b--20">
                         <div class="col-xs-6">
-                            <a href="<?php print site_url('public/newUser/register'); ?>">ลงทะเบียนผู้ใช้งาน</a>
+                            <a href="<?php print site_url('public/user/registerNewUser'); ?>">ลงทะเบียนผู้ใช้งาน</a>
                         </div>
                         <div class="col-xs-6 align-right">
-                            <a href="forgot-password.html">ลืมรหัสผ่าน?</a>
+                            <a href="<?php print site_url('public/user/forgetPassword'); ?>">ลืมรหัสผ่าน?</a>
                         </div>
                     </div>
                 </form>
                 <div class="text" style="text-align:center">หรือเข้าสู่ระบบด้วย Gmail</div>
-
+                        <?php
+                        }
+                        ?>
         <div class="row">
                     <div class="col-md-12 p-t-5" style="text-align:right;">
                         <div class="g-signin2" data-onsuccess="onSignIn" data-theme="dark"></div>
@@ -72,7 +79,8 @@
 				var profile = userInfo.getBasicProfile();
                 $.post( "<?php print site_url('public/user/checkGoogle'); ?>",{email:profile.getEmail(),token:userInfo.getAuthResponse().id_token}, function( data ) {
                     var result=$.parseJSON(data);
-                    if(result.status=='ok'){                        
+                    if(result.status=='ok'){   
+                        alert('Login');                     
                         signOut();
                         window.location.replace("<?php print site_url('public/home/dashboard'); ?>");
                     }else{
@@ -82,7 +90,7 @@
 			}
     function signOut() {
 				var auth2 = gapi.auth2.getAuthInstance();
-				auth2.signOut().then(function () {
+				auth2.signOut().then(function () { 
 						console.log("User signed out.");
 				});
 			}

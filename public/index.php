@@ -41,7 +41,9 @@ $allowNoneLoginUser=array(
     '/user/login',
     '/user/checkLogin',
     '/user/checkGoogle',
-    '/newUser/register',
+    '/user/registerNewUser',
+    '/user/checkSignUp',
+    '/user/forgetPassword',
 );
 if(!isset($_COOKIE['current_user'])) {
     if(!is_numeric(array_search($_SERVER['PATH_INFO'],$allowNoneLoginUser))){

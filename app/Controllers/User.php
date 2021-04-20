@@ -9,11 +9,38 @@ class User extends BaseController
         
         $data=array(
 			'title'=>'เข้าสู่ระบบ',
-			'systemName'=>'ระบบฐานข้อมูลความร่วมมือ',
+			'systemName'=>SYSTEMNAME,
 		);
 		$data=array(
             //'content'=>view('login',$data)
 			'content'=>view('ggLogin',$data)
+        );
+        return view('_authen',$data);
+	}
+	public function forgetPassword()
+	{
+        
+        $data=array(
+			'title'=>'เข้าสู่ระบบ',
+			'systemName'=>SYSTEMNAME,
+			'onlyMail'=>true,
+		);
+		$data=array(
+            //'content'=>view('login',$data)
+			'content'=>view('ggLogin',$data)
+        );
+        return view('_authen',$data);
+	}
+	public function registerNewUser()
+	{
+        
+        $data=array(
+			'title'=>'ลงทะเบียนสมาชิกใหม่',
+			'systemName'=>SYSTEMNAME,
+		);
+		$data=array(
+            //'content'=>view('login',$data)
+			'content'=>view('registerNewUser',$data)
         );
         return view('_authen',$data);
 	}
@@ -26,7 +53,7 @@ class User extends BaseController
 			
 			$loginTime=time()+3600;
 			if(count($user)>=1){
-				$data=array(
+				$data=array(//ถ้ามีข้อมูลอยู่แล้วไม่อัพเดตอะไรยกเว้นรูปภาพ
 					//'name'=>$result['data']['given_name'],
 					//'surname'=>$result['data']['family_name'],
 					'picture'=>$result['data']['picture'],
@@ -102,8 +129,42 @@ class User extends BaseController
 			setcookie("current_user", serialize($result), $loginTime,'/');
 			return '<meta http-equiv="refresh" content="0;url='.site_url('public/home/dashboard').'">';
 		}else{
-			$_SESSION['message']="Username or password Invalid.";
+			$_SESSION['message']="ชื่อผู้ใช้หรือรหัสผ่านไม่ถูกต้อง";
 			return '<meta http-equiv="refresh" content="0;url='.site_url('public/user/login').'">';
+		}
+	}
+
+	public function checkSignUp(){
+		if($_POST['password']!=$_POST['confirmPassword']){
+			$_SESSION['message']="รหัสผ่านไม่ตรงกัน";
+			return '<meta http-equiv="refresh" content="0;url='.site_url('public/user/registerNewUser').'">';
+		}
+		$userModel = model('App\Models\UserModel');
+        $data=array(
+			'username'=>$_POST['username']
+		);
+		$data2=array(
+			'email'=>$_POST['email']
+		);
+		$result=$userModel->checkUser($data);
+		$result2=$userModel->checkUser($data2);
+		if($result){
+			$_SESSION['message']="ชื่อผู้ใช้ <b>".$_POST['username']."</a> มีอยู่ในระบบแล้วโปรดเปลี่ยนชื่อผู้ใช้";
+			return '<meta http-equiv="refresh" content="0;url='.site_url('public/user/registerNewUser').'">';
+		}else if($result2){
+			$_SESSION['message']="อีเมล <b>".$_POST['email']."</a> มีอยู่ในระบบแล้วโปรดเปลี่ยนอีเมล";
+			return '<meta http-equiv="refresh" content="0;url='.site_url('public/user/registerNewUser').'">';
+		}{
+			$data=array(
+				'username'	=>$_POST['username'],
+				'name'		=>$_POST['name'],
+				'surname'	=>$_POST['surname'],
+				'email'		=>$_POST['email'],
+				'password'	=>md5($_POST['password']),
+				);				
+			$userModel->addUser($data);
+			$_SESSION['message']="การสมัครสมาชิกสำเร็จโปรดเข้าสู่ระบบเพื่อดำเนินการต่อ";
+			return 'การสมัครสมาชิกสำเร็จกรุณารอสักครู่..<meta http-equiv="refresh" content="3;url='.site_url('public/user/login').'">';
 		}
 	}
 	public function logout(){
