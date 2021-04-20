@@ -1,3 +1,4 @@
+<?php print $title; ?>
 <div class="row clearfix">
 <?php
 helper('widget');

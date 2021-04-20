@@ -2,16 +2,21 @@
         helper('table');
         helper('modal');
         $mouRows=array();
-        //print_r($data['gov']);
+        //print_r($data['school']);
         $school=$data['school'];
         $business=$data['business'];
         $gov=$data['gov'];
         foreach($data['mou'] as $mou){
             $mou = get_object_vars($mou);
+
+            $org_name='';
+            if(isset($school[$mou['school_id']]))$org_name=$school[$mou['school_id']];
+            else if(isset($gov[$mou['school_id']]))$org_name=$gov[$mou['school_id']];
+
             if(!isset($business[$mou['business_id']]))continue;
             $mouRows[]=array(
                 'business_id'=>$business[$mou['business_id']],
-                'school_id'=>isset($school[$mou['school_id']])?$school[$mou['school_id']]:isset($gov[$mou['school_id']])?$gov[$mou['school_id']]:$mou['school_id'],
+                'school_id'=>$org_name,
                 'mou_date'=>$mou['mou_date'],
                 'mou_sign_place'=>$mou['mou_sign_place'],
                 '<button class="btn btn-xs btn-warning waves-effect"><i class="material-icons">edit</i></button>

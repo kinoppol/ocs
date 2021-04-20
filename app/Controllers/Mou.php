@@ -10,7 +10,7 @@ class Mou extends BaseController
 		if($year=='')$year=date('Y');
 		$mouModel = model('App\Models\MouModel');
 		$data=array(
-			'data'=>$mouModel->getMou($year),
+			'data'=>$mouModel->getMou(['year'=>$year]),
 			'year'=>$year,
 		);
 		$data=array(
@@ -51,6 +51,7 @@ class Mou extends BaseController
 		$data=array(
 			'business_id'	=>$_POST['business_id'],
 			'school_id'		=>$_POST['org_id'],
+			'level'			=>$_POST['level'],
 			'director_name'	=>$_POST['govSignName'],
 			'director_type'	=>$_POST['govSignNamePosition'],
 			'ceo_name'		=>$_POST['businessSignName'],
@@ -64,6 +65,7 @@ class Mou extends BaseController
 			'dve_target'	=>$_POST['dve_target'],
 			'wage'			=>$_POST['wage'],
 			'benefits'		=>$_POST['benefits'],
+			'obligation'	=>$_POST['obligation'],
 		);
 		$result=$businessModel->addMou($data);
 		return '<meta http-equiv="refresh" content="0;url='.site_url('public/mou/list').'">';
@@ -103,6 +105,27 @@ class Mou extends BaseController
             'content'=>view('listBusiness',$data)
 		);        
 
+		return view('_main',$data);
+	}
+
+	public function curriculumDev(){
+
+		$data=array(
+			'title'=>'หลักสูตรที่ร่วมกับสถานประกอบการ',
+			'mainMenu'=>view('_menu'),
+            'content'=>'-การพัฒนาหลักสูตรร่วมกับสถานประกอบการ-',
+		);       
+		return view('_main',$data);
+	}
+
+	
+	public function result(){
+
+		$data=array(
+			'title'=>'ผลสัมฤทธิ์ของความร่วมมือ',
+			'mainMenu'=>view('_menu'),
+            'content'=>'-ผลสัมฤทธิ์ของความร่วมมือกับสถานประกอบการ-',
+		);       
 		return view('_main',$data);
 	}
 }

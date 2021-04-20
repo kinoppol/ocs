@@ -33,6 +33,8 @@ function genInput($data){
                 $ret.=genInput_submit($data);
             }else if(is_numeric(array_search($data['type'],array('hidden')))){
                 $ret.=genInput_hidden($data);
+            }else if(is_numeric(array_search($data['type'],array('check_group')))){
+                $ret.=genInput_check_group($data);
             }
 
         }
@@ -49,8 +51,8 @@ function genInput_textbox($data){
             <div class="form-group">
                 <div class="form-line">
                     <input type="'.$data['type'].'" name="'.$data['id'].'" id="'.$data['id'].'" class="form-control '.$data['class'].'" placeholder="'.$data['placeholder'].'" value="'.$data['def'].'" '.$min.$max.(isset($data['required'])&&$data['required']?'required':'').''.(isset($data['disabled'])&&$data['disabled']?'disabled':'').'/>
-                </div>
-            </div>';
+                    </div>
+                </div>';
         return $ret;
 }
 
@@ -60,6 +62,18 @@ function genInput_hidden($data){
         return $ret;
 }
 
+function genInput_check_group($data){
+    $ret='<label for="'.$data['id'].'">'.$data['label'].'</label>
+            <div class="form-group">
+                <div class="form-line">';
+               foreach($data['items'] as $k=>$v){
+                    $ret.='<input type="checkbox" id="'.$k.'" name="'.$k.'" value="'.$v['value'].'"'.($v['checked']?' checked':'').' />
+                    <label for="'.$k.'">'.$v['text'].'</label>';
+               }                         
+        $ret.='</div>
+            </div>';
+        return $ret;
+}
 
 function genInput_select($data){
     $ret='<label for="'.$data['id'].'">'.$data['label'].(isset($data['required'])&&$data['required']?'<span style="color:red;">*</span>':'').'</label>

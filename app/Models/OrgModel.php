@@ -4,7 +4,7 @@ namespace App\Models;
 
 use CodeIgniter\Model;
 
-class MouModel extends Model
+class OrgModel extends Model
 {
     public function getSchool(){
         $db = \Config\Database::connect();

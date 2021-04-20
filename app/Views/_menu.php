@@ -75,6 +75,16 @@ $data=array(
                 'url'=>site_url('public/mou/searchBusiness'),
                 'cond'=>true,
             ),
+            'curriculumDev'=>array(
+                'text'=>'การพัฒนาหลักสูตรร่วมกัน',
+                'url'=>site_url('public/mou/curriculumDev'),
+                'cond'=>true,
+            ),
+            'mouResult'=>array(
+                'text'=>'ผลสัมฤทธิ์ของความร่วมมือ',
+                'url'=>site_url('public/mou/result'),
+                'cond'=>true,
+            ),
 
         ),
     ),
@@ -103,14 +113,39 @@ $data=array(
             'bullet'=>'receipt_long',
             'cond'=>current_user('user_type')=='gov',
             'items'=>array(
-                'menu1'=>array(
-                    'text'=>'งาน 1',
-                    'url'=>site_url('public/admin/systemSetting'),
+                'reportRecode'=>array(
+                    'text'=>'รายงานการประชุม',
+                    'url'=>site_url('public/gov/reportRecode'),
                     'cond'=>true,
                     ),
-                'menu2'=>array(
-                    'text'=>'งาน 2',
-                    'url'=>site_url('public/admin/userManage'),
+                'curriculumDev'=>array(
+                    'text'=>'การพัฒนาหลักสูตร',
+                    'url'=>site_url('public/gov/curriculumDev'),
+                    'cond'=>true,
+                    ),
+                'teacherDev'=>array(
+                    'text'=>'การพัฒนาครูในสถานศึกษา',
+                    'url'=>site_url('public/gov/teacherDev'),
+                    'cond'=>true,
+                    ),
+                'trainerDev'=>array(
+                    'text'=>'การพัฒนาครูฝึกในสถานประกอบการ',
+                    'url'=>site_url('public/gov/trainerDev'),
+                    'cond'=>true,
+                    ),
+                'teacherDev'=>array(
+                    'text'=>'การพัฒนาผู้เรียน',
+                    'url'=>site_url('public/gov/teacherDev'),
+                    'cond'=>true,
+                    ),
+                'projectRecord'=>array(
+                    'text'=>'โครงการอื่นๆ',
+                    'url'=>site_url('public/gov/projectRecord'),
+                    'cond'=>true,
+                    ),
+                'publicRecord'=>array(
+                    'text'=>'การประชาสัมพันธ์',
+                    'url'=>site_url('public/gov/publicRecord'),
                     'cond'=>true,
                     ),
                 ),
@@ -147,7 +182,7 @@ $data=array(
                 ),
             'report'=>array(
                 'text'=>'รายงานผลการดำเนินงาน',
-                'url'=>site_url(),
+                'url'=>site_url('public/report/list'),
                 'bullet'=>'assessment',
                 'cond'=>true,
                 ),

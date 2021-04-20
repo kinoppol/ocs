@@ -6,16 +6,18 @@ use CodeIgniter\Model;
 
 class MouModel extends Model
 {
-    public function getMouCount(){
+    public function getMouCount($data=false){
         $db = \Config\Database::connect();
-        $mou = $db->table('mou')->get()->getResult();
+        $builder=$db->table('mou');
+        if(isset($data['org_code']))$builder->where('school_id',$data['org_code']);
+        $mou = $builder->get()->getResult();
         $mouCount=count($mou);
         return $mouCount;
     }
-    public function getMou($year){
+    public function getMou($data){
         $db = \Config\Database::connect();
         $builder = $db->table('mou');
-        $builder->like('mou_date',$year,'after');
+        $builder->like('mou_date',$data['year'],'after');
         $mou=$builder->get()->getResult();
         $builder = $db->table('school');
         $schools=$builder->get()->getResult();
@@ -43,18 +45,20 @@ class MouModel extends Model
         );
         return $result;
     }
-    public function getMouYearCount($year){
+    public function getMouYearCount($data){
         $db = \Config\Database::connect();
         $builder = $db->table('mou');
-        $builder->like('mou_date',$year,'after');
+        if(isset($data['org_code']))$builder->where('school_id',$data['org_code']);
+        $builder->like('mou_date',$data['year'],'after');
         $mou=$builder->get()->getResult();
         $mouCount=count($mou);
         return $mouCount;
     }
-    public function getBusinessCount(){
+    public function getBusinessCount($data=false){
         $db = \Config\Database::connect();
         $builder = $db->table('mou');
         $builder->select('business_id');
+        if(isset($data['org_code']))$builder->where('school_id',$data['org_code']);
         $builder->distinct();
         $business=$builder->get()->getResult();
         $businessCount=count($business);
