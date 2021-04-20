@@ -19,7 +19,7 @@
                 'school_id'=>$org_name,
                 'mou_date'=>$mou['mou_date'],
                 'mou_sign_place'=>$mou['mou_sign_place'],
-                '<button class="btn btn-xs btn-warning waves-effect"><i class="material-icons">edit</i></button>
+                '<a href="'.site_url('public/mou/edit/'.$mou['mou_id']).'" class="btn btn-xs btn-warning waves-effect"><i class="material-icons">edit</i></a>
                 <a href="'.site_url('public/mou/pdf/'.$mou['mou_id']).'" target="_blank" class="btn btn-xs btn-danger waves-effect"><i class="material-icons">print</i></a>',
             );
         }

@@ -15,9 +15,11 @@ class MouModel extends Model
         return $mouCount;
     }
     public function getMou($data){
+        //print_r($data);
         $db = \Config\Database::connect();
         $builder = $db->table('mou');
-        $builder->like('mou_date',$data['year'],'after');
+        if(isset($data['mou_id']))$builder->where('mou_id',$data['mou_id']);
+        if(isset($data['year']))$builder->like('mou_date',$data['year'],'after');
         $mou=$builder->get()->getResult();
         $builder = $db->table('school');
         $schools=$builder->get()->getResult();
@@ -69,6 +71,16 @@ class MouModel extends Model
         $db = \Config\Database::connect();
         $builder = $db->table('mou');
         $result=$builder->insert($data);
+        //print $db->getLastQuery();
+        return $result;
+    }
+    
+    public function updateMou($mou_id,$data){
+		//print_r($data);
+        $db = \Config\Database::connect();
+        $builder = $db->table('mou');
+        $builder->where('mou_id',$mou_id);
+        $result=$builder->update($data);
         //print $db->getLastQuery();
         return $result;
     }

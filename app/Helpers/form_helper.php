@@ -2,13 +2,15 @@
 helper('array');
 
 function genForm($data){
+    $enctype='';
+    if(isset($data['enctype']))$enctype=' enctype="multipart/form-data"';
     $ret='<div class="card">
     <div class="header">
         <h2>
             '.$data['formName'].'
         </h2>
         <div class="body">
-                            <form action="'.$data['action'].'" method="'.$data['method'].'">'.
+                            <form action="'.$data['action'].'" method="'.$data['method'].'"'.$enctype.'>'.
                             genInput($data['inputs'])
                             .'</form>
                             </div>
@@ -45,12 +47,16 @@ function genInput($data){
 function genInput_textbox($data){
     $min='';
     $max='';
+    $accept='';
+    $multiple='';
     if(isset($data['min']))$min=' min="'.$data['min'].'"';
     if(isset($data['max']))$max=' max="'.$data['max'].'"';
+    if(isset($data['accept']))$accept=' accept="'.$data['accept'].'"';
+    if(isset($data['multiple']))$multiple=' multiple';
     $ret='<label for="'.$data['id'].'">'.$data['label'].(isset($data['required'])&&$data['required']?'<span style="color:red;">*</span>':'').'</label>
             <div class="form-group">
                 <div class="form-line">
-                    <input type="'.$data['type'].'" name="'.$data['id'].'" id="'.$data['id'].'" class="form-control '.$data['class'].'" placeholder="'.$data['placeholder'].'" value="'.$data['def'].'" '.$min.$max.(isset($data['required'])&&$data['required']?'required':'').''.(isset($data['disabled'])&&$data['disabled']?'disabled':'').'/>
+                    <input type="'.$data['type'].'" name="'.$data['id'].'" id="'.$data['id'].'" class="form-control '.$data['class'].'" placeholder="'.$data['placeholder'].'" value="'.$data['def'].'" '.$min.$max.$accept.$multiple.(isset($data['required'])&&$data['required']?'required':'').''.(isset($data['disabled'])&&$data['disabled']?'disabled':'').'/>
                     </div>
                 </div>';
         return $ret;
