@@ -31,7 +31,7 @@ class Mou extends BaseController
 	}
 	public function add($business_id='')
 	{
-		$businessModel = model('App\Models\businessModel');
+		$businessModel = model('App\Models\BusinessModel');
 		$locationModel = model('App\Models\LocationModel');
 		$data=array(
 			'business_data'=>$businessModel->getBusiness($business_id),
