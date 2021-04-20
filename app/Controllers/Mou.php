@@ -84,19 +84,21 @@ class Mou extends BaseController
         helper('system');
 		$businessModel = model('App\Models\BusinessModel');
 		$locationModel = model('App\Models\LocationModel');
+        $province_id='10';
+        if(isset($_POST['province_id']))$province_id=$_POST['province_id'];
         if(isset($_POST['q'])&&$_POST['q']!=''){
             $data=array(            
                 'province'=>$locationModel->getProvince(),
                 'district'=>$locationModel->getDistrict(),
                 'subdistrict'=>$locationModel->getSubdistrict(),
-                'business'=>$businessModel->searchBusiness($_POST['q']),
+                'business'=>$businessModel->searchBusiness(['province_id'=>$province_id,'q'=>$_POST['q']]),
             );
         }else{
-            $data=array(           
-                'province'=>array(),
-                'district'=>array(),
-                'subdistrict'=>array(),
-                'business'=>array(),
+            $data=array(            
+                'province'=>$locationModel->getProvince(),
+                'district'=>$locationModel->getDistrict(),
+                'subdistrict'=>$locationModel->getSubdistrict(),
+                'business'=>$businessModel->searchBusiness(['province_id'=>$province_id]),
             );
         }
 		$data=array(

@@ -67,7 +67,7 @@ function genInput_check_group($data){
             <div class="form-group">
                 <div class="form-line">';
                foreach($data['items'] as $k=>$v){
-                    $ret.='<input type="checkbox" id="'.$k.'" name="'.$k.'" value="'.$v['value'].'"'.($v['checked']?' checked':'').' />
+                    $ret.='<input type="checkbox" class="filled-in chk-col-orange" id="'.$k.'" name="'.$k.'" value="'.$v['value'].'"'.($v['checked']?' checked':'').' />
                     <label for="'.$k.'">'.$v['text'].'</label>';
                }                         
         $ret.='</div>

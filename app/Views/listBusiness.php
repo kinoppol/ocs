@@ -1,6 +1,7 @@
 <?php
         helper('table');
         helper('modal');
+        helper('form');
         $buninessRows=array();
         foreach($business as $k=>$v){
             $buninessRows[]=array(
@@ -24,10 +25,21 @@
                     <div class="header">
                                <form action="<?php print site_url('public/'.$_SERVER['PATH_INFO']); ?>" method="post">
                                     <div class="row clearfix">
-                                      <div class="col-lg-8 col-md-6 col-sm-6 col-xs-3">
+                                      <div class="col-lg-4 col-md-6 col-sm-6 col-xs-3">
                                         <div class="form-group">
                                             <div class="form-line">
-                                                <input type="text" class="form-control" name="q" placeholder="ชื่อสถานประกอบการบางส่วน.." minlength="3" value="<?php print isset($_POST['q'])?$_POST['q']:''; ?>" required>
+                                                <select name="province_id" id="province_id" class="form-control">
+                                                    <?php
+                                                        print genOption($province,isset($_POST['province_id'])?$_POST['province_id']:'10');
+                                                    ?>
+                                                </select>
+                                            </div>
+                                        </div>
+                                    </div><div class="row clearfix">
+                                      <div class="col-lg-4 col-md-6 col-sm-6 col-xs-3">
+                                        <div class="form-group">
+                                            <div class="form-line">
+                                                <input type="text" class="form-control" name="q" placeholder="ชื่อสถานประกอบการบางส่วน.." value="<?php print isset($_POST['q'])?$_POST['q']:''; ?>">
                                             </div>
                                         </div>
                                     </div>

@@ -26,10 +26,11 @@ class BusinessModel extends Model
             }
         return $datas;
     }
-    public function searchBusiness($q=''){
+    public function searchBusiness($data){
         $db = \Config\Database::connect();
         $builder = $db->table('business');
-        $builder->like('business_name', $q, 'both');
+        if(isset($data['province_id']))$builder->where('province_id', $data['province_id']);
+        if(isset($data['q']))$builder->like('business_name', $data['q'], 'both');
         $data=$builder->get()->getResult();
             $datas=array();
             foreach($data as $row){
