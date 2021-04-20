@@ -79,8 +79,7 @@
 				var profile = userInfo.getBasicProfile();
                 $.post( "<?php print site_url('public/user/checkGoogle'); ?>",{email:profile.getEmail(),token:userInfo.getAuthResponse().id_token}, function( data ) {
                     var result=$.parseJSON(data);
-                    if(result.status=='ok'){   
-                        alert('Login');                     
+                    if(result.status=='ok'){                 
                         signOut();
                         window.location.replace("<?php print site_url('public/home/dashboard'); ?>");
                     }else{
