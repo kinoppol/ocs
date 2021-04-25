@@ -33,8 +33,8 @@ class Database extends Config
 	public $default = [
 		'DSN'      => '',
 		'hostname' => 'localhost',
-		'username' => 'root',
-		'password' => '',
+		'username' => 'noppol',
+		'password' => 'thailand',
 		'database' => 'ocs',
 		'DBDriver' => 'MySQLi',
 		'DBPrefix' => 'ocs_',
