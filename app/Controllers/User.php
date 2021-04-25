@@ -123,7 +123,7 @@ class User extends BaseController
 			'user_active'=>'Y'
 		);
 		$loginTime=time()+3600;// ล็อกอิน 1 ชั่วโมง
-		if($_POST['rememberme']=='yes')$loginTime=time()+3600*365;//ล็อกอิน 1 ปี
+		if(isset($_POST['rememberme'])&&$_POST['rememberme']=='yes')$loginTime=time()+3600*365;//ล็อกอิน 1 ปี
 		$result=$userModel->checkUser($data);
 		if($result){
 			setcookie("current_user", serialize($result), $loginTime,'/');
