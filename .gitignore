@@ -129,3 +129,5 @@ nb-configuration.xml
 public/pdf/4689.pdf
 app/Config/Database.php
 writable/cache/index.html
+app/Config/Database.php
+writable/cache/index.html
