@@ -10,7 +10,7 @@ class School extends BaseController
 			'title'=>'ข้อมูลสถานศึกษา',
 			'systemName'=>'ระบบฐานข้อมูลความร่วมมือ',
 			'mainMenu'=>view('_menu'),
-			'content'=>'-แสดงข้อมูลสถานศึกษา-',
+			'content'=>view('schoolDetail'),
 		);
         return view('_main',$data);
     }
