@@ -12,7 +12,7 @@ $data=array(
     ),
     'business'=>array(
         'color'=>'amber',
-        'text'=>'ข้อมูลสถานประกอบการ',
+        'text'=>'สถานประกอบการ',
         'number'=>$businessCount,
         'icon'=>'account_balance',
         'url'=>site_url('public/business/list'),

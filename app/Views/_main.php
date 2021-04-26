@@ -15,7 +15,12 @@ helper('modal');
     <!-- Google Fonts -->
     <link href="https://fonts.googleapis.com/css?family=Roboto:400,700&subset=latin,cyrillic-ext" rel="stylesheet" type="text/css">
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet" type="text/css">
-
+    <link href="https://fonts.googleapis.com/css2?family=Kanit&display=swap" rel="stylesheet">
+    <style>
+        body{
+            font-family: 'Kanit', sans-serif;
+        }
+    </style>
     <!-- Bootstrap Core Css -->
     <link href="<?php print site_url();?>template/adminbsb/plugins/bootstrap/css/bootstrap.css" rel="stylesheet">
 
@@ -41,7 +46,7 @@ helper('modal');
     <link href="<?php print site_url();?>template/adminbsb/plugins/bootstrap-select/css/bootstrap-select.css" rel="stylesheet" />
 
     <!-- Custom Css -->
-    <link href="<?php print site_url();?>template/adminbsb/css/style.css?lo=th" rel="stylesheet">
+    <link href="<?php print site_url();?>template/adminbsb/css/style.css?lo=thai" rel="stylesheet">
 
     <!-- AdminBSB Themes. You can choose a theme from css/themes instead of get all themes -->
     <link href="<?php print site_url();?>template/adminbsb/css/themes/all-themes.css" rel="stylesheet" />
@@ -51,7 +56,7 @@ helper('modal');
     -->
 </head>
 
-<body class="theme-orange">
+<body class="theme-orange" style="font-family: 'Kanit', sans-serif;">
     <!-- Page Loader -->
     <div class="page-loader-wrapper">
         <div class="loader">
