@@ -1,6 +1,7 @@
 <?php
 helper('user');
 helper('modal');
+helper('tab');
 ?>
 <!DOCTYPE html>
 <html>
@@ -301,16 +302,27 @@ helper('modal');
             <?php print $content; ?>
     </section>
     <?php
+                    $tab=array(
+                        'about'=>array(
+                            'title'=>'เกี่ยวกับระบบ',
+                            'content'=>'<h4>'.SYSTEMNAME.'</h4>
+                            Version: '.VERSION.' &copy;'.date('Y').' สำนักความร่วมมือ สำนักงานคณะกรรมการการอาชีวศึกษา
+                            <br><br>
+                            อำนวยการพัฒนาโดย <b>วิทยาลัยสารพัดช่างสมุทรปราการ</b> <a href="http://spkpoly.ac.th/">http://spkpoly.ac.th</a><br>
+                            ',
+                        ),
+                        'developer'=>array(
+                            'title'=>'ผู้พัฒนาระบบ',
+                            'content'=>'<h4>'.SYSTEMNAME.'</h4>
+                            พัฒนาระบบโดย <b>นายนพพล อินศร</b> ครูวิทยาลัยพณิชยการบางนา<br>
+                            <a href="mailto:noppol.ins@bncc.ac.th">noppol.ins@bncc.ac.th</a><br>
+                            โทร <a href="tel:+66919968266">09-1996-8266</a>',
+                        ),
+                    );
                     $data=array(
                         'id'=>'aboutSystem',
                         'title'=>'เกี่ยวกับระบบ',
-                        'content'=>'<h4>'.SYSTEMNAME.'</h4>
-                        Version: '.VERSION.' &copy;'.date('Y').' สำนักความร่วมมือ สำนักงานคณะกรรมการการอาชีวศึกษา
-                        <br><br>
-                        อำนวยการพัฒนาโดย <b>วิทยาลัยสารพัดช่างสมุทรปราการ</b> <a href="http://spkpoly.ac.th/">http://spkpoly.ac.th</a><br>
-                        พัฒนาระบบโดย <b>นายนพพล อินศร</b> ครูวิทยาลัยพณิชยการบางนา<br>
-                        <a href="mailto:noppol.ins@bncc.ac.th">noppol.ins@bncc.ac.th</a><br>
-                        โทร <a href="tel:+66919968266">09-1996-8266</a>',
+                        'content'=>gen_tab($tab),
                     );
                     print genModal($data);
                     ?>
