@@ -2,6 +2,8 @@
 helper('user');
 helper('modal');
 helper('tab');
+$debug=true;
+$_SESSION['FOOTSYSTEM']='';
 ?>
 <!DOCTYPE html>
 <html>
@@ -58,6 +60,9 @@ helper('tab');
 </head>
 
 <body class="theme-orange" style="font-family: 'Kanit', sans-serif;">
+<?php
+if(!$debug){
+?>
     <!-- Page Loader -->
     <div class="page-loader-wrapper">
         <div class="loader">
@@ -75,6 +80,9 @@ helper('tab');
         </div>
     </div>
     <!-- #END# Page Loader -->
+    <?php
+    }
+    ?>
     <!-- Overlay For Sidebars -->
     <div class="overlay"></div>
     <!-- #END# Overlay For Sidebars -->
@@ -152,7 +160,7 @@ helper('tab');
             <!-- User Info -->
             <div class="user-info">
                 <div class="image">
-                    <img src="<?php print current_user('picture')!=''?current_user('picture'):site_url('template/adminbsb/images/user.png'); ?>" width="48" height="48" alt="User" />
+                    <img src="<?php print current_user('picture')!=''?site_url(current_user('picture')):site_url('template/adminbsb/images/user.png'); ?>" width="48" height="48" alt="User" />
                 </div>
                 <div class="info-container">
                     <div class="name" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><?php print current_user('name').' '.current_user('surname').' : '.user_type(current_user('user_type')); ?></div>

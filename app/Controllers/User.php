@@ -53,12 +53,28 @@ class User extends BaseController
 			
 			$loginTime=time()+3600;
 			if(count($user)>=1){
-				$data=array(//ถ้ามีข้อมูลอยู่แล้วไม่อัพเดตอะไรยกเว้นรูปภาพ
-					//'name'=>$result['data']['given_name'],
-					//'surname'=>$result['data']['family_name'],
-					'picture'=>$result['data']['picture'],
-				);
-				$userModel->updateUser($result['data']['email'],$data);
+				$url=$result['data']['picture'];
+				$handle = curl_init($url);
+				curl_setopt($handle,  CURLOPT_RETURNTRANSFER, TRUE);
+				$response = curl_exec($handle);
+				$httpCode = curl_getinfo($handle, CURLINFO_HTTP_CODE);
+				if($httpCode == 200) {
+					/* Handle 200 here. */
+					$img_path="images/user/".$result['data']['email'].".jpg";
+					$user_image=fopen(APPPATH.'../'.$img_path,"w");
+					fwrite($user_image,$response);
+					fclose($user_image);
+
+
+						$data=array(//ถ้ามีข้อมูลอยู่แล้วไม่อัพเดตอะไรยกเว้นรูปภาพ
+							//'name'=>$result['data']['given_name'],
+							//'surname'=>$result['data']['family_name'],
+							'picture'=>$img_path,
+						);
+						$userModel->updateUser($result['data']['email'],$data);
+				}
+
+				curl_close($handle);
 			}else{
 				$data=array(
 				'username'=>$result['data']['email'],

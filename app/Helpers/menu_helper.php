@@ -69,7 +69,7 @@ function genSubMenu($data,$def=''){
     return $ret;
 }
 
-function searchForUrl($url='',$arr){
+function searchForUrl($url='',$arr=array()){
     foreach($arr as $row){
         if(isset($row['url'])&&$row['url']==$url)return true;
         if(isset($row['items'])&&is_array($row['items'])) return searchForUrl($url,$row['items']);

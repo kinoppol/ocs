@@ -47,6 +47,8 @@ class Home extends BaseController
 
 		$data=array(
 			'title'=>'ภาพรวม',
+			'task'=>'',
+			'notification'=>'',
 			'mainMenu'=>view('_menu'),
 			'content'=>view('dashboard',$data).view('dashboard',$data2),
 		);
