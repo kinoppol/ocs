@@ -127,5 +127,4 @@ nb-configuration.xml
 /phpunit*.xml
 /.phpunit.*.cache
 public/pdf/4689.pdf
-app/Config/Database.php
-app/Config/Database.php
+/app/Config/Database.php
