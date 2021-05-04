@@ -30,7 +30,7 @@
     <link href="<?php print site_url();?>template/adminbsb/plugins/animate-css/animate.css" rel="stylesheet" />
 
     <!-- Custom Css -->
-    <link href="<?php print site_url();?>template/adminbsb/css/style.css?YY" rel="stylesheet">
+    <link href="<?php print site_url();?>template/adminbsb/css/style.css?xx" rel="stylesheet">
 </head>
 
 

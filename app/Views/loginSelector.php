@@ -42,7 +42,7 @@ $data=array(
         'color'=>'pink',
         'text'=>'สถาบันการอาชีวศึกษา',
         'number'=>'5',
-        'icon'=>'folder',
+        'icon'=>'account_balance',
         'url'=>site_url('public/user/login/institute'),
         'class'=>'col-lg-6 col-md-12 col-sm-12 col-xs-12',
     ),

@@ -78,7 +78,7 @@
 						</div>
 						<div class="col-lg-7">
 							<div class="home_left_img">
-								<img class="img-fluid" src="images/brother_mfu_1.png" alt="">
+								<img class="img-fluid" src="images/mou_table.jpg" alt="">
 							</div>
 						</div>
 					</div>
