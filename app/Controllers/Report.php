@@ -10,7 +10,9 @@ class Report extends BaseController
 		$data=array(
 			'title'=>'รายงานผลการดำเนินงาน',
 			'mainMenu'=>view('_menu'),
-            'content'=>view('report')
+            'content'=>view('report'),
+			'notification'=>'',
+			'task'=>'',
 		);
 		return view('_main',$data);
 	}

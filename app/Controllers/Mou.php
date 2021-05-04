@@ -16,6 +16,8 @@ class Mou extends BaseController
 			'title'=>'รายการความร่วมมือ',
 			'mainMenu'=>view('_menu'),
 			'content'=>view('listMou',$data),
+			'notification'=>'',
+			'task'=>'',
 		);
 		return view('_main',$data);
 	}
@@ -25,6 +27,8 @@ class Mou extends BaseController
 		$data=array(
 			'title'=>'ค้นหาข้อมูลความร่วมมือ',
 			'mainMenu'=>view('_menu'),
+			'notification'=>'',
+			'task'=>'',
 		);
 		return view('_main',$data);
 	}
@@ -42,6 +46,8 @@ class Mou extends BaseController
 			'title'=>'เพิ่มข้อมูล MOU',
 			'mainMenu'=>view('_menu'),			
 			'content'=>view('detailMou',$data),
+			'notification'=>'',
+			'task'=>'',
 		);
 		return view('_main',$data);
 	}
@@ -63,6 +69,8 @@ class Mou extends BaseController
 			'title'=>'แก้ไขข้อมูล MOU',
 			'mainMenu'=>view('_menu'),			
 			'content'=>view('detailMou',$data),
+			'notification'=>'',
+			'task'=>'',
 		);
 		return view('_main',$data);
 	}
@@ -164,7 +172,9 @@ class Mou extends BaseController
 		$data=array(
 			'title'=>'ค้นหาสถานประกอบการที่ทำ MOU',
 			'mainMenu'=>view('_menu'),
-            'content'=>view('listBusiness',$data)
+            'content'=>view('listBusiness',$data),
+			'notification'=>'',
+			'task'=>'',
 		);        
 
 		return view('_main',$data);
@@ -176,6 +186,8 @@ class Mou extends BaseController
 			'title'=>'หลักสูตรที่ร่วมกับสถานประกอบการ',
 			'mainMenu'=>view('_menu'),
             'content'=>'-การพัฒนาหลักสูตรร่วมกับสถานประกอบการ-',
+			'notification'=>'',
+			'task'=>'',
 		);       
 		return view('_main',$data);
 	}
@@ -187,6 +199,8 @@ class Mou extends BaseController
 			'title'=>'ผลสัมฤทธิ์ของความร่วมมือ',
 			'mainMenu'=>view('_menu'),
             'content'=>'-ผลสัมฤทธิ์ของความร่วมมือกับสถานประกอบการ-',
+			'notification'=>'',
+			'task'=>'',
 		);       
 		return view('_main',$data);
 	}

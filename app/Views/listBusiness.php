@@ -4,9 +4,14 @@
         helper('form');
         $buninessRows=array();
         foreach($business as $k=>$v){
+            if($v['district_id']==0)continue;
             $buninessRows[]=array(
                 'business_name'=>$v['business_name'],
-                'address'=>'จังหวัด'.$province[$v['province_id']].' อำเภอ'.$district[$v['district_id']].' ตำบล'.$subdistrict[$v['subdistrict_id']].' ถนน'.($v['road']!=''?$v['road']:'-').' เลขที่ '.($v['address_no']!=''?$v['address_no']:'-'),
+                'address'=>'จังหวัด'.$province[$v['province_id']].
+                            ' อำเภอ'.$district[$v['district_id']].
+                            ' ตำบล'.$subdistrict[$v['subdistrict_id']].
+                            ' ถนน'.($v['road']!=''?$v['road']:'-').
+                            ' เลขที่ '.($v['address_no']!=''?$v['address_no']:'-'),
                 '<a href="'.site_url('public/mou/add/'.$v['business_id']).'" class="btn btn-xs btn-warning waves-effect"><i class="material-icons">book</i>เพิ่มข้อมูล MOU</a>',
             );
         }

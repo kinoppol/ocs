@@ -29,7 +29,9 @@ class Business extends BaseController
 		$data=array(
 			'title'=>'รายชื่อสถานประกอบการ',
 			'mainMenu'=>view('_menu'),
-            'content'=>view('listBusiness',$data)
+            'content'=>view('listBusiness',$data),
+			'notification'=>'',
+			'task'=>'',
 		);        
 
 		return view('_main',$data);

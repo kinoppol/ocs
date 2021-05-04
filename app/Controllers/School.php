@@ -11,6 +11,8 @@ class School extends BaseController
 			'systemName'=>'ระบบฐานข้อมูลความร่วมมือ',
 			'mainMenu'=>view('_menu'),
 			'content'=>view('schoolDetail'),
+			'notification'=>'',
+			'task'=>'',
 		);
         return view('_main',$data);
     }
