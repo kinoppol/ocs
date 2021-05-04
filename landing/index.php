@@ -41,7 +41,7 @@
             	<nav class="navbar navbar-expand-lg navbar-light">
 					<div class="container box_1620">
 						<!-- Brand and toggle get grouped for better mobile display -->
-						<a class="navbar-brand logo_h" href="index.html"><img src="img/ocs_logo.png" alt="" width="100"></a>
+						<a class="navbar-brand logo_h" href="./"><img src="img/ocs_logo.png" alt="" width="100"></a>
 						<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
 							<span class="icon-bar"></span>
 							<span class="icon-bar"></span>
@@ -130,8 +130,8 @@
         					<div class="f_title">
         						<h3>เกี่ยวกับเรา</h3>
         					</div>
-        					<p><a href="http://boc2.vec.go.th" target="_blank">สำนักความร่วมมือ</a></p>
-        					<p><a href="http://www.vec.go.th" target="_blank">สำนักงานคณะกรรมการการอาชีวศึกษา</a></p>
+        					<p><a href="http://boc2.vec.go.th" target="_blank">สำนักความร่วมมือ</a><br>
+        					<a href="http://www.vec.go.th" target="_blank">สำนักงานคณะกรรมการการอาชีวศึกษา</a></p>
         				</aside>
         			</div>
         			<div class="col-lg-5 col-sm-6">
