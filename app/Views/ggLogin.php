@@ -1,7 +1,18 @@
+<?php
+    $bgColor=array(
+        'board'=>'#FFAAAA',
+        'boc'=>'#FFFFAA',
+        'gov'=>'#AAFFFF',
+        'institute'=>'#FFAAFF',
+        'school'=>'#AAFFAA',
+    );
+?>
+
 <meta name="google-signin-scope" content="profile email">
 		<meta name="google-signin-client_id" content="360753505284-4uo4eiqbafl59t7141og7jnup73pn21d.apps.googleusercontent.com">
         <script src="https://apis.google.com/js/platform.js" async defer></script>
-        <div class="row clearfix">
+        <body class="login-page" style="font-family: 'Kanit', sans-serif; background-color: <?php print $bgColor[$userType]; ?>;">
+               <div class="row clearfix">
         <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
                     <div class="card">
                     <div class="header" style="text-align:center">
@@ -72,6 +83,7 @@
                     </div></div>
                     </div></div>
                     </div>
+                    <body>
     <script>
         
 			function onSignIn(userInfo) {

@@ -16,6 +16,13 @@ class OrgModel extends Model
             }
         return $datas;
     }
+    public function schoolData($school_id){
+        $db = \Config\Database::connect();
+        $builder = $db->table('school');
+        $builder->where('school_id',$school_id);
+        $data=$builder->get()->getResult();
+        return $data[0];
+    }
 
     public function getGov(){
         $db = \Config\Database::connect();

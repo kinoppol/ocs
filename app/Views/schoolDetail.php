@@ -44,10 +44,29 @@ helper('tab');
                             <div>
 
                             <?php
+                            $address=' เลขที่ '.($schoolData->address_no!=''?$schoolData->address_no:'-').
+                            ' ถนน'.($schoolData->road!=''?$schoolData->road:'-').
+                            ' ตำบล'.$subdistrict[$schoolData->subdistrict_id].
+                            ' อำเภอ'.$district[$schoolData->district_id].
+                            ' จังหวัด'.$province[$schoolData->province_id];
+                            $school_data='
+                            <b>รหัสสถานศึกษา</b> '.$schoolData->school_id.'
+                            <b>ชื่อสถานศึกษา</b> '.$schoolData->school_name.'<br>
+                            <b>ที่อยู่</b> '.$address.'<br>
+                            <b>อีเมล</b> '.$schoolData->email.'
+                            <b>โทรศัพท์</b> '.$schoolData->phone.'
+                            <b>โทรสาร</b> '.$schoolData->fax.'<br>
+                            <b>ผู้อำนวยการ</b> '.$schoolData->director_name.'<br>
+                            <b>รองฯ ฝ่ายวิชาการ</b> '.$schoolData->deputy_academic_name.'<br>
+                            <b>รองฯ ฝ่ายพัฒนากิจการนักเรียนนักศึกษา</b> '.$schoolData->deputy_activity_name.'<br>
+                            <b>รองฯ ฝ่ายบริหารทรัพยากร</b> '.$schoolData->deputy_resources_name.'<br>
+                            <b>รองฯ ฝ่ายแผนงานและความร่วมมือ</b> '.$schoolData->deputy_planning_name.'<br>
+                            ';
+
                             $tab=array(
                                 'detail'=>array(
                                     'title'=>'ข้อมูลทั่วไป',
-                                    'content'=>'5555',
+                                    'content'=>$school_data,
                                 ),
                                 'form'=>array(
                                     'title'=>'แก้ไขข้อมูล',

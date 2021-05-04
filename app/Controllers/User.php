@@ -4,7 +4,21 @@ namespace App\Controllers;
 
 class User extends BaseController
 {
-	public function login()
+	public function login($userType=false)
+	{
+        
+        $data=array(
+			'title'=>'เข้าสู่ระบบ',
+			'userType'=>$userType,
+			'systemName'=>SYSTEMNAME,
+		);
+		$data=array(
+            //'content'=>view('login',$data)
+			'content'=>view('ggLogin',$data)
+        );
+        return view('_authen',$data);
+	}
+	public function loginSelector()
 	{
         
         $data=array(
@@ -13,7 +27,7 @@ class User extends BaseController
 		);
 		$data=array(
             //'content'=>view('login',$data)
-			'content'=>view('ggLogin',$data)
+			'content'=>view('loginSelector',$data)
         );
         return view('_authen',$data);
 	}
@@ -185,6 +199,6 @@ class User extends BaseController
 	}
 	public function logout(){
 			setcookie("current_user", "", time() - 3600,'/');
-			return '<meta http-equiv="refresh" content="0;url='.site_url('public/user/login').'">';
+			return '<meta http-equiv="refresh" content="0;url='.site_url('public/user/loginSelector').'">';
 	}
 }

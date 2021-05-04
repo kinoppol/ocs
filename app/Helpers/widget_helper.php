@@ -7,8 +7,13 @@ function genWidget($data){
             $ret.=genWidget($row);
         }
     }else{
-    $ret='<div class="col-lg-3 col-md-3 col-sm-6 col-xs-12">
-                    <div class="info-box hover-zoom-effect bg-'.($data['color']==''?'blue':$data['color']).' hover-expand-effect">
+        if(!isset($data['class'])){
+            $class='col-lg-3 col-md-3 col-sm-6 col-xs-12';
+        }else{
+            $class=$data['class'];
+        }
+    $ret='<div class="'.$class.'">
+                    <div style="cursor:pointer;" class="info-box hover-zoom-effect bg-'.($data['color']==''?'blue':$data['color']).' hover-expand-effect">
                     <div class="icon">
                             <i class="material-icons">'.$data['icon'].'</i>
                         </div>

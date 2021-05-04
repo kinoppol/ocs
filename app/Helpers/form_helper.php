@@ -56,7 +56,7 @@ function genInput_textbox($data){
     $ret='<label for="'.$data['id'].'">'.$data['label'].(isset($data['required'])&&$data['required']?'<span style="color:red;">*</span>':'').'</label>
             <div class="form-group">
                 <div class="form-line">
-                    <input type="'.$data['type'].'" name="'.$data['id'].'" id="'.$data['id'].'" class="form-control '.$data['class'].'" placeholder="'.$data['placeholder'].'" value="'.$data['def'].'" '.$min.$max.$accept.$multiple.(isset($data['required'])&&$data['required']?'required':'').''.(isset($data['disabled'])&&$data['disabled']?'disabled':'').'/>
+                    <input type="'.$data['type'].'" name="'.$data['id'].'" id="'.$data['id'].'" class="form-control '.(isset($data['class'])?$data['class']:'').'" placeholder="'.(isset($data['placeholder'])?$data['placeholder']:'').'" value="'.(isset($data['def'])?$data['def']:'').'" '.$min.$max.$accept.$multiple.(isset($data['required'])&&$data['required']?'required':'').''.(isset($data['disabled'])&&$data['disabled']?'disabled':'').'/>
                     </div>
                 </div>';
         return $ret;
@@ -85,8 +85,8 @@ function genInput_select($data){
     $ret='<label for="'.$data['id'].'">'.$data['label'].(isset($data['required'])&&$data['required']?'<span style="color:red;">*</span>':'').'</label>
             <div class="form-group">
                 <div class="form-line">
-                    <select name="'.$data['id'].'" id="'.$data['id'].'" class="form-control '.$data['class'].'" '.(isset($data['required'])&&$data['required']?'required':'').''.(isset($data['disabled'])&&$data['disabled']?'disabled':'').'/>
-                    '.genOption($data['items'],$data['def'],$data['noneLabel']).'
+                    <select name="'.$data['id'].'" id="'.$data['id'].'" class="form-control '.(isset($data['class'])?$data['class']:'').'" '.(isset($data['required'])&&$data['required']?'required':'').''.(isset($data['disabled'])&&$data['disabled']?'disabled':'').'/>
+                    '.genOption($data['items'],$data['def'],(isset($data['noneLabel'])?$data['noneLabel']:false)).'
                     </select>
                 </div>
             </div>';

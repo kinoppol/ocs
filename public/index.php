@@ -1,7 +1,7 @@
 <?php
 ob_start();
 session_start();
-define('SYSTEMNAME','ระบบฐานข้อมูลความร่วมมือ');
+define('SYSTEMNAME','ระบบฐานข้อมูลสำนักความร่วมมือ');
 define('VERSION','21.4.0');
 ini_set('memory_limit', '512M');
 $_SESSION['FOOTSCRIPT']='';
@@ -39,7 +39,12 @@ $app       = require realpath($bootstrap) ?: $bootstrap;
  * up the engines and make this app do its thang.
  */
 $allowNoneLoginUser=array(
-    '/user/login',
+    '/user/login/board',
+    '/user/login/boc',
+    '/user/login/gov',
+    '/user/login/institute',
+    '/user/login/school',
+    '/user/loginSelector',
     '/user/checkLogin',
     '/user/checkGoogle',
     '/user/registerNewUser',
@@ -49,7 +54,7 @@ $allowNoneLoginUser=array(
 if(!isset($_COOKIE['current_user'])) {
     if(!is_numeric(array_search($_SERVER['PATH_INFO'],$allowNoneLoginUser))){
         //print_r($_SERVER);
-        print '<meta http-equiv="refresh" content="0;url='.site_url('public/user/login').'">';
+        print '<meta http-equiv="refresh" content="0;url='.site_url('public/user/loginSelector').'">';
         exit();
     }
 }

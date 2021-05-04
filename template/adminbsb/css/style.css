@@ -7796,7 +7796,35 @@ fieldset[disabled] .form-control {
       text-align: center;
       color: #fff;
       margin-top: -5px; }
-
+/* LoginSelector Page ================================== */
+.loginSelector-page {
+  background-color: #0063d4;
+  padding-left: 0;
+  max-width: 560px;
+  margin: 5% auto;
+  overflow-x: hidden; }
+  .loginSelector-page .login-box .msg {
+    color: #555;
+    margin-bottom: 30px;
+    text-align: center; }
+  .loginSelector-page .login-box a {
+    font-size: 14px;
+    text-decoration: none;
+    color: #00BCD4; }
+  .loginSelector-page .login-box .logo {
+    margin-bottom: 20px; }
+    .loginSelector-page .login-box .logo a {
+      font-size: 36px;
+      display: block;
+      width: 100%;
+      text-align: center;
+      color: #fff; }
+    .loginSelector-page .login-box .logo small {
+      display: block;
+      width: 100%;
+      text-align: center;
+      color: #fff;
+      margin-top: -5px; }
 /* Sign Up Page ================================ */
 .signup-page {
   background-color: #00BCD4;
