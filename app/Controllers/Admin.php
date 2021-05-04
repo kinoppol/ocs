@@ -11,6 +11,9 @@ class Admin extends BaseController
 			'title'=>'ตั้งค่าระบบ',
 			'systemName'=>'ระบบฐานข้อมูลความร่วมมือ',
 			'mainMenu'=>view('_menu'),
+			'content'=>'ตั้งค่าระบบ',
+			'notification'=>'',
+			'task'=>'',
 		);
 		return view('_main',$data);
 	}
@@ -34,10 +37,85 @@ class Admin extends BaseController
 			'mainMenu'=>view('_menu'),
 			'content'=>view('manageUser',$data).
 			view('manageUser',$data2),
+			'notification'=>'',
+			'task'=>'',
 		);
 
 		
 		return view('_main',$data);
+	}
+
+	public function editUser($userId)
+	{
+		$userModel = model('App\Models\UserModel');
+		$userData=$userModel->getUser($userId);
+		$data=array(
+			'userData'=>$userData,
+		);
+		$data=array(
+			'title'=>'แก้ไขผู้ใช้งาน',
+			'mainMenu'=>view('_menu'),
+			'content'=>view('editUser',$data),
+			'notification'=>'',
+			'task'=>'',
+		);
+
+		
+		return view('_main',$data);
+	}
+
+	public function saveUser(){
+		$user_id=$_POST['user_id'];
+		$userModel = model('App\Models\UserModel');
+		$userData=$userModel->getUser($user_id);
+		$error=0;
+		$message='';
+		$data=array();
+		foreach($userData as $k=>$v){
+			$data[$k]=$v;
+		}
+		if($_POST['password']!=$_POST['confirm_password']){
+			$error++;
+			$message.='รหัสผ่านและยืนยันรหัสผ่านไม่ตรงกัน';
+		}
+
+		if($_POST['password']!=''&&$_POST['password']==$_POST['confirm_password']){
+			if(mb_strlen($_POST['password'])>=8){
+				$data['password']=md5($_POST['password']);
+			}else{
+				$error++;
+				$message.='รหัสผ่านจะต้องมีความยาวไม่น้อยกว่า 8 ตัวอักษร';
+			}
+		}
+		
+		if($error>0){
+
+			$content=$message.'<br><button class="btn btn-primary" onclick="goBack()">กลับไปแก้ไข</button>
+
+			<script>
+			function goBack() {
+			  window.history.back();
+			}
+			</script>
+			';
+			$data=array(
+				'title'=>'แก้ไขผู้ใช้',
+				'systemName'=>'พบข้อผิดพลาด',
+				'mainMenu'=>view('_menu'),
+				'content'=>$content,
+				'notification'=>'',
+				'task'=>'',
+			);
+			return view('_main',$data);
+
+		}
+			$data['name']		=trim($_POST['name']);
+			$data['surname']	=trim($_POST['surname']);
+			$data['email']		=trim($_POST['email']);
+			$data['user_active']=trim($_POST['user_active']);
+			$data['user_type']	=trim($_POST['user_type']);
+		$result=$userModel->updateUser($userData->email,$data);
+		return '<meta http-equiv="refresh" content="0;url='.site_url('public/admin/userManage').'">';
 	}
 
 	public function approveUser($user_id){

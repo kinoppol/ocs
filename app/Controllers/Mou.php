@@ -61,9 +61,9 @@ class Mou extends BaseController
 		$data=array(
 			'mou_data'=>$mou_data['mou'][0],
 			'business_data'=>$businessModel->getBusiness($mou_data['mou'][0]->business_id),
-			//'province'=>$locationModel->getProvince(),
-			//'district'=>$locationModel->getDistrict(),
-			//'subdistrict'=>$locationModel->getSubdistrict(),
+			'province'=>$locationModel->getProvince(),
+			'district'=>$locationModel->getDistrict(),
+			'subdistrict'=>$locationModel->getSubdistrict(),
 		);
 		$data=array(
 			'title'=>'แก้ไขข้อมูล MOU',

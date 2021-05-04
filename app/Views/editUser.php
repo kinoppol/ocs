@@ -1,0 +1,94 @@
+<?php
+    //print_r($userData);
+
+    helper('form');
+    $data=array(array(
+        'label'=>'ชื่อผู้ใช้งาน',
+        'type'=>'text',
+        'id'=>'username',
+        'def'=>$userData->username,
+        'disabled'=>true,
+         ),
+         array(
+        'type'=>'hidden',
+        'id'=>'user_id',
+        'def'=>$userData->user_id,
+         ),
+         array(
+        'label'=>'รหัสผ่าน (ว่างไว้หากไม่ต้องการเปลี่ยน)',
+        'type'=>'password',
+        'id'=>'password',
+        'autocomplete'=>'new-password',
+        'def'=>'',
+         ),
+         array(
+        'label'=>'ยืนยันรหัสผ่าน (ว่างไว้หากไม่ต้องการเปลี่ยน)',
+        'type'=>'password',
+        'id'=>'confirm_password',
+        'autocomplete'=>'new-password',
+        'def'=>'',
+         ),
+         array(
+        'label'=>'ชื่อ',
+        'type'=>'text',
+        'id'=>'name',
+        'def'=>$userData->name,
+        'required'=>true,
+         ),
+         array(
+        'label'=>'สกุล',
+        'type'=>'text',
+        'id'=>'surname',
+        'def'=>$userData->surname,
+        'required'=>true,
+         ),
+         array(
+        'label'=>'สกุล',
+        'type'=>'text',
+        'id'=>'email',
+        'def'=>$userData->email,
+        'required'=>true,
+         ),
+         array(
+        'label'=>'สถานะ',
+        'type'=>'select',
+        'id'=>'user_active',
+        'items'=>array(
+            'Y'=>'ใช้งานปรกติ',
+            'N'=>'ยังไม่อนุมัติใช้งาน',
+            'B'=>'ระงับการใช้งาน',
+            ),
+        'def'=>$userData->user_active,
+        'required'=>true,
+         ),
+         array(
+        'label'=>'ประเภทผู้ใช้งาน',
+        'type'=>'select',
+        'id'=>'user_type',
+        'items'=>array(
+            'admin'=>'ผู้ดูและระบบ',
+            'board'=>'ผู้บริหาร สอศ.',
+            'boc'=>'สำนักความร่วมมือ',
+            'gov'=>'อ.กรอ.อศ.',
+            'institute'=>'สถาบันการอาชีวศึกษา',
+            'school'=>'สถานศึกษา',
+            'user'=>'ผู้ใช้งานที่ยังไม่ลงทะเบียน',
+            ),
+        'def'=>$userData->user_type,
+        'required'=>true,
+         ),
+         array(
+             'label'=>'บันทึกข้อมูล',
+             'type'=>'submit',
+         ),
+    );
+
+    $form=array(
+        'formName'=>'ข้อมูลผู้ใช้',
+        'inputs'=>$data,
+        'action'=>site_url('public/admin/saveUser'),
+        'method'=>'post',
+        'enctype'=>'multipart/form-data',
+    );
+    
+    print genForm($form);
