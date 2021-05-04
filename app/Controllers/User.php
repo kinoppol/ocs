@@ -199,6 +199,6 @@ class User extends BaseController
 	}
 	public function logout(){
 			setcookie("current_user", "", time() - 3600,'/');
-			return '<meta http-equiv="refresh" content="0;url='.site_url('public/user/loginSelector').'">';
+			return '<meta http-equiv="refresh" content="0;url='.site_url().'">';
 	}
 }

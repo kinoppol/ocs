@@ -22,7 +22,7 @@ $data=array(
         'url'=>site_url('public/user/login/board'),
         'class'=>'col-lg-6 col-md-12 col-sm-12 col-xs-12',
     ),
-    'mou'=>array(
+    'boc'=>array(
         'color'=>'orange',
         'text'=>'สำนักความร่วมมือ',
         'number'=>'สำนักความร่วมมือ',
@@ -30,7 +30,7 @@ $data=array(
         'url'=>site_url('public/user/login/boc'),
         'class'=>'col-lg-6 col-md-12 col-sm-12 col-xs-12',
     ),
-    'business'=>array(
+    'gov'=>array(
         'color'=>'blue',
         'text'=>'อ.กรอ.อศ.',
         'number'=>'5',
@@ -38,7 +38,7 @@ $data=array(
         'url'=>site_url('public/user/login/gov'),
         'class'=>'col-lg-6 col-md-12 col-sm-12 col-xs-12',
     ),
-    'mouLastYear'=>array(
+    'institute'=>array(
         'color'=>'pink',
         'text'=>'สถาบันการอาชีวศึกษา',
         'number'=>'5',
@@ -46,12 +46,20 @@ $data=array(
         'url'=>site_url('public/user/login/institute'),
         'class'=>'col-lg-6 col-md-12 col-sm-12 col-xs-12',
     ),
-    'mouYear'=>array(
+    'school'=>array(
         'color'=>'green',
         'text'=>'สถานศึกษา ',
         'number'=>'5',
         'icon'=>'school',
         'url'=>site_url('public/user/login/school'),
+        'class'=>'col-lg-6 col-md-12 col-sm-12 col-xs-12',
+    ),
+    'newUser'=>array(
+        'color'=>'blue-grey',
+        'text'=>'ลงทะเบียน ',
+        'number'=>'5',
+        'icon'=>'person_add',
+        'url'=>site_url('public/user/registerNewUser'),
         'class'=>'col-lg-6 col-md-12 col-sm-12 col-xs-12',
     ),
 );

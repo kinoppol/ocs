@@ -1,1 +1,1 @@
-<meta http-equiv="refresh" content="0;url=public/home/dashboard">
+<meta http-equiv="refresh" content="0;url=./landing">

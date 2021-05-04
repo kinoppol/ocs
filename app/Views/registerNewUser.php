@@ -1,3 +1,4 @@
+<body class="login-page" style="font-family: 'Kanit', sans-serif; background-color: <?php print $bgColor[$userType]; ?>;">
 <div class="login-box">
         <div class="logo">
         <h1>
@@ -80,10 +81,11 @@
                         <div class="col-xs-6">
                         </div>
                         <div class="col-xs-6 align-right">
-                            <a href="<?php print site_url('public/user/login'); ?>">เข้าสู่ระบบ</a>
+                            <a href="<?php print site_url('public/user/loginSelector'); ?>">เข้าสู่ระบบ</a>
                         </div>
                     </div>
                 </form>
             </div>
         </div>
     </div>
+                    </body>
