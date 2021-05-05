@@ -115,7 +115,7 @@ $data=array(
             'items'=>array(
                 'reportRecode'=>array(
                     'text'=>'รายงานการประชุม',
-                    'url'=>site_url('public/gov/reportRecode'),
+                    'url'=>site_url('public/gov/meetingRecode'),
                     'cond'=>true,
                     ),
                 'curriculumDev'=>array(

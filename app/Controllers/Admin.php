@@ -109,8 +109,7 @@ class Admin extends BaseController
 			</script>
 			';
 			$data=array(
-				'title'=>'แก้ไขผู้ใช้',
-				'systemName'=>'พบข้อผิดพลาด',
+				'title'=>'บันทึกข้อมูลผู้ใช้งาน',
 				'mainMenu'=>view('_menu'),
 				'content'=>$content,
 				'notification'=>'',
@@ -127,7 +126,16 @@ class Admin extends BaseController
 			$data['user_type']	=trim($_POST['user_type']);
 			$data['org_code']	=trim($_POST['org_code']);
 		$result=$userModel->updateUser($userData->email,$data);
-		return 'บันทึกข้อมูลสำเร็จ<br>โปรดรอสักครู่..<meta http-equiv="refresh" content="2;url='.site_url('public/admin/userManage').'">';
+		$content='บันทึกข้อมูลสำเร็จ<br>โปรดรอสักครู่..<meta http-equiv="refresh" content="2;url='.site_url('public/admin/userManage').'">';
+		$data=array(
+			'title'=>'บันทึกข้อมูลผู้ใช้งาน',
+			'mainMenu'=>view('_menu'),
+			'content'=>$content,
+			'notification'=>'',
+			'task'=>'',
+		);
+		return view('_main',$data);
+		///return 'บันทึกข้อมูลสำเร็จ<br>โปรดรอสักครู่..<meta http-equiv="refresh" content="2;url='.site_url('public/admin/userManage').'">';
 	}
 
 	public function approveUser($user_id){

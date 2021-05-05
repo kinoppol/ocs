@@ -82,7 +82,7 @@
         'label'=>'สถานะ',
         'type'=>'select',
         'id'=>'user_active',
-        'class'=>'js-example-basic-single',
+        'class'=>'show-tick',
         'items'=>array(
             'Y'=>'ใช้งานปรกติ',
             'N'=>'ยังไม่อนุมัติใช้งาน',
@@ -95,6 +95,7 @@
         'label'=>'ประเภทผู้ใช้งาน',
         'type'=>'select',
         'id'=>'user_type',
+        'class'=>'show-tick',
         'items'=>array(
             'admin'=>'ผู้ดูและระบบ',
             'board'=>'ผู้บริหาร สอศ.',
@@ -111,7 +112,7 @@
              'label'=>'ต้นสังกัด/สถานศึกษา/กลุ่มอาชีพ',
              'type'=>'select',
              'id'=>'org_code',
-             'class'=>'js-example-basic-single',
+             'class'=>'show-tick',
              'items'=>$orgData,
              //'noneLabel'=>'โปรดเลือกต้นสังกัด/สถานศึกษา/กลุ่มอาชีพ',
              'required'=>true,

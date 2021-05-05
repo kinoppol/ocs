@@ -391,7 +391,7 @@ if(!$debug){
         }
     });
     $(function () {
-    //$('.js-example-basic-single').select2();
+    $('.js-example-basic-single').select2();
     $('.js-basic-example').DataTable( {
                     "oLanguage": {
                     "sLengthMenu": "แสดง _MENU_ รายการ ต่อหน้า",

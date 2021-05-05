@@ -91,7 +91,7 @@ function genInput_select($data){
     $ret='<label for="'.$data['id'].'">'.$data['label'].(isset($data['required'])&&$data['required']?'<span style="color:red;">*</span>':'').'</label>
             <div class="form-group">
                 <div class="form-line">
-                    <select name="'.$data['id'].'" id="'.$data['id'].'" class="form-control '.(isset($data['class'])?$data['class']:'').'" '.(isset($data['required'])&&$data['required']?'required':'').''.(isset($data['disabled'])&&$data['disabled']?'disabled':'').'/>
+                    <select name="'.$data['id'].'" id="'.$data['id'].'" class="form-control '.(isset($data['class'])?$data['class']:'').'" '.(isset($data['required'])&&$data['required']?'required':'').''.(isset($data['disabled'])&&$data['disabled']?'disabled':'').' data-live-search="true"/>
                     '.genOption($data['items'],$data['def'],(isset($data['noneLabel'])?$data['noneLabel']:false)).'
                     </select>
                 </div>
@@ -117,7 +117,7 @@ function genOption($data,$def=false,$noneSelectLable=false){
     foreach($data as $k=>$v){
         $selected='';
         if($k==$def)$selected='selected';
-        $ret.='<option value="'.$k.'"'.$selected.'>'.$v.'</option>';
+        $ret.='<option  style="padding:0px 50px;" value="'.$k.'"'.$selected.'>'.$v.'</option>';
     }
     return $ret;
 }
