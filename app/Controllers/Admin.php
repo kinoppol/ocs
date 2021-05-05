@@ -49,8 +49,18 @@ class Admin extends BaseController
 	{
 		$userModel = model('App\Models\UserModel');
 		$userData=$userModel->getUser($userId);
+
+
+		$orgModel = model('App\Models\OrgModel');
+		$schools=$orgModel->getSchool();
+		$govs=$orgModel->getGov();
+		$institute=$orgModel->getInstitute();
+
 		$data=array(
 			'userData'=>$userData,
+			'schools'=>$schools,
+			'govs'=>$govs,
+			'institutes'=>$institute,
 		);
 		$data=array(
 			'title'=>'แก้ไขผู้ใช้งาน',
@@ -109,13 +119,15 @@ class Admin extends BaseController
 			return view('_main',$data);
 
 		}
+			$data['username']	=trim($_POST['username']);
 			$data['name']		=trim($_POST['name']);
 			$data['surname']	=trim($_POST['surname']);
 			$data['email']		=trim($_POST['email']);
 			$data['user_active']=trim($_POST['user_active']);
 			$data['user_type']	=trim($_POST['user_type']);
+			$data['org_code']	=trim($_POST['org_code']);
 		$result=$userModel->updateUser($userData->email,$data);
-		return '<meta http-equiv="refresh" content="0;url='.site_url('public/admin/userManage').'">';
+		return 'บันทึกข้อมูลสำเร็จ<br>โปรดรอสักครู่..<meta http-equiv="refresh" content="2;url='.site_url('public/admin/userManage').'">';
 	}
 
 	public function approveUser($user_id){
@@ -150,3 +162,4 @@ class Admin extends BaseController
 		return '<meta http-equiv="refresh" content="0;url='.site_url('public/admin/userManage').'">';
 	}
 }
+

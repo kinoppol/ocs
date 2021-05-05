@@ -16,6 +16,13 @@ class OrgModel extends Model
             }
         return $datas;
     }
+    public function updateSchool($school_id,$data){
+        $db = \Config\Database::connect();
+        $builder = $db->table('school');
+        $builder->where('school_id', $school_id);
+        $result=$builder->update($data);
+        return $result;
+    }
     public function schoolData($school_id){
         $db = \Config\Database::connect();
         $builder = $db->table('school');

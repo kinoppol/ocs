@@ -5,7 +5,7 @@ helper('user');
 $data=array(
     'dashboard'=>array(
         'text'=>'ภาพรวม',
-        'url'=>site_url(),
+        'url'=>site_url('public/home/dashboard'),
         'bullet'=>'dashboard',
         'cond'=>true,/*
         'items'=>array(

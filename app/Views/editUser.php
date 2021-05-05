@@ -1,13 +1,42 @@
 <?php
     //print_r($userData);
+    $vec=array(
+        '1300000000'=>'สำนักงานคณะกรรมการอาชีวศึกษา',
+        //'1300000001'=>'สำนักความร่วมมือ',
+    );
+    $orgs=$vec;
+    $orgSchools=array();
+    foreach($schools as $k=>$v){
+        $orgSchools[$k]=$v;
+        $orgs[$k]=$v;
+    }
+    
+    $orgGovs=array();
+    foreach($govs as $k=>$v){
+        $orgGovs[$k]=$v;
+        $orgs[$k]=$v;
+    }
+    
+    $orgInstitutes=array();
+    foreach($institutes as $k=>$v){
+        $orgInstitutes[$k]=$v;
+        $orgs[$k]=$v;
+    }
 
+    $orgData=array(
+        'สอศ.'=>$vec,
+        'เลขานุการ กรอ.อศ.'=>$orgGovs,
+        'สถานศึกษา'=>$orgSchools,
+        'สถาบันการอาชีวศึกษา'=>$orgInstitutes,
+    );
+    
     helper('form');
     $data=array(array(
         'label'=>'ชื่อผู้ใช้งาน',
         'type'=>'text',
         'id'=>'username',
         'def'=>$userData->username,
-        'disabled'=>true,
+        'disabled'=>false,
          ),
          array(
         'type'=>'hidden',
@@ -53,6 +82,7 @@
         'label'=>'สถานะ',
         'type'=>'select',
         'id'=>'user_active',
+        'class'=>'js-example-basic-single',
         'items'=>array(
             'Y'=>'ใช้งานปรกติ',
             'N'=>'ยังไม่อนุมัติใช้งาน',
@@ -78,6 +108,16 @@
         'required'=>true,
          ),
          array(
+             'label'=>'ต้นสังกัด/สถานศึกษา/กลุ่มอาชีพ',
+             'type'=>'select',
+             'id'=>'org_code',
+             'class'=>'js-example-basic-single',
+             'items'=>$orgData,
+             //'noneLabel'=>'โปรดเลือกต้นสังกัด/สถานศึกษา/กลุ่มอาชีพ',
+             'required'=>true,
+             'def'=>isset($userData->org_code)?$userData->org_code:false,
+         ),
+         array(
              'label'=>'บันทึกข้อมูล',
              'type'=>'submit',
          ),
@@ -92,3 +132,10 @@
     );
     
     print genForm($form);
+
+    $_SESSION['FOOTSYSTEM'].='
+    <script>
+    $(document).ready(function() {
+        $(\'.js-example-basic-single\').select2();
+    });
+    <script>';

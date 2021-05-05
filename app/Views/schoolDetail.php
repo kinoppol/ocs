@@ -70,7 +70,7 @@ helper('tab');
                                 ),
                                 'form'=>array(
                                     'title'=>'แก้ไขข้อมูล',
-                                    'content'=>'7777',
+                                    'content'=>$editForm,
                                 ),
                             );
                             print gen_tab($tab);
