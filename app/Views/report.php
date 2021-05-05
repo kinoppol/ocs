@@ -1,25 +1,37 @@
 <?php
         helper('table');
         helper('modal');
-        $reportRows=array(array(
-                            'i'=>'1',
-                            'reportName'=>'รายงานการลงนามความร่วมมือ',
-                            'manage'=>'<button class="btn btn-success">ส่งออก</button>
-                                       <button class="btn btn-danger">พิมพ์</button>',
-                            ),
-                        array(
-                            'i'=>'2',
-                            'reportName'=>'รายงานการพัฒนาหลักสูตรร่วมกับสถานประกอบการ',
-                            'manage'=>'<button class="btn btn-success">ส่งออก</button>
-                                       <button class="btn btn-danger">พิมพ์</button>',
-                            ),
-                        array(
-                            'i'=>'3',
-                            'reportName'=>'รายงานผลสัมฤทธิ์ของการร่วมมือกับสถานประกอบการ',
-                            'manage'=>'<button class="btn btn-success">ส่งออก</button>
-                                       <button class="btn btn-danger">พิมพ์</button>',
-                            ),
-                        );
+        helper('user');
+
+        $reports=array(array(
+            'title'=>'รายงานการลงนามความร่วมมือ',
+            'file'=>'school_01',
+            'cond'=>current_user('user_type')=='school',
+            ),
+            array(
+            'title'=>'รายงานการพัฒนาหลักสูตรร่วมกับสถานประกอบการ',
+            'file'=>'school_02',
+            'cond'=>current_user('user_type')=='school',
+            ),
+            array(
+            'title'=>'รายงานผลสัมฤทธิ์ของการร่วมมือกับสถานประกอบการ',
+            'file'=>'school_03',
+            'cond'=>current_user('user_type')=='school',
+            ),
+        );
+
+
+        $reportRows=array();
+        $i=0;
+        foreach($reports as $row){
+            if(!$row['cond'])continue;
+            $i++;
+            $reportRows[]=array(
+                'i'=>$i,
+                'reportName'=>$row['title'],
+                'manage'=>'<a href="'.site_url('public/report/view/'.$row['file']).'" class="btn btn-primary"> <i class="material-icons">search</i> ดูรายงาน</a>'
+            );
+        }
         $reportArr=array('thead'=>array(
                                 'ที่',
                                 'ชื่อรายงาน',
