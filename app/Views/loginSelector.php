@@ -8,26 +8,26 @@
                             </h2>
                     </div>
                     <div class="body">
-                       <div style="text-align:center"> <h4>โปรดเลือกประเภทผู้ใช้</h4></div>
+                       <div style="text-align:center"> <h4>โปรดเลือกประเภทผู้ใช้ (หากเข้าใช้งานครั้งแรกเลือก "ลงทะเบียน")</h4></div>
                        <br>
                     <div class="input-group">
 <?php
 helper('widget');
 $data=array(
-    'board'=>array(
-        'color'=>'red',
-        'text'=>'ผู้บริหาร สอศ.',
-        'number'=>'',
-        'icon'=>'perm_identity',
-        'url'=>site_url('public/user/login/board'),
+    'newUser'=>array(
+        'color'=>'blue-grey',
+        'text'=>'ลงทะเบียน<br>(ครั้งแรกเท่านั้น)',
+        'number'=>'5',
+        'icon'=>'person_add',
+        'url'=>site_url('public/user/registerNewUser'),
         'class'=>'col-lg-6 col-md-12 col-sm-12 col-xs-12',
     ),
-    'boc'=>array(
-        'color'=>'orange',
-        'text'=>'สำนักความร่วมมือ',
-        'number'=>'สำนักความร่วมมือ',
-        'icon'=>'person',
-        'url'=>site_url('public/user/login/boc'),
+    'school'=>array(
+        'color'=>'green',
+        'text'=>'สถานศึกษา ',
+        'number'=>'5',
+        'icon'=>'school',
+        'url'=>site_url('public/user/login/school'),
         'class'=>'col-lg-6 col-md-12 col-sm-12 col-xs-12',
     ),
     'gov'=>array(
@@ -46,20 +46,20 @@ $data=array(
         'url'=>site_url('public/user/login/institute'),
         'class'=>'col-lg-6 col-md-12 col-sm-12 col-xs-12',
     ),
-    'school'=>array(
-        'color'=>'green',
-        'text'=>'สถานศึกษา ',
-        'number'=>'5',
-        'icon'=>'school',
-        'url'=>site_url('public/user/login/school'),
+    'boc'=>array(
+        'color'=>'orange',
+        'text'=>'สำนักความร่วมมือ',
+        'number'=>'สำนักความร่วมมือ',
+        'icon'=>'person',
+        'url'=>site_url('public/user/login/boc'),
         'class'=>'col-lg-6 col-md-12 col-sm-12 col-xs-12',
     ),
-    'newUser'=>array(
-        'color'=>'blue-grey',
-        'text'=>'ลงทะเบียน ',
-        'number'=>'5',
-        'icon'=>'person_add',
-        'url'=>site_url('public/user/registerNewUser'),
+    'board'=>array(
+        'color'=>'red',
+        'text'=>'ผู้บริหาร สอศ.',
+        'number'=>'',
+        'icon'=>'perm_identity',
+        'url'=>site_url('public/user/login/board'),
         'class'=>'col-lg-6 col-md-12 col-sm-12 col-xs-12',
     ),
 );

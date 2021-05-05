@@ -1,4 +1,4 @@
-<body class="login-page" style="font-family: 'Kanit', sans-serif; background-color: <?php print $bgColor[$userType]; ?>;">
+<body class="login-page" style="font-family: 'Kanit', sans-serif; background-color: grey;">
 <div class="login-box">
         <div class="logo">
         <h1>

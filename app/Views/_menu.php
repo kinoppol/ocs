@@ -40,7 +40,7 @@ $data=array(
     ),
     'govBasic'=>array(
         'text'=>'ข้อมูลพื้นฐานของ อ.กรอ.อศ.',
-        'url'=>site_url('public/school/detail'),
+        'url'=>site_url('public/gov/detail'),
         'bullet'=>'people',
         'cond'=>current_user('user_type')=='gov',
 

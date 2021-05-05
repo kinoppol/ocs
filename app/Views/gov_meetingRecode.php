@@ -41,7 +41,8 @@
                                     </div>
                                     <div class="col-lg-2 col-md-3 col-sm-3 col-xs-3">
                                         <div class="form-group">
-                                                <button  type="button" class="btn btn-warning" id="addBusiness"><i class="material-icons">add</i> เพิ่มรายงานการประชุม</button>
+                                                <!--<button  type="button" class="btn btn-warning" id="addBusiness"><i class="material-icons">add</i> เพิ่มรายงานการประชุม</button>-->
+                                                <a  href="<?php print site_url('public/gov/meettingDetail'); ?>" class="btn btn-warning" id="addBusiness"><i class="material-icons">add</i> เพิ่มรายงานการประชุม</a>
                                         </div>
                                     </div>
                                 </div>
