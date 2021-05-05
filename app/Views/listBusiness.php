@@ -55,7 +55,8 @@
                                     </div>
                                     <div class="col-lg-2 col-md-3 col-sm-3 col-xs-3">
                                         <div class="form-group">
-                                                <button  type="button" class="btn btn-warning" id="addBusiness"><i class="material-icons">add</i> เพิ่มข้อมูลสถานประกอบการ</button>
+                                                <!-- <button  type="button" class="btn btn-warning" id="addBusiness"><i class="material-icons">add</i> เพิ่มข้อมูลสถานประกอบการ</button> -->
+                                                <a  href="<?php print site_url('public/business/add'); ?>" class="btn btn-warning" id="addBusiness"><i class="material-icons">add</i> เพิ่มข้อมูลสถานประกอบการ</a>
                                         </div>
                                     </div>
                                 </div>

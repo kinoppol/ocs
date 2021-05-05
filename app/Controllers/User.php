@@ -194,7 +194,7 @@ class User extends BaseController
 				);				
 			$userModel->addUser($data);
 			$_SESSION['message']="การสมัครสมาชิกสำเร็จโปรดเข้าสู่ระบบเพื่อดำเนินการต่อ";
-			return 'การสมัครสมาชิกสำเร็จกรุณารอสักครู่..<meta http-equiv="refresh" content="3;url='.site_url('public/user/login').'">';
+			return 'การสมัครสมาชิกสำเร็จกรุณารอสักครู่..<meta http-equiv="refresh" content="3;url='.site_url('public/user/loginSelector').'">';
 		}
 	}
 	public function logout(){

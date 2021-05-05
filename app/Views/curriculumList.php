@@ -1,25 +1,18 @@
 <?php
         helper('table');
         helper('modal');
-        helper('form');
-
-        $meettingRows=array();
-        //print_r($meettingData);
-        foreach($meettingData as $k=>$v){
-            $meettingRows[]=array(
-                'meetting_date'=>$v['meetting_date'],
-                'meetting_place'=>$v['meetting_place'],
-                'subject'=>$v['subject'],
-            );
-        }
-        $meettingArr=array('thead'=>array(
-            'วันที่ประชุม',
-            'สถานที่ประชุม',
-            'หัวข้อการประชุม',
-    ),
-    'tbody'=>$meettingRows,
-);
+        $curRows=array();
+        $curArr=array('thead'=>array(
+                                'ชื่อสถานประกอบการ',
+                                'ชื่อหลักสูตร',
+                                'ระดับ',
+                                'จำนวนชั่วโมง',
+                                'จัดการ',
+                        ),
+                        'tbody'=>$curRows,
+        );
     ?>
+
 
 <div class="row clearfix">
                 <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
@@ -42,7 +35,7 @@
                                     <div class="col-lg-2 col-md-3 col-sm-3 col-xs-3">
                                         <div class="form-group">
                                                 <!--<button  type="button" class="btn btn-warning" id="addBusiness"><i class="material-icons">add</i> เพิ่มรายงานการประชุม</button>-->
-                                                <a  href="<?php print site_url('public/gov/meettingAdd'); ?>" class="btn btn-warning" id="addBusiness"><i class="material-icons">add</i> เพิ่มรายงานการประชุม</a>
+                                                <a  href="<?php print site_url('public/mou/curriculumAdd'); ?>" class="btn btn-warning" id="addCurriculum"><i class="material-icons">add</i> เพิ่มข้อมูลหลักสูตร</a>
                                         </div>
                                     </div>
                                 </div>
@@ -50,7 +43,7 @@
                         <div class="body">
                         <div class="table-responsive">
                         <?php
-                                print genTable($meettingArr);
+                                print genTable($curArr);
                              ?>
                             </div>
                     </div>

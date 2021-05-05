@@ -185,7 +185,19 @@ class Mou extends BaseController
 		$data=array(
 			'title'=>'หลักสูตรที่ร่วมกับสถานประกอบการ',
 			'mainMenu'=>view('_menu'),
-            'content'=>'-การพัฒนาหลักสูตรร่วมกับสถานประกอบการ-',
+            'content'=>view('curriculumList'),
+			'notification'=>'',
+			'task'=>'',
+		);       
+		return view('_main',$data);
+	}
+
+	public function curriculumAdd(){
+
+		$data=array(
+			'title'=>'ข้อมูลหลักสูตร',
+			'mainMenu'=>view('_menu'),
+            'content'=>view('curriculumDetail'),
 			'notification'=>'',
 			'task'=>'',
 		);       
@@ -198,7 +210,7 @@ class Mou extends BaseController
 		$data=array(
 			'title'=>'ผลสัมฤทธิ์ของความร่วมมือ',
 			'mainMenu'=>view('_menu'),
-            'content'=>'-ผลสัมฤทธิ์ของความร่วมมือกับสถานประกอบการ-',
+            'content'=>view('mouResult'),
 			'notification'=>'',
 			'task'=>'',
 		);       

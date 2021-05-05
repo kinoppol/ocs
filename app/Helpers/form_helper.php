@@ -37,6 +37,8 @@ function genInput($data){
                 $ret.=genInput_hidden($data);
             }else if(is_numeric(array_search($data['type'],array('check_group')))){
                 $ret.=genInput_check_group($data);
+            }else if(is_numeric(array_search($data['type'],array('textarea')))){
+                $ret.=genInput_textarea($data);
             }
 
         }
@@ -63,6 +65,27 @@ function genInput_textbox($data){
                         '" '.$min.$max.$accept.$multiple.(isset($data['required'])&&$data['required']?'required':'').
                         ''.(isset($data['disabled'])&&$data['disabled']?'disabled':'').
                         ''.(isset($data['autocomplete'])?' autocomplete="'.$data['autocomplete'].'"':'').'/>
+                    </div>
+                </div>';
+        return $ret;
+}
+
+function genInput_textarea($data){
+    $min='';
+    $max='';
+    $accept='';
+    $multiple='';
+    if(isset($data['min']))$min=' min="'.$data['min'].'"';
+    if(isset($data['max']))$max=' max="'.$data['max'].'"';
+    if(isset($data['accept']))$accept=' accept="'.$data['accept'].'"';
+    if(isset($data['multiple']))$multiple=' multiple';
+    $ret='<label for="'.$data['id'].'">'.$data['label'].(isset($data['required'])&&$data['required']?'<span style="color:red;">*</span>':'').'</label>
+            <div class="form-group">
+                <div class="form-line">
+                    <textarea name="'.$data['id'].'" id="'.$data['id'].'" class="form-control '.
+                        (isset($data['class'])?$data['class']:'').
+                        '" placeholder="'.(isset($data['placeholder'])?$data['placeholder']:'').
+                        '">'.(isset($data['def'])?$data['def']:'').'</textarea>
                     </div>
                 </div>';
         return $ret;

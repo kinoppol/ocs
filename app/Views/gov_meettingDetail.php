@@ -1,0 +1,48 @@
+<?php
+    //print_r($schoolData);
+    helper('form');
+    $data=array(array(
+        'label'=>'หัวข้อการประชุม',
+        'type'=>'text',
+        'id'=>'subject',
+        'def'=>'',
+         ),
+         array(
+            'label'=>'สถานที่ประชุม',
+            'type'=>'text',
+            'id'=>'meetting_place',
+            'def'=>'',
+             ),
+         array(
+            'label'=>'วันที่ประชุม',
+            'type'=>'date',
+            'id'=>'meetting_date',
+            'def'=>date('Y-m-d'),
+             ),
+         array(
+            'label'=>'บันทึกการประชุม',
+            'type'=>'file',
+            'id'=>'meettingRecord',
+            'def'=>'',
+             ),
+         array(
+            'label'=>'ภาพถ่าย',
+            'type'=>'file',
+            'id'=>'pictures',
+            'def'=>'',
+             ),
+         array(
+             'label'=>'บันทึกข้อมูล',
+             'type'=>'submit',
+         ),
+    );
+
+    $form=array(
+        'formName'=>'ข้อมูลการประชุม',
+        'inputs'=>$data,
+        'action'=>site_url('public/gov/saveMeetting'),
+        'method'=>'post',
+        'enctype'=>'multipart/form-data',
+    );
+    
+    print genForm($form);

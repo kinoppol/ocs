@@ -71,20 +71,6 @@
 							<div class="banner_content">
 								<h2>ระบบฐานข้อมูล <br />สำนักความร่วมมือ</h2>
 								<p>ระบบจัดการฐานขอมูลการลงนามความร่วมมือ (MOU) ระหว่างสถานศึกษาถาครัฐและสถานประกอบการ ข้อมูลผู้เรียนอาชีวศึกษา และข้อมูล อ.กรอ.อศ. ของสำนักความร่วมมือ สำนักงานคณะกรรมการการอาชีวศึกษา
-								<br>
-								</p><p>
-								หากผู้ใช้งานต้องการสอบถามข้อมูลเพิ่มเติมโปรดติดต่อ<br>
-								นางสาวจิตติมา  จิตต์โสภณ (สำนักความร่วมมือ)<br>
-								โทร <a href="tel:0899369493">089-9369493</a> อีเมล <a href="mailto:j.jitsophon2527@gmail.com">j.jitsophon2527@gmail.com</a>
-								<br>
-								นางสาวพิมพ์มณีการ์  ขุมทรัพย์ (อ.กรอ.อศ.)<br>
-								โทร <a href="tel:0812964884">081-2964884</a> อีเมล <a href="mailto:pimmanika.k@gmail.com">pimmanika.k@gmail.com</a>
-								<br>
-								นางสาวอรพิน  พรหมนอก (อ.กรอ.อศ.)<br>
-								โทร <a href="tel:0992818842">099-2818842</a> อีเมล <a href="mailto:ora.ovec@gmail.com">ora.ovec@gmail.com</a>
-								</p>
-								<h3>ประกาศ</h3>
-								<p>ขอให้สถานศึกษาดำเนินการกรอกข้อมูลการลงนามความร่วมมือให้แล้วเสร็จภานในวันที่ 31 พฤษภาคม 2564</p>
 								</p>
 								<a class="banner_btn2" href="../public/user/registerNewUser">สมัครสมาชิก</a>
 								<a class="banner_btn" href="../public/user/loginSelector">ลงชื่อเข้าใช้</a>
@@ -104,31 +90,41 @@
         <!--================Work Area =================-->
         <section class="work_area p_120">
         	<div class="container">
+			<!--
         		<div class="main_title">
         			<h2>ระบบฐานข้อมูลสำนักความร่วมมือ</h2>
-        			<p>ข้อมูลการลงนามความร่วมมือระหว่างสถานศึกษาอชีวศึกษาภาครัฐ สถาบันการอาชีวศึกษา อ.กรอ.อศ. สำนักงานคณะกรรมการการอาชีวศึกษา และสถานประกอบการ</p>
-        		</div>
+        			
+        		</div> -->
         		<div class="work_inner row">
         			<div class="col-lg-4">
         				<div class="work_item">
-        					<i class="lnr lnr-database"></i>
-        					<a href="#"><h4>ฐานข้อมูลเชิงสัมพันธ์</h4></a>
-        					<p>จัดาการข้อมูลเชิงโครงสร้างด้วยระบบฐานข้อมูลเชิงสัมพันธ์</p>
+        					<i class="lnr lnr-license"></i>
+        					<a href="#"><h4>ประกาศ</h4></a>
+        					<p>ขอให้สถานศึกษาดำเนินการกรอกข้อมูลการลงนามความร่วมมือให้แล้วเสร็จภายในวันที่ 31 พฤษภาคม 2564</p>
         				</div>
         			</div>
         			<div class="col-lg-4">
         				<div class="work_item">
-        					<i class="lnr lnr-printer"></i>
-        					<a href="#"><h4>รายงานในรูปแบบ PDF และ Spread Sheet</h4></a>
-        					<p>สามารถออกรายงานข้อมูลในรูปแบบ PDF ไฟล์สำหรับสั่งพิมพ์ หรือส่งออกเป็นไฟล์ Spread Sheet สำหรับการประมวลผลต่อด้วยโปรแกรม Excel</p>
+        					<i class="lnr lnr-license"></i>
+        					<a href="#"><h4>ประกาศ</h4></a>
+        					<p>ขอให้ อ.กรอ.อศ. ดำเนินการกรอกข้อมูลการลงนามความร่วมมือให้แล้วเสร็จภายในวันที่ 31 พฤษภาคม 2564</p>
         				</div>
         			</div>
         			<div class="col-lg-4">
         				<div class="work_item">
-        					<i class="lnr lnr-chart-bars"></i>
-        					<a href="#"><h4>แสดงข้อมูลภาพรวมแบบ Real time</h4></a>
-        					<p>แสดงรายงานข้อมูลภาพรวมด้วยแผนภูมิตามเวลาจริง (Real Time)</p>
-        				</div>
+        				<i class="lnr lnr-users"></i>
+        					<a href="#"><h4>ผู้ประสานงาน</h4></a>
+        					<p>
+								หากผู้ใช้งานต้องการสอบถามข้อมูลเพิ่มเติมโปรดติดต่อ<br>
+								นางสาวจิตติมา  จิตต์โสภณ (สำนักความร่วมมือ)<br>
+								โทร <a href="tel:0899369493">089-9369493</a> อีเมล <a href="mailto:j.jitsophon2527@gmail.com">j.jitsophon2527@gmail.com</a>
+								<br>
+								นางสาวพิมพ์มณีการ์  ขุมทรัพย์ (อ.กรอ.อศ.)<br>
+								โทร <a href="tel:0812964884">081-2964884</a> อีเมล <a href="mailto:pimmanika.k@gmail.com">pimmanika.k@gmail.com</a>
+								<br>
+								นางสาวอรพิน  พรหมนอก (อ.กรอ.อศ.)<br>
+								โทร <a href="tel:0992818842">099-2818842</a> อีเมล <a href="mailto:ora.ovec@gmail.com">ora.ovec@gmail.com</a>
+								</p>
         			</div>
         		</div>
         	</div>

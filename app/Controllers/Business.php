@@ -36,4 +36,16 @@ class Business extends BaseController
 
 		return view('_main',$data);
 	}
+    public function add(){
+        
+		$data=array(
+			'title'=>'เพิ่มข้อมูลสถานประกอบการ',
+			'mainMenu'=>view('_menu'),
+            'content'=>view('businessDetail'),
+			'notification'=>'',
+			'task'=>'',
+		);        
+
+		return view('_main',$data);
+    }
 }
