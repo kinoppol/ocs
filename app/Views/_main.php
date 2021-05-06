@@ -383,8 +383,16 @@ if(!$debug){
 
     <!-- Select2 js -->
     <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
-
+    <script src="<?php print site_url('font/vfs_fonts.js'); ?>"></script>
     <script>
+        pdfMake.fonts = {
+   THSarabun: {
+     normal: 'THSarabun.ttf',
+     bold: 'THSarabun-Bold.ttf',
+     italics: 'THSarabun-Italic.ttf',
+     bolditalics: 'THSarabun-BoldItalic.ttf'
+   }
+}
         $('.count-to').countTo({
         formatter: function (value, options) {
             return value.toFixed(options.decimals).replace(/\B(?=(\d{3})+(?!\d))/g, ",");
@@ -416,7 +424,20 @@ if(!$debug){
         dom: 'Bfrtip',
         responsive: true,
         buttons: [
-             'excel', 'pdf', 'print'
+             'excel', { // กำหนดพิเศษเฉพาะปุ่ม pdf
+                "extend": 'pdf', // ปุ่มสร้าง pdf ไฟล์
+                "text": 'PDF', // ข้อความที่แสดง
+                "pageSize": 'A4',   // ขนาดหน้ากระดาษเป็น A4           
+                "pageOrientation": 'landscape', 
+                "customize":function(doc){ // ส่วนกำหนดเพิ่มเติม ส่วนนี้จะใช้จัดการกับ pdfmake
+                    // กำหนด style หลัก
+                    doc.defaultStyle = {
+                        font:'THSarabun',
+                        fontSize:16                                 
+                    };
+                }
+            }, // สิ้นสุดกำหนดพิเศษปุ่ม pdf
+             'print'
         ]
     });
 });

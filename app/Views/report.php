@@ -29,7 +29,7 @@
             $reportRows[]=array(
                 'i'=>$i,
                 'reportName'=>$row['title'],
-                'manage'=>'<a href="'.site_url('public/report/view/'.$row['file']).'" class="btn btn-primary"> <i class="material-icons">search</i> ดูรายงาน</a>'
+                'manage'=>'<a href="'.site_url('public/reportView/'.$row['file']).'/'.$row['title'].'" class="btn btn-primary"> <i class="material-icons">search</i> ดูรายงาน</a>'
             );
         }
         $reportArr=array('thead'=>array(

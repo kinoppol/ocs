@@ -22,15 +22,15 @@ helper('tab');
                             <ul>
                                 <li>
                                     <span>นักเรียนนักศึกษา</span>
-                                    <span>1.234</span>
+                                    <span><?php print number_format($totalStudent,0,','); ?> คน</span>
                                 </li>
                                 <li>
                                     <span>ระบบปกติ</span>
-                                    <span>1.201</span>
+                                    <span><?php print number_format($totalStudent-$totalDVEStudent,0,','); ?> คน</span>
                                 </li>
                                 <li>
                                     <span>ระบบทวิภาคี</span>
-                                    <span>14.252</span>
+                                    <span><?php print number_format($totalDVEStudent,0,','); ?> คน</span>
                                 </li>
                             </ul>
                             <!-- <button class="btn btn-primary btn-lg waves-effect btn-block">ประสานข้อมูลจากระบบ ศธ. ๐๒ ออนไลน์</button> -->

@@ -8,6 +8,7 @@ class School extends BaseController
 	{
 		helper('user');
 		$orgModel = model('App\Models\OrgModel');
+		$schoolModel = model('App\Models\SchoolModel');
 		$locationModel = model('App\Models\LocationModel');
 
 		$province=$locationModel->getProvince();
@@ -15,11 +16,16 @@ class School extends BaseController
 		$subdistrict=$locationModel->getSubdistrict();
 		$schoolData=$orgModel->schoolData(current_user('org_code'));
 
+		$sumStudentCount=$schoolModel->getSumStudent(current_user('org_code'));
+		$sumStudentDVECount=$schoolModel->getSumStudent(current_user('org_code'),'dve');
+		//print_r($sumStudentCount);
 			$datas=array(
 				'provinceData'=>$province,
 				'districtData'=>$district,
 				'subdistrictData'=>$subdistrict,
 				'schoolData'=>$schoolData,
+				'totalStudent'=>$sumStudentCount->count_val,
+				'totalDVEStudent'=>$sumStudentDVECount->count_dve_val,
 			);
 
 		$data=array(

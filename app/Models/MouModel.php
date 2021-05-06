@@ -19,6 +19,7 @@ class MouModel extends Model
         $db = \Config\Database::connect();
         $builder = $db->table('mou');
         if(isset($data['mou_id']))$builder->where('mou_id',$data['mou_id']);
+        if(isset($data['school_id']))$builder->where('school_id',$data['school_id']);
         if(isset($data['year']))$builder->like('mou_date',$data['year'],'after');
         $mou=$builder->get()->getResult();
         $builder = $db->table('school');
@@ -45,6 +46,7 @@ class MouModel extends Model
             'business'=>$business,
             'gov'=>$gov,
         );
+        //print $db->getLastQuery();
         return $result;
     }
     public function getMouYearCount($data){

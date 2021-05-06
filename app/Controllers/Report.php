@@ -16,16 +16,4 @@ class Report extends BaseController
 		);
 		return view('_main',$data);
 	}
-	public function view($fileName)
-	{
-		helper('user');
-		$data=array(
-			'title'=>'รายงานผลการดำเนินงาน',
-			'mainMenu'=>view('_menu'),
-            'content'=>view('report'),
-			'notification'=>'',
-			'task'=>'',
-		);
-		return view('_main',$data);
-	}
 }

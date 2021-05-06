@@ -1,8 +1,10 @@
 <?php
 
-function genTable($arr){
+function genTable($arr,$export=false){
+    $class=' js-basic-example';
+    if($export)$class=' js-exportable';
     $ret='';
-        $ret.='<table class="table table-bordered table-striped table-hover js-basic-example dataTable">
+        $ret.='<table class="table table-bordered table-striped table-hover'.$class.' dataTable">
         <thead>
             <tr>';
             $ths='';
