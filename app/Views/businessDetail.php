@@ -27,6 +27,7 @@
             'id'=>'job_description',
             'def'=>'',
             'required'=>true,
+            'placeholder'=>'เช่น ค้าปลีก,บริการหลังการขาย',
              ),
          array(
             'label'=>'จำนวนพนักงาน',
@@ -40,7 +41,6 @@
             'type'=>'email',
             'id'=>'email',
             'def'=>'',
-            'required'=>true,
              ),
          array(
             'label'=>'สิทธิ์ลดหย่อนภาษี',

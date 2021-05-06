@@ -33,7 +33,7 @@ helper('tab');
                                     <span>14.252</span>
                                 </li>
                             </ul>
-                            <button class="btn btn-primary btn-lg waves-effect btn-block">ประสานข้อมูลจากระบบ ศธ. ๐๒ ออนไลน์</button>
+                            <!-- <button class="btn btn-primary btn-lg waves-effect btn-block">ประสานข้อมูลจากระบบ ศธ. ๐๒ ออนไลน์</button> -->
                         </div>
                     </div>
                 </div>
