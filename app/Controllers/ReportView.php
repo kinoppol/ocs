@@ -100,7 +100,7 @@ class ReportView extends BaseController
 			//return $result;
 			$pdf_data=array(
 				'html'=>$result,
-				'size'=>"A4",
+				'size'=>"A4-L",
 				'fontsize'=>16,
 				'marginL'=>20,
 				'marginR'=>10,
