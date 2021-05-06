@@ -113,7 +113,7 @@ class ReportView extends BaseController
 				//'header'=>'<div style="text-align: right; font-weight: normal;">หน้า {PAGENO}/{nbpg}</div>'
 			);
 			$location=FCPATH.'/pdf/';
-			$fname=$id.'.pdf';
+			$fname=current_user('org_code').'_school_01.pdf';
 			$filePdf=genPdf($pdf_data,$pageNo=NULL,$location,$fname);
 			//return '';
 			return '<meta http-equiv="refresh" content="0;url='.site_url('public/pdf/'.$filePdf).'">';
