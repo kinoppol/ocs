@@ -81,15 +81,16 @@ class Mou extends BaseController
 			'business_id'	=>$_POST['business_id'],
 			'school_id'		=>$_POST['org_id'],
 			'level'			=>$_POST['level'],
-			'support_vc_edu'=>($_POST['support_vc_edu']=='Y'?'Y':'N'),
-			'support_hvc_edu'=>($_POST['support_hvc_edu']=='Y'?'Y':'N'),
-			'support_btech_edu'=>($_POST['support_btech_edu']=='Y'?'Y':'N'),
-			'support_short_course'=>($_POST['support_short_course']=='Y'?'Y':'N'),
-			'support_no_specific'=>($_POST['support_no_specific']=='Y'?'Y':'N'),
-			'support_normal'=>($_POST['support_normal']=='Y'?'Y':'N'),
-			'support_dve'	=>($_POST['support_dve']=='Y'?'Y':'N'),
-			'support_local_training'=>($_POST['support_local_training']=='Y'?'Y':'N'),
-			'support_oversea_training'=>($_POST['support_oversea_training']=='Y'?'Y':'N'),
+			'investment'	=>$_POST['investment'],
+			'support_vc_edu'=>(isset($_POST['support_vc_edu'])?'Y':'N'),
+			'support_hvc_edu'=>(isset($_POST['support_hvc_edu'])?'Y':'N'),
+			'support_btech_edu'=>(isset($_POST['support_btech_edu'])?'Y':'N'),
+			'support_short_course'=>(isset($_POST['support_short_course'])?'Y':'N'),
+			'support_no_specific'=>(isset($_POST['support_no_specific'])?'Y':'N'),
+			'support_normal'=>(isset($_POST['support_normal'])?'Y':'N'),
+			'support_dve'	=>(isset($_POST['support_dve'])?'Y':'N'),
+			'support_local_training'=>(isset($_POST['support_local_training'])?'Y':'N'),
+			'support_oversea_training'=>(isset($_POST['support_oversea_training'])?'Y':'N'),
 			'director_name'	=>$_POST['govSignName'],
 			'director_type'	=>$_POST['govSignNamePosition'],
 			'ceo_name'		=>$_POST['businessSignName'],
@@ -302,11 +303,16 @@ class Mou extends BaseController
 
 	
 	public function result(){
-
+		helper('user');
+		$mouModel = model('App\Models\MouModel');
+		$result=$mouModel->resultGet(['school_id'=>current_user('org_code')]);
+		$data=array(
+			'result'=>$result,
+		);
 		$data=array(
 			'title'=>'ผลสัมฤทธิ์ของความร่วมมือ',
 			'mainMenu'=>view('_menu'),
-            'content'=>view('mouResultList'),
+            'content'=>view('mouResultList',$data),
 			'notification'=>'',
 			'task'=>'',
 		);       
@@ -330,6 +336,44 @@ class Mou extends BaseController
 			'notification'=>'',
 			'task'=>'',
 		);       
+		return view('_main',$data);
+	}
+
+	
+	public function resultSave(){
+		helper('user');
+		helper('user');
+		$mouModel = model('App\Models\MouModel');
+		
+		$data=array(
+			'business_id'=>$_POST['business_id'],
+			'school_id'=>$_POST['school_id'],
+			'result_year'=>$_POST['result_year'],
+			'trainee_majors'=>$_POST['trainee_majors'],
+			'trainee_amount'=>$_POST['trainee_amount'],
+			'employee_majors'=>$_POST['employee_majors'],
+			'employee_amount'=>$_POST['employee_amount'],
+			'donate_detail'=>$_POST['donate_detail'],
+			'donate_value'=>$_POST['donate_value'],
+			'donate_other'=>$_POST['donate_other'],
+		);
+
+		if(!isset($_POST['id'])){
+			$result=$mouModel->resultAdd($data);
+		}else{
+			$result=$mouModel->resultAdd($_POST['id'],$data);
+		}
+
+		print_r($_POST);
+
+
+		$data=array(
+			'title'=>'บันทึกข้อมูลผลสัมฤทธิ์',
+			'mainMenu'=>view('_menu'),
+            'content'=>$result?'บันทึกข้อมูลสำเร็จ <meta http-equiv="refresh" content="2;url='.site_url('public/mou/result').'">':'บันทึกข้อมูลไม่สำเร็จ',
+			'notification'=>'',
+			'task'=>'',
+		);      
 		return view('_main',$data);
 	}
 }

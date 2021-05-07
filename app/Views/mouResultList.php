@@ -2,31 +2,37 @@
         helper('table');
         helper('modal');
         $check='<img src="'.site_url('images/check.jpg').'" width="16">';
-        $reRows=array();/*
-        $business=$curriculum['business'];
-        foreach($curriculum['curriculum'] as $row){
-            $curRows[]=array(
+        $resRows=array();
+        $business=$result['business'];
+        foreach($result['result'] as $row){
+            $resRows[]=array(
                 'business_id'=>$business[$row->business_id]['business_name'],
-                'curriculum_name'=>$row->curriculum_name,/*
-                'support_vc_edu'=>$row->support_vc_edu=='Y'?$check:'',
-                'support_hvc_edu'=>$row->support_hvc_edu=='Y'?$check:'',
-                'support_btech_edu'=>$row->support_btech_edu=='Y'?$check:'',
-                'support_short_course'=>$row->support_short_course=='Y'?$check:'',
-                'support_no_specific'=>$row->support_no_specific=='Y'?$check:'',
-                'curriculum_hour'=>$row->curriculum_hour,
+                'result_year'=>($row->result_year+543),
+                'trainee_majors'=>$row->trainee_majors,
+                'trainee_amount'=>$row->employee_amount,
+                'employee_majors'=>$row->employee_majors,
+                'employee_amount'=>$row->employee_amount,
+                'donate_detail'=>$row->donate_detail,
+                'donate_value'=>$row->donate_value,
+                'donate_other'=>$row->donate_other,
                 'manage'=>'
                 <a href="'.site_url('public/mou/curriculumDetail/'.$row->id).'" class="btn btn-xs btn-warning waves-effect"><i class="material-icons">edit</i>แก้ไข</a>
-                <a href="'.site_url('public/mou/curriculumDelete/'.$row->id).'" class="btn btn-xs btn-danger" onclick="return confirm(\'ยืนยันการลบหลักสูตร '.$row->curriculum_name.'\');"><i class="material-icons">delete</i> ลบ</a>',
+                <a href="'.site_url('public/mou/curriculumDelete/'.$row->id).'" class="btn btn-xs btn-danger" onclick="return confirm(\'ยืนยันการลบข้อมูล\');"><i class="material-icons">delete</i> ลบ</a>',
             );
-        }*/
+        }
         $reArr=array('thead'=>array(
                                 'ชื่อสถานประกอบการ',
                                 'ปี',
-                                'ประเภทผลลัพธ์',
+                                'สาขาที่รับ<br>เข้าฝึกงาน',
+                                'รับ นร./นศ.<br>เข้าฝึกงาน',
+                                'สาขาที่รับ<br>เข้าทำงาน',
+                                'รับผู้สำเร็จฯ<br>เข้าทำงาน',
+                                'การสนับสนุนการศึกษา',
                                 'มูลค่า',
+                                'การสนับสนุนการศึกษารูปแบบอื่นๆ',
                                 'จัดการ',
                         ),
-                        'tbody'=>$reRows,
+                        'tbody'=>$resRows,
         );
     ?>
 

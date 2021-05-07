@@ -1,4 +1,7 @@
 <?php
+
+helper('tab');
+helper('user');
     //print_r($schoolData);
     $years=array();
     for($i=date('Y')+1;$i>(date('Y')-5);$i--){
@@ -9,7 +12,7 @@
         $businessData[$k]=$v['business_name'];
     }
     helper('form');
-    $data=array(array(
+    $data1=array(array(
         'label'=>'ชื่อสถานประกอบการ',
         'type'=>'select',
         'items'=>$businessData,
@@ -17,53 +20,60 @@
         'noneLabel'=>'โปรดเลือกสถานประกอบการ',
         'id'=>'business_id',
         'def'=>'',
+        'required'=>true,
          ),
+         array(
+            'type'=>'hidden',
+            'id'=>'school_id',
+            'def'=>current_user('org_code'),
+            ),
          array(
             'label'=>'ปีที่เกิดผลสัมฤทธิ์',
             'type'=>'select',
-            'id'=>'curriculum_year',
+            'id'=>'result_year',
             'items'=>$years,
             'def'=>date('Y'),
             'required'=>true,
-             ),    
-               
+             ),   
+            ); 
+        
+             $data2=array(
          array(
             'label'=>'สาขาที่รับนักศึกษาฝึกงาน/ฝึกอาชีพ',
             'type'=>'text',
             'id'=>'trainee_majors',
             'def'=>'',
             'placeholder'=>'เช่น ช่างไฟฟ้า,ช่างอิเล็กทรอนิกส์ ขั้นแต่ละสาขาด้วยเครื่องหมายจุลภาค (,)',
-            'required'=>true,
              ),   
          array(
             'label'=>'จำนวนนักศึกษาฝึกงาน/ฝึกอาชีพ (จำนวนรวม)',
             'type'=>'number',
             'id'=>'trainee_amount',
             'def'=>'',
-            'required'=>true,
              ),    
+            );
+            $data3=array(
         array(
             'label'=>'สาขาที่รับผู้สำเร็จการศึกษาเข้าเป็นพนักงาน',
             'type'=>'text',
             'id'=>'employee_majors',
             'def'=>'',
             'placeholder'=>'เช่น ช่างไฟฟ้า,ช่างอิเล็กทรอนิกส์ ขั้นแต่ละสาขาด้วยเครื่องหมายจุลภาค (,)',
-            'required'=>true,
              ),   
          array(
             'label'=>'จำนวนการรับผู้สำเร็จการศึกษาเข้าเป็นพนักงาน (จำนวนรวม)',
             'type'=>'number',
             'id'=>'employee_amount',
             'def'=>'',
-            'required'=>true,
              ),    
+            );
+            $data4=array(
          array(
             'label'=>'การสนับสนุนการจัดการศึกษาด้วยการบริจาค (หากมีการบริจาตหลายรายการให้บันทึกข้อมูลสัมฤทธิ์แยกรายการ)',
             'type'=>'text',
             'id'=>'donate_detail',
             'def'=>'',
             'placeholder'=>'เช่น บริจาครถกระบะสี่ประตู',
-            'required'=>true,
              ),    
          array(
             'label'=>'มูลค่าการสนับสนุนการจัดการศึกษา (บาท)',
@@ -71,8 +81,8 @@
             'id'=>'donate_value',
             'placeholder'=>'900,000 บาท',
             'def'=>'',
-            'required'=>true,
              ),    
+            
          array(
             'label'=>'การสนับสนุนการศึกษารูปแบบอื่นๆ',
             'type'=>'textarea',
@@ -81,15 +91,15 @@
             'placeholder'=>'เช่น
 1) การจัดแข่งขั้นทักษะ
 2) การ',
-            'required'=>true,
              ),    
-              
+            );
+            $data5=array(
          array(
              'label'=>'บันทึกข้อมูล',
              'type'=>'submit',
          ),
     );
-
+/*
     $form=array(
         'formName'=>'ข้อมูลผลสัมฤทธิ์',
         'inputs'=>$data,
@@ -97,5 +107,32 @@
         'method'=>'post',
         'enctype'=>'multipart/form-data',
     );
-    
-    print genForm($form);
+  */  
+    //print genForm($form);
+
+    $tab=array(
+        'hr'=>array(
+            'title'=>'การรับนักศึกษาเข้าฝึกงานฝึกอาชีพ',
+            'content'=>genInput($data2),
+        ),
+        'donate'=>array(
+            'title'=>'การรับผู้สำเร็จเข้าทำงาน',
+            'content'=>genInput($data3),
+        ),
+        'form'=>array(
+            'title'=>'การสนับสนุนการจัดการศึกษา',
+            'content'=>genInput($data4),
+        ),
+    );
+    ?>
+<div class="col-lg-12 col-xs-12 col-sm-12">
+                    <div class="card">
+                        <div class="body">
+                        <form action="<?php print site_url('public/mou/resultSave'); ?>" method="post">
+    <?php
+    print genInput($data1).gen_tab($tab).genInput($data5);
+    ?>
+    </form>
+    </div>
+    </div>
+    </div>

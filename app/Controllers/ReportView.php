@@ -50,10 +50,12 @@ class ReportView extends BaseController
 			'ที่',
 			'สถานประกอบการ',
 			'ลักษณะงาน',
-			'ระดับความร่วมมือ',
-			'ระดับการศึกษา',
-			'วันที่ลงนาม',
-			'วันที่สิ้นสุดความร่วมมือ',
+			'ระดับ<br>ความร่วมมือ',
+			'การร่วมลงทุน<br>กับสถานศึกษา',
+			'ระดับ<br>การศึกษา',
+			//'วันที่ลงนาม',
+			'วันที่เริ่ม<br>ความร่วมมือ',
+			'วันที่สิ้นสุด<br>ความร่วมมือ',
 			'สถานที่ลงนาม',
 			'หมายเหตุ',
 		);
@@ -93,11 +95,12 @@ class ReportView extends BaseController
 					$i,
 					'business_id'=>$business[$mou['business_id']]['business_name'],
 					'job_description'=>$business[$mou['business_id']]['job_description'],
-					'level'=>'',
+					'level'=>'ระดับ '.$mou['level'],
+					'investment'=>$mou['investment'],
 					'support_edu'=>$supEdu,
-					'mou_date'=>dateThai($mou['mou_date'],true,false,true),
-					//'mou_start_date'=>dateThai($mou['mou_start_date'],true,false,true),
-					'mou_end_date'=>dateThai($mou['mou_end_date'],true,false,true),
+					//'mou_date'=>dateThai($mou['mou_date']),
+					'mou_start_date'=>dateThai($mou['mou_start_date']),
+					'mou_end_date'=>dateThai($mou['mou_end_date']),
 					'mou_sign_place'=>$mou['mou_sign_place'],
 					'note'=>$trainingPlace,
 				);
@@ -238,6 +241,7 @@ class ReportView extends BaseController
 		</div>';
 		$result='';
 		$resultHead=array(
+			'ที่',
 			'สถานประกอบการ',
 			'ชื่อหลักสูตร',
 			'ปวช.',
@@ -263,7 +267,9 @@ class ReportView extends BaseController
 			$business=$resultData['business'];
 			//$gov=$resultData['gov'];
 			$resultRows=array();
+			$i=0;
 			foreach ($resultData['curriculum'] as $cur){
+				$i++;
 				//$cur = get_object_vars($curriculum);
 
 				$KG='';
@@ -280,6 +286,7 @@ class ReportView extends BaseController
 				if($cur->skill_10=='Y'){if($KG!='')$KG.='<br>';$KG.=$skill['10'];}
 
 				$resultRows[]=array(
+					$i,
 					'business_id'=>$business[$cur->business_id]['business_name'],
 					'curriculum_name'=>$cur->curriculum_name,	
 					'support_vc_edu'=>$cur->support_vc_edu=='Y'?$check:'',
@@ -291,6 +298,165 @@ class ReportView extends BaseController
 					'curriculum_hour'=>$cur->curriculum_hour,			
 					'curriculum_target'=>$cur->curriculum_target,	
 					'training_amount'=>$cur->training_amount,
+					'note'=>'',
+				);
+			}
+
+			$mouArr=array(
+					'caption'=>$caption,
+					'thead'=>$resultHead,
+					'tbody'=>$resultRows,
+			);
+			$result=genTable($mouArr,$export=true,$noFoot=true);
+		}else{
+
+			$result='โปรดกดปุม "ตกลง" เพื่อดูรายงาน';
+		}
+		$data=array(
+			'form'=>$form,
+			'result'=>$result,
+		);
+		if($print==false){
+		$data=array(
+			'title'=>$title,
+			'mainMenu'=>view('_menu'),
+            'content'=>view('reportView',$data),
+			'notification'=>'',
+			'task'=>'',
+		);
+		}else{
+			$result.='
+			<table width="100%">
+			<tr>
+				<td style="text-align:center;">
+				<br>
+				.......................................<br>
+				(.....................................)<br>
+				หัวหน้างานความร่วมมือ
+				</td>
+				<td style="text-align:center;">
+				<br>
+				.......................................<br>
+				(.....................................)<br>
+				รองผู้อำนวยการฝ่ายแผนงานและความร่วมมือ
+				</td>
+				<td style="text-align:center;">
+				<br>
+				.......................................<br>
+				(.....................................)<br>
+				ผู้อำนวยการ'.$org_name.'
+				</td>
+			</tr>
+			</table>
+			';
+			error_reporting(0);
+			helper('mpdf');
+			//return $result;
+			$pdf_data=array(
+				'html'=>$result,
+				'size'=>"A4-L",
+				'fontsize'=>16,
+				'marginL'=>20,
+				'marginR'=>10,
+				'marginT'=>10,
+				'marginB'=>10,
+				'header'=>'',
+				'wartermark'=>'',
+				'wartermarkimage'=>'',
+				'footer'=>'เอกสารนี้ออกโดย'.SYSTEMNAME.' สำนักความร่วมมือ สำนักงานคณะกรรมการการอาชีวศึกษา '.date('Y-m-d H:i:s'),
+				'header'=>'<div style="text-align: right; font-weight: normal;">หน้า {PAGENO}/{nbpg}</div>'
+			);
+			$location=FCPATH.'/pdf/';
+			$fname=current_user('org_code').'_school_01.pdf';
+			$filePdf=genPdf($pdf_data,$pageNo=NULL,$location,$fname);
+			//return '';
+			return '<meta http-equiv="refresh" content="0;url='.site_url('public/pdf/'.$filePdf).'?'.time().'">';
+		}
+		return view('_main',$data);
+	}
+
+	//////// Report 3
+	
+	public function school_03($title,$print=false)
+	{	
+		if(!isset($title))$title=$_POST['title'];
+		helper('report');
+		helper('table');
+		helper('user');
+		helper('org');
+		helper('thai');
+		
+		$org_name=org_name(current_user('org_code'));
+
+		$form='
+		<div class="row clearfix">
+		<form method="post">
+		<input type="hidden" name="title" value="'.$title.'">
+		<div class="col-lg-2 col-md-6 col-sm-6 col-xs-3">
+		ปีที่ลงนาม
+		</div>
+		<div class="col-lg-6 col-md-6 col-sm-6 col-xs-3">
+		<div class="form-group">
+		<div class="form-line">'.filterSelectYear('year',false,false,(isset($_POST['year'])?$_POST['year']:false)).'
+		</div>
+		</div>
+		</div>
+		<div class="col-lg-2 col-md-6 col-sm-6 col-xs-3">
+		<div class="form-group">
+		<div class="form-line">
+		<button class="btn btn-primary form-control"><i class="material-icons">search</i> ตกลง</button>
+		</div>
+		</div>
+		</div>
+		<div class="col-lg-2 col-md-6 col-sm-6 col-xs-3">
+		<div class="form-group">
+		<div class="form-line">
+		<button name="export" formaction="'.$title.'/print" formtarget="_blank" class="btn btn-danger form-control"><i class="material-icons">picture_as_pdf</i> พิมพ์รายงาน</button>
+		</div>
+		</div>
+		</div>
+		</form>
+		</div>';
+		$result='';
+		$resultHead=array(
+			'ที่',
+			'สถานประกอบการ',
+			'สาขาที่รับ<br>นร.นศ. ฝึกงาน/ฝึกอาชีพ',
+			'รับนร.นศ.<br> ฝึกงาน/ฝึกอาชีพ (คน)',
+			'สาขาที่รับ<br>ผู้สำเร็จการศึกษา เข้าทำงาน',
+			'รับ<br>ผู้สำเร็จการศึกษา เข้าทำงาน (คน)',
+			'การสนับสนุน<br>การศึกษา',
+			'มูลค่าการสนับสนุน',
+			'การสนับสนุน<br>การศึกษาด้านอื่นๆ',
+			'หมายเหตุ',
+		);
+		if(isset($_POST['year'])){
+
+			$caption='<b>'.$title.' ปี '.($_POST['year']+543).' </b><br>'.$org_name;
+
+			$mouModel = model('App\Models\MouModel');
+			$resultData=$mouModel->resultGet(['result'=>$_POST['year'],
+											'school_id'=>current_user('org_code')]);
+			
+			//$school=$resultData['school'];
+			$business=$resultData['business'];
+			//$gov=$resultData['gov'];
+			$resultRows=array();
+			$i=0;
+			foreach ($resultData['result'] as $res){
+				//$cur = get_object_vars($curriculum);
+				$i++;
+
+				$resultRows[]=array(
+					$i,
+					'business_id'=>$business[$res->business_id]['business_name'],
+					'trainee_majors'=>$res->trainee_majors,	
+					'trainee_amount'=>$res->trainee_amount,
+					'employee_majors'=>$res->employee_majors,
+					'employee_amount'=>$res->employee_amount,
+					'donate_detail'=>$res->donate_detail,
+					'donate_value'=>'<div style="text-align:right;">'.number_format($res->donate_value,0,'.',',').($res->donate_value>0?' บาท':'').'</div>',
+					'donate_other'=>$res->donate_other,
 					'note'=>'',
 				);
 			}

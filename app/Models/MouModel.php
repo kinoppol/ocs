@@ -149,4 +149,43 @@ class MouModel extends Model
         'business'=>$business);
         return $data;
     }
+    public function resultAdd($data){
+        $db = \Config\Database::connect();
+        $builder = $db->table('mou_result');
+        $result=$builder->insert($data);
+        return $result;
+    }
+
+    public function resultGet($data){
+        $db = \Config\Database::connect();
+        $builder = $db->table('mou_result');
+        if(isset($data['id']))$builder->where('id',$data['id']);
+        if(isset($data['result_year']))$builder->where('result_year',$data['result_year']);
+        if(isset($data['school_id']))$builder->where('school_id',$data['school_id']);
+        $builder->orderBy('business_id');
+        $result=$builder->get()->getResult();
+        if(count($result)<1){
+            return $data=array('curriculum'=>array(),
+            'business'=>array());
+        }
+        $business_ids=array();
+        foreach($result as $row){            
+            array_push($business_ids,$row->business_id);
+        }
+
+        $builder = $db->table('business');
+        $builder->where('business_id in ('.implode(',',$business_ids).')');
+        $businesss=$builder->get()->getResult();
+        $business=array();
+        
+        foreach($businesss as $row){
+            $business[$row->business_id]=array('business_name'=>$row->business_name,
+                                             'job_description'=>$row->job_description,
+                                                );
+        }
+
+        $data=array('result'=>$result,
+        'business'=>$business);
+        return $data;
+    }
 }
