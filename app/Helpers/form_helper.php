@@ -130,7 +130,7 @@ function genOption($data,$def=false,$noneSelectLable=false){
 
     if(is_marray($data)){
         foreach($data as $k=>$v){
-            $ret.='<optgroup label="'.$k.'">';
+            $ret.='<optgroup label="'.$k.'" style="padding:0px 150px">';
             $ret.=genOption($v,$def);
             $ret.='</optgroup>
             ';
@@ -140,7 +140,7 @@ function genOption($data,$def=false,$noneSelectLable=false){
     foreach($data as $k=>$v){
         $selected='';
         if($k==$def)$selected='selected';
-        $ret.='<option  style="padding:0px 50px;" value="'.$k.'"'.$selected.'>'.$v.'</option>';
+        $ret.='<option  style="padding:0px 100px" value="'.$k.'"'.$selected.'>'.$v.'</option>';
     }
     return $ret;
 }

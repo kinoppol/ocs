@@ -42,6 +42,13 @@ $data=array(array(
                     ),
                     'def'=>isset($mou_data)?$mou_data->level:'',
                     'required'=>true,
+                ),
+                array(
+                    'label'=>'การลงทุนร่วมกับสถานศึกษา',
+                    'type'=>'text',
+                    'id'=>'investment',
+                    'placeholder'=>'หากเลือกระดับความร่วมมือ ระดับ 3 โปรดระบุรายละเอียดและมูลค่าการลงทุนรวม',
+                    'def'=>'',
                 ),                
                 array(
                     'label'=>'ระดับการศึกษาที่ร่วมมือ',

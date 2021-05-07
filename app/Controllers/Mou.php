@@ -181,11 +181,18 @@ class Mou extends BaseController
 	}
 
 	public function curriculumDev(){
+		
+		helper('user');
+		$mouModel = model('App\Models\MouModel');
+		$curriculum=$mouModel->curriculumGet(['school_id'=>current_user('org_code')]);
+		$data=array(
+			'curriculum'=>$curriculum,
+		);
 
 		$data=array(
 			'title'=>'หลักสูตรที่ร่วมกับสถานประกอบการ',
 			'mainMenu'=>view('_menu'),
-            'content'=>view('curriculumList'),
+            'content'=>view('curriculumList',$data),
 			'notification'=>'',
 			'task'=>'',
 		);       
@@ -193,16 +200,105 @@ class Mou extends BaseController
 	}
 
 	public function curriculumAdd(){
-
+		helper('user');
+		$mouModel = model('App\Models\MouModel');
+		$resultData=$mouModel->getMou(['school_id'=>current_user('org_code')]);
+		$data=array(
+			'mouData'=>$resultData,
+		);
 		$data=array(
 			'title'=>'ข้อมูลหลักสูตร',
 			'mainMenu'=>view('_menu'),
-            'content'=>view('curriculumDetail'),
+            'content'=>view('curriculumDetail',$data),
 			'notification'=>'',
 			'task'=>'',
 		);       
 		return view('_main',$data);
 	}
+
+	public function curriculumDetail($id){
+		helper('user');
+		$mouModel = model('App\Models\MouModel');
+		$resultData=$mouModel->getMou(['school_id'=>current_user('org_code')]);
+		$curriculumData=$mouModel->curriculumGet(['id'=>$id]);
+		$data=array(
+			'mouData'=>$resultData,
+			'curriculumData'=>$curriculumData['curriculum'][0],
+		);
+		$data=array(
+			'title'=>'ข้อมูลหลักสูตร',
+			'mainMenu'=>view('_menu'),
+            'content'=>view('curriculumDetail',$data),
+			'notification'=>'',
+			'task'=>'',
+		);       
+		return view('_main',$data);
+	}
+
+	public function curriculumSave(){
+		//print_r($_POST);
+
+		$data=array(
+			'business_id'		=>$_POST['business_id'],
+			'school_id'			=>$_POST['school_id'],
+			'curriculum_name'	=>$_POST['curriculum_name'],
+			'curriculum_year'	=>$_POST['curriculum_year'],
+			'skill_01'			=>isset($_POST['skill_01'])?$_POST['skill_01']:'N',
+			'skill_02'			=>isset($_POST['skill_02'])?$_POST['skill_02']:'N',
+			'skill_03'			=>isset($_POST['skill_03'])?$_POST['skill_03']:'N',
+			'skill_04'			=>isset($_POST['skill_04'])?$_POST['skill_04']:'N',
+			'skill_05'			=>isset($_POST['skill_05'])?$_POST['skill_05']:'N',
+			'skill_06'			=>isset($_POST['skill_06'])?$_POST['skill_06']:'N',
+			'skill_07'			=>isset($_POST['skill_07'])?$_POST['skill_07']:'N',
+			'skill_08'			=>isset($_POST['skill_08'])?$_POST['skill_08']:'N',
+			'skill_09'			=>isset($_POST['skill_09'])?$_POST['skill_09']:'N',
+			'skill_10'			=>isset($_POST['skill_10'])?$_POST['skill_10']:'N',
+			'support_vc_edu'	=>isset($_POST['support_edu'])&&$_POST['support_edu']=='support_vc_edu'?'Y':'N',
+			'support_hvc_edu'	=>isset($_POST['support_edu'])&&$_POST['support_edu']=='support_hvc_edu'?'Y':'N',
+			'support_btech_edu'	=>isset($_POST['support_edu'])&&$_POST['support_edu']=='support_btech_edu'?'Y':'N',
+			'support_short_course'=>isset($_POST['support_edu'])&&$_POST['support_edu']=='support_short_course'?'Y':'N',
+			'support_no_specific'=>isset($_POST['support_edu'])&&$_POST['support_edu']=='support_no_specific'?'Y':'N',
+			'curriculum_hour'	=>$_POST['curriculum_hour'],
+			'curriculum_target'	=>$_POST['curriculum_target'],
+			'business_action'	=>$_POST['business_action'],
+			'training_amount'	=>$_POST['training_amount'],
+		);
+		
+		$mouModel = model('App\Models\MouModel');
+		 
+		if(!isset($_POST['id'])){
+			$result=$mouModel->curriculumAdd($data);
+		}else{
+			$result=$mouModel->curriculumUpdate($_POST['id'],$data);
+		}
+
+		$data=array(
+			'title'=>'บันทึกข้อมูลหลักสูตร',
+			'mainMenu'=>view('_menu'),
+            'content'=>$result?'บันทึกข้อมูลสำเร็จ <meta http-equiv="refresh" content="2;url='.site_url('public/mou/curriculumDev').'">':'บันทึกข้อมูลไม่สำเร็จ',
+			'notification'=>'',
+			'task'=>'',
+		);      
+		return view('_main',$data);
+
+	} 
+
+	public function curriculumDelete($id){
+
+		$mouModel = model('App\Models\MouModel');
+		 
+			$result=$mouModel->curriculumDelete(['id'=>$id]);
+
+		$data=array(
+			'title'=>'ลบข้อมูลหลักสูตร',
+			'mainMenu'=>view('_menu'),
+            'content'=>$result?'ลบข้อมูลสำเร็จ <meta http-equiv="refresh" content="2;url='.site_url('public/mou/curriculumDev').'">':'ลบข้อมูลไม่สำเร็จ',
+			'notification'=>'',
+			'task'=>'',
+		);      
+		return view('_main',$data);
+
+	} 
 
 	
 	public function result(){
@@ -210,7 +306,27 @@ class Mou extends BaseController
 		$data=array(
 			'title'=>'ผลสัมฤทธิ์ของความร่วมมือ',
 			'mainMenu'=>view('_menu'),
-            'content'=>view('mouResult'),
+            'content'=>view('mouResultList'),
+			'notification'=>'',
+			'task'=>'',
+		);       
+		return view('_main',$data);
+	}
+
+	public function resultAdd(){
+		helper('user');
+		$mouModel = model('App\Models\MouModel');
+		$resultData=$mouModel->getMou(['school_id'=>current_user('org_code')]);
+		//$curriculumData=$mouModel->curriculumGet(['id'=>$id]);
+		$data=array(
+			'mouData'=>$resultData,
+			//'curriculumData'=>$curriculumData['curriculum'][0],
+		);
+
+		$data=array(
+			'title'=>'เพิ่มข้อมูลผลสัมฤทธิ์ของความร่วมมือ',
+			'mainMenu'=>view('_menu'),
+            'content'=>view('resultDetail',$data),
 			'notification'=>'',
 			'task'=>'',
 		);       

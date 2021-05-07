@@ -17,6 +17,7 @@ class BusinessModel extends Model
                 $datas[$row->business_id]=array(
                     'business_id'=>$row->business_id,
                     'business_name'=>$row->business_name,
+                    'job_description'=>$row->job_description,
                     'province_id'=>$row->province_id,
                     'district_id'=>$row->district_id,
                     'subdistrict_id'=>$row->subdistrict_id,

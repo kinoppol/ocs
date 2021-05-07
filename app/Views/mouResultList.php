@@ -2,7 +2,7 @@
         helper('table');
         helper('modal');
         $check='<img src="'.site_url('images/check.jpg').'" width="16">';
-        $curRows=array();
+        $reRows=array();/*
         $business=$curriculum['business'];
         foreach($curriculum['curriculum'] as $row){
             $curRows[]=array(
@@ -12,25 +12,21 @@
                 'support_hvc_edu'=>$row->support_hvc_edu=='Y'?$check:'',
                 'support_btech_edu'=>$row->support_btech_edu=='Y'?$check:'',
                 'support_short_course'=>$row->support_short_course=='Y'?$check:'',
-                'support_no_specific'=>$row->support_no_specific=='Y'?$check:'',*/
+                'support_no_specific'=>$row->support_no_specific=='Y'?$check:'',
                 'curriculum_hour'=>$row->curriculum_hour,
                 'manage'=>'
                 <a href="'.site_url('public/mou/curriculumDetail/'.$row->id).'" class="btn btn-xs btn-warning waves-effect"><i class="material-icons">edit</i>แก้ไข</a>
                 <a href="'.site_url('public/mou/curriculumDelete/'.$row->id).'" class="btn btn-xs btn-danger" onclick="return confirm(\'ยืนยันการลบหลักสูตร '.$row->curriculum_name.'\');"><i class="material-icons">delete</i> ลบ</a>',
             );
-        }
-        $curArr=array('thead'=>array(
+        }*/
+        $reArr=array('thead'=>array(
                                 'ชื่อสถานประกอบการ',
-                                'ชื่อหลักสูตร',/*
-                                'ระดับ ปวช.',
-                                'ระดับ ปวส.',
-                                'ระดับ ทล.บ.',
-                                'ระดับ ระยะสั้น',
-                                'ไม่ระบุ ระดับ',*/
-                                'จำนวนชั่วโมง',
+                                'ปี',
+                                'ประเภทผลลัพธ์',
+                                'มูลค่า',
                                 'จัดการ',
                         ),
-                        'tbody'=>$curRows,
+                        'tbody'=>$reRows,
         );
     ?>
 
@@ -56,7 +52,7 @@
                                     <div class="col-lg-2 col-md-3 col-sm-3 col-xs-3">
                                         <div class="form-group">
                                                 <!--<button  type="button" class="btn btn-warning" id="addBusiness"><i class="material-icons">add</i> เพิ่มรายงานการประชุม</button>-->
-                                                <a  href="<?php print site_url('public/mou/curriculumAdd'); ?>" class="btn btn-warning" id="addCurriculum"><i class="material-icons">add</i> เพิ่มข้อมูลหลักสูตร</a>
+                                                <a  href="<?php print site_url('public/mou/resultAdd'); ?>" class="btn btn-warning" id="addCurriculum"><i class="material-icons">add</i> เพิ่มข้อมูลผลลัพธ์</a>
                                         </div>
                                     </div>
                                 </div>
@@ -64,7 +60,7 @@
                         <div class="body">
                         <div class="table-responsive">
                         <?php
-                                print genTable($curArr);
+                                print genTable($reArr);
                              ?>
                             </div>
                     </div>

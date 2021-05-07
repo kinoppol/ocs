@@ -22,6 +22,11 @@ class MouModel extends Model
         if(isset($data['school_id']))$builder->where('school_id',$data['school_id']);
         if(isset($data['year']))$builder->like('mou_date',$data['year'],'after');
         $mou=$builder->get()->getResult();
+        $business_ids=array();
+        foreach($mou as $row){
+            array_push($business_ids,$row->business_id);
+        }
+        //print_r($business_ids);
         $builder = $db->table('school');
         $schools=$builder->get()->getResult();
             $school=array();
@@ -29,10 +34,13 @@ class MouModel extends Model
                 $school[$row->school_id]=$row->school_name;
             }
         $builder = $db->table('business');
+        $builder->where('business_id in ('.implode(',',$business_ids).')');
         $businesss=$builder->get()->getResult();
         $business=array();
         foreach($businesss as $row){
-            $business[$row->business_id]=$row->business_name;
+            $business[$row->business_id]=array('business_name'=>$row->business_name,
+                                             'job_description'=>$row->job_description,
+                                                );
         }
         $builder = $db->table('govdata');
         $govs=$builder->get()->getResult();
@@ -85,5 +93,60 @@ class MouModel extends Model
         $result=$builder->update($data);
         //print $db->getLastQuery();
         return $result;
+    }
+
+    public function curriculumAdd($data){
+        $db = \Config\Database::connect();
+        $builder = $db->table('curriculum');
+        $result=$builder->insert($data);
+        return $result;
+    }
+
+    public function curriculumUpdate($id,$data){
+        $db = \Config\Database::connect();
+        $builder = $db->table('curriculum');
+        $builder->where('id',$id);
+        $result=$builder->update($data);
+        return $result;
+    }
+    public function curriculumDelete($id){
+        $db = \Config\Database::connect();
+        $builder = $db->table('curriculum');
+        $builder->where('id',$id);
+        $result=$builder->delete();
+        return $result;
+    }
+    
+    public function curriculumGet($data){
+        $db = \Config\Database::connect();
+        $builder = $db->table('curriculum');
+        if(isset($data['id']))$builder->where('id',$data['id']);
+        if(isset($data['curriculum_year']))$builder->where('curriculum_year',$data['curriculum_year']);
+        if(isset($data['school_id']))$builder->where('school_id',$data['school_id']);
+        $builder->orderBy('business_id');
+        $curriculum=$builder->get()->getResult();
+        if(count($curriculum)<1){
+            return $data=array('curriculum'=>array(),
+            'business'=>array());
+        }
+        $business_ids=array();
+        foreach($curriculum as $row){            
+            array_push($business_ids,$row->business_id);
+        }
+
+        $builder = $db->table('business');
+        $builder->where('business_id in ('.implode(',',$business_ids).')');
+        $businesss=$builder->get()->getResult();
+        $business=array();
+        
+        foreach($businesss as $row){
+            $business[$row->business_id]=array('business_name'=>$row->business_name,
+                                             'job_description'=>$row->job_description,
+                                                );
+        }
+
+        $data=array('curriculum'=>$curriculum,
+        'business'=>$business);
+        return $data;
     }
 }

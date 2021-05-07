@@ -4,10 +4,17 @@
     for($i=date('Y')+1;$i>(date('Y')-5);$i--){
         $years[$i]=$i+543;
     }
+    $businessData=array();
+    foreach($mouData['business'] as $k=>$v){
+        $businessData[$k]=$v['business_name'];
+    }
     helper('form');
     $data=array(array(
         'label'=>'ชื่อสถานประกอบการ',
-        'type'=>'text',
+        'type'=>'select',
+        'items'=>$businessData,
+        'class'=>'show-tick',
+        'noneLabel'=>'โปรดเลือกสถานประกอบการ',
         'id'=>'business_id',
         'def'=>'',
          ),

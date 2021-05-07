@@ -15,7 +15,7 @@
 
             if(!isset($business[$mou['business_id']]))continue;
             $mouRows[]=array(
-                'business_id'=>$business[$mou['business_id']],
+                'business_id'=>$business[$mou['business_id']]['business_name'],
                 'school_id'=>$org_name,
                 'mou_date'=>$mou['mou_date'],
                 'mou_sign_place'=>$mou['mou_sign_place'],
