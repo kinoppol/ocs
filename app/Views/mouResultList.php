@@ -13,11 +13,11 @@
                 'employee_majors'=>$row->employee_majors,
                 'employee_amount'=>$row->employee_amount,
                 'donate_detail'=>$row->donate_detail,
-                'donate_value'=>$row->donate_value,
+                'donate_value'=>number_format($row->donate_value,0,'.',','),
                 'donate_other'=>$row->donate_other,
                 'manage'=>'
-                <a href="'.site_url('public/mou/curriculumDetail/'.$row->id).'" class="btn btn-xs btn-warning waves-effect"><i class="material-icons">edit</i>แก้ไข</a>
-                <a href="'.site_url('public/mou/curriculumDelete/'.$row->id).'" class="btn btn-xs btn-danger" onclick="return confirm(\'ยืนยันการลบข้อมูล\');"><i class="material-icons">delete</i> ลบ</a>',
+                <a href="'.site_url('public/mou/resultDetail/'.$row->id).'" class="btn btn-xs btn-warning waves-effect"><i class="material-icons">edit</i>แก้ไข</a>
+                <a href="'.site_url('public/mou/resultDelete/'.$row->id).'" class="btn btn-xs btn-danger" onclick="return confirm(\'ยืนยันการลบข้อมูล\');"><i class="material-icons">delete</i> ลบ</a>',
             );
         }
         $reArr=array('thead'=>array(
@@ -28,7 +28,7 @@
                                 'สาขาที่รับ<br>เข้าทำงาน',
                                 'รับผู้สำเร็จฯ<br>เข้าทำงาน',
                                 'การสนับสนุนการศึกษา',
-                                'มูลค่า',
+                                'มูลค่า<br>(บาท)',
                                 'การสนับสนุนการศึกษารูปแบบอื่นๆ',
                                 'จัดการ',
                         ),

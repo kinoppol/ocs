@@ -2,7 +2,7 @@
 helper('user');
 helper('modal');
 helper('tab');
-$debug=true;
+$debug=false;
 $_SESSION['FOOTSYSTEM']='';
 ?>
 <!DOCTYPE html>

@@ -19,9 +19,15 @@ helper('user');
         'class'=>'show-tick',
         'noneLabel'=>'โปรดเลือกสถานประกอบการ',
         'id'=>'business_id',
-        'def'=>'',
+        'def'=>isset($resultData)?$resultData->business_id:'',
         'required'=>true,
-         ),
+         ),  
+         array(
+            'type'=>'hidden',
+            'id'=>'id',
+            'def'=>isset($resultData->id)?$resultData->id:'',
+            'disabled'=>isset($resultData->id)?false:true,
+            ),
          array(
             'type'=>'hidden',
             'id'=>'school_id',
@@ -32,7 +38,7 @@ helper('user');
             'type'=>'select',
             'id'=>'result_year',
             'items'=>$years,
-            'def'=>date('Y'),
+            'def'=>isset($resultData)?$resultData->result_year:date('Y'),
             'required'=>true,
              ),   
             ); 
@@ -42,14 +48,14 @@ helper('user');
             'label'=>'สาขาที่รับนักศึกษาฝึกงาน/ฝึกอาชีพ',
             'type'=>'text',
             'id'=>'trainee_majors',
-            'def'=>'',
+            'def'=>isset($resultData)?$resultData->trainee_majors:'',
             'placeholder'=>'เช่น ช่างไฟฟ้า,ช่างอิเล็กทรอนิกส์ ขั้นแต่ละสาขาด้วยเครื่องหมายจุลภาค (,)',
              ),   
          array(
             'label'=>'จำนวนนักศึกษาฝึกงาน/ฝึกอาชีพ (จำนวนรวม)',
             'type'=>'number',
             'id'=>'trainee_amount',
-            'def'=>'',
+            'def'=>isset($resultData)?$resultData->trainee_amount:'',
              ),    
             );
             $data3=array(
@@ -57,14 +63,14 @@ helper('user');
             'label'=>'สาขาที่รับผู้สำเร็จการศึกษาเข้าเป็นพนักงาน',
             'type'=>'text',
             'id'=>'employee_majors',
-            'def'=>'',
+            'def'=>isset($resultData)?$resultData->employee_majors:'',
             'placeholder'=>'เช่น ช่างไฟฟ้า,ช่างอิเล็กทรอนิกส์ ขั้นแต่ละสาขาด้วยเครื่องหมายจุลภาค (,)',
              ),   
          array(
             'label'=>'จำนวนการรับผู้สำเร็จการศึกษาเข้าเป็นพนักงาน (จำนวนรวม)',
             'type'=>'number',
             'id'=>'employee_amount',
-            'def'=>'',
+            'def'=>isset($resultData)?$resultData->employee_amount:'',
              ),    
             );
             $data4=array(
@@ -72,7 +78,7 @@ helper('user');
             'label'=>'การสนับสนุนการจัดการศึกษาด้วยการบริจาค (หากมีการบริจาตหลายรายการให้บันทึกข้อมูลสัมฤทธิ์แยกรายการ)',
             'type'=>'text',
             'id'=>'donate_detail',
-            'def'=>'',
+            'def'=>isset($resultData)?$resultData->donate_detail:'',
             'placeholder'=>'เช่น บริจาครถกระบะสี่ประตู',
              ),    
          array(
@@ -80,14 +86,14 @@ helper('user');
             'type'=>'number',
             'id'=>'donate_value',
             'placeholder'=>'900,000 บาท',
-            'def'=>'',
+            'def'=>isset($resultData)?$resultData->donate_value:'',
              ),    
             
          array(
             'label'=>'การสนับสนุนการศึกษารูปแบบอื่นๆ',
             'type'=>'textarea',
             'id'=>'donate_other',
-            'def'=>'',
+            'def'=>isset($resultData)?$resultData->donate_other:'',
             'placeholder'=>'เช่น
 1) การจัดแข่งขั้นทักษะ
 2) การ',

@@ -13,11 +13,11 @@
     helper('form');
     helper('user');
     $def_edu='';
-    if($curriculumData->support_vc_edu=='Y')$def_edu='support_vc_edu';
-    if($curriculumData->support_hvc_edu=='Y')$def_edu='support_hvc_edu';
-    if($curriculumData->support_btech_edu=='Y')$def_edu='support_btech_edu';
-    if($curriculumData->support_short_course=='Y')$def_edu='support_short_course';
-    if($curriculumData->support_no_specific=='Y')$def_edu='support_no_specific';
+    if(isset($curriculumData)&&$curriculumData->support_vc_edu=='Y')$def_edu='support_vc_edu';
+    if(isset($curriculumData)&&$curriculumData->support_hvc_edu=='Y')$def_edu='support_hvc_edu';
+    if(isset($curriculumData)&&$curriculumData->support_btech_edu=='Y')$def_edu='support_btech_edu';
+    if(isset($curriculumData)&&$curriculumData->support_short_course=='Y')$def_edu='support_short_course';
+    if(isset($curriculumData)&&$curriculumData->support_no_specific=='Y')$def_edu='support_no_specific';
 
     $data=array(array(
         'label'=>'ชื่อสถานประกอบการ',

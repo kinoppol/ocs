@@ -155,6 +155,13 @@ class MouModel extends Model
         $result=$builder->insert($data);
         return $result;
     }
+    public function resultUpdate($id,$data){
+        $db = \Config\Database::connect();
+        $builder = $db->table('mou_result');
+        $builder->where('id',$id);
+        $result=$builder->update($data);
+        return $result;
+    }
 
     public function resultGet($data){
         $db = \Config\Database::connect();
@@ -187,5 +194,12 @@ class MouModel extends Model
         $data=array('result'=>$result,
         'business'=>$business);
         return $data;
+    }
+    public function resultDelete($id){
+        $db = \Config\Database::connect();
+        $builder = $db->table('mou_result');
+        $builder->where('id',$id);
+        $result=$builder->delete();
+        return $result;
     }
 }

@@ -203,9 +203,9 @@ class Mou extends BaseController
 	public function curriculumAdd(){
 		helper('user');
 		$mouModel = model('App\Models\MouModel');
-		$resultData=$mouModel->getMou(['school_id'=>current_user('org_code')]);
+		$curriculumData=$mouModel->getMou(['school_id'=>current_user('org_code')]);
 		$data=array(
-			'mouData'=>$resultData,
+			'mouData'=>$curriculumData,
 		);
 		$data=array(
 			'title'=>'ข้อมูลหลักสูตร',
@@ -220,10 +220,10 @@ class Mou extends BaseController
 	public function curriculumDetail($id){
 		helper('user');
 		$mouModel = model('App\Models\MouModel');
-		$resultData=$mouModel->getMou(['school_id'=>current_user('org_code')]);
+		$curriculumData=$mouModel->getMou(['school_id'=>current_user('org_code')]);
 		$curriculumData=$mouModel->curriculumGet(['id'=>$id]);
 		$data=array(
-			'mouData'=>$resultData,
+			'mouData'=>$curriculumData,
 			'curriculumData'=>$curriculumData['curriculum'][0],
 		);
 		$data=array(
@@ -339,6 +339,26 @@ class Mou extends BaseController
 		return view('_main',$data);
 	}
 
+	public function resultDetail($id){
+		helper('user');
+		$mouModel = model('App\Models\MouModel');
+		$resultData=$mouModel->getMou(['school_id'=>current_user('org_code')]);
+		$resultData=$mouModel->resultGet(['id'=>$id]);
+		$data=array(
+			'mouData'=>$resultData,
+			'resultData'=>$resultData['result'][0],
+		);
+
+		$data=array(
+			'title'=>'แก้ไขข้อมูลผลสัมฤทธิ์ของความร่วมมือ',
+			'mainMenu'=>view('_menu'),
+            'content'=>view('resultDetail',$data),
+			'notification'=>'',
+			'task'=>'',
+		);       
+		return view('_main',$data);
+	}
+
 	
 	public function resultSave(){
 		helper('user');
@@ -361,7 +381,7 @@ class Mou extends BaseController
 		if(!isset($_POST['id'])){
 			$result=$mouModel->resultAdd($data);
 		}else{
-			$result=$mouModel->resultAdd($_POST['id'],$data);
+			$result=$mouModel->resultUpdate($_POST['id'],$data);
 		}
 
 		print_r($_POST);
@@ -376,4 +396,21 @@ class Mou extends BaseController
 		);      
 		return view('_main',$data);
 	}
+
+	public function resultDelete($id){
+
+		$mouModel = model('App\Models\MouModel');
+		 
+			$result=$mouModel->resultDelete(['id'=>$id]);
+
+		$data=array(
+			'title'=>'ลบข้อมูลผลสัมฤทธิ์',
+			'mainMenu'=>view('_menu'),
+            'content'=>$result?'ลบข้อมูลสำเร็จ <meta http-equiv="refresh" content="2;url='.site_url('public/mou/result').'">':'ลบข้อมูลไม่สำเร็จ',
+			'notification'=>'',
+			'task'=>'',
+		);      
+		return view('_main',$data);
+
+	} 
 }
