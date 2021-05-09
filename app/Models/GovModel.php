@@ -20,4 +20,11 @@ class GovModel extends Model
             }
         return $datas;
     }
+    public function getGovData($id=false){
+        $db = \Config\Database::connect();
+        $builder = $db->table('govdata');
+        $builder->where('gov_id',$id);
+        $data=$builder->get()->getResult();
+        return $data[0];
+    }
 }

@@ -111,10 +111,12 @@ function genInput_check_group($data){
 }
 
 function genInput_select($data){
+    $multiple='';
+    if(isset($data['multiple'])&&$data['multiple'])$multiple=' multiple';
     $ret='<label for="'.$data['id'].'">'.$data['label'].(isset($data['required'])&&$data['required']?'<span style="color:red;">*</span>':'').'</label>
             <div class="form-group">
                 <div class="form-line">
-                    <select name="'.$data['id'].'" id="'.$data['id'].'" class="form-control '.(isset($data['class'])?$data['class']:'').'" '.(isset($data['required'])&&$data['required']?'required':'').''.(isset($data['disabled'])&&$data['disabled']?'disabled':'').' data-live-search="true"/>
+                    <select name="'.$data['id'].'" id="'.$data['id'].'" class="form-control '.(isset($data['class'])?$data['class']:'').'" '.(isset($data['required'])&&$data['required']?'required':'').''.(isset($data['disabled'])&&$data['disabled']?'disabled':'').' '.$multiple.' data-live-search="true"/>
                     '.genOption($data['items'],$data['def'],(isset($data['noneLabel'])?$data['noneLabel']:false)).'
                     </select>
                 </div>
@@ -139,7 +141,11 @@ function genOption($data,$def=false,$noneSelectLable=false){
     }
     foreach($data as $k=>$v){
         $selected='';
-        if($k==$def)$selected='selected';
+        if(is_array($def)){
+            if(is_numeric(array_search($k,$def)))$selected='selected';
+        }else{
+            if($k==$def)$selected='selected';
+        }
         $ret.='<option  style="padding:0px 100px" value="'.$k.'"'.$selected.'>'.$v.'</option>';
     }
     return $ret;

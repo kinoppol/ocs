@@ -11,7 +11,14 @@ class SchoolModel extends Model
         $builder=$db->table('summary_of_student');
         if($type!='dve')$builder->selectSum('count_val');
         else if($type=='dve')$builder->selectSum('count_dve_val');
-        $builder->where('school_id',$school_id);
+        if(is_array($school_id)&&$school_id[0]!=''){
+            //print "5555";
+            $builder->where('school_id in ('.implode(',',$school_id).')');
+        }else if(is_array($school_id)&&count($school_id)==0){
+            return false;
+        }else{
+            $builder->where('school_id',$school_id);
+        }
         $count = $builder->get()->getResult();
         //print $db->getLastQuery();
         return $count[0];

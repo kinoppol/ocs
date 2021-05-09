@@ -23,6 +23,13 @@ class OrgModel extends Model
         $result=$builder->update($data);
         return $result;
     }
+    public function updateGov($id,$data){
+        $db = \Config\Database::connect();
+        $builder = $db->table('govdata');
+        $builder->where('gov_id', $id);
+        $result=$builder->update($data);
+        return $result;
+    }
     public function schoolData($school_id){
         $db = \Config\Database::connect();
         $builder = $db->table('school');
