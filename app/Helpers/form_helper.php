@@ -54,7 +54,12 @@ function genInput_textbox($data){
     if(isset($data['min']))$min=' min="'.$data['min'].'"';
     if(isset($data['max']))$max=' max="'.$data['max'].'"';
     if(isset($data['accept']))$accept=' accept="'.$data['accept'].'"';
-    if(isset($data['multiple']))$multiple=' multiple';
+    if(isset($data['multiple'])){
+        if(mb_substr($data['id'],mb_strlen($data['id'])-2,2)!='[]'){
+            $data['id'].='[]';
+        }
+        $multiple=' multiple';
+    }
     $ret='<label for="'.$data['id'].'">'.$data['label'].(isset($data['required'])&&$data['required']?'<span style="color:red;">*</span>':'').'</label>
             <div class="form-group">
                 <div class="form-line">
@@ -62,7 +67,7 @@ function genInput_textbox($data){
                         (isset($data['class'])?$data['class']:'').
                         '" placeholder="'.(isset($data['placeholder'])?$data['placeholder']:'').
                         '" value="'.(isset($data['def'])?$data['def']:'').
-                        '" '.$min.$max.$accept.$multiple.(isset($data['required'])&&$data['required']?'required':'').
+                        '" '.$min.$max.$accept.$multiple.(isset($data['required'])&&$data['required']?' required':'').
                         ''.(isset($data['disabled'])&&$data['disabled']?'disabled':'').
                         ''.(isset($data['autocomplete'])?' autocomplete="'.$data['autocomplete'].'"':'').'/>
                     </div>

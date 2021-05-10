@@ -65,7 +65,7 @@ class User extends BaseController
 		if($result['status']=='ok'){
 			$user=$userModel->checkEmail($result['data']['email']);
 			
-			$loginTime=time()+3600;
+			$loginTime=time()+36000;
 			if(count($user)>=1){
 				$url=$result['data']['picture'];
 				$handle = curl_init($url);

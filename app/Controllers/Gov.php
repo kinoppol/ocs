@@ -4,7 +4,7 @@ namespace App\Controllers;
 
 class Gov extends BaseController
 {
-	public function meetingRecode()
+	public function meettingRecord()
 	{
 		helper('user');
         
@@ -97,6 +97,67 @@ class Gov extends BaseController
 			'notification'=>'',
 			'task'=>'',
 			'content'=>'บันทึกข้อมูลสำเร็จ<br>โปรดรอสักครู่..<meta http-equiv="refresh" content="1;url='.site_url('public/gov/detail').'">',
+		);
+		return view('_main',$data);
+	}
+	public function saveMeetting(){
+
+		$govModel = model('App\Models\GovModel');
+
+		$data=array();
+		foreach($_POST as $k=>$v){
+				$data[$k]=$v;
+		}
+		helper('user');
+		$data['recorder_id']=current_user('user_id');
+		$data['gov_id']=current_user('org_code');
+		$data['record_time']=date('y-m-d H:i:s');
+
+		if(!isset($_POST['id'])){
+			$file_name=$result=$govModel->meettingAdd($data);
+		}else{
+			$result=$govModel->meettingUpdate($_POST['id'],$data);
+			$file_name=$govModel->$_POST['id'];
+		}
+
+		$mettingFilePath=FCPATH.'../meettingRecord/';
+
+		if($_FILES['meettingRecord']['type']=='application/pdf'){
+			$meettingRecord=$mettingFilePath.'doc/'.$file_name.'.pdf';
+			move_uploaded_file($_FILES['meettingRecord']['tmp_name'],$meettingRecord);
+		}
+		//เรียง Array File ภาพ ใหม่
+		$hFiles=array();
+		$hFiles['pictures']=array();
+		foreach($_FILES['pictures'] as $k=>$v){
+			foreach($v as $sk=>$sv){
+				$hFiles['pictures'][$sk][$k]=$sv;
+			}
+		}
+
+		$pictures=array();
+		$i=0;
+		foreach($hFiles['pictures'] as $pic){
+			if($pic['type']!='image/jpeg')continue;
+			$i++;
+			$picture=$mettingFilePath.'images/'.$file_name.'_'.$i.'.jpg';
+			$pictures[]=$picture;
+			move_uploaded_file($pic['tmp_name'],$picture);
+		}
+		//อัพเดตข้อมูลไฟล์แนบ
+			$mRecord_id=$file_name;
+			$data=array(
+				'meettingRecord'=>$meettingRecord,
+				'pictures'=>implode(',',$pictures),
+			);
+			$govModel->meettingUpdate($mRecord_id,$data);
+
+		$data=array(
+			'title'=>'บันทึกข้อมูลการประชุม อ.กรอ.อศ.',
+			'mainMenu'=>view('_menu'),
+			'notification'=>'',
+			'task'=>'',
+			'content'=>'บันทึกข้อมูลสำเร็จ<br>โปรดรอสักครู่..<meta http-equiv="refresh" content="1;url='.site_url('public/gov/meettingRecord').'">',
 		);
 		return view('_main',$data);
 	}

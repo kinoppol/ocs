@@ -27,4 +27,17 @@ class GovModel extends Model
         $data=$builder->get()->getResult();
         return $data[0];
     }
+    public function meettingAdd($data){
+        $db = \Config\Database::connect();
+        $builder = $db->table('meetting_record');
+        $result=$builder->insert($data);
+        return $db->insertID();
+    }
+    public function meettingUpdate($id,$data){
+        $db = \Config\Database::connect();
+        $builder = $db->table('meetting_record');
+        $builder->where('id',$id);
+        $result=$builder->update($data);
+        return $result;
+    }
 }
