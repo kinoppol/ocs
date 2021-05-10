@@ -6,10 +6,11 @@ class Mou extends BaseController
 {
 	public function list($year='')
 	{
+		helper('user');
 		if($year=='')$year=date('Y');
 		$mouModel = model('App\Models\MouModel');
 		$data=array(
-			'data'=>$mouModel->getMou(['year'=>$year]),
+			'data'=>$mouModel->getMou(['year'=>$year,'school_id'=>current_user('org_code')]),
 			'year'=>$year,
 		);
 		$data=array(
@@ -378,13 +379,13 @@ class Mou extends BaseController
 			'donate_other'=>$_POST['donate_other'],
 		);
 
-		if(!isset($_POST['id'])){
+		if(!isset($_POST['id'])||$_POST['id']==''){
 			$result=$mouModel->resultAdd($data);
 		}else{
 			$result=$mouModel->resultUpdate($_POST['id'],$data);
 		}
 
-		print_r($_POST);
+		//print_r($_POST);
 
 
 		$data=array(

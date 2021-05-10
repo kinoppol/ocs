@@ -13,11 +13,15 @@ class GovModel extends Model
             $datas=array();
             foreach($data as $row){
                 $datas[$row->id]=array(
+                    'book_no'=>$row->book_no,
                     'subject'=>$row->subject,
                     'meetting_date'=>$row->meetting_date,
-                    'meetting_place'=>$row->meetting_place,
+                    'meetting_place'=>$row->meetting_place,/*
+                    'meettingRecord'=>$row->meettingRecord,
+                    'pictures'=>$row->pictures,*/
                 );
             }
+            //print_r($datas);
         return $datas;
     }
     public function getGovData($id=false){
@@ -38,6 +42,21 @@ class GovModel extends Model
         $builder = $db->table('meetting_record');
         $builder->where('id',$id);
         $result=$builder->update($data);
+        return $result;
+    }
+    public function getMeettingData($id){
+        $db = \Config\Database::connect();
+        $builder = $db->table('meetting_record');
+        $builder->where('id',$id);
+        $result=$builder->get()->getResult();
+        return $result[0];
+    }
+    
+    public function meettingDelete($id){
+        $db = \Config\Database::connect();
+        $builder = $db->table('meetting_record');
+        $builder->where('id',$id);
+        $result=$builder->delete();
         return $result;
     }
 }

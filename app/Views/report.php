@@ -6,17 +6,17 @@
         $reports=array(array(
             'title'=>'รายงานการลงนามความร่วมมือ',
             'file'=>'school_01',
-            'cond'=>current_user('user_type')=='school',
+            'cond'=>current_user('user_type')=='school'||current_user('user_type')=='gov',
             ),
             array(
             'title'=>'รายงานการพัฒนาหลักสูตรร่วมกับสถานประกอบการ',
             'file'=>'school_02',
-            'cond'=>current_user('user_type')=='school',
+            'cond'=>current_user('user_type')=='school'||current_user('user_type')=='gov',
             ),
             array(
             'title'=>'รายงานผลสัมฤทธิ์ของการร่วมมือกับสถานประกอบการ',
             'file'=>'school_03',
-            'cond'=>current_user('user_type')=='school',
+            'cond'=>current_user('user_type')=='school'||current_user('user_type')=='gov',
             ),
         );
 

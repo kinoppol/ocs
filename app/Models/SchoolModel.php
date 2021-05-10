@@ -6,9 +6,10 @@ use CodeIgniter\Model;
 
 class SchoolModel extends Model
 {
-    public function getSumStudent($school_id,$type=false){
+    public function getSumStudent($school_id,$type=false,$data=array()){
         $db = \Config\Database::connect();
         $builder=$db->table('summary_of_student');
+        if(is_array($data['minor_code']))$builder->where('minor_code in ('.implode(',',$data['minor_code']).')');
         if($type!='dve')$builder->selectSum('count_val');
         else if($type=='dve')$builder->selectSum('count_dve_val');
         if(is_array($school_id)&&$school_id[0]!=''){

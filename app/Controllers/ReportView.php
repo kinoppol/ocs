@@ -14,7 +14,24 @@ class ReportView extends BaseController
 		helper('org');
 		helper('thai');
 		
-		$org_name=org_name(current_user('org_code'));
+		$org_code=current_user('org_code');		
+		$org_name=org_name($org_code);
+
+		if(mb_strlen($org_code)<10){
+			$org_type_name=' อ.กรอ.อศ. ';
+			$signData=array(
+				'positionP1'=>'ผู้จัดทำข้อมูล',
+				'positionP2'=>'อนุกรรมการและผู้ช่วยเลขานุการ อ.กรอ.อศ. <br>'.$org_name,
+				'positionP3'=>'อนุกรรมการและเลขานุการ อ.กรอ.อศ. <br>'.$org_name,
+			);
+		}else{
+			$org_type_name='สถานศึกษา';
+			$signData=array(
+				'positionP1'=>'หัวหน้างานความร่วมมือ',
+				'positionP2'=>'รองผู้อำนวยการฝ่ายแผนงานและความร่วมมือ',
+				'positionP2'=>'ผู้อำนวยการ'.$org_name,
+			);
+		}
 
 		$form='
 		<div class="row clearfix">
@@ -51,7 +68,7 @@ class ReportView extends BaseController
 			'สถานประกอบการ',
 			'ลักษณะงาน',
 			'ระดับ<br>ความร่วมมือ',
-			'การร่วมลงทุน<br>กับสถานศึกษา',
+			'การร่วมลงทุน<br>กับ'.$org_type_name,
 			'ระดับ<br>การศึกษา',
 			//'วันที่ลงนาม',
 			'วันที่เริ่ม<br>ความร่วมมือ',
@@ -61,7 +78,7 @@ class ReportView extends BaseController
 		);
 		if(isset($_POST['year'])){
 
-			$caption='<b>'.$title.'ระหว่างสถานศึกษาและสถานประกอบการ ปี '.($_POST['year']+543).'</b><br>'.$org_name;
+			$caption='<b>'.$title.'ระหว่าง'.$org_type_name.'และสถานประกอบการ ปี '.($_POST['year']+543).'</b><br>'.$org_name;
 
 			$mouModel = model('App\Models\MouModel');
 			$resultData=$mouModel->getMou(['year'=>$_POST['year'],
@@ -134,29 +151,7 @@ class ReportView extends BaseController
 			&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;ระดับ ๑ หมายถึง ดำเนินกิจกรรมเกี่ยวกับ CSR การฝึกงาน กิจกรรมเฉพาะกิจ (รวมระยะสั้น)<br>
 			&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;ระดับ ๒ หมายถึง ดำเนินกิจกรรมเกี่ยวกับ CSR การฝึกงาน กิจกรรมเฉพาะกิจ (รวมระยะสั้น) และจัดการเรียนการสอนทวิภาคี<br>
 			&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;ระดับ ๓ หมายถึง ดำเนินกิจกรรมเกี่ยวกับ CSR การฝึกงาน กิจกรรมเฉพาะกิจ (รวมระยะสั้น) และจัดการเรียนการสอนทวิภาคี และมีการร่วมลงทุนระหว่างสถานประกอบการและสถานศึกษา
-			<table width="100%">
-			<tr>
-				<td style="text-align:center;">
-				<br>
-				.......................................<br>
-				(.....................................)<br>
-				หัวหน้างานความร่วมมือ
-				</td>
-				<td style="text-align:center;">
-				<br>
-				.......................................<br>
-				(.....................................)<br>
-				รองผู้อำนวยการฝ่ายแผนงานและความร่วมมือ
-				</td>
-				<td style="text-align:center;">
-				<br>
-				.......................................<br>
-				(.....................................)<br>
-				ผู้อำนวยการ'.$org_name.'
-				</td>
-			</tr>
-			</table>
-			';
+			'.genSignBox($signData);
 			error_reporting(0);
 			helper('mpdf');
 			//return $result;
@@ -172,7 +167,7 @@ class ReportView extends BaseController
 				'wartermark'=>'',
 				'wartermarkimage'=>'',
 				'footer'=>'เอกสารนี้ออกโดย'.SYSTEMNAME.' สำนักความร่วมมือ สำนักงานคณะกรรมการการอาชีวศึกษา '.date('Y-m-d H:i:s'),
-				'header'=>'<div style="text-align: right; font-weight: normal;">หน้า {PAGENO}/{nbpg}</div>'
+				'header'=>'<div style="text-align: right; font-weight: normal;"><b>แบบฟอร์มที่ 4</b> <br> หน้า{PAGENO}/{nbpg}</div>'
 			);
 			$location=FCPATH.'/pdf/';
 			$fname=current_user('org_code').'_school_01.pdf';
@@ -208,7 +203,26 @@ class ReportView extends BaseController
 		helper('org');
 		helper('thai');
 		
-		$org_name=org_name(current_user('org_code'));
+		$org_code=current_user('org_code');		
+		$org_name=org_name($org_code);
+
+		if(mb_strlen($org_code)<10){
+			$org_type_name=' อ.กรอ.อศ. ';
+			$signData=array(
+				'positionP1'=>'ผู้จัดทำข้อมูล',
+				'positionP2'=>'อนุกรรมการและผู้ช่วยเลขานุการ อ.กรอ.อศ. <br>'.$org_name,
+				'positionP3'=>'อนุกรรมการและเลขานุการ อ.กรอ.อศ. <br>'.$org_name,
+			);
+		}else{
+			$org_type_name='สถานศึกษา';
+			$signData=array(
+				'positionP1'=>'หัวหน้างานความร่วมมือ',
+				'positionP2'=>'รองผู้อำนวยการฝ่ายแผนงานและความร่วมมือ',
+				'positionP3'=>'ผู้อำนวยการ'.$org_name,
+			);
+		}
+
+		$title='รายงานการพัฒนาหลักสูตรระหว่าง '.$org_type_name.' ร่วมกับสถานประกอบการ';
 
 		$form='
 		<div class="row clearfix">
@@ -325,30 +339,7 @@ class ReportView extends BaseController
 			'task'=>'',
 		);
 		}else{
-			$result.='
-			<table width="100%">
-			<tr>
-				<td style="text-align:center;">
-				<br>
-				.......................................<br>
-				(.....................................)<br>
-				หัวหน้างานความร่วมมือ
-				</td>
-				<td style="text-align:center;">
-				<br>
-				.......................................<br>
-				(.....................................)<br>
-				รองผู้อำนวยการฝ่ายแผนงานและความร่วมมือ
-				</td>
-				<td style="text-align:center;">
-				<br>
-				.......................................<br>
-				(.....................................)<br>
-				ผู้อำนวยการ'.$org_name.'
-				</td>
-			</tr>
-			</table>
-			';
+			$result.=genSignBox($signData);
 			error_reporting(0);
 			helper('mpdf');
 			//return $result;
@@ -364,7 +355,7 @@ class ReportView extends BaseController
 				'wartermark'=>'',
 				'wartermarkimage'=>'',
 				'footer'=>'เอกสารนี้ออกโดย'.SYSTEMNAME.' สำนักความร่วมมือ สำนักงานคณะกรรมการการอาชีวศึกษา '.date('Y-m-d H:i:s'),
-				'header'=>'<div style="text-align: right; font-weight: normal;">หน้า {PAGENO}/{nbpg}</div>'
+				'header'=>'<div style="text-align: right; font-weight: normal;"><b>แบบฟอร์มที่ 3</b> <br> หน้า {PAGENO}/{nbpg}</div>'
 			);
 			$location=FCPATH.'/pdf/';
 			$fname=current_user('org_code').'_school_01.pdf';
@@ -386,7 +377,27 @@ class ReportView extends BaseController
 		helper('org');
 		helper('thai');
 		
-		$org_name=org_name(current_user('org_code'));
+		$org_code=current_user('org_code');		
+		$org_name=org_name($org_code);
+
+		if(mb_strlen($org_code)<10){
+			$org_type_name=' อ.กรอ.อศ. ';
+			$signData=array(
+				'positionP1'=>'ผู้จัดทำข้อมูล',
+				'positionP2'=>'อนุกรรมการและผู้ช่วยเลขานุการ อ.กรอ.อศ. <br>'.$org_name,
+				'positionP3'=>'อนุกรรมการและเลขานุการ อ.กรอ.อศ.  <br>'.$org_name,
+			);
+		}else{
+			$org_type_name='สถานศึกษา';
+			$signData=array(
+				'positionP1'=>'หัวหน้างานความร่วมมือ',
+				'positionP2'=>'รองผู้อำนวยการฝ่ายแผนงานและความร่วมมือ',
+				'positionP2'=>'ผู้อำนวยการ'.$org_name,
+			);
+		}
+
+		
+		$title='รายงานผลสัมฤทธิ์ของการร่วมมือระหว่าง '.$org_type_name.' ร่วมกับสถานประกอบการ';
 
 		$form='
 		<div class="row clearfix">
@@ -484,30 +495,7 @@ class ReportView extends BaseController
 			'task'=>'',
 		);
 		}else{
-			$result.='
-			<table width="100%">
-			<tr>
-				<td style="text-align:center;">
-				<br>
-				.......................................<br>
-				(.....................................)<br>
-				หัวหน้างานความร่วมมือ
-				</td>
-				<td style="text-align:center;">
-				<br>
-				.......................................<br>
-				(.....................................)<br>
-				รองผู้อำนวยการฝ่ายแผนงานและความร่วมมือ
-				</td>
-				<td style="text-align:center;">
-				<br>
-				.......................................<br>
-				(.....................................)<br>
-				ผู้อำนวยการ'.$org_name.'
-				</td>
-			</tr>
-			</table>
-			';
+			$result.=genSignBox($signData);
 			error_reporting(0);
 			helper('mpdf');
 			//return $result;

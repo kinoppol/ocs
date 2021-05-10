@@ -1,6 +1,7 @@
 <?php
 
 helper('org');
+helper('minor');
 helper('tab');
 		
 ?>
@@ -22,15 +23,15 @@ helper('tab');
                             <ul>
                                 <li>
                                     <span>นักเรียนนักศึกษา</span>
-                                    <span><?php print number_format($totalStudent,0,",","."); ?> คน</span>
+                                    <span><?php print number_format($totalStudent,0,".",","); ?> คน</span>
                                 </li>
                                 <li>
                                     <span>ระบบปกติ</span>
-                                    <span><?php print number_format($totalStudent-$totalDVEStudent,0,",","."); ?> คน</span>
+                                    <span><?php print number_format($totalStudent-$totalDVEStudent,0,".",","); ?> คน</span>
                                 </li>
                                 <li>
                                     <span>ระบบทวิภาคี</span>
-                                    <span><?php print number_format($totalDVEStudent,0,",","."); ?> คน</span>
+                                    <span><?php print number_format($totalDVEStudent,0,".",","); ?> คน</span>
                                 </li>
                             </ul>
                             <!-- <button class="btn btn-primary btn-lg waves-effect btn-block">ประสานข้อมูลจากระบบ ศธ. ๐๒ ออนไลน์</button> -->
@@ -45,25 +46,32 @@ helper('tab');
 
                             <?php
                             $gov_school_id=explode(',',$govData->gov_school_id);
+                            $gov_minors=explode(',',$govData->gov_minor);
                             $gov_school='';
                             $i=0;
-                            $total=count($gov_school_id);
+                            //print_r($student_school);
                             foreach($gov_school_id as $school){
                                 $i++;
                                 if($gov_school!=''){
-                                    if($i==$total){
-                                        $gov_school.=' และ';
-                                    }else{
-                                        $gov_school.=', ';
-                                    }
+                                        $gov_school.='<br> ';
                                 }
-                                $gov_school.=org_name($school);
+                                $gov_school.='&nbsp;&nbsp;&nbsp;&nbsp;'.$i.'.) '.org_name($school).' ('.(isset($student_school[$school]->count_val)?$student_school[$school]->count_val:'0').' คน)';
+                            }
+                            $i=0;
+                            $gov_minor='';
+                            foreach($gov_minors as $minor){
+                                $i++;
+                                if($gov_minor!=''){
+                                        $gov_minor.='<br> ';
+                                }
+                                $gov_minor.='&nbsp;&nbsp;&nbsp;&nbsp;'.$i.'.) '.minor_name($minor);
                             }
 
                             $gov_data='
                             <b>ประธาน อ.กรอ.อศ.</b> '.$govData->president_name.'<br>
                             <b>เลขานุการ อ.กรอ.อศ.</b> '.org_name($govData->secretary_school_id).'<br>
-                            <b>สถานศึกษาใน อ.กรอ.อศ.</b> '.$gov_school.'<br>
+                            <b>สถานศึกษาใน อ.กรอ.อศ. '.org_name(current_user('org_code')).'</b><br> '.$gov_school.'<br>
+                            <b>สาขางานของผู้เรียนใน อ.กรอ.อศ. '.org_name(current_user('org_code')).'</b><br> '.$gov_minor.'<br>
                             ';
 
                             $tab=array(

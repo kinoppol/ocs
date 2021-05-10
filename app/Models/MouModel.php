@@ -19,9 +19,15 @@ class MouModel extends Model
         $db = \Config\Database::connect();
         $builder = $db->table('mou');
         if(isset($data['mou_id']))$builder->where('mou_id',$data['mou_id']);
-        if(isset($data['school_id']))$builder->where('school_id',$data['school_id']);
+        if(isset($data['school_id'])&&!is_array($data['school_id'])){
+            $builder->where('school_id',$data['school_id']);
+        }/*else if(isset($data['school_id'])&&is_array($data['school_id'])){
+            $builder->where('school_id in ('.implode(',',$data['school_id']).')');
+        }*/
         if(isset($data['year']))$builder->like('mou_date',$data['year'],'after');
         $mou=$builder->get()->getResult();
+        //print $db->getLastQuery();
+        
         $business_ids=array();
         foreach($mou as $row){
             array_push($business_ids,$row->business_id);
@@ -34,14 +40,19 @@ class MouModel extends Model
                 $school[$row->school_id]=$row->school_name;
             }
         $builder = $db->table('business');
-        $builder->where('business_id in ('.implode(',',$business_ids).')');
-        $businesss=$builder->get()->getResult();
-        $business=array();
-        foreach($businesss as $row){
-            $business[$row->business_id]=array('business_name'=>$row->business_name,
-                                             'job_description'=>$row->job_description,
-                                                );
+        if(is_array($business_ids)&&count($business_ids)>0){
+            $builder->where('business_id in ('.implode(',',$business_ids).')');
+            $businesss=$builder->get()->getResult();
+            $business=array();
+            foreach($businesss as $row){
+                $business[$row->business_id]=array('business_name'=>$row->business_name,
+                                                'job_description'=>$row->job_description,
+                                                    );
+            }
+        }else if(is_array($business_ids)&&count($business_ids)==0){
+            $business=array();
         }
+        
         $builder = $db->table('govdata');
         $govs=$builder->get()->getResult();
         $gov=array();
@@ -153,6 +164,7 @@ class MouModel extends Model
         $db = \Config\Database::connect();
         $builder = $db->table('mou_result');
         $result=$builder->insert($data);
+        //print $db->getLastQuery();
         return $result;
     }
     public function resultUpdate($id,$data){
@@ -160,6 +172,7 @@ class MouModel extends Model
         $builder = $db->table('mou_result');
         $builder->where('id',$id);
         $result=$builder->update($data);
+        //print $db->getLastQuery();
         return $result;
     }
 
@@ -171,8 +184,9 @@ class MouModel extends Model
         if(isset($data['school_id']))$builder->where('school_id',$data['school_id']);
         $builder->orderBy('business_id');
         $result=$builder->get()->getResult();
+        print $db->getLastQuery();
         if(count($result)<1){
-            return $data=array('curriculum'=>array(),
+            return $data=array('result'=>array(),
             'business'=>array());
         }
         $business_ids=array();
