@@ -47,13 +47,13 @@ class BusinessModel extends Model
             }
         return $datas;
     }
-    public function add($data){
+    public function businessAdd($data){
         $db = \Config\Database::connect();
         $builder = $db->table('business');
         $result=$builder->insert($data);
         return $result;
     }
-    public function update($business_id,$data){
+    public function businessUpdate($business_id,$data){
         $db = \Config\Database::connect();
         $builder = $db->table('business');
         $builder->where('business_id',$business_id);

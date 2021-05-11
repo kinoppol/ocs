@@ -8,7 +8,7 @@
         'def'=>'',
         'required'=>true,
          ),
-         array(\
+         array(
             'type'=>'hidden',
             'id'=>'business_id',
             'def'=>isset($businessData->bussiness_id)?$businessData->bussiness_id:'',
