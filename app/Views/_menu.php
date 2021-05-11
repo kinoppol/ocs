@@ -133,9 +133,14 @@ $data=array(
                     'url'=>site_url('public/gov/trainerDev'),
                     'cond'=>true,
                     ),
-                'teacherDev'=>array(
+                'studentDev'=>array(
                     'text'=>'การพัฒนาผู้เรียน',
-                    'url'=>site_url('public/gov/teacherDev'),
+                    'url'=>site_url('public/gov/studentDev'),
+                    'cond'=>true,
+                    ),
+                'research'=>array(
+                    'text'=>'การวิจัยความพึงพอใจ',
+                    'url'=>site_url('public/gov/research'),
                     'cond'=>true,
                     ),
                 'projectRecord'=>array(
@@ -143,11 +148,11 @@ $data=array(
                     'url'=>site_url('public/gov/projectRecord'),
                     'cond'=>true,
                     ),
-                'publicRecord'=>array(
-                    'text'=>'การประชาสัมพันธ์',
-                    'url'=>site_url('public/gov/publicRecord'),
-                    'cond'=>true,
-                    ),
+                    'publicRecord'=>array(
+                        'text'=>'การประชาสัมพันธ์',
+                        'url'=>site_url('public/gov/publicRecord'),
+                        'cond'=>true,
+                        ),
                 ),
             ),
             'boardSchool'=>array(
