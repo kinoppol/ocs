@@ -22,7 +22,7 @@ helper('tab');
                         <div class="profile-footer">
                             <ul>
                                 <li>
-                                    <span>นักเรียนนักศึกษา</span>
+                                    <span>นักเรียนนักศึกษาทั้งหมด</span>
                                     <span><?php print number_format($totalStudent,0,".",","); ?> คน</span>
                                 </li>
                                 <li>
@@ -32,6 +32,9 @@ helper('tab');
                                 <li>
                                     <span>ระบบทวิภาคี</span>
                                     <span><?php print number_format($totalDVEStudent,0,".",","); ?> คน</span>
+                                </li><li>
+                                    <span>ระยะสั้น</span>
+                                    <span><?php print number_format(0,0,".",","); ?> คน</span>
                                 </li>
                             </ul>
                             <!-- <button class="btn btn-primary btn-lg waves-effect btn-block">ประสานข้อมูลจากระบบ ศธ. ๐๒ ออนไลน์</button> -->
