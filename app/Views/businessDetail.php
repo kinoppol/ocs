@@ -8,24 +8,29 @@
         'def'=>'',
         'required'=>true,
          ),
+         array(\
+            'type'=>'hidden',
+            'id'=>'business_id',
+            'def'=>isset($businessData->bussiness_id)?$businessData->bussiness_id:'',
+             ),
          array(
             'label'=>'หมายเลขประจำตัวผู้เสียภาษี',
             'type'=>'text',
-            'id'=>'vat_number',
-            'def'=>'',
+            'id'=>'vat_id',
+            'def'=>isset($businessData->vat_id)?$businessData->vat_id:'',
              ),
          array(
             'label'=>'ที่อยู่',
             'type'=>'text',
-            'id'=>'address',
-            'def'=>'',
+            'id'=>'address_no',
+            'def'=>isset($businessData->address_no)?$businessData->address_no:'',
             'required'=>true,
              ),
          array(
             'label'=>'ลักษณะของกิจการ',
             'type'=>'text',
             'id'=>'job_description',
-            'def'=>'',
+            'def'=>isset($businessData->job_description)?$businessData->job_description:'',
             'required'=>true,
             'placeholder'=>'เช่น ค้าปลีก,บริการหลังการขาย',
              ),
@@ -33,14 +38,14 @@
             'label'=>'จำนวนพนักงาน',
             'type'=>'number',
             'id'=>'amount_emp',
-            'def'=>'',
+            'def'=>isset($businessData->amount_emp)?$businessData->amount_emp:'',
             'required'=>true,
              ),
          array(
             'label'=>'อีเมล',
             'type'=>'email',
             'id'=>'email',
-            'def'=>'',
+            'def'=>isset($businessData->email)?$businessData->email:'',
              ),
          array(
             'label'=>'สิทธิ์ลดหย่อนภาษี',
@@ -51,7 +56,7 @@
                 'tax_break'=>array(
                     'text'=>'ใช้สิทธิ์ลดหย่อนภาษี',
                     'value'=>'Y',
-                    'checked'=>false,
+                    'checked'=>isset($businessData->tax_break)&&$businessData->tax_break=='ใช้สิทธิ์'?true:false,
                                 )
             ),
             'required'=>true,
@@ -59,8 +64,8 @@
          array(
             'label'=>'ประเทศที่ตั้งของสถานประกอบการ',
             'type'=>'text',
-            'id'=>'land',
-            'def'=>'ประเทศไทย',
+            'id'=>'country',
+            'def'=>isset($businessData->country)?$businessData->country:'ประเทศไทย',
             'required'=>true,
              ),
          array(
@@ -68,7 +73,7 @@
             'type'=>'text',
             'id'=>'location',
             'placeholder'=>'เช่น 13.60502042693827, 100.5964253312417',
-            'def'=>'',
+            'def'=>isset($businessData->location)?$businessData->location:'',
              ),
              
          array(
@@ -86,7 +91,7 @@
     $form=array(
         'formName'=>'ข้อมูลสถานประกอบการ',
         'inputs'=>$data,
-        'action'=>site_url('public/gov/saveMeetting'),
+        'action'=>site_url('public/business/saveBusiness'),
         'method'=>'post',
         'enctype'=>'multipart/form-data',
     );

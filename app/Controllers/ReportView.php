@@ -28,8 +28,8 @@ class ReportView extends BaseController
 			$org_type_name='สถานศึกษา';
 			$signData=array(
 				'positionP1'=>'หัวหน้างานความร่วมมือ',
-				'positionP2'=>'รองผู้อำนวยการฝ่ายแผนงานและความร่วมมือ',
-				'positionP2'=>'ผู้อำนวยการ'.$org_name,
+				'positionP2'=>'รองผู้อำนวยการฝ่ายแผนงานและความร่วมมือ<br>&nbsp;',
+				'positionP3'=>'ผู้อำนวยการ'.$org_name.'<br>&nbsp',
 			);
 		}
 
@@ -217,8 +217,8 @@ class ReportView extends BaseController
 			$org_type_name='สถานศึกษา';
 			$signData=array(
 				'positionP1'=>'หัวหน้างานความร่วมมือ',
-				'positionP2'=>'รองผู้อำนวยการฝ่ายแผนงานและความร่วมมือ',
-				'positionP3'=>'ผู้อำนวยการ'.$org_name,
+				'positionP2'=>'รองผู้อำนวยการฝ่ายแผนงานและความร่วมมือ<br>&nbsp;',
+				'positionP3'=>'ผู้อำนวยการ'.$org_name.'<br>&nbsp;',
 			);
 		}
 
@@ -391,8 +391,8 @@ class ReportView extends BaseController
 			$org_type_name='สถานศึกษา';
 			$signData=array(
 				'positionP1'=>'หัวหน้างานความร่วมมือ',
-				'positionP2'=>'รองผู้อำนวยการฝ่ายแผนงานและความร่วมมือ',
-				'positionP2'=>'ผู้อำนวยการ'.$org_name,
+				'positionP2'=>'รองผู้อำนวยการฝ่ายแผนงานและความร่วมมือ<br>&nbsp;',
+				'positionP3'=>'ผู้อำนวยการ'.$org_name.'<br>&nbsp;',
 			);
 		}
 

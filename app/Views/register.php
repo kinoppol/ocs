@@ -41,9 +41,17 @@ $userType=array(
 );
 
 $data=array(array(
-                    'label'=>'ชื่อ-นามสกุล',
+                    'label'=>'ชื่อ',
                     'type'=>'text',
                     'id'=>'name',
+                    'def'=>current_user('name'),
+                    'required'=>true,
+                ),
+                array(
+                    'label'=>'ชนามสกุล',
+                    'type'=>'text',
+                    'id'=>'surname',
+                    'def'=>current_user('surname'),
                     'required'=>true,
                 ),
                 array(
@@ -62,6 +70,7 @@ $data=array(array(
                     'label'=>'อีเมล',
                     'type'=>'email',
                     'id'=>'email',
+                    'def'=>current_user('email'),
                     'required'=>true,
                 ),
                 array(

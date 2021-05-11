@@ -47,4 +47,17 @@ class BusinessModel extends Model
             }
         return $datas;
     }
+    public function add($data){
+        $db = \Config\Database::connect();
+        $builder = $db->table('business');
+        $result=$builder->insert($data);
+        return $result;
+    }
+    public function update($business_id,$data){
+        $db = \Config\Database::connect();
+        $builder = $db->table('business');
+        $builder->where('business_id',$business_id);
+        $result=$builder->update($data);
+        return $result;
+    }
 }

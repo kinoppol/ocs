@@ -120,6 +120,14 @@ class User extends BaseController
 			);
 			$result=$userModel->register($data);
 			//print "REGISTER";
+			$data=array(
+				'name'=>$_POST['name'],
+				'surname'=>$_POST['surname'],
+				'position'=>$_POST['position'],
+				'email'=>$_POST['email'],
+				'tel'=>$_POST['tel'],
+			);
+			$result=$userModel->updateUser(current_user('email'),$data);
 		}
 
 		$orgModel = model('App\Models\OrgModel');

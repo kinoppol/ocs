@@ -48,4 +48,17 @@ class Business extends BaseController
 
 		return view('_main',$data);
     }
+
+    public function saveBusiness(){
+		$businessModel = model('App\Models\BusinessModel');
+        $data=array();
+        foreach($_POST as $k=>$v){
+            $data[$k]=>$v;
+        }
+        if(isset($_POST['business_id'])&&$_POST['business_id']!=''){
+            $result=$businessModel->update($_POST['business_id'],$data);
+        }else{
+            $result=$businessModel->add($data);
+        }
+    }
 }
