@@ -34,7 +34,7 @@ class Database extends Config
 		'DSN'      => '',
 		'hostname' => 'localhost',
 		'username' => 'root',
-		'password' => '',
+		'password' => 'thailand',
 		'database' => 'ocs',
 		'DBDriver' => 'MySQLi',
 		'DBPrefix' => 'ocs_',
