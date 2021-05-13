@@ -26,7 +26,7 @@
                             <i class="material-icons">person</i>
                         </span>
                         <div class="form-line">
-                            <input type="text" class="form-control" name="username" placeholder="Username" minlength="4" required autofocus>
+                            <input type="text" class="form-control" name="username" placeholder="Username"  minlength="4" onkeypress="return /[a-z,A-Z,0-9_\-.]/i.test(event.key)" pattern="[a-z,A-Z,0-9_\-.]" autocomplete="off" required autofocus>
                         </div>
                     </div>
                     <div class="input-group">
