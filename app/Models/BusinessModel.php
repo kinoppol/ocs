@@ -51,6 +51,7 @@ class BusinessModel extends Model
         $db = \Config\Database::connect();
         $builder = $db->table('business');
         $result=$builder->insert($data);
+        //print $db->getLastQuery();
         return $result;
     }
     public function businessUpdate($business_id,$data){
@@ -58,6 +59,7 @@ class BusinessModel extends Model
         $builder = $db->table('business');
         $builder->where('business_id',$business_id);
         $result=$builder->update($data);
+        //print $db->getLastQuery();
         return $result;
     }
 }

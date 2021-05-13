@@ -12,7 +12,8 @@
                             ' ตำบล'.isset($v['subdistrict_id'])&&$v['subdistrict_id']!='0'?$subdistrict[$v['subdistrict_id']]:"".
                             ' ถนน'.($v['road']!=''?$v['road']:'-').
                             ' เลขที่ '.($v['address_no']!=''?$v['address_no']:'-'),
-                '<a href="'.site_url('public/mou/add/'.$v['business_id']).'" class="btn btn-xs btn-warning waves-effect"><i class="material-icons">book</i>เพิ่มข้อมูล MOU</a>',
+                '<a href="'.site_url('public/business/detail/'.$v['business_id']).'" class="btn btn-xs btn-warning waves-effect"><i class="material-icons">edit</i> แก้ไขข้อมูล</a>
+                <a href="'.site_url('public/mou/add/'.$v['business_id']).'" class="btn btn-xs btn-success waves-effect"><i class="material-icons">book</i>เพิ่มข้อมูล MOU</a>',
             );
         }
         $businessArr=array('thead'=>array(

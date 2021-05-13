@@ -83,6 +83,9 @@ class Mou extends BaseController
 			'school_id'		=>$_POST['org_id'],
 			'level'			=>$_POST['level'],
 			'investment'	=>$_POST['investment'],
+			'educationalSupport'=>(isset($_POST['educationalSupport'])?'Y':'N'),
+			'personalSupport'=>(isset($_POST['personalSupport'])?'Y':'N'),
+			'executiveSupport'=>(isset($_POST['executiveSupport'])?'Y':'N'),
 			'support_vc_edu'=>(isset($_POST['support_vc_edu'])?'Y':'N'),
 			'support_hvc_edu'=>(isset($_POST['support_hvc_edu'])?'Y':'N'),
 			'support_btech_edu'=>(isset($_POST['support_btech_edu'])?'Y':'N'),
@@ -102,7 +105,7 @@ class Mou extends BaseController
 			'mou_sign_place'=>$_POST['mou_sign_place'],
 			'major'			=>$_POST['major'],
 			'object'		=>$_POST['object'],
-			'dve_target'	=>$_POST['dve_target'],
+			'dve_target'	=>isset($_POST['dve_target'])?$_POST['dve_target']:0,
 			'wage'			=>$_POST['wage'],
 			'benefits'		=>$_POST['benefits'],
 			'obligation'	=>$_POST['obligation'],
@@ -244,6 +247,7 @@ class Mou extends BaseController
 			'business_id'		=>$_POST['business_id'],
 			'school_id'			=>$_POST['school_id'],
 			'curriculum_name'	=>$_POST['curriculum_name'],
+			'curriculum_type'	=>$_POST['curriculum_type'],
 			'curriculum_year'	=>$_POST['curriculum_year'],
 			'skill_01'			=>isset($_POST['skill_01'])?$_POST['skill_01']:'N',
 			'skill_02'			=>isset($_POST['skill_02'])?$_POST['skill_02']:'N',
@@ -366,6 +370,10 @@ class Mou extends BaseController
 		helper('user');
 		$mouModel = model('App\Models\MouModel');
 		
+		foreach($_POST as $k=>$v){
+			$data[$k]=$v;
+		}
+		/*
 		$data=array(
 			'business_id'=>$_POST['business_id'],
 			'school_id'=>$_POST['school_id'],
@@ -377,7 +385,7 @@ class Mou extends BaseController
 			'donate_detail'=>$_POST['donate_detail'],
 			'donate_value'=>$_POST['donate_value'],
 			'donate_other'=>$_POST['donate_other'],
-		);
+		);*/
 
 		if(!isset($_POST['id'])||$_POST['id']==''){
 			$result=$mouModel->resultAdd($data);

@@ -47,17 +47,35 @@
             'required'=>true,
              ),      
          array(
+            'label'=>'ประเภทการพัฒนาหลักสูตร',
+            'type'=>'select',
+            'id'=>'curriculum_type',
+            'items'=>array(
+                'shortCourse'=>'หลักสูตรระยะสั้น/ฝึกอบรม',
+                'subjectCourse'=>'หลักสูตรรายวิชา',
+            ),
+            'def'=>isset($curriculumData->curriculum_type)?$curriculumData->curriculum_type:date('shortCourse'),
+            'required'=>true,
+             ),      
+         array(
             'label'=>'ปีที่พัฒนาหลักสูตร',
             'type'=>'select',
             'id'=>'curriculum_year',
             'items'=>$years,
             'def'=>isset($curriculumData->curriculum_year)?$curriculumData->curriculum_year:date('Y'),
             'required'=>true,
-             ),       
+             ),
          array(
-            'label'=>'การพัฒนา Skill Gap ตอบสนองภาคการผลิตและบริการใน 10 กลุ่มอุตสาหกรรมหลัก',
-            'type'=>'check_group',
+            'label'=>'การพัฒนา Skill Gap ',
+            'type'=>'text',
             'id'=>'skill_gap',
+            'placeholder'=>'ระบุชื่อ Skill Gap ที่จะถูกพัฒนาด้วยหลักสูตรนี้',
+            'def'=>isset($curriculumData->skill_gap)?$curriculumData->skill_gap:'',
+             ),         
+         array(
+            'label'=>'หลักสูตรนี้ตอบสนองภาคการผลิตและบริการใน 10 กลุ่มอุตสาหกรรมหลักด้านใดบ้าง',
+            'type'=>'check_group',
+            'id'=>'scurve',
             'def'=>'',
             'items'=>array(
                 'skill_01'=>array(
@@ -148,7 +166,7 @@
             'def'=>isset($curriculumData->curriculum_target)?$curriculumData->curriculum_target:'',
              ),
          array(
-            'label'=>'การดำเนินการของสถานประกอบการ',
+            'label'=>'การสนับสนุนของสถานประกอบการ',
             'type'=>'textarea',
             'id'=>'business_action',
             'placeholder'=>'เช่น
@@ -170,7 +188,7 @@
             'def'=>'',
              ),
          array(
-            'label'=>'จำนวนผู้เข้ารับอบรม',
+            'label'=>'จำนวนผู้เข้ารับอบรม (กรอกเมื่อการดำเนินการอมรมเสร็จสิ้น)',
             'type'=>'number',
             'id'=>'training_amount',
             'def'=>isset($curriculumData->training_amount)?$curriculumData->training_amount:'',

@@ -56,7 +56,7 @@
         'label'=>'ชื่อผู้จัดทำข้อมูล อ.กรอ.อศ./ผู้ได้รับมอบหมาย',
         'type'=>'text',
         'id'=>'supervisor_name',
-        'def'=>$govData->supervisor_name,
+        'def'=>isset($govData->supervisor_name)?$govData->supervisor_name:'',
         'required'=>true,
          ),
         array(
@@ -78,7 +78,7 @@
             'class'=>'show-tick',
             'items'=>$minors,
             'noneLabel'=>'โปรดเลือกสาขางานของผู้เรียนที่อยู่ใน อ.กรอ.อศ.',
-            'def'=>explode(',',$govData->gov_minor),
+            'def'=>isset($govData->gov_minor)?explode(',',$govData->gov_minor):'',
             'multiple'=>true,
             'required'=>true,
             ),

@@ -34,7 +34,7 @@ helper('user');
             'def'=>current_user('org_code'),
             ),
          array(
-            'label'=>'ปีที่เกิดผลสัมฤทธิ์',
+            'label'=>'ปีที่เกิดผลสัมฤทธิ์ (ปีปฏิทิน)',
             'type'=>'select',
             'id'=>'result_year',
             'items'=>$years,
@@ -75,7 +75,7 @@ helper('user');
             );
             $data4=array(
          array(
-            'label'=>'การสนับสนุนการจัดการศึกษาด้วยการบริจาค (หากมีการบริจาตหลายรายการให้บันทึกข้อมูลสัมฤทธิ์แยกรายการ)',
+            'label'=>'การสนับสนุนการจัดการศึกษาด้วยการบริจาค (หากมีการบริจาคหลายรายการให้บันทึกข้อมูลสัมฤทธิ์แยกรายการ)',
             'type'=>'text',
             'id'=>'donate_detail',
             'def'=>isset($resultData)?$resultData->donate_detail:'',
@@ -100,6 +100,45 @@ helper('user');
              ),    
             );
             $data5=array(
+                array(
+                   
+                array(
+                   'label'=>'โปรดระบุรายละเอียดของกิจกรรมที่ทำ',
+                   'type'=>'textarea',
+                   'id'=>'other_activity',
+                   'def'=>isset($resultData->other_activity)?$resultData->other_activity:'',
+                   'placeholder'=>'เช่น
+การนำนักเรียนนักศึกษาจัดกิจกรรมปลูกป่า, การนำนักเรียนนักศึกษาและครูจัดนิทรรศการ'
+                    ),    
+                array(
+                    'label'=>'จำนวนนักเรียนนักศึกษาที่เข้าร่วมกิจกรรม',
+                    'type'=>'number',
+                    'id'=>'activity_student',
+                    'def'=>isset($resultData->activity_student)?$resultData->activity_student:'0',
+                ),
+                array(
+                    'label'=>'จำนวนครู, บุคลากรทางการศึกษา และผู้บริหารที่เข้าร่วมกิจกรรม',
+                    'type'=>'number',
+                    'id'=>'activity_teacher',
+                    'def'=>isset($resultData->activity_teacher)?$resultData->activity_teacher:'0',
+                ),
+                array(
+                    'label'=>'แนบไฟล์รายงานสรุปโครงการ (สแกนเป็น PDF ไฟล์)',
+                    'type'=>'file',
+                    'id'=>'attach_file',
+                    'accept'=>'application/pdf',
+                    'def'=>'',
+                ),
+                array(
+                    'label'=>'แนบไฟล์รูปภาพ (อย่างน้อย 2 รูป)',
+                    'type'=>'file',
+                    'id'=>'attach_picture',
+                    'accept'=>'image/jpeg',
+                    'def'=>'',
+                ),
+                ),
+                   );
+            $data6=array(
          array(
              'label'=>'บันทึกข้อมูล',
              'type'=>'submit',
@@ -117,17 +156,21 @@ helper('user');
     //print genForm($form);
 
     $tab=array(
-        'hr'=>array(
+        'training'=>array(
             'title'=>'การรับนักศึกษาเข้าฝึกงานฝึกอาชีพ',
             'content'=>genInput($data2),
         ),
-        'donate'=>array(
+        'hr'=>array(
             'title'=>'การรับผู้สำเร็จเข้าทำงาน',
             'content'=>genInput($data3),
         ),
-        'form'=>array(
+        'domate'=>array(
             'title'=>'การสนับสนุนการจัดการศึกษา',
             'content'=>genInput($data4),
+        ),
+        'activity'=>array(
+            'title'=>'กิจกรรมความร่วมมืออื่นๆ',
+            'content'=>genInput($data5),
         ),
     );
     ?>
@@ -136,7 +179,7 @@ helper('user');
                         <div class="body">
                         <form action="<?php print site_url('public/mou/resultSave'); ?>" method="post">
     <?php
-    print genInput($data1).gen_tab($tab).genInput($data5);
+    print genInput($data1).gen_tab($tab).genInput($data6);
     ?>
     </form>
     </div>

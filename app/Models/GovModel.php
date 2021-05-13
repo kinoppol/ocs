@@ -59,4 +59,40 @@ class GovModel extends Model
         $result=$builder->delete();
         return $result;
     }
+    public function getPublic($gov_id=false){
+        $db = \Config\Database::connect();
+        $builder = $db->table('public');
+        $builder->where('gov_id',$gov_id);
+        $data=$builder->get()->getResult();
+        return $data;
+    }
+
+    public function publicAdd($data){
+        $db = \Config\Database::connect();
+        $builder = $db->table('public');
+        $result=$builder->insert($data);
+        return $db->insertID();
+    }
+    public function publicUpdate($id,$data){
+        $db = \Config\Database::connect();
+        $builder = $db->table('public');
+        $builder->where('id',$id);
+        $result=$builder->update($data);
+        return $result;
+    }
+    public function getPublicData($id){
+        $db = \Config\Database::connect();
+        $builder = $db->table('public');
+        $builder->where('id',$id);
+        $result=$builder->get()->getResult();
+        return $result[0];
+    }
+    
+    public function publicDelete($id){
+        $db = \Config\Database::connect();
+        $builder = $db->table('public');
+        $builder->where('id',$id);
+        $result=$builder->delete();
+        return $result;
+    }
 }

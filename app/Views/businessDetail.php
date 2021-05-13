@@ -5,13 +5,14 @@
         'label'=>'ชื่อสถานประกอบการ',
         'type'=>'text',
         'id'=>'business_name',
-        'def'=>'',
+        'def'=>isset($businessData->business_name)?$businessData->business_name:'',
         'required'=>true,
          ),
          array(
             'type'=>'hidden',
             'id'=>'business_id',
-            'def'=>isset($businessData->bussiness_id)?$businessData->bussiness_id:'',
+            'def'=>isset($businessData->business_id)?$businessData->business_id:false,
+            'disabled'=>isset($businessData->business_id)?false:true,
              ),
          array(
             'label'=>'หมายเลขประจำตัวผู้เสียภาษี',
@@ -65,7 +66,7 @@
             'label'=>'ประเทศที่ตั้งของสถานประกอบการ',
             'type'=>'text',
             'id'=>'country',
-            'def'=>isset($businessData->country)?$businessData->country:'ประเทศไทย',
+            'def'=>isset($businessData->country)&&$businessData->country!=''?$businessData->country:'ประเทศไทย',
             'required'=>true,
              ),
          array(

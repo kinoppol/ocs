@@ -48,90 +48,147 @@ $data=array(array(
                     'type'=>'text',
                     'id'=>'investment',
                     'placeholder'=>'หากเลือกระดับความร่วมมือ ระดับ 3 โปรดระบุรายละเอียดและมูลค่าการลงทุนรวม',
-                    'def'=>isset($mou_data)?$mou_data->investment:'',
-                ),                
+                    'def'=>isset($mou_data->investment)?$mou_data->investment:'',
+                ),        
                 array(
-                    'label'=>'ระดับการศึกษาที่ร่วมมือ',
+                    'label'=>'กลุ่มเป้าหมายของความร่วมมือ',
                     'type'=>'check_group',
-                    'id'=>'support_edu',
+                    'id'=>'eduSup',
                     'items'=>array(
-                        'support_vc_edu'=>array('text'=>'ปวช.',
+                        'educationalSupport'=>array('text'=>'นักเรียนนักศึกษา',
                                                 'value'=>'Y',
-                                                'checked'=>isset($mou_data)?$mou_data->support_vc_edu=='Y'?true:false:false,
+                                                'checked'=>isset($mou_data->educationalSupport)?$mou_data->educationalSupport=='Y'?true:false:false,
                                                 ),
-                        'support_hvc_edu'=>array('text'=>'ปวส.',
+                        'personalSupport'=>array('text'=>'ครูและบุคลากรทางการศึกษา',
                                                 'value'=>'Y',
-                                                'checked'=>isset($mou_data)?$mou_data->support_hvc_edu=='Y'?true:false:false,
+                                                'checked'=>isset($mou_data->personalSupport)?$mou_data->personalSupport=='Y'?true:false:false,
                                                 ),
-                        'support_btech_edu'=>array('text'=>'ทล.บ.',
+                        'executiveSupport'=>array('text'=>'ผู้บริหาร',
                                                 'value'=>'Y',
-                                                'checked'=>isset($mou_data)?$mou_data->support_btech_edu=='Y'?true:false:false,
+                                                'checked'=>isset($mou_data->executiveSupport)?$mou_data->executiveSupport=='Y'?true:false:false,
                                                 ),
-                        'support_short_course'=>array('text'=>'ระยะสั้น',
-                                                'value'=>'Y',
-                                                'checked'=>isset($mou_data)?$mou_data->support_short_course=='Y'?true:false:false,
-                                                ),
-                        'support_no_specific'=>array('text'=>'อื่นๆ',
-                                                'value'=>'Y',
-                                                'checked'=>isset($mou_data)?$mou_data->support_no_specific=='Y'?true:false:false,
-                                                ),
+                                            ),
+                ),
+                array(
+                    'type'=>'div',
+                    'id'=>'education_support',
+                    'items'=>array(        
+                    array(
+                        'label'=>'ระดับการศึกษาที่ร่วมมือ',
+                        'type'=>'check_group',
+                        'id'=>'support_edu',
+                        'items'=>array(
+                            'support_vc_edu'=>array('text'=>'ปวช.',
+                                                    'value'=>'Y',
+                                                    'checked'=>isset($mou_data)?$mou_data->support_vc_edu=='Y'?true:false:false,
+                                                    ),
+                            'support_hvc_edu'=>array('text'=>'ปวส.',
+                                                    'value'=>'Y',
+                                                    'checked'=>isset($mou_data)?$mou_data->support_hvc_edu=='Y'?true:false:false,
+                                                    ),
+                            'support_btech_edu'=>array('text'=>'ทล.บ.',
+                                                    'value'=>'Y',
+                                                    'checked'=>isset($mou_data)?$mou_data->support_btech_edu=='Y'?true:false:false,
+                                                    ),
+                            'support_short_course'=>array('text'=>'ระยะสั้น',
+                                                    'value'=>'Y',
+                                                    'checked'=>isset($mou_data)?$mou_data->support_short_course=='Y'?true:false:false,
+                                                    ),/*
+                            'support_no_specific'=>array('text'=>'อื่นๆ',
+                                                    'value'=>'Y',
+                                                    'checked'=>isset($mou_data)?$mou_data->support_no_specific=='Y'?true:false:false,
+                                                    ),*/
+                        ),
+                        'required'=>true,
                     ),
-                    'required'=>true,
-                ),
-                array(
-                    'label'=>'สาขาวิชาที่ลงนาม',
-                    'type'=>'text',
-                    'id'=>'major',
-                    'placeholder'=>'เช่น ช่างไฟฟ้ากำลัง,ช่างอิเล็กทรอนิกส์ โดยขั้นแต่ละสาขาด้วยจุลภาค (,)',
-                    'def'=>isset($mou_data)?$mou_data->major:'',
-                    'required'=>false,
-                ),
-                array(
-                    'label'=>'เป้าหมายการรับนักศึกษาฝึกงาน/ฝึกอาชีพ (ระบุจำนวนคนรวมทุกสาขา)',
-                    'type'=>'number',
-                    'id'=>'dve_target',
-                    'def'=>isset($mou_data)?$mou_data->dve_target:'',
-                    'required'=>true,
-                ),
-                array(
-                    'label'=>'รูปแบบการจัดการศึกษา',
-                    'type'=>'check_group',
-                    'id'=>'dve',
-                    'items'=>array(
-                        'support_normal'=>array('text'=>'ระบบปกติ',
-                                                'value'=>'Y',
-                                                'checked'=>isset($mou_data)?$mou_data->support_normal=='Y'?true:false:false,
+                    array(
+                        'label'=>'สาขาวิชาที่ลงนาม',
+                        'type'=>'text',
+                        'id'=>'major',
+                        'placeholder'=>'เช่น ช่างไฟฟ้ากำลัง,ช่างอิเล็กทรอนิกส์ โดยขั้นแต่ละสาขาด้วยจุลภาค (,)',
+                        'def'=>isset($mou_data)?$mou_data->major:'',
+                        'required'=>false,
+                    ),
+                    array(
+                        'label'=>'เป้าหมายการรับนักศึกษาฝึกงาน/ฝึกอาชีพ (ระบุจำนวนคนรวมทุกสาขา)',
+                        'type'=>'number',
+                        'id'=>'dve_target',
+                        'def'=>isset($mou_data)?$mou_data->dve_target:'',
+                        'required'=>true,
+                    ),
+                    array(
+                        'label'=>'รูปแบบการจัดการศึกษา',
+                        'type'=>'check_group',
+                        'id'=>'dve',
+                        'items'=>array(
+                            'support_normal'=>array('text'=>'ระบบปกติ',
+                                                    'value'=>'Y',
+                                                    'checked'=>isset($mou_data)?$mou_data->support_normal=='Y'?true:false:false,
+                                                    ),
+                            'support_dve'=>array('text'=>'ระบบทวิภาคี',
+                                                    'value'=>'Y',
+                                                    'checked'=>isset($mou_data)?$mou_data->support_dve=='Y'?true:false:false,
+                                                    ),
+                            'support_shortcourse'=>array('text'=>'หลักสูตรวิชาชีพระยะสั้น',
+                                                    'value'=>'Y',
+                                                    'checked'=>isset($mou_data)?$mou_data->support_short_course=='Y'?true:false:false,
+                                                    ),
+                            'support_dual'=>array('text'=>'ระบบทวิศึกษา',
+                                                    'value'=>'Y',
+                                                    'checked'=>isset($mou_data)?$mou_data->support_dual=='Y'?true:false:false,
+                                                    ),
                                                 ),
-                        'support_dve'=>array('text'=>'ระบบทวิภาคี',
-                                                'value'=>'Y',
-                                                'checked'=>isset($mou_data)?$mou_data->support_dve=='Y'?true:false:false,
+                        'required'=>true,
+                    ),
+                    array(
+                        'label'=>'การฝึกงานในประเทศ/ต่างประเทศ',
+                        'type'=>'check_group',
+                        'id'=>'oversea',
+                        'items'=>array(
+                            'support_local_training'=>array('text'=>'มีการฝึกงานในประเทศ',
+                                                    'value'=>'Y',
+                                                    'checked'=>isset($mou_data)?$mou_data->support_local_training=='Y'?true:false:false,
+                                                    ),
+                            'support_oversea_training'=>array('text'=>'มีการฝึกงานในต่างประเทศ',
+                                                    'value'=>'Y',
+                                                    'checked'=>isset($mou_data)?$mou_data->support_oversea_training=='Y'?true:false:false,
+                                                    ),
                                                 ),
-                        'support_shortcourse'=>array('text'=>'หลักสูตรวิชาชีพระยะสั้น',
-                                                'value'=>'Y',
-                                                'checked'=>isset($mou_data)?$mou_data->support_short_course=='Y'?true:false:false,
-                                                ),
-                        'support_dual'=>array('text'=>'ระบบทวิศึกษา',
-                                                'value'=>'Y',
-                                                'checked'=>isset($mou_data)?$mou_data->support_dual=='Y'?true:false:false,
-                                                ),
-                                            ),
-                    'required'=>true,
-                ),
-                array(
-                    'label'=>'การฝึกงานในประเทศ/ต่างประเทศ',
-                    'type'=>'check_group',
-                    'id'=>'oversea',
-                    'items'=>array(
-                        'support_local_training'=>array('text'=>'มีการฝึกงานในประเทศ',
-                                                'value'=>'Y',
-                                                'checked'=>isset($mou_data)?$mou_data->support_local_training=='Y'?true:false:false,
-                                                ),
-                        'support_oversea_training'=>array('text'=>'มีการฝึกงานในต่างประเทศ',
-                                                'value'=>'Y',
-                                                'checked'=>isset($mou_data)?$mou_data->support_oversea_training=='Y'?true:false:false,
-                                                ),
-                                            ),
-                    'required'=>true,
+                        'required'=>true,
+                    ),
+                    array(
+                        'label'=>'ค่าตอบแทนการฝึกงาน/ฝึกอาชีพโดยประมาณ',
+                        'type'=>'select',
+                        'id'=>'wage',
+                        'items'=>array(
+                            '-'=>'0. ไม่ระบุค่าตอบแทน',
+                            '0'=>'1. ไม่ให้ค่าตอบแทนเป็นเงิน',
+                            '1'=>'2. ต่ำกว่า 150 บาท/วัน',
+                            '2'=>'3. 150 - 300 บาท/วัน',
+                            '3'=>'4. มากกว่า 300 บาท/วัน',
+                            '4'=>'5. น้อยกว่า 6,000 บาท/เดือน',
+                            '5'=>'6. 6,000 - 10,000 บาท/เดือน',
+                            '6'=>'7. มากกว่า 10,000 บาท/เดือน',
+                        ),
+                        'def'=>isset($mou_data)?$mou_data->wage:'-',
+                        'required'=>true,
+                    ),
+                    array(
+                        'label'=>'สิทธิประโยชน์อื่นนอกจากค่าตอบแทน',
+                        'type'=>'text',
+                        'id'=>'benefits',
+                        'placeholder'=>'เช่น ค่าที่พัก ค่าเดินทาง ค่ารถ ประกันชีวิต ทุนการศึกษา',
+                        'def'=>isset($mou_data)?$mou_data->benefits:'',
+                        'required'=>false,
+                    ),array(
+                        'label'=>'ข้อผูกมัด,พันธผูกพันกับผู้เรียน',
+                        'type'=>'text',
+                        'id'=>'obligation',
+                        'placeholder'=>'เช่น เมื่อสำเร็จการศึกษา จะต้องทำงานชดใช้ทุน 2 ปี',
+                        'def'=>isset($mou_data)?$mou_data->obligation:'',
+                        'required'=>false,
+                    ),
+                    ),
                 ),
                 array(
                     'label'=>'ชื่อผู้บริหารภาครัฐที่ลงนาม',
@@ -207,38 +264,6 @@ $data=array(array(
                     'required'=>true,
                 ),
                 array(
-                    'label'=>'ค่าตอบแทนการฝึกงาน/ฝึกอาชีพโดยประมาณ',
-                    'type'=>'select',
-                    'id'=>'wage',
-                    'items'=>array(
-                        '-'=>'0. ไม่ระบุค่าตอบแทน',
-                        '0'=>'1. ไม่ให้ค่าตอบแทนเป็นเงิน',
-                        '1'=>'2. ต่ำกว่า 150 บาท/วัน',
-                        '2'=>'3. 150 - 300 บาท/วัน',
-                        '3'=>'4. มากกว่า 300 บาท/วัน',
-                        '4'=>'5. น้อยกว่า 6,000 บาท/เดือน',
-                        '5'=>'6. 6,000 - 10,000 บาท/เดือน',
-                        '6'=>'7. มากกว่า 10,000 บาท/เดือน',
-                    ),
-                    'def'=>isset($mou_data)?$mou_data->wage:'-',
-                    'required'=>true,
-                ),
-                array(
-                    'label'=>'สิทธิประโยชน์อื่นนอกจากค่าตอบแทน',
-                    'type'=>'text',
-                    'id'=>'benefits',
-                    'placeholder'=>'เช่น ค่าที่พัก ค่าเดินทาง ค่ารถ ประกันชีวิต ทุนการศึกษา',
-                    'def'=>isset($mou_data)?$mou_data->benefits:'',
-                    'required'=>false,
-                ),array(
-                    'label'=>'ข้อผูกมัด,พันธผูกพันกับผู้เรียน',
-                    'type'=>'text',
-                    'id'=>'obligation',
-                    'placeholder'=>'เช่น เมื่อสำเร็จการศึกษา จะต้องทำงานชดใช้ทุน 2 ปี',
-                    'def'=>isset($mou_data)?$mou_data->obligation:'',
-                    'required'=>false,
-                ),
-                array(
                     'label'=>'แนบไฟล์ MOU (สแกนไฟล์เอกสาร MOU ทุกหน้าเป็นไฟล์ .PDF)',
                     'type'=>'file',
                     'id'=>'mou',
@@ -267,5 +292,26 @@ $form=array(
     'enctype'=>'multipart/form-data',
 );
 
+$_SESSION['FOOTSYSTEM'].='
+<script>
+$(function(){
+
+    if($("#educationalSupport").prop("checked") == true){
+        $("#education_support").show();
+    }
+
+});
+
+    $("#educationalSupport").click(function(){
+        if($("#educationalSupport").prop("checked") == true){
+            $("#education_support").slideDown();
+            //$("#dve_target").removeAttr("required");​​​​​
+        }else{
+            $("#education_support").slideUp();
+            //$("#dve_target").addAttr("required");​​​​​
+        }
+        });
+</script>
+';
+
 print genForm($form);
-?>

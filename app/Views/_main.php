@@ -3,7 +3,7 @@ helper('user');
 helper('modal');
 helper('tab');
 $debug=false;
-$_SESSION['FOOTSYSTEM']='';
+
 ?>
 <!DOCTYPE html>
 <html>

@@ -72,7 +72,7 @@ class Gov extends BaseController
 		$schoolModel = model('App\Models\SchoolModel');
 
 		$data=array(
-			'minor_code'=>explode(',',$govData->gov_minor),
+			'minor_code'=>isset($govData->gov_minor)?explode(',',$govData->gov_minor):array(),
 		);
 		$sumStudentCount=$schoolModel->getSumStudent($gov_school_id,false,$data);
 		//print $sumStudentCount->count_val;
@@ -130,7 +130,7 @@ class Gov extends BaseController
 			'mainMenu'=>view('_menu'),
 			'notification'=>'',
 			'task'=>'',
-			'content'=>'บันทึกข้อมูลสำเร็จ<br>โปรดรอสักครู่..<meta http-equiv="refresh" content="1;url='.site_url('public/gov/detail').'">',
+			'content'=>$result?'บันทึกข้อมูลสำเร็จ <meta http-equiv="refresh" content="2;url='.site_url('public/gov/detail').'">':'บันทึกข้อมูลไม่สำเร็จ',
 		);
 		return view('_main',$data);
 	}
@@ -194,7 +194,7 @@ class Gov extends BaseController
 			'mainMenu'=>view('_menu'),
 			'notification'=>'',
 			'task'=>'',
-			'content'=>'บันทึกข้อมูลสำเร็จ<br>โปรดรอสักครู่..<meta http-equiv="refresh" content="1;url='.site_url('public/gov/meettingRecord').'">',
+			'content'=>$result?'บันทึกข้อมูลสำเร็จ <meta http-equiv="refresh" content="2;url='.site_url('public/gov/meettingRecord').'">':'บันทึกข้อมูลไม่สำเร็จ',
 		);
 		return view('_main',$data);
 	}
@@ -312,4 +312,103 @@ class Gov extends BaseController
 			return '<meta http-equiv="refresh" content="0;url='.site_url('public/pdf/'.$filePdf).'?'.time().'">';
 		return view('_main',$data);
 	}
+	public function publicRecord()
+	{
+		helper('user');
+        
+		$govModel = model('App\Models\GovModel');
+        $data=array(
+            'publicData'=>$govModel->getPublic(current_user('org_code')),
+        );
+		$data=array(
+			'title'=>'การประชาสัมพันธ์เพิ่มผู้เรียนในกลุ่ม อ.กรอ.อศ.',
+			'mainMenu'=>view('_menu'),
+            'content'=>view('gov_publicRecode',$data),
+			'notification'=>'',
+			'task'=>'',
+		);        
+
+		return view('_main',$data);
+	}
+
+	public function publicAdd()
+	{
+		helper('user');
+		$mouModel = model('App\Models\MouModel');
+		$resultData=$mouModel->getMou(['school_id'=>current_user('org_code')]);
+		$data=array(
+			'mouData'=>$resultData,
+		);
+
+		$data=array(
+			'title'=>'รายงานการประชาสัมพันธ์',
+			'mainMenu'=>view('_menu'),
+            'content'=>view('gov_publicDetail',$data),
+			'notification'=>'',
+			'task'=>'',
+		);        
+
+		return view('_main',$data);
+	}
+	public function publicDetail($id)
+	{
+		helper('user');
+		$mouModel = model('App\Models\MouModel');
+		$govModel = model('App\Models\GovModel');
+		$resultData=$mouModel->getMou(['school_id'=>current_user('org_code')]);
+		$publicData=$govModel->getPublicData($id);
+		$data=array(
+			'mouData'=>$resultData,
+			'publicData'=>$publicData,
+		);
+
+		$data=array(
+			'title'=>'รายงานการประชาสัมพันธ์',
+			'mainMenu'=>view('_menu'),
+            'content'=>view('gov_publicDetail',$data),
+			'notification'=>'',
+			'task'=>'',
+		);        
+
+		return view('_main',$data);
+	}
+	public function publicSave(){
+		$govModel = model('App\Models\GovModel');
+		$data=array();
+		foreach($_POST as $k=>$v){
+				$data[$k]=$v;
+		}
+		if(isset($data['id'])&&$data['id']!=''){			
+			$result=$govModel->publicUpdate($data['id'],$data);
+		}else{
+			$result=$govModel->publicAdd($data);
+		}
+
+		$data=array(
+			'title'=>'บันทึกข้อมูลการประชาสัมพันธ์',
+			'mainMenu'=>view('_menu'),
+			'notification'=>'',
+			'task'=>'',
+			'content'=>$result?'บันทึกข้อมูลสำเร็จ <meta http-equiv="refresh" content="2;url='.site_url('public/gov/publicRecord').'">':'บันทึกข้อมูลไม่สำเร็จ',
+		);
+		return view('_main',$data);
+
+	}
+
+	public function publicDelete($id){
+
+		$govModel = model('App\Models\GovModel');
+		 
+			$result=$govModel->publicDelete(['id'=>$id]);
+
+		$data=array(
+			'title'=>'ลบข้อมูลการประชาสัมพันธ์',
+			'mainMenu'=>view('_menu'),
+            'content'=>$result?'ลบข้อมูลสำเร็จ <meta http-equiv="refresh" content="2;url='.site_url('public/gov/publicRecord').'">':'ลบข้อมูลไม่สำเร็จ',
+			'notification'=>'',
+			'task'=>'',
+		);      
+		return view('_main',$data);
+
+	} 
 }

@@ -39,6 +39,8 @@ function genInput($data){
                 $ret.=genInput_check_group($data);
             }else if(is_numeric(array_search($data['type'],array('textarea')))){
                 $ret.=genInput_textarea($data);
+            }else if(is_numeric(array_search($data['type'],array('div')))){
+                $ret.='<div class="form-line" id="'.$data['id'].'">'.genInput($data['items']).'</div>';
             }
 
         }
@@ -98,7 +100,7 @@ function genInput_textarea($data){
 
 function genInput_hidden($data){
 
-    $ret='<input type="hidden" name="'.$data['id'].'" id="'.$data['id'].'" value="'.$data['def'].'" />';
+    $ret='<input type="hidden" name="'.$data['id'].'" id="'.$data['id'].'" value="'.$data['def'].'" '.(isset($data['disabled'])&&$data['disabled']?'disabled':'').'/>';
         return $ret;
 }
 

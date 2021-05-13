@@ -50,15 +50,43 @@ class Business extends BaseController
     }
 
     public function saveBusiness(){
+        helper('user');
 		$businessModel = model('App\Models\BusinessModel');
         $data=array();
         foreach($_POST as $k=>$v){
             $data[$k]=$v;
         }
+        $data['school_id']=current_user('org_code');
         if(isset($_POST['business_id'])&&$_POST['business_id']!=''){
             $result=$businessModel->businessUpdate($_POST['business_id'],$data);
         }else{
             $result=$businessModel->businessAdd($data);
         }
+        
+		$data=array(
+			'title'=>'บันทึกข้อมูลสถานประกอบการ',
+			'mainMenu'=>view('_menu'),
+            'content'=>$result?'บันทึกข้อมูลสำเร็จ <meta http-equiv="refresh" content="2;url='.site_url('public/business/list').'">':'บันทึกข้อมูลไม่สำเร็จ',
+			'notification'=>'',
+			'task'=>'',
+		);      
+		return view('_main',$data);
+    }
+
+    public function detail($id){
+		$businessModel = model('App\Models\BusinessModel');
+        $businessData=$businessModel->getBusiness($id);
+        $data=array(
+            'businessData'=>$businessData,
+        );
+		$data=array(
+			'title'=>'ข้อมูลสถานประกอบการ',
+			'mainMenu'=>view('_menu'),
+            'content'=>view('businessDetail',$data),
+			'notification'=>'',
+			'task'=>'',
+		);        
+
+		return view('_main',$data);
     }
 }

@@ -49,7 +49,7 @@ helper('tab');
 
                             <?php
                             $gov_school_id=explode(',',$govData->gov_school_id);
-                            $gov_minors=explode(',',$govData->gov_minor);
+                            $gov_minors=isset($govData->gov_minor)?explode(',',$govData->gov_minor):array();
                             $gov_school='';
                             $i=0;
                             //print_r($student_school);
@@ -62,6 +62,7 @@ helper('tab');
                             }
                             $i=0;
                             $gov_minor='';
+                            if(isset($gov_minors)&&count($gov_minors)>0){
                             foreach($gov_minors as $minor){
                                 $i++;
                                 if($gov_minor!=''){
@@ -69,6 +70,7 @@ helper('tab');
                                 }
                                 $gov_minor.='&nbsp;&nbsp;&nbsp;&nbsp;'.$i.'.) '.minor_name($minor);
                             }
+                        }
 
                             $gov_data='
                             <b>ประธาน อ.กรอ.อศ.</b> '.$govData->president_name.'<br>

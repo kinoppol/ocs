@@ -5,6 +5,7 @@ define('SYSTEMNAME','ระบบฐานข้อมูลสำนักค�
 define('VERSION','21.05.10');
 ini_set('memory_limit', '512M');
 $_SESSION['FOOTSCRIPT']='';
+$_SESSION['FOOTSYSTEM']='';
 // Path to the front controller (this file)
 define('FCPATH', __DIR__ . DIRECTORY_SEPARATOR);
 
