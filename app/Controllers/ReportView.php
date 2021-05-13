@@ -113,7 +113,7 @@ class ReportView extends BaseController
 					'business_id'=>$business[$mou['business_id']]['business_name'],
 					'job_description'=>$business[$mou['business_id']]['job_description'],
 					'level'=>'ระดับ '.$mou['level'],
-					'investment'=>$mou['investment'],
+					'investment'=>isset($mou['investment'])?$mou['investment']:'',
 					'support_edu'=>$supEdu,
 					//'mou_date'=>dateThai($mou['mou_date']),
 					'mou_start_date'=>dateThai($mou['mou_start_date']),
