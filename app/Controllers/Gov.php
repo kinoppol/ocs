@@ -411,4 +411,415 @@ class Gov extends BaseController
 		return view('_main',$data);
 
 	} 
+
+	public function trainerDev(){
+
+		helper('user');
+        
+		$govModel = model('App\Models\GovModel');
+        $data=array(
+            'trainerDevData'=>$govModel->getTrainerDev(current_user('org_code')),
+        );
+		$data=array(
+			'title'=>'การพัฒนาครูฝึกในสถานประกอบการ',
+			'mainMenu'=>view('_menu'),
+            'content'=>view('gov_trainerDev',$data),
+			'notification'=>'',
+			'task'=>'',
+		);        
+
+		return view('_main',$data);
+
+	} 
+	public function trainerDevAdd(){
+		helper('user');
+		$mouModel = model('App\Models\MouModel');
+		$resultData=$mouModel->getMou(['school_id'=>current_user('org_code')]);
+		$data=array(
+			'mouData'=>$resultData,
+		);
+
+		$data=array(
+			'title'=>'การพัฒนาครูฝึก',
+			'mainMenu'=>view('_menu'),
+            'content'=>view('gov_trainerDevDetail',$data),
+			'notification'=>'',
+			'task'=>'',
+		);        
+
+		return view('_main',$data);
+	}
+
+	public function trainerDevSave(){
+		$govModel = model('App\Models\GovModel');
+		$data=array();
+		foreach($_POST as $k=>$v){
+				$data[$k]=$v;
+		}
+		$data['record_date']=date('Y-m-d');
+		if(isset($data['id'])&&$data['id']!=''){			
+			$result=$govModel->trainerDevUpdate($data['id'],$data);
+		}else{
+			$result=$govModel->trainerDevAdd($data);
+		}
+
+		$data=array(
+			'title'=>'บันทึกข้อมูลการพัฒนาครูฝึก',
+			'mainMenu'=>view('_menu'),
+			'notification'=>'',
+			'task'=>'',
+			'content'=>$result?'บันทึกข้อมูลสำเร็จ <meta http-equiv="refresh" content="2;url='.site_url('public/gov/trainerDev').'">':'บันทึกข้อมูลไม่สำเร็จ',
+		);
+		return view('_main',$data);
+
+	}
+	public function trainerDevDetail($id){
+		helper('user');
+		$govModel = model('App\Models\GovModel');
+		$mouModel = model('App\Models\MouModel');
+		$resultData=$mouModel->getMou(['school_id'=>current_user('org_code')]);
+		$trainerDevData=$govModel->getTrainerDevData($id);
+		$data=array(
+			'mouData'=>$resultData,
+			'trainerDevData'=>$trainerDevData,
+		);
+
+		$data=array(
+			'title'=>'การพัฒนาครูฝึก',
+			'mainMenu'=>view('_menu'),
+            'content'=>view('gov_trainerDevDetail',$data),
+			'notification'=>'',
+			'task'=>'',
+		);        
+
+		return view('_main',$data);
+	}
+	public function trainerDevDelete($id){
+
+		$govModel = model('App\Models\GovModel');
+		 
+			$result=$govModel->trainerDevDelete(['id'=>$id]);
+
+		$data=array(
+			'title'=>'ลบข้อมูลการพัฒนาครูฝึก',
+			'mainMenu'=>view('_menu'),
+            'content'=>$result?'ลบข้อมูลสำเร็จ <meta http-equiv="refresh" content="2;url='.site_url('public/gov/trainerDev').'">':'ลบข้อมูลไม่สำเร็จ',
+			'notification'=>'',
+			'task'=>'',
+		);      
+		return view('_main',$data);
+
+	} 
+
+
+	public function teacherDev(){
+
+		helper('user');
+        
+		$govModel = model('App\Models\GovModel');
+        $data=array(
+            'teacherDevData'=>$govModel->getTeacherDev(current_user('org_code')),
+        );
+		$data=array(
+			'title'=>'การพัฒนาครูในสถานศึกษา',
+			'mainMenu'=>view('_menu'),
+            'content'=>view('gov_teacherDev',$data),
+			'notification'=>'',
+			'task'=>'',
+		);        
+
+		return view('_main',$data);
+
+	} 
+	public function teacherDevAdd(){
+		helper('user');
+		$mouModel = model('App\Models\MouModel');
+		$resultData=$mouModel->getMou(['school_id'=>current_user('org_code')]);
+		$data=array(
+			'mouData'=>$resultData,
+		);
+
+		$data=array(
+			'title'=>'การพัฒนาครูผู้สอนในสถานศึกษา',
+			'mainMenu'=>view('_menu'),
+            'content'=>view('gov_teacherDevDetail',$data),
+			'notification'=>'',
+			'task'=>'',
+		);        
+
+		return view('_main',$data);
+	}
+
+	public function teacherDevSave(){
+		$govModel = model('App\Models\GovModel');
+		$data=array();
+		foreach($_POST as $k=>$v){
+				$data[$k]=$v;
+		}
+		$data['record_date']=date('Y-m-d');
+		if(isset($data['id'])&&$data['id']!=''){			
+			$result=$govModel->teacherDevUpdate($data['id'],$data);
+		}else{
+			$result=$govModel->teacherDevAdd($data);
+		}
+
+		$data=array(
+			'title'=>'บันทึกข้อมูลการพัฒนาครูในสถานศึกษา',
+			'mainMenu'=>view('_menu'),
+			'notification'=>'',
+			'task'=>'',
+			'content'=>$result?'บันทึกข้อมูลสำเร็จ <meta http-equiv="refresh" content="2;url='.site_url('public/gov/teacherDev').'">':'บันทึกข้อมูลไม่สำเร็จ',
+		);
+		return view('_main',$data);
+
+	}
+	public function teacherDevDetail($id){
+		helper('user');
+		$govModel = model('App\Models\GovModel');
+		$mouModel = model('App\Models\MouModel');
+		$resultData=$mouModel->getMou(['school_id'=>current_user('org_code')]);
+		$teacherDevData=$govModel->getteacherDevData($id);
+		$data=array(
+			'mouData'=>$resultData,
+			'teacherDevData'=>$teacherDevData,
+		);
+
+		$data=array(
+			'title'=>'การพัฒนาครูผู้สอนในสถานศึกษา',
+			'mainMenu'=>view('_menu'),
+            'content'=>view('gov_teacherDevDetail',$data),
+			'notification'=>'',
+			'task'=>'',
+		);        
+
+		return view('_main',$data);
+	}
+	public function teacherDevDelete($id){
+
+		$govModel = model('App\Models\GovModel');
+		 
+			$result=$govModel->teacherDevDelete(['id'=>$id]);
+
+		$data=array(
+			'title'=>'ลบข้อมูลการพัฒนาครูผู้สอนในสถานศึกษา',
+			'mainMenu'=>view('_menu'),
+            'content'=>$result?'ลบข้อมูลสำเร็จ <meta http-equiv="refresh" content="2;url='.site_url('public/gov/teacherDev').'">':'ลบข้อมูลไม่สำเร็จ',
+			'notification'=>'',
+			'task'=>'',
+		);      
+		return view('_main',$data);
+
+	} 
+
+
+	public function studentDev(){
+
+		helper('user');
+        
+		$govModel = model('App\Models\GovModel');
+        $data=array(
+            'studentDevData'=>$govModel->getStudentDev(current_user('org_code')),
+        );
+		$data=array(
+			'title'=>'การพัฒนาผู้เรียน',
+			'mainMenu'=>view('_menu'),
+            'content'=>view('gov_studentDev',$data),
+			'notification'=>'',
+			'task'=>'',
+		);        
+
+		return view('_main',$data);
+
+	} 
+	public function studentDevAdd(){
+		helper('user');
+		$mouModel = model('App\Models\MouModel');
+		$resultData=$mouModel->getMou(['school_id'=>current_user('org_code')]);
+		$data=array(
+			'mouData'=>$resultData,
+		);
+
+		$data=array(
+			'title'=>'การพัฒนาผู้เรียน',
+			'mainMenu'=>view('_menu'),
+            'content'=>view('gov_studentDevDetail',$data),
+			'notification'=>'',
+			'task'=>'',
+		);        
+
+		return view('_main',$data);
+	}
+
+	public function studentDevSave(){
+		$govModel = model('App\Models\GovModel');
+		$data=array();
+		foreach($_POST as $k=>$v){
+				$data[$k]=$v;
+		}
+		$data['record_date']=date('Y-m-d');
+		if(isset($data['id'])&&$data['id']!=''){			
+			$result=$govModel->studentDevUpdate($data['id'],$data);
+		}else{
+			$result=$govModel->studentDevAdd($data);
+		}
+
+		$data=array(
+			'title'=>'บันทึกข้อมูลการพัฒนาผู้เรียน',
+			'mainMenu'=>view('_menu'),
+			'notification'=>'',
+			'task'=>'',
+			'content'=>$result?'บันทึกข้อมูลสำเร็จ <meta http-equiv="refresh" content="2;url='.site_url('public/gov/studentDev').'">':'บันทึกข้อมูลไม่สำเร็จ',
+		);
+		return view('_main',$data);
+
+	}
+	public function studentDevDetail($id){
+		helper('user');
+		$govModel = model('App\Models\GovModel');
+		$mouModel = model('App\Models\MouModel');
+		$resultData=$mouModel->getMou(['school_id'=>current_user('org_code')]);
+		$studentDevData=$govModel->getStudentDevData($id);
+		$data=array(
+			'mouData'=>$resultData,
+			'studentDevData'=>$studentDevData,
+		);
+
+		$data=array(
+			'title'=>'การพัฒนาผู้เรียน',
+			'mainMenu'=>view('_menu'),
+            'content'=>view('gov_studentDevDetail',$data),
+			'notification'=>'',
+			'task'=>'',
+		);        
+
+		return view('_main',$data);
+	}
+	public function studentDevDelete($id){
+
+		$govModel = model('App\Models\GovModel');
+		 
+			$result=$govModel->studentDevDelete(['id'=>$id]);
+
+		$data=array(
+			'title'=>'ลบข้อมูลการพัฒนาผู้เรียน',
+			'mainMenu'=>view('_menu'),
+            'content'=>$result?'ลบข้อมูลสำเร็จ <meta http-equiv="refresh" content="2;url='.site_url('public/gov/studentDev').'">':'ลบข้อมูลไม่สำเร็จ',
+			'notification'=>'',
+			'task'=>'',
+		);      
+		return view('_main',$data);
+
+	} 
+
+	public function projectRecord(){
+
+		helper('user');
+        
+		$govModel = model('App\Models\GovModel');
+        $data=array(
+            'projectRecordData'=>$govModel->getProject(current_user('org_code')),
+        );
+		$data=array(
+			'title'=>'การดำเนินโครงการอื่นๆ',
+			'mainMenu'=>view('_menu'),
+            'content'=>view('gov_projectRecord',$data),
+			'notification'=>'',
+			'task'=>'',
+		);        
+
+		return view('_main',$data);
+
+	} 
+	public function projectAdd(){
+		helper('user');
+		$mouModel = model('App\Models\MouModel');
+		$resultData=$mouModel->getMou(['school_id'=>current_user('org_code')]);
+		$data=array(
+			'mouData'=>$resultData,
+		);
+
+		$data=array(
+			'title'=>'การดำเนินโครงการอื่น ๆ',
+			'mainMenu'=>view('_menu'),
+            'content'=>view('gov_projectDetail',$data),
+			'notification'=>'',
+			'task'=>'',
+		);        
+
+		return view('_main',$data);
+	}
+
+	public function projectSave(){
+		$govModel = model('App\Models\GovModel');
+		$data=array();
+		foreach($_POST as $k=>$v){
+				$data[$k]=$v;
+		}
+		$data['record_date']=date('Y-m-d');
+		if(isset($data['id'])&&$data['id']!=''){			
+			$result=$govModel->projectUpdate($data['id'],$data);
+		}else{
+			$result=$govModel->projectAdd($data);
+		}
+
+		$data=array(
+			'title'=>'บันทึกข้อมูลการดำเนินโครงการอื่น ๆ',
+			'mainMenu'=>view('_menu'),
+			'notification'=>'',
+			'task'=>'',
+			'content'=>$result?'บันทึกข้อมูลสำเร็จ <meta http-equiv="refresh" content="2;url='.site_url('public/gov/projectRecord').'">':'บันทึกข้อมูลไม่สำเร็จ',
+		);
+		return view('_main',$data);
+
+	}
+	public function projectDetail($id){
+		helper('user');
+		$govModel = model('App\Models\GovModel');
+		$mouModel = model('App\Models\MouModel');
+		$resultData=$mouModel->getMou(['school_id'=>current_user('org_code')]);
+		$projectData=$govModel->getProjectData($id);
+		$data=array(
+			'mouData'=>$resultData,
+			'projectData'=>$projectData,
+		);
+
+		$data=array(
+			'title'=>'การดำเนินโครงการอื่น ๆ',
+			'mainMenu'=>view('_menu'),
+            'content'=>view('gov_projectDetail',$data),
+			'notification'=>'',
+			'task'=>'',
+		);        
+
+		return view('_main',$data);
+	}
+	public function projectDelete($id){
+
+		$govModel = model('App\Models\GovModel');
+		 
+			$result=$govModel->projectDelete(['id'=>$id]);
+
+		$data=array(
+			'title'=>'ลบข้อมูลการดำเนินโครงการ',
+			'mainMenu'=>view('_menu'),
+            'content'=>$result?'ลบข้อมูลสำเร็จ <meta http-equiv="refresh" content="2;url='.site_url('public/gov/projectRecord').'">':'ลบข้อมูลไม่สำเร็จ',
+			'notification'=>'',
+			'task'=>'',
+		);      
+		return view('_main',$data);
+
+	}
+
+	public function research(){
+
+		$data=array(
+			'title'=>'แบบสอบถามความพึงพอใจ',
+			'mainMenu'=>view('_menu'),
+			'content'=>view('research'),
+			'notification'=>'',
+			'task'=>'',
+		);
+
+		return view('_main',$data);
+	}
 }

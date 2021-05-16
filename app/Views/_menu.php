@@ -117,12 +117,12 @@ $data=array(
                     'text'=>'รายงานการประชุม',
                     'url'=>site_url('public/gov/meettingRecord'),
                     'cond'=>true,
-                    ),
+                    ),/*
                 'curriculumDev'=>array(
                     'text'=>'การพัฒนาหลักสูตร',
                     'url'=>site_url('public/gov/curriculumDev'),
                     'cond'=>true,
-                    ),
+                    ),*/
                 'teacherDev'=>array(
                     'text'=>'การพัฒนาครูในสถานศึกษา',
                     'url'=>site_url('public/gov/teacherDev'),
