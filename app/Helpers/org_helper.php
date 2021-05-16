@@ -10,6 +10,7 @@ function org_name($org_id=false){
             $institute=$orgModel->getInstitute();
             $_SESSION['ORG']=$schools+$govs+$institute;
         }
+        $_SESSION['ORG']['1300000000']='สำนักงานคณะกรรมการการอาชีวศึกษา';
         //print_r($_SESSION['ORG']);
         return $_SESSION['ORG'][$org_id];
 }

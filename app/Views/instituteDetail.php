@@ -14,7 +14,7 @@ helper('tab');
                                 <img src="<?php print site_url('public/images/vec_logo.jpg'); ?>" alt="AdminBSB - Profile Image" width="128"/>
                             </div>
                             <div class="content-area">
-                                <h3>ข้อมูล อ.กรอ.อศ.</h3>
+                                <h3>ข้อมูลสถาบันการอาชีวศึกษา</h3>
                                 <p><?php print '#'.current_user('org_code'); ?></p>
                                 <p><?php print org_name(current_user('org_code')); ?></p>
                             </div>
@@ -47,42 +47,27 @@ helper('tab');
                         <div class="body">
                             <div>
 
-                            <?php
-                            $gov_school_id=explode(',',$govData->gov_school_id);
-                            $gov_minors=isset($govData->gov_minor)?explode(',',$govData->gov_minor):array();
-                            $gov_school='';
-                            $i=0;
-                            //print_r($student_school);
-                            foreach($gov_school_id as $school){
-                                $i++;
-                                if($gov_school!=''){
-                                        $gov_school.='<br> ';
+                            <?php 
+                                $in_school='';
+                                $i=0;
+                                //print_r($student_school);
+                                foreach($in_school_id as $school){
+                                    $i++;
+                                    if($in_school!=''){
+                                            $in_school.='<br> ';
+                                    }
+                                    $in_school.='&nbsp;&nbsp;&nbsp;&nbsp;'.$i.'.) '.org_name($school).' ('.number_format((isset($student_school[$school]->count_val)?$student_school[$school]->count_val:'0'),0,".",",").' คน)';
                                 }
-                                $gov_school.='&nbsp;&nbsp;&nbsp;&nbsp;'.$i.'.) '.org_name($school).' ('.number_format((isset($student_school[$school]->count_val)?$student_school[$school]->count_val:'0'),0,".",",").' คน)';
-                            }
-                            $i=0;
-                            $gov_minor='';
-                            if(isset($gov_minors)&&count($gov_minors)>0){
-                            foreach($gov_minors as $minor){
-                                $i++;
-                                if($gov_minor!=''){
-                                        $gov_minor.='<br> ';
-                                }
-                                $gov_minor.='&nbsp;&nbsp;&nbsp;&nbsp;'.$i.'.) รหัสสาขางาน '.$minor.' ชื่อสาขางาน '.minor_name($minor);
-                            }
-                        }
-
-                            $gov_data='
-                            <b>ประธาน อ.กรอ.อศ.</b> '.$govData->president_name.'<br>
-                            <b>เลขานุการ อ.กรอ.อศ.</b> '.org_name($govData->secretary_school_id).'<br>
-                            <b>สถานศึกษาใน อ.กรอ.อศ. '.org_name(current_user('org_code')).'</b><br> '.$gov_school.'<br>
-                            <b>สาขางานของผู้เรียนใน อ.กรอ.อศ. '.org_name(current_user('org_code')).'</b><br> '.$gov_minor.'<br>
+                            $data='
+                            <b>ผู้อำนวยการสถาบันการอาชีวศึกษา </b> '.$institute_data->director_name.'<br>
+                            <b>รองผู้อำนวยการสถาบันการอาชีวศึกษา </b> '.$institute_data->institute_name.'<br>
+                            <b>สถานศึกษาในสังกัดสถาบันการอาชีวศึกษา'.$institute_data->institute_name.'</b><br> '.$in_school.'<br>
                             ';
 
                             $tab=array(
                                 'detail'=>array(
                                     'title'=>'ข้อมูลทั่วไป',
-                                    'content'=>$gov_data,
+                                    'content'=>$data,
                                 ),
                                 'form'=>array(
                                     'title'=>'แก้ไขข้อมูล',

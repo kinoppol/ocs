@@ -35,7 +35,7 @@
             'deputy_resources'=>'รองฯ ฝ่ายบริหารทรัพยากร',
             'deputy_planning'=>'รองฯ ฝ่ายแผนงานและความร่วมมือ',
         ),
-        'def'=>$govData->secretary_school_id,
+        'def'=>$govData->secretary_position,
         'required'=>true,
         ),
         array(

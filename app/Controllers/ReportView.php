@@ -24,13 +24,29 @@ class ReportView extends BaseController
 				'positionP2'=>'อนุกรรมการและผู้ช่วยเลขานุการ อ.กรอ.อศ. <br>'.$org_name,
 				'positionP3'=>'อนุกรรมการและเลขานุการ อ.กรอ.อศ. <br>'.$org_name,
 			);
-		}else{
+		}else if(mb_substr($org_code,2,1)!=0){
 			$org_type_name='สถานศึกษา';
 			$signData=array(
 				'positionP1'=>'หัวหน้างานความร่วมมือ',
 				'positionP2'=>'รองผู้อำนวยการฝ่ายแผนงานและความร่วมมือ<br>&nbsp;',
-				'positionP3'=>'ผู้อำนวยการ'.$org_name.'<br>&nbsp',
+				'positionP3'=>'ผู้อำนวยการ'.$org_name.'<br>&nbsp;',
 			);
+		}else if($org_code=='1300000000'){
+			$org_type_name='สำนักงานคณะกรรมการการอาชีวศึกษา';
+			$signData=array(
+				'positionP1'=>'ผู้จัดทำข้อมูล',
+				'positionP2'=>'ผู้อำนวยการกลุ่ม...<br>&nbsp;',
+				'positionP3'=>'ผู้อำนวยการสำนักความร่วมมือ<br>&nbsp;',
+			);
+
+		}else{
+			$org_type_name='สถาบันการอาชีวศึกษา';
+			$signData=array(
+				'positionP1'=>'ผู้จัดทำข้อมูล',
+				'positionP2'=>'รองผู้อำนวยการ'.$org_name.'<br>&nbsp;',
+				'positionP3'=>'ผู้อำนวยการ'.$org_name.'<br>&nbsp;',
+			);
+
 		}
 
 		$form='

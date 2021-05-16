@@ -17,7 +17,7 @@ class SchoolModel extends Model
             $builder->where('school_id in ('.implode(',',$school_id).')');
         }else if(is_array($school_id)&&count($school_id)==0){
             return false;
-        }else{
+        }else if(isset($school_id)){
             $builder->where('school_id',$school_id);
         }
         $count = $builder->get()->getResult();

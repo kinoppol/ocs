@@ -119,8 +119,8 @@
 								นางสาวจิตติมา  จิตต์โสภณ (สำนักความร่วมมือ)<br>
 								โทร <a href="tel:0899369493">089-9369493</a> อีเมล <a href="mailto:j.jitsophon2527@gmail.com">j.jitsophon2527@gmail.com</a>
 								<br>
-								นางสาวพิมพ์มณีการ์  ขุมทรัพย์ (อ.กรอ.อศ.)<br>
-								โทร <a href="tel:0812964884">081-2964884</a> อีเมล <a href="mailto:pimmanika.k@gmail.com">pimmanika.k@gmail.com</a>
+								นางสาวพิมพ์มณิการ์  ขุมทรัพย์ (อ.กรอ.อศ.)<br>
+								โทร <a href="tel:0812964884">081-2964884</a> อีเมล <a href="mailto:setsangroup@gmail.com">setsangroup@gmail.com</a>
 								<br>
 								นางสาวอรพิน  พรหมนอก (อ.กรอ.อศ.)<br>
 								โทร <a href="tel:0992818842">099-2818842</a> อีเมล <a href="mailto:ora.ovec@gmail.com">ora.ovec@gmail.com</a>

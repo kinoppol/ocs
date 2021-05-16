@@ -229,7 +229,22 @@ class Gov extends BaseController
 	} 
 	public function meettingPrint($id){		
 		$govModel = model('App\Models\GovModel');
+		$orgModel = model('App\Models\OrgModel');
 		$report=$govModel->getMeettingData($id);
+		$govDetail=$govModel->getGovData($report->gov_id);
+		$school_detail=$orgModel->schoolData($govDetail->secretary_school_id);
+
+		$secretary_name=$school_detail->director_name;
+		if($govDetail->secretary_position=='deputy_planning'){
+			$secretary_name=$school_detail->deputy_planning_name;
+		}else if($govDetail->secretary_position=='deputy_resources'){
+			$secretary_name=$school_detail->deputy_resources_name;
+		}else if($govDetail->secretary_position=='deputy_academic'){
+			$secretary_name=$school_detail->deputy_academic_name;
+		}else if($govDetail->secretary_position=='deputy_activity'){
+			$secretary_name=$school_detail->deputy_activity_name;
+		}
+
 		$pdfUrl=site_url('meettingRecord/doc/'.$report->meettingRecord);
 		$budYear=mb_substr($report->meetting_date,0,4);
 		$mount=mb_substr($report->meettingRecord,5,2);
@@ -274,17 +289,19 @@ class Gov extends BaseController
 			</tr>
 			</tbody>
 			</table>
+			<!--
 			<table width="100%">
 				<tr>
 					<td valign="top" width="12%"><u>หมายเหตุ</u></td>
-					<td valign="top" width="88%">ส่งรายงานการประชุม สารบรรณอิเล็กทรอนิกส์ : (AMS e-office) : bocadmin<br> ผู้ประสานงาน : อรพิน  พรมนอก  โทรศัพท์ 09 9281 8842 E-mail: ora.ovec@gmail.com</td>
+					<td valign="top" width="88%">ส่งรายงานการประชุม สารบรรณอิเล็กทรอนิกส์ : (AMS e-office) : bocadmin<br> ผู้ประสานงาน : อรพิน  พรมนอก  โทรศัพท์ 09 9281 8842 E-mail: ora.ovec@gmail.com</td> 
 				</tr>
 			</table>
+			--><br>&nbsp;
 			<table width="100%">
 				<tr>
 					<td valign="top" width="50%">&nbsp;</td>
 					<td valign="top" width="50%" style="text-align:center;"><br>ผู้รายงาน.........................................................<br>
-					(...................................................)<br>
+					('.$secretary_name.')<br>
 					เลขานุการ อ.กรอ.อศ. '.org_name($report->gov_id).'<br>
 					วันที่รายงานผล.................................
 					</td>

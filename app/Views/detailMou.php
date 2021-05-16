@@ -295,9 +295,11 @@ $form=array(
 $_SESSION['FOOTSYSTEM'].='
 <script>
 $(function(){
-
+    
     if($("#educationalSupport").prop("checked") == true){
         $("#education_support").show();
+    }else{
+        $("#education_support").hide();
     }
 
 });
