@@ -104,6 +104,13 @@
             'def'=>$schoolData->deputy_planning_name,
             'required'=>true,
              ),
+         array(
+            'label'=>'หัวหน้างานความร่วมมือ',
+            'type'=>'text',
+            'id'=>'co_supervisor_name',
+            'def'=>isset($schoolData->co_supervisor_name)?$schoolData->co_supervisor_name:'',
+            'required'=>true,
+             ),
              
          array(
              'label'=>'บันทึกข้อมูล',

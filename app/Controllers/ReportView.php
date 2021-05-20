@@ -14,40 +14,14 @@ class ReportView extends BaseController
 		helper('org');
 		helper('thai');
 		
-		$org_code=current_user('org_code');		
-		$org_name=org_name($org_code);
-
-		if(mb_strlen($org_code)<10){
-			$org_type_name=' อ.กรอ.อศ. ';
-			$signData=array(
-				'positionP1'=>'ผู้จัดทำข้อมูล',
-				'positionP2'=>'อนุกรรมการและผู้ช่วยเลขานุการ อ.กรอ.อศ. <br>'.$org_name,
-				'positionP3'=>'อนุกรรมการและเลขานุการ อ.กรอ.อศ. <br>'.$org_name,
-			);
-		}else if(mb_substr($org_code,2,1)!=0){
-			$org_type_name='สถานศึกษา';
-			$signData=array(
-				'positionP1'=>'หัวหน้างานความร่วมมือ',
-				'positionP2'=>'รองผู้อำนวยการฝ่ายแผนงานและความร่วมมือ<br>&nbsp;',
-				'positionP3'=>'ผู้อำนวยการ'.$org_name.'<br>&nbsp;',
-			);
-		}else if($org_code=='1300000000'){
-			$org_type_name='สำนักงานคณะกรรมการการอาชีวศึกษา';
-			$signData=array(
-				'positionP1'=>'ผู้จัดทำข้อมูล',
-				'positionP2'=>'ผู้อำนวยการกลุ่ม...<br>&nbsp;',
-				'positionP3'=>'ผู้อำนวยการสำนักความร่วมมือ<br>&nbsp;',
-			);
-
-		}else{
-			$org_type_name='สถาบันการอาชีวศึกษา';
-			$signData=array(
-				'positionP1'=>'ผู้จัดทำข้อมูล',
-				'positionP2'=>'รองผู้อำนวยการ'.$org_name.'<br>&nbsp;',
-				'positionP3'=>'ผู้อำนวยการ'.$org_name.'<br>&nbsp;',
-			);
-
-		}
+		$org_code=current_user('org_code');
+		$org_name=org_name(current_user('org_code'));
+		$data=array(
+			'org_code'=>$org_code,
+			'org_name'=>$org_name,
+		);
+		$org_type_name=org_type_name($data);
+		$signBox=signBox($data);
 
 		$form='
 		<div class="row clearfix">
@@ -167,7 +141,7 @@ class ReportView extends BaseController
 			&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;ระดับ ๑ หมายถึง ดำเนินกิจกรรมเกี่ยวกับ CSR การฝึกงาน กิจกรรมเฉพาะกิจ (รวมระยะสั้น)<br>
 			&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;ระดับ ๒ หมายถึง ดำเนินกิจกรรมเกี่ยวกับ CSR การฝึกงาน กิจกรรมเฉพาะกิจ (รวมระยะสั้น) และจัดการเรียนการสอนทวิภาคี<br>
 			&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;ระดับ ๓ หมายถึง ดำเนินกิจกรรมเกี่ยวกับ CSR การฝึกงาน กิจกรรมเฉพาะกิจ (รวมระยะสั้น) และจัดการเรียนการสอนทวิภาคี และมีการร่วมลงทุนระหว่างสถานประกอบการและสถานศึกษา
-			'.genSignBox($signData);
+			'.$signBox;
 			error_reporting(0);
 			helper('mpdf');
 			//return $result;
@@ -221,22 +195,12 @@ class ReportView extends BaseController
 		
 		$org_code=current_user('org_code');		
 		$org_name=org_name($org_code);
-
-		if(mb_strlen($org_code)<10){
-			$org_type_name=' อ.กรอ.อศ. ';
-			$signData=array(
-				'positionP1'=>'ผู้จัดทำข้อมูล',
-				'positionP2'=>'อนุกรรมการและผู้ช่วยเลขานุการ อ.กรอ.อศ. <br>'.$org_name,
-				'positionP3'=>'อนุกรรมการและเลขานุการ อ.กรอ.อศ. <br>'.$org_name,
-			);
-		}else{
-			$org_type_name='สถานศึกษา';
-			$signData=array(
-				'positionP1'=>'หัวหน้างานความร่วมมือ',
-				'positionP2'=>'รองผู้อำนวยการฝ่ายแผนงานและความร่วมมือ<br>&nbsp;',
-				'positionP3'=>'ผู้อำนวยการ'.$org_name.'<br>&nbsp;',
-			);
-		}
+		$data=array(
+			'org_code'=>$org_code,
+			'org_name'=>$org_name,
+		);
+		$org_type_name=org_type_name($data);
+		$signBox=signBox($data);
 
 		$title='รายงานการพัฒนาหลักสูตรระหว่าง '.$org_type_name.' ร่วมกับสถานประกอบการ';
 
@@ -355,7 +319,7 @@ class ReportView extends BaseController
 			'task'=>'',
 		);
 		}else{
-			$result.=genSignBox($signData);
+			$result.=$signBox;
 			error_reporting(0);
 			helper('mpdf');
 			//return $result;
@@ -395,6 +359,12 @@ class ReportView extends BaseController
 		
 		$org_code=current_user('org_code');		
 		$org_name=org_name($org_code);
+		$data=array(
+			'org_code'=>$org_code,
+			'org_name'=>$org_name,
+		);
+		$org_type_name=org_type_name($data);
+		$signBox=signBox($data);
 
 		if(mb_strlen($org_code)<10){
 			$org_type_name=' อ.กรอ.อศ. ';
@@ -511,7 +481,7 @@ class ReportView extends BaseController
 			'task'=>'',
 		);
 		}else{
-			$result.=genSignBox($signData);
+			$result.=$signBox;
 			error_reporting(0);
 			helper('mpdf');
 			//return $result;
