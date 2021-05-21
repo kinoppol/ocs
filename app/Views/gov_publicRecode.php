@@ -11,14 +11,14 @@
             $i++;
             $publicRows[]=array(
                 'no'=>$i,
-                'public_duration'=>dateThai($v->start_date,true,false,true).'-'.dateThai($v->end_date,true,false,true),
+                'public_duration'=>dateThai($v->start_date,true,false,true).' ถึง<br>'.dateThai($v->end_date,true,false,true),
                 'public_plcae'=>$v->public_place,
                 'public_method'=>$v->public_method,
                 'student_target'=>$v->student_target,
                 'student_apply'=>$v->student_apply,
                 'manage'=>'
-                <a href="'.site_url('public/gov/publicDetail/'.$v->id).'" class="btn btn-xs btn-warning waves-effect"><i class="material-icons">edit</i>แก้ไข</a>
-                <a href="'.site_url('public/gov/publicDelete/'.$v->id).'" class="btn btn-xs btn-danger" onclick="return confirm(\'ยืนยันการลบข้อมูล\');"><i class="material-icons">delete</i> ลบ</a>',
+                <a href="'.site_url('public/gov/publicDetail/'.$v->id).'" class="btn btn-xs btn-warning waves-effect"><i class="material-icons">edit</i></a>
+                <a href="'.site_url('public/gov/publicDelete/'.$v->id).'" class="btn btn-xs btn-danger" onclick="return confirm(\'ยืนยันการลบข้อมูล\');"><i class="material-icons">delete</i></a>',
             );
         }
         $publicArr=array('thead'=>array(
@@ -27,8 +27,8 @@
             'สถานที่ประชาสัมพันธ์',
             'วิธีการ',
             'เป้าหมาย',
-            'จำนวนนักเรียนที่สมัครเข้าเรียน',
-            'จัดการ',
+            'จำนวนผู้เรียน<br>ที่สมัครเข้าเรียน',
+            'จัดการ<br>(แก้ไข/ลบ)',
     ),
     'tbody'=>$publicRows,
 );

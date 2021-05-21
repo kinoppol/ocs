@@ -11,12 +11,12 @@
             $i++;
             $tableRows[]=array(
                 'no'=>$i,
-                'project_duration'=>dateThai($v->start_date,true,false,true).'-'.dateThai($v->end_date,true,false,true),
+                'project_duration'=>dateThai($v->start_date,true,false,true).' ถึง<br>'.dateThai($v->end_date,true,false,true),
                 'project_plcae'=>$v->project_place,
                 'project_subject'=>$v->subject,
                 'manage'=>'
-                <a href="'.site_url('public/gov/projectDetail/'.$v->id).'" class="btn btn-xs btn-warning waves-effect"><i class="material-icons">edit</i>แก้ไข</a>
-                <a href="'.site_url('public/gov/projectDelete/'.$v->id).'" class="btn btn-xs btn-danger" onclick="return confirm(\'ยืนยันการลบข้อมูล\');"><i class="material-icons">delete</i> ลบ</a>',
+                <a href="'.site_url('public/gov/projectDetail/'.$v->id).'" class="btn btn-xs btn-warning waves-effect"><i class="material-icons">edit</i></a>
+                <a href="'.site_url('public/gov/projectDelete/'.$v->id).'" class="btn btn-xs btn-danger" onclick="return confirm(\'ยืนยันการลบข้อมูล\');"><i class="material-icons">delete</i></a>',
             );
         }
         $tableArr=array('thead'=>array(
@@ -24,7 +24,7 @@
             'ช่วงเวลา',
             'สถานที่ดำเนินโครงการ',
             'ชื่อโครงการ',
-            'จัดการ',
+            'จัดการ<br>(ลบ/แก้ไข)',
     ),
     'tbody'=>$tableRows,
 );

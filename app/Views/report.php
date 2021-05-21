@@ -5,63 +5,63 @@
 
         $reports=array(array(
             'title'=>'รายงานการลงนามความร่วมมือ',
-            'file'=>'school_01',
+            'file'=>'reportOrg/school_01',
             'cond'=>current_user('user_type')=='school'||current_user('user_type')=='gov'||current_user('user_type')=='institute'||current_user('user_type')=='boc',
             ),
             array(
             'title'=>'รายงานการพัฒนาหลักสูตรร่วมกับสถานประกอบการ',
-            'file'=>'school_02',
+            'file'=>'reportOrg/school_02',
             'cond'=>current_user('user_type')=='school'||current_user('user_type')=='gov'||current_user('user_type')=='institute'||current_user('user_type')=='boc',
             ),
             array(
             'title'=>'รายงานผลสัมฤทธิ์ของการร่วมมือกับสถานประกอบการ',
-            'file'=>'school_03',
+            'file'=>'reportOrg/school_03',
             'cond'=>current_user('user_type')=='school'||current_user('user_type')=='gov'||current_user('user_type')=='institute'||current_user('user_type')=='boc',
             ),
 
             array(
-                'title'=>'รายงานการประชุม อ.กรอ.อศ.',
-                'file'=>'gov_01',
+                'title'=>'สรุปรายการการประชุม อ.กรอ.อศ.',
+                'file'=>'reportGov/gov_01',
                 'cond'=>current_user('user_type')=='gov'||current_user('user_type')=='institute'||current_user('user_type')=='boc',
-                ),
+                ),/*
             array(
                 'title'=>'รายงานการพัฒนาหลักสูตรร่วมกับสถานประกอบการ',
-                'file'=>'gov_03',
+                'file'=>'reportGov/gov_03',
                 'cond'=>current_user('user_type')=='gov'||current_user('user_type')=='institute'||current_user('user_type')=='boc',
                 ),
             array(
                 'title'=>'รายงานการลงนามความร่วมมือ',
-                'file'=>'gov_04',
+                'file'=>'reportGov/gov_04',
                 'cond'=>current_user('user_type')=='gov'||current_user('user_type')=='institute'||current_user('user_type')=='boc',
-                ),
+                ),*/
             array(
                 'title'=>'รายงานการวิจัยความพึงพอใจของสถานประกอบการที่มีต่อผู้สำเร็จการศึกษา',
-                'file'=>'gov_05',
+                'file'=>'reportGov/gov_05',
                 'cond'=>current_user('user_type')=='gov'||current_user('user_type')=='institute'||current_user('user_type')=='boc',
                 ),
             array(
                 'title'=>'รายงานการพัฒนาครูฝึกในสถานประกอบการ',
-                'file'=>'gov_06',
+                'file'=>'reportGov/gov_06',
                 'cond'=>current_user('user_type')=='gov'||current_user('user_type')=='institute'||current_user('user_type')=='boc',
                 ),
             array(
-                'title'=>'รายงานการประชาสัมพันธ์เพิ่มผู้เรียน',
-                'file'=>'gov_07',
+                'title'=>'รายงานการประชาสัมพันธ์เพิ่มผู้เรียนในกลุ่ม อ.กรอ.อศ.',
+                'file'=>'reportGov/gov_07',
                 'cond'=>current_user('user_type')=='gov'||current_user('user_type')=='institute'||current_user('user_type')=='boc',
                 ),
             array(
                 'title'=>'รายงานการพัฒนาครูผู้สอนในสถานศึกษา',
-                'file'=>'gov_08',
+                'file'=>'reportGov/gov_08',
                 'cond'=>current_user('user_type')=='gov'||current_user('user_type')=='institute'||current_user('user_type')=='boc',
                 ),
             array(
                 'title'=>'รายงานการพัฒนาผู้เรียน',
-                'file'=>'gov_09',
+                'file'=>'reportGov/gov_09',
                 'cond'=>current_user('user_type')=='gov'||current_user('user_type')=='institute'||current_user('user_type')=='boc',
                 ),
             array(
                 'title'=>'รายงานดำเนินโครงการอื่น ๆ',
-                'file'=>'gov_10',
+                'file'=>'reportGov/gov_10',
                 'cond'=>current_user('user_type')=='gov'||current_user('user_type')=='institute'||current_user('user_type')=='boc',
                 ),
         );
@@ -75,7 +75,7 @@
             $reportRows[]=array(
                 'i'=>$i,
                 'reportName'=>$row['title'],
-                'manage'=>'<a href="'.site_url('public/reportView/'.$row['file']).'/'.$row['title'].'" class="btn btn-primary"> <i class="material-icons">search</i> ดูรายงาน</a>'
+                'manage'=>'<a href="'.site_url('public/'.$row['file']).'/'.$row['title'].'" class="btn btn-primary"> <i class="material-icons">search</i> ดูรายงาน</a>'
             );
         }
         $reportArr=array('thead'=>array(

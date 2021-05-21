@@ -184,7 +184,7 @@ class MouModel extends Model
         if(isset($data['school_id']))$builder->where('school_id',$data['school_id']);
         $builder->orderBy('business_id');
         $result=$builder->get()->getResult();
-        print $db->getLastQuery();
+        //print $db->getLastQuery();
         if(count($result)<1){
             return $data=array('result'=>array(),
             'business'=>array());

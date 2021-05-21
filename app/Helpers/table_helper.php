@@ -31,7 +31,13 @@ function genTable($arr,$export=false,$noFoot=false){
     foreach($arr['tbody'] as $row){
         $trs.='<tr>';
         foreach($row as $td){
-            $trs.='<td>'.$td.'</td>';
+            $align='';
+            $td_n=str_replace(',','',$td);
+            $td_n=str_replace('.','',$td);
+                if(is_numeric($td_n)){
+                    $align=' style="text-align:right"';
+                }
+            $trs.='<td'.$align.'>'.$td.'</td>';
         }
         $trs.='</tr>';
     }

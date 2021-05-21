@@ -11,12 +11,14 @@
             $i++;
             $tableRows[]=array(
                 'no'=>$i,
-                'teacherDev_duration'=>dateThai($v->start_date,true,false,true).'-'.dateThai($v->end_date,true,false,true),
+                'teacherDev_duration'=>dateThai($v->start_date,true,false,true).' ถึง<br>'.dateThai($v->end_date,true,false,true),
                 'teacherDev_plcae'=>$v->dev_place,
                 'teacherDev_subject'=>$v->subject,
+                'personCount'=>0,
                 'manage'=>'
-                <a href="'.site_url('public/gov/teacherDevDetail/'.$v->id).'" class="btn btn-xs btn-warning waves-effect"><i class="material-icons">edit</i>แก้ไข</a>
-                <a href="'.site_url('public/gov/teacherDevDelete/'.$v->id).'" class="btn btn-xs btn-danger" onclick="return confirm(\'ยืนยันการลบข้อมูล\');"><i class="material-icons">delete</i> ลบ</a>',
+                <a href="'.site_url('public/gov/teacherDevPerson/'.$v->id).'" class="btn btn-xs btn-primary waves-effect"><i class="material-icons">groups</i></a>
+                <a href="'.site_url('public/gov/teacherDevDetail/'.$v->id).'" class="btn btn-xs btn-warning waves-effect"><i class="material-icons">edit</i></a>
+                <a href="'.site_url('public/gov/teacherDevDelete/'.$v->id).'" class="btn btn-xs btn-danger" onclick="return confirm(\'ยืนยันการลบข้อมูล\');"><i class="material-icons">delete</i></a>',
             );
         }
         $tableArr=array('thead'=>array(
@@ -24,7 +26,8 @@
             'ช่วงเวลา',
             'สถานที่จัดอบรม',
             'หัวข้อ',
-            'จัดการ',
+            'จำนวนผู้เข้ารับ<br>การพัฒนา (คน)',
+            'จัดการ<br>(รายชื่อ/แก้ไข/ลบ)',
     ),
     'tbody'=>$tableRows,
 );

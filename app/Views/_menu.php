@@ -45,6 +45,13 @@ $data=array(
         'cond'=>current_user('user_type')=='gov',
 
     ),
+    'govBasic'=>array(
+        'text'=>'ข้อมูลพื้นฐานของสำนักความร่วมมือ',
+        'url'=>site_url('public/boc/detail'),
+        'bullet'=>'people',
+        'cond'=>current_user('user_type')=='boc',
+
+    ),
     'instituteBasic'=>array(
         'text'=>'ข้อมูลพื้นฐานของสถาบันฯ',
         'url'=>site_url('public/institute/detail'),

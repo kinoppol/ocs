@@ -10,7 +10,7 @@ class Gov extends BaseController
         
 		$govModel = model('App\Models\GovModel');
         $data=array(
-            'meettingData'=>$govModel->getMeetting(current_user('org_code')),
+            'meettingData'=>$govModel->getMeetting(['gov_id'=>current_user('org_code')]),
         );
 		$data=array(
 			'title'=>'รายงานการประชุม',
@@ -200,7 +200,7 @@ class Gov extends BaseController
 	}
 	public function viewMeettingRecord($id){		
 		$govModel = model('App\Models\GovModel');
-		$report=$govModel->getMeettingData($id);
+		$report=$govModel->getMeettingData([$id]);
 		$pdfUrl=site_url('meettingRecord/doc/'.$report->meettingRecord);
 		$data=array(
 			'title'=>'รายงานการประชุม อ.กรอ.อศ.',
@@ -335,7 +335,7 @@ class Gov extends BaseController
         
 		$govModel = model('App\Models\GovModel');
         $data=array(
-            'publicData'=>$govModel->getPublic(current_user('org_code')),
+            'publicData'=>$govModel->getPublic(['gov_id'=>current_user('org_code')]),
         );
 		$data=array(
 			'title'=>'การประชาสัมพันธ์เพิ่มผู้เรียนในกลุ่ม อ.กรอ.อศ.',
@@ -435,7 +435,7 @@ class Gov extends BaseController
         
 		$govModel = model('App\Models\GovModel');
         $data=array(
-            'trainerDevData'=>$govModel->getTrainerDev(current_user('org_code')),
+            'trainerDevData'=>$govModel->getTrainerDev(['gov_id'=>current_user('org_code')]),
         );
 		$data=array(
 			'title'=>'การพัฒนาครูฝึกในสถานประกอบการ',
@@ -535,7 +535,7 @@ class Gov extends BaseController
         
 		$govModel = model('App\Models\GovModel');
         $data=array(
-            'teacherDevData'=>$govModel->getTeacherDev(current_user('org_code')),
+            'teacherDevData'=>$govModel->getTeacherDev(['gov_id'=>current_user('org_code')]),
         );
 		$data=array(
 			'title'=>'การพัฒนาครูในสถานศึกษา',
@@ -635,7 +635,7 @@ class Gov extends BaseController
         
 		$govModel = model('App\Models\GovModel');
         $data=array(
-            'studentDevData'=>$govModel->getStudentDev(current_user('org_code')),
+            'studentDevData'=>$govModel->getStudentDev(['gov_id'=>current_user('org_code')]),
         );
 		$data=array(
 			'title'=>'การพัฒนาผู้เรียน',
@@ -734,7 +734,7 @@ class Gov extends BaseController
         
 		$govModel = model('App\Models\GovModel');
         $data=array(
-            'projectRecordData'=>$govModel->getProject(current_user('org_code')),
+            'projectRecordData'=>$govModel->getProject(['gov_id'=>current_user('org_code')]),
         );
 		$data=array(
 			'title'=>'การดำเนินโครงการอื่นๆ',

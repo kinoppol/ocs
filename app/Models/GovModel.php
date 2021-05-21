@@ -5,11 +5,15 @@ use CodeIgniter\Model;
 
 class GovModel extends Model
 {
-    public function getMeetting($gov_id=false){
+    public function getMeetting($data=array()){
         $db = \Config\Database::connect();
         $builder = $db->table('meetting_record');
-        $builder->where('gov_id',$gov_id);
+        $builder->where('gov_id',$data['gov_id']);
+        if(isset($data['year'])){
+            $builder->like('meetting_date',$data['year'],'after');
+        }
         $data=$builder->get()->getResult();
+        //print $db->getLastQuery();
             $datas=array();
             foreach($data as $row){
                 $datas[$row->id]=array(
@@ -59,10 +63,14 @@ class GovModel extends Model
         $result=$builder->delete();
         return $result;
     }
-    public function getPublic($gov_id=false){
+    public function getPublic($data){
         $db = \Config\Database::connect();
         $builder = $db->table('public');
-        $builder->where('gov_id',$gov_id);
+        $builder->where('gov_id',$data['gov_id']);
+        if(isset($data['year'])){
+            $builder->like('start_date',$data['year'],'after');
+        }
+        $data=$builder->orderBy('start_date');
         $data=$builder->get()->getResult();
         return $data;
     }
@@ -95,10 +103,13 @@ class GovModel extends Model
         $result=$builder->delete();
         return $result;
     }
-    public function getTrainerDev($gov_id){
+    public function getTrainerDev($data=array()){
         $db = \Config\Database::connect();
         $builder = $db->table('govtrainer_dev');
-        $builder->where('gov_id',$gov_id);
+        $builder->where('gov_id',$data['gov_id']);
+        if(isset($data['year'])){
+            $builder->like('start_date',$data['year'],'after');
+        }
         $result=$builder->get()->getResult();
         return $result;
     }
@@ -133,10 +144,13 @@ class GovModel extends Model
     }
 
 
-    public function getTeacherDev($gov_id){
+    public function getTeacherDev($data=array()){
         $db = \Config\Database::connect();
         $builder = $db->table('govteacher_dev');
-        $builder->where('gov_id',$gov_id);
+        $builder->where('gov_id',$data['gov_id']);
+        if(isset($data['year'])){
+            $builder->like('start_date',$data['year'],'after');
+        }
         $result=$builder->get()->getResult();
         return $result;
     }
@@ -171,10 +185,13 @@ class GovModel extends Model
     }
 
 
-    public function getStudentDev($gov_id){
+    public function getStudentDev($data){
         $db = \Config\Database::connect();
         $builder = $db->table('govstudent_dev');
-        $builder->where('gov_id',$gov_id);
+        $builder->where('gov_id',$data['gov_id']);
+        if(isset($data['year'])){
+            $builder->like('start_date',$data['year'],'after');
+        }
         $result=$builder->get()->getResult();
         return $result;
     }
@@ -209,10 +226,13 @@ class GovModel extends Model
     }
 
 
-    public function getProject($gov_id){
+    public function getProject($data=array()){
         $db = \Config\Database::connect();
         $builder = $db->table('govproject_record');
-        $builder->where('gov_id',$gov_id);
+        $builder->where('gov_id',$data['gov_id']);
+        if(isset($data['year'])){
+            $builder->like('start_date',$data['year'],'after');
+        }
         $result=$builder->get()->getResult();
         return $result;
     }

@@ -2,7 +2,7 @@
 
 namespace App\Controllers;
 
-class ReportView extends BaseController
+class ReportOrg extends BaseController
 {
 	public function school_01($title,$print=false)
 	{

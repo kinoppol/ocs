@@ -6,8 +6,8 @@
         $business=$curriculum['business'];
         foreach($curriculum['curriculum'] as $row){
             $curRows[]=array(
-                'business_id'=>$business[$row->business_id]['business_name'],
-                'curriculum_name'=>$row->curriculum_name,/*
+                'business_id'=>isset($row->business_id)&&$row->business_id!=0?$business[$row->business_id]['business_name']:'',
+                'curriculum_name'=>isset($row->curriculum_name)?$row->curriculum_name:'',/*
                 'support_vc_edu'=>$row->support_vc_edu=='Y'?$check:'',
                 'support_hvc_edu'=>$row->support_hvc_edu=='Y'?$check:'',
                 'support_btech_edu'=>$row->support_btech_edu=='Y'?$check:'',

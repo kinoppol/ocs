@@ -135,11 +135,11 @@ function genOption($data,$def=false,$noneSelectLable=false){
     $ret='';
     if(!is_array($data)) return $ret;
     
-    if(isset($noneSelectLable)&&$noneSelectLable!="")$ret.='<option value="">'.$noneSelectLable.'</option>';
+    if(isset($noneSelectLable)&&$noneSelectLable!="")$ret.='<option value="" style="padding:0px 40px">'.$noneSelectLable.'</option>';
 
     if(is_marray($data)){
         foreach($data as $k=>$v){
-            $ret.='<optgroup label="'.$k.'" style="padding:0px 150px">';
+            $ret.='<optgroup label="'.$k.'" style="padding:0px 40px">';
             $ret.=genOption($v,$def);
             $ret.='</optgroup>
             ';
@@ -153,7 +153,7 @@ function genOption($data,$def=false,$noneSelectLable=false){
         }else{
             if($k==$def)$selected='selected';
         }
-        $ret.='<option  style="padding:0px 100px" value="'.$k.'"'.$selected.'>'.$v.'</option>';
+        $ret.='<option  style="padding:0px 50px" value="'.$k.'"'.$selected.'>'.$v.'</option>';
     }
     return $ret;
 }
