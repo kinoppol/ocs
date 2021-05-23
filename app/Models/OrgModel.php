@@ -6,9 +6,11 @@ use CodeIgniter\Model;
 
 class OrgModel extends Model
 {
-    public function getSchool(){
+    public function getSchool($data=array()){
         $db = \Config\Database::connect();
         $builder = $db->table('school');
+        if(isset($data['province_id']))$builder->where('province_id',$data['province_id']);
+        if(isset($data['zone_id']))$builder->where('zone',$data['zone_id']);
         $data=$builder->get()->getResult();
             $datas=array();
             foreach($data as $row){
@@ -31,11 +33,37 @@ class OrgModel extends Model
         return $result;
     }
     public function schoolData($school_id){
+        if(trim($school_id)=='')return false;
         $db = \Config\Database::connect();
         $builder = $db->table('school');
         $builder->where('school_id',$school_id);
         $data=$builder->get()->getResult();
-        return $data[0];
+            return $data[0];
+
+    }
+
+    public function getZone(){
+        $db = \Config\Database::connect();
+        $builder = $db->table('data_zone');
+        $data=$builder->get()->getResult();
+        $ret=array();
+        foreach($data as $row){
+            $ret[$row->zone_id]=$row->zone_name;
+        }
+            return $ret;
+
+    }
+
+    public function getProvince(){
+        $db = \Config\Database::connect();
+        $builder = $db->table('data_province');
+        $data=$builder->get()->getResult();
+        $ret=array();
+        foreach($data as $row){
+            $ret[$row->province_code]=$row->province_name;
+        }
+            return $ret;
+
     }
 
     public function getGov(){

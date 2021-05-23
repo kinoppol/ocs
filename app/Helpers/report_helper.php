@@ -1,18 +1,143 @@
 <?php
+function yearFilter($data){
+    $ret='
+		<div class="row clearfix">
+		<form method="post">
+		<input type="hidden" name="title" value="'.$data['title'].'">
+		<div class="col-lg-2 col-md-6 col-sm-6 col-xs-3">
+		'.$data['label'].'
+		</div>
+		<div class="col-lg-6 col-md-6 col-sm-6 col-xs-3">
+		<div class="form-group">
+		<div class="form-line">'.filterSelectYear('year',false,false,(isset($_POST['year'])?$_POST['year']:false)).'
+		</div>
+		</div>
+		</div>
+		<div class="col-lg-2 col-md-6 col-sm-6 col-xs-3">
+		<div class="form-group">
+		<div class="form-line">
+		<button class="btn btn-primary form-control"><i class="material-icons">search</i> ตกลง</button>
+		</div>
+		</div>
+		</div>
+		<div class="col-lg-2 col-md-6 col-sm-6 col-xs-3">
+		<div class="form-group">
+		<div class="form-line">
+		<button name="export" formaction="'.$data['title'].'/print" formtarget="_blank" class="btn btn-danger form-control"><i class="material-icons">picture_as_pdf</i> พิมพ์รายงาน</button>
+		</div>
+		</div>
+		</div>
+		</form>
+		</div>';
+    return $ret;
+}
+
+function orgYearFilter($data){
+    helper('form');
+    helper('org');
+    $orgSelect=array(
+        'id'=>"org_id",
+        'label'=>"หน่วยงาน",
+        'items'=>orgArr(isset($data['org_ids'])?$data['org_ids']:false),
+        'def'=>(isset($_POST['org_id']))?$_POST['org_id']:current_user('org_code'),
+    );
+    $yearSelect=array(
+        'id'=>'year',
+        'label'=>$data['label'],
+        'items'=>filterOptionYear(false,false),
+        'def'=>(isset($_POST['year'])?$_POST['year']:date('Y')),
+    );
+    $ret='
+		<div class="row clearfix">
+		<form method="post">
+		<input type="hidden" name="title" value="'.$data['title'].'">
+		<div class="col-lg-4 col-md-4 col-sm-4 col-xs-4">'.genInput_select($yearSelect).'
+		</div>
+		<div class="col-lg-4 col-md-4 col-sm-4 col-xs-4">'.genInput_select($orgSelect).'
+		</div>
+		<div class="col-lg-2 col-md-2 col-sm-2 col-xs-2"">
+		<div class="form-group">
+		<div class="form-line">
+		<button class="btn btn-primary form-control"><i class="material-icons">search</i> ตกลง</button>
+		</div>
+		</div>
+		</div>
+		<div class="col-lg-2 col-md-2 col-sm-2 col-xs-2"">
+		<div class="form-group">
+		<div class="form-line">
+		<button name="export" formaction="'.$data['title'].'/print" formtarget="_blank" class="btn btn-danger form-control"><i class="material-icons">picture_as_pdf</i> พิมพ์รายงาน</button>
+		</div>
+		</div>
+		</div>
+		</form>
+		</div>';
+    return $ret;
+}
+
+
+function govYearFilter($data){
+    helper('form');
+    helper('org');
+    $orgSelect=array(
+        'id'=>"org_id",
+        'label'=>"หน่วยงาน",
+        'items'=>govArr(isset($data['org_ids'])?$data['org_ids']:false),
+        'def'=>(isset($_POST['org_id']))?$_POST['org_id']:current_user('org_code'),
+    );
+    $yearSelect=array(
+        'id'=>'year',
+        'label'=>$data['label'],
+        'items'=>filterOptionYear(false,false),
+        'def'=>(isset($_POST['year'])?$_POST['year']:date('Y')),
+    );
+    $ret='
+		<div class="row clearfix">
+		<form method="post">
+		<input type="hidden" name="title" value="'.$data['title'].'">
+		<div class="col-lg-4 col-md-4 col-sm-4 col-xs-4">'.genInput_select($yearSelect).'
+		</div>
+		<div class="col-lg-4 col-md-4 col-sm-4 col-xs-4">'.genInput_select($orgSelect).'
+		</div>
+		<div class="col-lg-2 col-md-2 col-sm-2 col-xs-2"">
+		<div class="form-group">
+		<div class="form-line">
+		<button class="btn btn-primary form-control"><i class="material-icons">search</i> ตกลง</button>
+		</div>
+		</div>
+		</div>
+		<div class="col-lg-2 col-md-2 col-sm-2 col-xs-2"">
+		<div class="form-group">
+		<div class="form-line">
+		<button name="export" formaction="'.$data['title'].'/print" formtarget="_blank" class="btn btn-danger form-control"><i class="material-icons">picture_as_pdf</i> พิมพ์รายงาน</button>
+		</div>
+		</div>
+		</div>
+		</form>
+		</div>';
+    return $ret;
+}
+
 function signBox($data=array()){
     if(mb_strlen($data['org_code'])<10){
 		$orgModel = model('App\Models\OrgModel');
 		$govModel = model('App\Models\GovModel');
 		$govData=$govModel->getGovData($data['org_code']);
+        if($govData->secretary_school_id==''){
+            $data=array(
+                'org_name'=>$data['org_name'],
+            );
+            $signBox=govSignBox($data);
+            return $signBox;
+        }
 		$schoolData=$orgModel->schoolData($govData->secretary_school_id);
 
-        $assistant_secretary_position=$govData->assistant_secretary_position.'_name';
-        $secretary_position=$govData->secretary_position.'_name';
+        $assistant_secretary_position=isset($govData)?$govData->assistant_secretary_position.'_name':false;
+        $secretary_position=isset($govData)?$govData->secretary_position.'_name':false;
         $data=array(
             'org_name'=>$data['org_name'],
-            'nameP1'=>$govData->supervisor_name,
-            'nameP2'=>$schoolData->$assistant_secretary_position,
-            'nameP3'=>$schoolData->$secretary_position,
+            'nameP1'=>isset($govData->supervisor_name)?$govData->supervisor_name:false,
+            'nameP2'=>isset($schoolData)?$schoolData->$assistant_secretary_position:false,
+            'nameP3'=>isset($schoolData)?$schoolData->$secretary_position:false,
         );
         $signBox=govSignBox($data);
     }else if(mb_substr($data['org_code'],2,1)!=0){
@@ -27,8 +152,14 @@ function signBox($data=array()){
         );
         $signBox=schoolSignBox($data);
     }else if($data['org_code']=='1300000000'){
+
+		$bocModel = model('App\Models\BocModel');
+        $bocData=$bocModel->bocData();
         $data=array(
             'org_name'=>$data['org_name'],
+            'nameP1'=>$bocData->supervisor_name,
+            'nameP2'=>$bocData->director_group_name,
+            'nameP3'=>$bocData->director_name,
         );
         $signBox=bocSignBox($data);
 
@@ -130,6 +261,17 @@ $option='';
 $ret.=$option.'</select>  ';
 
 return $ret;
+}
+
+function filterOptionYear($MAXY=false,$MINY=false){
+    if(!$MAXY)$MAXY=date('Y')+1;
+    if(!$MINY)$MINY=date('Y')-5;
+$option=array();
+    for($i=$MAXY;$i>$MINY;$i--){
+        $option[$i]=$i+543;
+    }
+
+return $option;
 }
 
 function genSignBox($data=array()){

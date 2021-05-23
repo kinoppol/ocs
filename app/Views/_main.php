@@ -303,7 +303,7 @@ if(!$debug){
     <section class="content">
         <div class="container-fluid">
             <div class="block-header">
-                <h2 style="text-align:left;float:left;"><?php print $title;?></h2><h2 style="text-align:right;float:right;"><?php print $_SERVER['PATH_INFO']; ?></h2>
+                <h2 style="text-align:left;float:left;"><?php print $title;?></h2><h2 style="text-align:right;float:right;"><?php /* print $_SERVER['PATH_INFO']; */ ?></h2>
                 <hr style="clear:both;"/>
             </div>
                         

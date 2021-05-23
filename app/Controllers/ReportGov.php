@@ -14,8 +14,8 @@ class ReportGov extends BaseController
 		helper('org');
 		helper('thai');
 		
-		$org_code=current_user('org_code');
-		$org_name=org_name(current_user('org_code'));
+		$org_code=isset($_POST['org_id'])?$_POST['org_id']:current_user('org_code');
+		$org_name=isset($_POST['org_id'])?org_name($_POST['org_id']):'';
 		$data=array(
 			'org_code'=>$org_code,
 			'org_name'=>$org_name,
@@ -23,35 +23,12 @@ class ReportGov extends BaseController
 		$org_type_name=org_type_name($data);
 		$signBox=signBox($data);
 
-		$form='
-		<div class="row clearfix">
-		<form method="post">
-		<input type="hidden" name="title" value="'.$title.'">
-		<div class="col-lg-2 col-md-6 col-sm-6 col-xs-3">
-		ปีที่ประชุม
-		</div>
-		<div class="col-lg-6 col-md-6 col-sm-6 col-xs-3">
-		<div class="form-group">
-		<div class="form-line">'.filterSelectYear('year',false,false,(isset($_POST['year'])?$_POST['year']:false)).'
-		</div>
-		</div>
-		</div>
-		<div class="col-lg-2 col-md-6 col-sm-6 col-xs-3">
-		<div class="form-group">
-		<div class="form-line">
-		<button class="btn btn-primary form-control"><i class="material-icons">search</i> ตกลง</button>
-		</div>
-		</div>
-		</div>
-		<div class="col-lg-2 col-md-6 col-sm-6 col-xs-3">
-		<div class="form-group">
-		<div class="form-line">
-		<button name="export" formaction="'.$title.'/print" formtarget="_blank" class="btn btn-danger form-control"><i class="material-icons">picture_as_pdf</i> พิมพ์รายงาน</button>
-		</div>
-		</div>
-		</div>
-		</form>
-		</div>';
+		$data=array(
+			'title'=>$title,
+			'label'=>'ปีที่ประชุม',
+			'org_ids'=>gov_ids(),
+		);
+		$form=govYearFilter($data);
 		$result='';
 		$resultHead=array(
 			'ครั้งที่',
@@ -66,7 +43,7 @@ class ReportGov extends BaseController
 
 
 		    $govModel = model('App\Models\GovModel');
-            $resultData=$govModel->getMeetting(['gov_id'=>current_user('org_code'),'year'=>$_POST['year']]);
+            $resultData=$govModel->getMeetting(['gov_id'=>$_POST['org_id'],'year'=>$_POST['year']]);
 			$i=0;
             $resultRows=array();
 			foreach ($resultData as $meetting){
@@ -122,7 +99,7 @@ class ReportGov extends BaseController
 				'header'=>'<div style="text-align: right; font-weight: normal;"><br> หน้า{PAGENO}/{nbpg}</div>'
 			);
 			$location=FCPATH.'/pdf/';
-			$fname=current_user('org_code').'_school_01.pdf';
+			$fname=$_POST['org_id'].'_school_01.pdf';
 			$filePdf=genPdf($pdf_data,$pageNo=NULL,$location,$fname);
 			//return '';
 			return '<meta http-equiv="refresh" content="0;url='.site_url('public/pdf/'.$filePdf).'?'.time().'">';
@@ -140,8 +117,8 @@ class ReportGov extends BaseController
 		helper('org');
 		helper('thai');
 		
-		$org_code=current_user('org_code');
-		$org_name=org_name(current_user('org_code'));
+		$org_code=isset($_POST['org_id'])?$_POST['org_id']:current_user('org_code');
+		$org_name=isset($_POST['org_id'])?org_name($_POST['org_id']):'';
 		$data=array(
 			'org_code'=>$org_code,
 			'org_name'=>$org_name,
@@ -149,35 +126,12 @@ class ReportGov extends BaseController
 		$org_type_name=org_type_name($data);
 		$signBox=signBox($data);
 
-		$form='
-		<div class="row clearfix">
-		<form method="post">
-		<input type="hidden" name="title" value="'.$title.'">
-		<div class="col-lg-2 col-md-6 col-sm-6 col-xs-3">
-		ปีที่พัฒนาครูฝึก
-		</div>
-		<div class="col-lg-6 col-md-6 col-sm-6 col-xs-3">
-		<div class="form-group">
-		<div class="form-line">'.filterSelectYear('year',false,false,(isset($_POST['year'])?$_POST['year']:false)).'
-		</div>
-		</div>
-		</div>
-		<div class="col-lg-2 col-md-6 col-sm-6 col-xs-3">
-		<div class="form-group">
-		<div class="form-line">
-		<button class="btn btn-primary form-control"><i class="material-icons">search</i> ตกลง</button>
-		</div>
-		</div>
-		</div>
-		<div class="col-lg-2 col-md-6 col-sm-6 col-xs-3">
-		<div class="form-group">
-		<div class="form-line">
-		<button name="export" formaction="'.$title.'/print" formtarget="_blank" class="btn btn-danger form-control"><i class="material-icons">picture_as_pdf</i> พิมพ์รายงาน</button>
-		</div>
-		</div>
-		</div>
-		</form>
-		</div>';
+		$data=array(
+			'title'=>$title,
+			'label'=>'ปีที่พัฒนาครูฝึก',
+			'org_ids'=>gov_ids(),
+		);
+		$form=govYearFilter($data);
 		$result='';
 		$resultHead=array(
 			'ครั้งที่',
@@ -192,7 +146,7 @@ class ReportGov extends BaseController
 			$caption='<b>'.$title.' ปี '.($_POST['year']+543).'</b><br>'.$org_name;
 
 			$data=array(
-				'gov_id'=>current_user('org_code'),
+				'gov_id'=>$_POST['org_id'],
 				'year'=>$_POST['year'],
 			);
 		    $govModel = model('App\Models\GovModel');
@@ -253,7 +207,7 @@ class ReportGov extends BaseController
 				'header'=>'<div style="text-align: right; font-weight: normal;"><b>แบบฟอร์มที่ 6</b><br> หน้า{PAGENO}/{nbpg}</div>'
 			);
 			$location=FCPATH.'/pdf/';
-			$fname=current_user('org_code').'_school_01.pdf';
+			$fname=$_POST['org_id'].'_school_01.pdf';
 			$filePdf=genPdf($pdf_data,$pageNo=NULL,$location,$fname);
 			//return '';
 			return '<meta http-equiv="refresh" content="0;url='.site_url('public/pdf/'.$filePdf).'?'.time().'">';
@@ -271,8 +225,8 @@ class ReportGov extends BaseController
 		helper('org');
 		helper('thai');
 		
-		$org_code=current_user('org_code');
-		$org_name=org_name(current_user('org_code'));
+		$org_code=isset($_POST['org_id'])?$_POST['org_id']:current_user('org_code');
+		$org_name=isset($_POST['org_id'])?org_name($_POST['org_id']):'';
 		$data=array(
 			'org_code'=>$org_code,
 			'org_name'=>$org_name,
@@ -280,35 +234,12 @@ class ReportGov extends BaseController
 		$org_type_name=org_type_name($data);
 		$signBox=signBox($data);
 
-		$form='
-		<div class="row clearfix">
-		<form method="post">
-		<input type="hidden" name="title" value="'.$title.'">
-		<div class="col-lg-2 col-md-6 col-sm-6 col-xs-3">
-		ปีที่ประชาสัมพันธ์
-		</div>
-		<div class="col-lg-6 col-md-6 col-sm-6 col-xs-3">
-		<div class="form-group">
-		<div class="form-line">'.filterSelectYear('year',false,false,(isset($_POST['year'])?$_POST['year']:false)).'
-		</div>
-		</div>
-		</div>
-		<div class="col-lg-2 col-md-6 col-sm-6 col-xs-3">
-		<div class="form-group">
-		<div class="form-line">
-		<button class="btn btn-primary form-control"><i class="material-icons">search</i> ตกลง</button>
-		</div>
-		</div>
-		</div>
-		<div class="col-lg-2 col-md-6 col-sm-6 col-xs-3">
-		<div class="form-group">
-		<div class="form-line">
-		<button name="export" formaction="'.$title.'/print" formtarget="_blank" class="btn btn-danger form-control"><i class="material-icons">picture_as_pdf</i> พิมพ์รายงาน</button>
-		</div>
-		</div>
-		</div>
-		</form>
-		</div>';
+		$data=array(
+			'title'=>$title,
+			'label'=>'ปีที่ประชาสัมพันธ์',
+			'org_ids'=>gov_ids(),
+		);
+		$form=govYearFilter($data);
 		$result='';
 		$resultHead=array(
 			'ครั้งที่',
@@ -323,7 +254,7 @@ class ReportGov extends BaseController
 			$caption='<b>'.$title.' ปี '.($_POST['year']+543).'</b><br>'.$org_name;
 
 			$data=array(
-				'gov_id'=>current_user('org_code'),
+				'gov_id'=>$_POST['org_id'],
 				'year'=>$_POST['year'],
 			);
 		    $govModel = model('App\Models\GovModel');
@@ -384,7 +315,7 @@ class ReportGov extends BaseController
 				'header'=>'<div style="text-align: right; font-weight: normal;"><b>แบบฟอร์มที่ 7</b><br> หน้า{PAGENO}/{nbpg}</div>'
 			);
 			$location=FCPATH.'/pdf/';
-			$fname=current_user('org_code').'_school_01.pdf';
+			$fname=$_POST['org_id'].'_school_01.pdf';
 			$filePdf=genPdf($pdf_data,$pageNo=NULL,$location,$fname);
 			//return '';
 			return '<meta http-equiv="refresh" content="0;url='.site_url('public/pdf/'.$filePdf).'?'.time().'">';
@@ -402,8 +333,8 @@ class ReportGov extends BaseController
 		helper('org');
 		helper('thai');
 		
-		$org_code=current_user('org_code');
-		$org_name=org_name(current_user('org_code'));
+		$org_code=isset($_POST['org_id'])?$_POST['org_id']:current_user('org_code');
+		$org_name=isset($_POST['org_id'])?org_name($_POST['org_id']):'';
 		$data=array(
 			'org_code'=>$org_code,
 			'org_name'=>$org_name,
@@ -411,35 +342,12 @@ class ReportGov extends BaseController
 		$org_type_name=org_type_name($data);
 		$signBox=signBox($data);
 
-		$form='
-		<div class="row clearfix">
-		<form method="post">
-		<input type="hidden" name="title" value="'.$title.'">
-		<div class="col-lg-2 col-md-6 col-sm-6 col-xs-3">
-		ปีที่ครูผู้สอนในสถานศึกษา
-		</div>
-		<div class="col-lg-6 col-md-6 col-sm-6 col-xs-3">
-		<div class="form-group">
-		<div class="form-line">'.filterSelectYear('year',false,false,(isset($_POST['year'])?$_POST['year']:false)).'
-		</div>
-		</div>
-		</div>
-		<div class="col-lg-2 col-md-6 col-sm-6 col-xs-3">
-		<div class="form-group">
-		<div class="form-line">
-		<button class="btn btn-primary form-control"><i class="material-icons">search</i> ตกลง</button>
-		</div>
-		</div>
-		</div>
-		<div class="col-lg-2 col-md-6 col-sm-6 col-xs-3">
-		<div class="form-group">
-		<div class="form-line">
-		<button name="export" formaction="'.$title.'/print" formtarget="_blank" class="btn btn-danger form-control"><i class="material-icons">picture_as_pdf</i> พิมพ์รายงาน</button>
-		</div>
-		</div>
-		</div>
-		</form>
-		</div>';
+		$data=array(
+			'title'=>$title,
+			'label'=>'ปีที่อบรมครูผู้สอนในสถานศึกษา',
+			'org_ids'=>gov_ids(),
+		);
+		$form=govYearFilter($data);
 		$result='';
 		$resultHead=array(
 			'ครั้งที่',
@@ -454,7 +362,7 @@ class ReportGov extends BaseController
 			$caption='<b>'.$title.' ปี '.($_POST['year']+543).'</b><br>'.$org_name;
 
 			$data=array(
-				'gov_id'=>current_user('org_code'),
+				'gov_id'=>$_POST['org_id'],
 				'year'=>$_POST['year'],
 			);
 		    $govModel = model('App\Models\GovModel');
@@ -515,7 +423,7 @@ class ReportGov extends BaseController
 				'header'=>'<div style="text-align: right; font-weight: normal;"><b>แบบฟอร์มที่ 8</b><br> หน้า{PAGENO}/{nbpg}</div>'
 			);
 			$location=FCPATH.'/pdf/';
-			$fname=current_user('org_code').'_school_01.pdf';
+			$fname=$_POST['org_id'].'_school_01.pdf';
 			$filePdf=genPdf($pdf_data,$pageNo=NULL,$location,$fname);
 			//return '';
 			return '<meta http-equiv="refresh" content="0;url='.site_url('public/pdf/'.$filePdf).'?'.time().'">';
@@ -533,8 +441,8 @@ class ReportGov extends BaseController
 		helper('org');
 		helper('thai');
 		
-		$org_code=current_user('org_code');
-		$org_name=org_name(current_user('org_code'));
+		$org_code=isset($_POST['org_id'])?$_POST['org_id']:current_user('org_code');
+		$org_name=isset($_POST['org_id'])?org_name($_POST['org_id']):'';
 		$data=array(
 			'org_code'=>$org_code,
 			'org_name'=>$org_name,
@@ -542,35 +450,12 @@ class ReportGov extends BaseController
 		$org_type_name=org_type_name($data);
 		$signBox=signBox($data);
 
-		$form='
-		<div class="row clearfix">
-		<form method="post">
-		<input type="hidden" name="title" value="'.$title.'">
-		<div class="col-lg-2 col-md-6 col-sm-6 col-xs-3">
-		ปีที่พัฒนาผู้เรียน
-		</div>
-		<div class="col-lg-6 col-md-6 col-sm-6 col-xs-3">
-		<div class="form-group">
-		<div class="form-line">'.filterSelectYear('year',false,false,(isset($_POST['year'])?$_POST['year']:false)).'
-		</div>
-		</div>
-		</div>
-		<div class="col-lg-2 col-md-6 col-sm-6 col-xs-3">
-		<div class="form-group">
-		<div class="form-line">
-		<button class="btn btn-primary form-control"><i class="material-icons">search</i> ตกลง</button>
-		</div>
-		</div>
-		</div>
-		<div class="col-lg-2 col-md-6 col-sm-6 col-xs-3">
-		<div class="form-group">
-		<div class="form-line">
-		<button name="export" formaction="'.$title.'/print" formtarget="_blank" class="btn btn-danger form-control"><i class="material-icons">picture_as_pdf</i> พิมพ์รายงาน</button>
-		</div>
-		</div>
-		</div>
-		</form>
-		</div>';
+		$data=array(
+			'title'=>$title,
+			'label'=>'ปีที่พัฒนาผู้เรียน',
+			'org_ids'=>gov_ids(),
+		);
+		$form=govYearFilter($data);
 		$result='';
 		$resultHead=array(
 			'ครั้งที่',
@@ -585,7 +470,7 @@ class ReportGov extends BaseController
 			$caption='<b>'.$title.' ปี '.($_POST['year']+543).'</b><br>'.$org_name;
 
 			$data=array(
-				'gov_id'=>current_user('org_code'),
+				'gov_id'=>$_POST['org_id'],
 				'year'=>$_POST['year'],
 			);
 		    $govModel = model('App\Models\GovModel');
@@ -646,7 +531,7 @@ class ReportGov extends BaseController
 				'header'=>'<div style="text-align: right; font-weight: normal;"><b>แบบฟอร์มที่ 9</b><br> หน้า{PAGENO}/{nbpg}</div>'
 			);
 			$location=FCPATH.'/pdf/';
-			$fname=current_user('org_code').'_school_01.pdf';
+			$fname=$_POST['org_id'].'_school_01.pdf';
 			$filePdf=genPdf($pdf_data,$pageNo=NULL,$location,$fname);
 			//return '';
 			return '<meta http-equiv="refresh" content="0;url='.site_url('public/pdf/'.$filePdf).'?'.time().'">';
@@ -665,8 +550,8 @@ class ReportGov extends BaseController
 		helper('org');
 		helper('thai');
 		
-		$org_code=current_user('org_code');
-		$org_name=org_name(current_user('org_code'));
+		$org_code=isset($_POST['org_id'])?$_POST['org_id']:current_user('org_code');
+		$org_name=isset($_POST['org_id'])?org_name($_POST['org_id']):'';
 		$data=array(
 			'org_code'=>$org_code,
 			'org_name'=>$org_name,
@@ -674,35 +559,12 @@ class ReportGov extends BaseController
 		$org_type_name=org_type_name($data);
 		$signBox=signBox($data);
 
-		$form='
-		<div class="row clearfix">
-		<form method="post">
-		<input type="hidden" name="title" value="'.$title.'">
-		<div class="col-lg-2 col-md-6 col-sm-6 col-xs-3">
-		ปีที่ดำเนินโครงการ
-		</div>
-		<div class="col-lg-6 col-md-6 col-sm-6 col-xs-3">
-		<div class="form-group">
-		<div class="form-line">'.filterSelectYear('year',false,false,(isset($_POST['year'])?$_POST['year']:false)).'
-		</div>
-		</div>
-		</div>
-		<div class="col-lg-2 col-md-6 col-sm-6 col-xs-3">
-		<div class="form-group">
-		<div class="form-line">
-		<button class="btn btn-primary form-control"><i class="material-icons">search</i> ตกลง</button>
-		</div>
-		</div>
-		</div>
-		<div class="col-lg-2 col-md-6 col-sm-6 col-xs-3">
-		<div class="form-group">
-		<div class="form-line">
-		<button name="export" formaction="'.$title.'/print" formtarget="_blank" class="btn btn-danger form-control"><i class="material-icons">picture_as_pdf</i> พิมพ์รายงาน</button>
-		</div>
-		</div>
-		</div>
-		</form>
-		</div>';
+		$data=array(
+			'title'=>$title,
+			'label'=>'ปีที่ดำเนินโครงการ',
+			'org_ids'=>gov_ids(),
+		);
+		$form=govYearFilter($data);
 		$result='';
 		$resultHead=array(
 			'ครั้งที่',
@@ -722,7 +584,7 @@ class ReportGov extends BaseController
 			$caption='<b>'.$title.' ปี '.($_POST['year']+543).'</b><br>'.$org_name;
 
 			$data=array(
-				'gov_id'=>current_user('org_code'),
+				'gov_id'=>$_POST['org_id'],
 				'year'=>$_POST['year'],
 			);
 		    $govModel = model('App\Models\GovModel');
@@ -788,7 +650,7 @@ class ReportGov extends BaseController
 				'header'=>'<div style="text-align: right; font-weight: normal;"><b>แบบฟอร์มที่ 10</b><br> หน้า{PAGENO}/{nbpg}</div>'
 			);
 			$location=FCPATH.'/pdf/';
-			$fname=current_user('org_code').'_school_01.pdf';
+			$fname=$_POST['org_id'].'_school_01.pdf';
 			$filePdf=genPdf($pdf_data,$pageNo=NULL,$location,$fname);
 			//return '';
 			return '<meta http-equiv="refresh" content="0;url='.site_url('public/pdf/'.$filePdf).'?'.time().'">';

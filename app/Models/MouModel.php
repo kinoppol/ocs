@@ -19,11 +19,11 @@ class MouModel extends Model
         $db = \Config\Database::connect();
         $builder = $db->table('mou');
         if(isset($data['mou_id']))$builder->where('mou_id',$data['mou_id']);
-        if(isset($data['school_id'])&&!is_array($data['school_id'])){
+        if(isset($data['school_id'])&&!is_array($data['school_id'])&&$data['school_id']!='*'){
             $builder->where('school_id',$data['school_id']);
-        }/*else if(isset($data['school_id'])&&is_array($data['school_id'])){
+        }else if(isset($data['school_id'])&&is_array($data['school_id'])){
             $builder->where('school_id in ('.implode(',',$data['school_id']).')');
-        }*/
+        }
         if(isset($data['year']))$builder->like('mou_date',$data['year'],'after');
         $mou=$builder->get()->getResult();
         //print $db->getLastQuery();
@@ -133,9 +133,14 @@ class MouModel extends Model
         $builder = $db->table('curriculum');
         if(isset($data['id']))$builder->where('id',$data['id']);
         if(isset($data['curriculum_year']))$builder->where('curriculum_year',$data['curriculum_year']);
-        if(isset($data['school_id']))$builder->where('school_id',$data['school_id']);
+        if(isset($data['school_id'])&&!is_array($data['school_id'])&&$data['school_id']!='*'){
+            $builder->where('school_id',$data['school_id']);
+        }else if(isset($data['school_id'])&&is_array($data['school_id'])){
+                $builder->where('school_id in ('.implode(',',$data['school_id']).')');
+            }
         $builder->orderBy('business_id');
         $curriculum=$builder->get()->getResult();
+        //print $db->getLastQuery();
         if(count($curriculum)<1){
             return $data=array('curriculum'=>array(),
             'business'=>array());
@@ -181,7 +186,11 @@ class MouModel extends Model
         $builder = $db->table('mou_result');
         if(isset($data['id']))$builder->where('id',$data['id']);
         if(isset($data['result_year']))$builder->where('result_year',$data['result_year']);
-        if(isset($data['school_id']))$builder->where('school_id',$data['school_id']);
+        if(isset($data['school_id'])&&!is_array($data['school_id'])&&$data['school_id']!='*'){
+            $builder->where('school_id',$data['school_id']);
+        }else if(isset($data['school_id'])&&is_array($data['school_id'])){
+                $builder->where('school_id in ('.implode(',',$data['school_id']).')');
+            }
         $builder->orderBy('business_id');
         $result=$builder->get()->getResult();
         //print $db->getLastQuery();

@@ -14,44 +14,35 @@ class ReportOrg extends BaseController
 		helper('org');
 		helper('thai');
 		
-		$org_code=current_user('org_code');
-		$org_name=org_name(current_user('org_code'));
+		$org_code=isset($_POST['org_id'])?$_POST['org_id']:current_user('org_code');
+		if($org_code=='all'){
+			$org_name="สถานศึกษาทุกแห่งในสังกัด".org_name(current_user('org_code'));
+			$org_id=$_SESSION['subORG'];
+		}else if(mb_substr($org_code,0,1)=='p'){
+			$province_code=mb_substr($org_code,1,mb_strlen($org_code));
+			$org_name="สถานศึกษาทุกแห่งในจังหวัด".provinceName($province_code);
+			$org_id=schoolInProvince($province_code);
+		}else if(mb_substr($org_code,0,1)=='z'){
+			$zone_id=mb_substr($org_code,1,mb_strlen($org_code));
+			$org_name="สถานศึกษาทุกแห่งในภาค".zoneName($zone_id);
+			$org_id=schoolInZone($zone_id);
+		}else{
+			$org_name=isset($_POST['org_id'])?org_name($_POST['org_id']):org_name(current_user('org_code'));
+			$org_id=$org_code;
+		}
 		$data=array(
-			'org_code'=>$org_code,
-			'org_name'=>$org_name,
+			'org_code'=>$org_code=='all'||!is_numeric($org_code)?current_user('org_code'):$org_code,
+			'org_name'=>$org_code=='all'||!is_numeric($org_code)?org_name(current_user('org_code')):$org_name,
 		);
 		$org_type_name=org_type_name($data);
 		$signBox=signBox($data);
 
-		$form='
-		<div class="row clearfix">
-		<form method="post">
-		<input type="hidden" name="title" value="'.$title.'">
-		<div class="col-lg-2 col-md-6 col-sm-6 col-xs-3">
-		ปีที่ลงนาม
-		</div>
-		<div class="col-lg-6 col-md-6 col-sm-6 col-xs-3">
-		<div class="form-group">
-		<div class="form-line">'.filterSelectYear('year',false,false,(isset($_POST['year'])?$_POST['year']:false)).'
-		</div>
-		</div>
-		</div>
-		<div class="col-lg-2 col-md-6 col-sm-6 col-xs-3">
-		<div class="form-group">
-		<div class="form-line">
-		<button class="btn btn-primary form-control"><i class="material-icons">search</i> ตกลง</button>
-		</div>
-		</div>
-		</div>
-		<div class="col-lg-2 col-md-6 col-sm-6 col-xs-3">
-		<div class="form-group">
-		<div class="form-line">
-		<button name="export" formaction="'.$title.'/print" formtarget="_blank" class="btn btn-danger form-control"><i class="material-icons">picture_as_pdf</i> พิมพ์รายงาน</button>
-		</div>
-		</div>
-		</div>
-		</form>
-		</div>';
+		$data=array(
+			'title'=>$title,
+			'label'=>'ปีที่ลงนาม',
+			'org_ids'=>org_ids(),
+		);
+		$form=orgYearFilter($data);
 		$result='';
 		$resultHead=array(
 			'ที่',
@@ -72,7 +63,7 @@ class ReportOrg extends BaseController
 
 			$mouModel = model('App\Models\MouModel');
 			$resultData=$mouModel->getMou(['year'=>$_POST['year'],
-											'school_id'=>current_user('org_code')]);
+											'school_id'=>$org_id]);
 			
 			$school=$resultData['school'];
 			$business=$resultData['business'];
@@ -80,8 +71,10 @@ class ReportOrg extends BaseController
 			$resultRows=array();
 			$i=0;
 			foreach ($resultData['mou'] as $mou){
-				$i++;
 				$mou = get_object_vars($mou);
+
+				if(!isset($business[$mou['business_id']]))continue;
+				$i++;
 
 				$supEdu='';
 				if($mou['support_vc_edu']=='Y')$supEdu='ปวช.';
@@ -98,12 +91,13 @@ class ReportOrg extends BaseController
 					if(isset($school[$mou['school_id']]))$org_name=$school[$mou['school_id']];
 					else if(isset($gov[$mou['school_id']]))$org_name=$gov[$mou['school_id']];
 
+					
 				$resultRows[]=array(
 					$i,
 					'business_id'=>$business[$mou['business_id']]['business_name'],
 					'job_description'=>$business[$mou['business_id']]['job_description'],
-					'level'=>'ระดับ '.$mou['level'],
-					'investment'=>isset($mou['investment'])?$mou['investment']:'',
+					'level'=>isset($mou['level'])&&$mou['level']!=''?'ระดับ '.$mou['level']:'',
+					'investment'=>isset($mou['investment'])&&$mou['investment']!=''?$mou['investment']:'ยังไม่มี',
 					'support_edu'=>$supEdu,
 					//'mou_date'=>dateThai($mou['mou_date']),
 					'mou_start_date'=>dateThai($mou['mou_start_date']),
@@ -137,10 +131,16 @@ class ReportOrg extends BaseController
 		);
 		}else{
 			$result.='
+			<table width="100%">
+			<tr>
+			<td>
 			<u>หมายเหตุ</u><br>
 			&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;ระดับ ๑ หมายถึง ดำเนินกิจกรรมเกี่ยวกับ CSR การฝึกงาน กิจกรรมเฉพาะกิจ (รวมระยะสั้น)<br>
 			&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;ระดับ ๒ หมายถึง ดำเนินกิจกรรมเกี่ยวกับ CSR การฝึกงาน กิจกรรมเฉพาะกิจ (รวมระยะสั้น) และจัดการเรียนการสอนทวิภาคี<br>
 			&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;ระดับ ๓ หมายถึง ดำเนินกิจกรรมเกี่ยวกับ CSR การฝึกงาน กิจกรรมเฉพาะกิจ (รวมระยะสั้น) และจัดการเรียนการสอนทวิภาคี และมีการร่วมลงทุนระหว่างสถานประกอบการและสถานศึกษา
+			</td>
+			</tr>
+			</table>
 			'.$signBox;
 			error_reporting(0);
 			helper('mpdf');
@@ -151,8 +151,8 @@ class ReportOrg extends BaseController
 				'fontsize'=>16,
 				'marginL'=>20,
 				'marginR'=>10,
-				'marginT'=>10,
-				'marginB'=>10,
+				'marginT'=>25,
+				'marginB'=>15,
 				'header'=>'',
 				'wartermark'=>'',
 				'wartermarkimage'=>'',
@@ -160,7 +160,7 @@ class ReportOrg extends BaseController
 				'header'=>'<div style="text-align: right; font-weight: normal;"><b>แบบฟอร์มที่ 4</b> <br> หน้า{PAGENO}/{nbpg}</div>'
 			);
 			$location=FCPATH.'/pdf/';
-			$fname=current_user('org_code').'_school_01.pdf';
+			$fname=$_POST['org_id'].'_school_01.pdf';
 			$filePdf=genPdf($pdf_data,$pageNo=NULL,$location,$fname);
 			//return '';
 			return '<meta http-equiv="refresh" content="0;url='.site_url('public/pdf/'.$filePdf).'?'.time().'">';
@@ -193,46 +193,36 @@ class ReportOrg extends BaseController
 		helper('org');
 		helper('thai');
 		
-		$org_code=current_user('org_code');		
-		$org_name=org_name($org_code);
+		$org_code=isset($_POST['org_id'])?$_POST['org_id']:current_user('org_code');
+		if($org_code=='all'){
+			$org_name="สถานศึกษาทุกแห่งในสังกัด".org_name(current_user('org_code'));
+			$org_id=$_SESSION['subORG'];
+		}else if(mb_substr($org_code,0,1)=='p'){
+			$province_code=mb_substr($org_code,1,mb_strlen($org_code));
+			$org_name="สถานศึกษาทุกแห่งในจังหวัด".provinceName($province_code);
+			$org_id=schoolInProvince($province_code);
+		}else if(mb_substr($org_code,0,1)=='z'){
+			$zone_id=mb_substr($org_code,1,mb_strlen($org_code));
+			$org_name="สถานศึกษาทุกแห่งในภาค".zoneName($zone_id);
+			$org_id=schoolInZone($zone_id);
+		}else{
+			$org_name=isset($_POST['org_id'])?org_name($_POST['org_id']):org_name(current_user('org_code'));
+			$org_id=$org_code;
+		}
 		$data=array(
-			'org_code'=>$org_code,
-			'org_name'=>$org_name,
+			'org_code'=>$org_code=='all'||!is_numeric($org_code)?current_user('org_code'):$org_code,
+			'org_name'=>$org_code=='all'||!is_numeric($org_code)?org_name(current_user('org_code')):$org_name,
 		);
 		$org_type_name=org_type_name($data);
 		$signBox=signBox($data);
 
 		$title='รายงานการพัฒนาหลักสูตรระหว่าง '.$org_type_name.' ร่วมกับสถานประกอบการ';
 
-		$form='
-		<div class="row clearfix">
-		<form method="post">
-		<input type="hidden" name="title" value="'.$title.'">
-		<div class="col-lg-2 col-md-6 col-sm-6 col-xs-3">
-		ปีที่ลงนาม
-		</div>
-		<div class="col-lg-6 col-md-6 col-sm-6 col-xs-3">
-		<div class="form-group">
-		<div class="form-line">'.filterSelectYear('year',false,false,(isset($_POST['year'])?$_POST['year']:false)).'
-		</div>
-		</div>
-		</div>
-		<div class="col-lg-2 col-md-6 col-sm-6 col-xs-3">
-		<div class="form-group">
-		<div class="form-line">
-		<button class="btn btn-primary form-control"><i class="material-icons">search</i> ตกลง</button>
-		</div>
-		</div>
-		</div>
-		<div class="col-lg-2 col-md-6 col-sm-6 col-xs-3">
-		<div class="form-group">
-		<div class="form-line">
-		<button name="export" formaction="'.$title.'/print" formtarget="_blank" class="btn btn-danger form-control"><i class="material-icons">picture_as_pdf</i> พิมพ์รายงาน</button>
-		</div>
-		</div>
-		</div>
-		</form>
-		</div>';
+		$data=array(
+			'title'=>$title,
+			'label'=>'ปีที่จัดอบรม',
+		);
+		$form=orgYearFilter($data);
 		$result='';
 		$resultHead=array(
 			'ที่',
@@ -255,7 +245,7 @@ class ReportOrg extends BaseController
 
 			$mouModel = model('App\Models\MouModel');
 			$resultData=$mouModel->curriculumGet(['curriculum_year'=>$_POST['year'],
-											'school_id'=>current_user('org_code')]);
+											'school_id'=>$org_id]);
 			
 			//$school=$resultData['school'];
 			$business=$resultData['business'];
@@ -330,7 +320,7 @@ class ReportOrg extends BaseController
 				'marginL'=>20,
 				'marginR'=>10,
 				'marginT'=>10,
-				'marginB'=>10,
+				'marginB'=>15,
 				'header'=>'',
 				'wartermark'=>'',
 				'wartermarkimage'=>'',
@@ -338,7 +328,7 @@ class ReportOrg extends BaseController
 				'header'=>'<div style="text-align: right; font-weight: normal;"><b>แบบฟอร์มที่ 3</b> <br> หน้า {PAGENO}/{nbpg}</div>'
 			);
 			$location=FCPATH.'/pdf/';
-			$fname=current_user('org_code').'_school_01.pdf';
+			$fname=$_POST['org_id'].'_school_01.pdf';
 			$filePdf=genPdf($pdf_data,$pageNo=NULL,$location,$fname);
 			//return '';
 			return '<meta http-equiv="refresh" content="0;url='.site_url('public/pdf/'.$filePdf).'?'.time().'">';
@@ -357,11 +347,25 @@ class ReportOrg extends BaseController
 		helper('org');
 		helper('thai');
 		
-		$org_code=current_user('org_code');		
-		$org_name=org_name($org_code);
+		$org_code=isset($_POST['org_id'])?$_POST['org_id']:current_user('org_code');
+		if($org_code=='all'){
+			$org_name="สถานศึกษาทุกแห่งในสังกัด".org_name(current_user('org_code'));
+			$org_id=$_SESSION['subORG'];
+		}else if(mb_substr($org_code,0,1)=='p'){
+			$province_code=mb_substr($org_code,1,mb_strlen($org_code));
+			$org_name="สถานศึกษาทุกแห่งในจังหวัด".provinceName($province_code);
+			$org_id=schoolInProvince($province_code);
+		}else if(mb_substr($org_code,0,1)=='z'){
+			$zone_id=mb_substr($org_code,1,mb_strlen($org_code));
+			$org_name="สถานศึกษาทุกแห่งในภาค".zoneName($zone_id);
+			$org_id=schoolInZone($zone_id);
+		}else{
+			$org_name=isset($_POST['org_id'])?org_name($_POST['org_id']):org_name(current_user('org_code'));
+			$org_id=$org_code;
+		}
 		$data=array(
-			'org_code'=>$org_code,
-			'org_name'=>$org_name,
+			'org_code'=>$org_code=='all'||!is_numeric($org_code)?current_user('org_code'):$org_code,
+			'org_name'=>$org_code=='all'||!is_numeric($org_code)?org_name(current_user('org_code')):$org_name,
 		);
 		$org_type_name=org_type_name($data);
 		$signBox=signBox($data);
@@ -384,36 +388,12 @@ class ReportOrg extends BaseController
 
 		
 		$title='รายงานผลสัมฤทธิ์ของการร่วมมือระหว่าง '.$org_type_name.' ร่วมกับสถานประกอบการ';
-
-		$form='
-		<div class="row clearfix">
-		<form method="post">
-		<input type="hidden" name="title" value="'.$title.'">
-		<div class="col-lg-2 col-md-6 col-sm-6 col-xs-3">
-		ปีที่ลงนาม
-		</div>
-		<div class="col-lg-6 col-md-6 col-sm-6 col-xs-3">
-		<div class="form-group">
-		<div class="form-line">'.filterSelectYear('year',false,false,(isset($_POST['year'])?$_POST['year']:false)).'
-		</div>
-		</div>
-		</div>
-		<div class="col-lg-2 col-md-6 col-sm-6 col-xs-3">
-		<div class="form-group">
-		<div class="form-line">
-		<button class="btn btn-primary form-control"><i class="material-icons">search</i> ตกลง</button>
-		</div>
-		</div>
-		</div>
-		<div class="col-lg-2 col-md-6 col-sm-6 col-xs-3">
-		<div class="form-group">
-		<div class="form-line">
-		<button name="export" formaction="'.$title.'/print" formtarget="_blank" class="btn btn-danger form-control"><i class="material-icons">picture_as_pdf</i> พิมพ์รายงาน</button>
-		</div>
-		</div>
-		</div>
-		</form>
-		</div>';
+		$data=array(
+			'title'=>$title,
+			'label'=>'ปีที่เกิดผลสัมฤทธิ์',
+			'org_ids'=>org_ids(),
+		);
+		$form=orgYearFilter($data);
 		$result='';
 		$resultHead=array(
 			'ที่',
@@ -432,8 +412,8 @@ class ReportOrg extends BaseController
 			$caption='<b>'.$title.' ปี '.($_POST['year']+543).' </b><br>'.$org_name;
 
 			$mouModel = model('App\Models\MouModel');
-			$resultData=$mouModel->resultGet(['result'=>$_POST['year'],
-											'school_id'=>current_user('org_code')]);
+			$resultData=$mouModel->resultGet(['result_year'=>$_POST['year'],
+											'school_id'=>$org_id]);
 			
 			//$school=$resultData['school'];
 			$business=$resultData['business'];
@@ -492,7 +472,7 @@ class ReportOrg extends BaseController
 				'marginL'=>20,
 				'marginR'=>10,
 				'marginT'=>10,
-				'marginB'=>10,
+				'marginB'=>15,
 				'header'=>'',
 				'wartermark'=>'',
 				'wartermarkimage'=>'',
@@ -500,7 +480,7 @@ class ReportOrg extends BaseController
 				'header'=>'<div style="text-align: right; font-weight: normal;">หน้า {PAGENO}/{nbpg}</div>'
 			);
 			$location=FCPATH.'/pdf/';
-			$fname=current_user('org_code').'_school_01.pdf';
+			$fname=$_POST['org_id'].'_school_01.pdf';
 			$filePdf=genPdf($pdf_data,$pageNo=NULL,$location,$fname);
 			//return '';
 			return '<meta http-equiv="refresh" content="0;url='.site_url('public/pdf/'.$filePdf).'?'.time().'">';
