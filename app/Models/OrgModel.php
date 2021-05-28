@@ -66,6 +66,41 @@ class OrgModel extends Model
 
     }
 
+    public function getDistrict($province_code){
+        $db = \Config\Database::connect();
+        $builder = $db->table('data_district');
+        $builder->where('province_code',$province_code);
+        $builder->select('district_code,district_name');
+        $data=$builder->get()->getResult();
+        $ret=array();
+        foreach($data as $row){
+            $ret[]=array(
+                'district_code'=>$row->district_code,
+                'district_name'=>$row->district_name,
+            );
+        }
+        return $ret;
+
+    }
+
+
+    public function getSubDistrict($district_code){
+        $db = \Config\Database::connect();
+        $builder = $db->table('data_subdistrict');
+        $builder->where('district_code',$district_code);
+        $builder->select('subdistrict_code,subdistrict_name');
+        $data=$builder->get()->getResult();
+        $ret=array();
+        foreach($data as $row){
+            $ret[]=array(
+                'subdistrict_code'=>$row->subdistrict_code,
+                'subdistrict_name'=>$row->subdistrict_name,
+            );
+        }
+        return $ret;
+
+    }
+
     public function getGov(){
         $db = \Config\Database::connect();
         $builder = $db->table('govdata');

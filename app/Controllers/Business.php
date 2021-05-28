@@ -37,16 +37,31 @@ class Business extends BaseController
 		return view('_main',$data);
 	}
     public function add(){
-        
+		$orgModel = model('App\Models\OrgModel');
+        $province = $orgModel->getProvince();
+        $data=array(
+            'province'=>$province,
+        );
 		$data=array(
 			'title'=>'เพิ่มข้อมูลสถานประกอบการ',
 			'mainMenu'=>view('_menu'),
-            'content'=>view('businessDetail'),
+            'content'=>view('businessDetail',$data),
 			'notification'=>'',
 			'task'=>'',
 		);        
 
 		return view('_main',$data);
+    }
+    public function districtInProvince($province_id){
+		$orgModel = model('App\Models\OrgModel');
+        $data = $orgModel->getDistrict($province_id);
+        return json_encode($data);
+    }
+
+    public function subdistrictInDistrict($district_id){
+		$orgModel = model('App\Models\OrgModel');
+        $data = $orgModel->getSubDistrict($district_id);
+        return json_encode($data);
     }
 
     public function saveBusiness(){

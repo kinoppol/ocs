@@ -839,4 +839,29 @@ class Gov extends BaseController
 
 		return view('_main',$data);
 	}
+
+	public function viewMeettingPicture($meettingID){
+
+		$govModel = model('App\Models\GovModel');
+		$meettingData=$govModel->getMeettingData($meettingID);
+		$pics=$meettingData->pictures;
+		$pics=explode(',',$pics);
+		$pictures=array();
+		foreach($pics as $pic){
+			$pictures[]['url']=site_url('meettingRecord/images/'.$pic);
+		}
+		$data=array(
+			'galleryName'=>$meettingData->subject,
+			'pictures'=>$pictures,
+		);
+		$data=array(
+			'title'=>'ภาพประกอบรายงานการประชุม',
+			'mainMenu'=>view('_menu'),
+			'content'=>view('gallery',$data),
+			'notification'=>'',
+			'task'=>'',
+		);
+
+		return view('_main',$data);
+	}
 }

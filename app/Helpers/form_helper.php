@@ -119,11 +119,21 @@ function genInput_check_group($data){
 
 function genInput_select($data){
     $multiple='';
+    $search='';
     if(isset($data['multiple'])&&$data['multiple'])$multiple=' multiple';
+    if(isset($data['search'])&&$data['search']==true){
+        $search='data-live-search="true"';
+        if(!isset($_SESSION['SEARCHLIB'])){
+            $_SESSION['SEARCHLIB']=true;
+            $_SESSION['FOOTSYSTEM'].='
+            <!-- Select Plugin Js -->
+            <script src="'.site_url().'template/adminbsb/plugins/bootstrap-select/js/bootstrap-select.js"></script>';
+        }
+    }
     $ret='<label for="'.$data['id'].'">'.$data['label'].(isset($data['required'])&&$data['required']?'<span style="color:red;">*</span>':'').'</label>
             <div class="form-group">
                 <div class="form-line">
-                    <select name="'.$data['id'].'" id="'.$data['id'].'" class="form-control '.(isset($data['class'])?$data['class']:'').'" '.(isset($data['required'])&&$data['required']?'required':'').''.(isset($data['disabled'])&&$data['disabled']?'disabled':'').' '.$multiple.' data-live-search="true"/>
+                    <select name="'.$data['id'].'" id="'.$data['id'].'" class="form-control '.(isset($data['class'])?$data['class']:'').'" '.(isset($data['required'])&&$data['required']?'required':'').''.(isset($data['disabled'])&&$data['disabled']?'disabled':'').' '.$multiple.$search.'/>
                     '.genOption($data['items'],$data['def'],(isset($data['noneLabel'])?$data['noneLabel']:false)).'
                     </select>
                 </div>

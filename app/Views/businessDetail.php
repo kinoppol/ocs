@@ -21,7 +21,41 @@
             'def'=>isset($businessData->vat_id)?$businessData->vat_id:'',
              ),
          array(
-            'label'=>'ที่อยู่',
+            'label'=>'จังหวัด',
+            'type'=>'select',
+            'id'=>'province_id',
+            'items'=>$province,
+            'noneLabel'=>'โปรดเลือกจังหวัด',
+            'def'=>isset($businessData->provice_id)?$businessData->provice_id:'',
+            'required'=>true,
+             ),
+         array(
+            'label'=>'อำเภอ/เขต',
+            'type'=>'select',
+            'id'=>'district_id',
+            'items'=>array(),
+            'noneLabel'=>'โปรดเลือกอำเภอ/เขต',
+            'def'=>isset($businessData->district_id)?$businessData->district_id:'',
+            'required'=>true,
+             ),
+         array(
+            'label'=>'ตำบล/แขวง',
+            'type'=>'select',
+            'id'=>'subdistrict_id',
+            'items'=>array(),
+            'noneLabel'=>'โปรดเลือกตำบล/แขวง',
+            'def'=>isset($businessData->subdistrict_id)?$businessData->subdistrict_id:'',
+            'required'=>true,
+             ),
+         array(
+            'label'=>'ถนน',
+            'type'=>'text',
+            'id'=>'road',
+            'def'=>isset($businessData->road)?$businessData->road:'',
+            'required'=>false,
+             ),
+         array(
+            'label'=>'เลขที่',
             'type'=>'text',
             'id'=>'address_no',
             'def'=>isset($businessData->address_no)?$businessData->address_no:'',
@@ -97,4 +131,41 @@
         'enctype'=>'multipart/form-data',
     );
     
+    $_SESSION['FOOTSYSTEM']='
+    <script>
+    $("#province_id").change(function(){
+        var p_code=$(this).val();
+        $("#subdistrict_id").html("<option value=\"\">โปรดเลือกตำบล/แขวง</option>");
+        $("#district_id").html("<option value=\"\">โปรดเลือกอำเภอ/เขต</option>");
+    
+        $.get("'.site_url('public/business/districtInProvince/').'"+p_code,function(data){
+
+
+            var result=JSON.parse(data);
+            $.each(result,function(index,item){
+                $("#district_id").append(
+                    $("<option></option>").val(item.district_code).html(item.district_name)
+                );
+            });
+    
+        })
+    });
+    
+    $("#district_id").change(function(){
+        var d_code=$(this).val();
+        $("#subdistrict_id").html("<option value=\"\">โปรดเลือกตำบล/แขวง</option>");
+    
+        $.get("'.site_url('public/business/subdistrictInDistrict/').'"+d_code,function(data){
+            var result=JSON.parse(data);
+            $.each(result,function(index,item){
+                $("#subdistrict_id").append(
+                    
+                    $("<option></option>").val(item.subdistrict_code).html(item.subdistrict_name)
+                );
+            });
+    
+        })
+    });
+    </script>';
+
     print genForm($form);

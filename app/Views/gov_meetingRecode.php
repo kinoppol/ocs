@@ -14,7 +14,7 @@
                 'subject'=>$v['subject'],
                 'attach'=>'
                 <a href="'.site_url('public/gov/viewMeettingRecord/'.$k).'" target="_blank" class="btn btn-xs btn-danger waves-effect"><i class="material-icons">picture_as_pdf</i>PDF</a>
-                <a href="'.site_url('public/gov/viewPictures/'.$k).'" target="_blank" class="btn btn-xs btn-success waves-effect"><i class="material-icons">image</i>PIC</a>',
+                <a href="'.site_url('public/gov/viewMeettingPicture/'.$k).'" class="btn btn-xs btn-success waves-effect"><i class="material-icons">image</i>PIC</a>',
                 'manage'=>'
                 <a href="'.site_url('public/gov/meettingPrint/'.$k).'" target="_blank" class="btn btn-xs btn-primary waves-effect"><i class="material-icons">print</i></a>
                 <a href="'.site_url('public/gov/meettingDetail/'.$k).'" class="btn btn-xs btn-warning waves-effect"><i class="material-icons">edit</i></a>

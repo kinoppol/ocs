@@ -38,6 +38,7 @@ function orgYearFilter($data){
     $orgSelect=array(
         'id'=>"org_id",
         'label'=>"หน่วยงาน",
+        'search'=>true,
         'items'=>orgArr(isset($data['org_ids'])?$data['org_ids']:false),
         'def'=>(isset($_POST['org_id']))?$_POST['org_id']:current_user('org_code'),
     );
@@ -81,6 +82,7 @@ function govYearFilter($data){
     $orgSelect=array(
         'id'=>"org_id",
         'label'=>"หน่วยงาน",
+        'search'=>true,
         'items'=>govArr(isset($data['org_ids'])?$data['org_ids']:false),
         'def'=>(isset($_POST['org_id']))?$_POST['org_id']:current_user('org_code'),
     );
