@@ -9,7 +9,7 @@
         foreach($meettingData as $k=>$v){
             $meettingRows[]=array(
                 'book_no'=>$v['book_no'],
-                'meetting_date'=>dateThai($v['meetting_date'],true,false,true),
+                'meetting_date'=>dateThai($v['meetting_date']),
                 'meetting_place'=>$v['meetting_place'],
                 'subject'=>$v['subject'],
                 'attach'=>'

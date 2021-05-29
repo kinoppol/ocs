@@ -11,7 +11,7 @@
             $i++;
             $tableRows[]=array(
                 'no'=>$i,
-                'project_duration'=>dateThai($v->start_date,true,false,true).' ถึง<br>'.dateThai($v->end_date,true,false,true),
+                'project_duration'=>dateThai($v->start_date).' ถึง<br>'.dateThai($v->end_date),
                 'project_plcae'=>$v->project_place,
                 'project_subject'=>$v->subject,
                 'manage'=>'

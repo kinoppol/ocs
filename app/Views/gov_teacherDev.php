@@ -11,12 +11,16 @@
             $i++;
             $tableRows[]=array(
                 'no'=>$i,
-                'teacherDev_duration'=>dateThai($v->start_date,true,false,true).' ถึง<br>'.dateThai($v->end_date,true,false,true),
-                'teacherDev_plcae'=>$v->dev_place,
+                'teacherDev_duration'=>dateThai($v->start_date).' ถึง<br>'.dateThai($v->end_date),
+                /*'teacherDev_plcae'=>$v->dev_place,*/
                 'teacherDev_subject'=>$v->subject,
+                'attach'=>'
+                <a href="'.site_url('public/gov/viewTeacherDev/'.$v->id).'" target="_blank" class="btn btn-xs btn-danger waves-effect"><i class="material-icons">picture_as_pdf</i>PDF</a>
+                <a href="'.site_url('public/gov/viewTeacherDevPicture/'.$v->id).'" class="btn btn-xs btn-success waves-effect"><i class="material-icons">image</i>PIC</a>',
                 'personCount'=>0,
                 'manage'=>'
-                <a href="'.site_url('public/gov/teacherDevPerson/'.$v->id).'" class="btn btn-xs btn-primary waves-effect"><i class="material-icons">groups</i></a>
+                <a href="'.site_url('public/gov/teacherDevPerson/'.$v->id).'" class="btn btn-xs btn-warning waves-effect"><i class="material-icons">groups</i></a>
+                <a href="'.site_url('public/gov/teacherDevReport/'.$v->id).'" target="_blank" class="btn btn-xs btn-primary waves-effect"><i class="material-icons">print</i></a>
                 <a href="'.site_url('public/gov/teacherDevDetail/'.$v->id).'" class="btn btn-xs btn-warning waves-effect"><i class="material-icons">edit</i></a>
                 <a href="'.site_url('public/gov/teacherDevDelete/'.$v->id).'" class="btn btn-xs btn-danger" onclick="return confirm(\'ยืนยันการลบข้อมูล\');"><i class="material-icons">delete</i></a>',
             );
@@ -24,10 +28,11 @@
         $tableArr=array('thead'=>array(
             'ที่',
             'ช่วงเวลา',
-            'สถานที่จัดอบรม',
+            /*'สถานที่จัดอบรม',*/
             'หัวข้อ',
+            'ไฟล์แนบ<br>(เอกสาร/รูปภาพ)',
             'จำนวนผู้เข้ารับ<br>การพัฒนา (คน)',
-            'จัดการ<br>(รายชื่อ/แก้ไข/ลบ)',
+            'จัดการ<br>(รายชื่อ/พิมพ์/แก้ไข/ลบ)',
     ),
     'tbody'=>$tableRows,
 );
