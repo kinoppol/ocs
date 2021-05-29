@@ -63,7 +63,7 @@ helper('user');
         array(
             'label'=>'แนบไฟล์รูปภาพ (โปรดแนบรูปอย่างน้อย 2 รูป)',
             'type'=>'file',
-            'id'=>'pictures',
+            'id'=>'picture',
             'accept'=>'image/jpeg,image/png',
             'def'=>'',
         ),
