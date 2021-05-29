@@ -23,6 +23,8 @@ class BusinessModel extends Model
                     'subdistrict_id'=>$row->subdistrict_id,
                     'road'=>$row->road,
                     'address_no'=>$row->address_no,
+                    'location'=>$row->location,
+                    'picture'=>$row->picture,
                 );
             }
         return $datas;
@@ -43,6 +45,8 @@ class BusinessModel extends Model
                     'subdistrict_id'=>$row->subdistrict_id,
                     'road'=>$row->road,
                     'address_no'=>$row->address_no,
+                    'location'=>$row->location,
+                    'picture'=>$row->picture,
                 );
             }
         return $datas;

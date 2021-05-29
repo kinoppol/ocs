@@ -3,14 +3,16 @@ helper('array');
 
 function genForm($data){
     $enctype='';
+    $onSubmit='';
     if(isset($data['enctype']))$enctype=' enctype="multipart/form-data"';
+    if(isset($data['onSubmit']))$onSubmit=' onSubmit="'.$data['onSubmit'].'"';
     $ret='<div class="card">
     <div class="header">
         <h2>
             '.$data['formName'].'
         </h2>
         <div class="body">
-                            <form action="'.$data['action'].'" method="'.$data['method'].'"'.$enctype.'>'.
+                            <form id="'.(isset($data['id'])?$data['id']:'form_data').'" action="'.$data['action'].'" method="'.$data['method'].'"'.$enctype.$onSubmit.'>'.
                             genInput($data['inputs'])
                             .'</form>
                             </div>

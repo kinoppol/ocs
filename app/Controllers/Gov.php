@@ -136,6 +136,7 @@ class Gov extends BaseController
 	}
 	public function saveMeetting(){
 
+        helper('image');
 		$govModel = model('App\Models\GovModel');
 
 		$data=array();
@@ -147,44 +148,33 @@ class Gov extends BaseController
 		$data['gov_id']=current_user('org_code');
 		$data['record_time']=date('y-m-d H:i:s');
 
-		if(!isset($_POST['id'])){
-			$file_name=$result=$govModel->meettingAdd($data);
+		if(!isset($_POST['id'])||$_POST['id']==''){
+			$mid=$result=$govModel->meettingAdd($data);
 		}else{
 			$result=$govModel->meettingUpdate($_POST['id'],$data);
-			$file_name=$_POST['id'];
+			$mid=$_POST['id'];
 		}
 
-		$mettingFilePath=FCPATH.'../meettingRecord/';
+		$mettingFilePath=FCPATH.'../docs/meettingRecord/';
+		
 
 		if($_FILES['meettingRecord']['type']=='application/pdf'){
-			$pdf_file=$file_name.'.pdf';
-			$meettingRecord=$mettingFilePath.'doc/'.$pdf_file;
+			$pdf_file=$mid.'.pdf';
+			$meettingRecord=$mettingFilePath.$pdf_file;
 			move_uploaded_file($_FILES['meettingRecord']['tmp_name'],$meettingRecord);
 		}
-		//เรียง Array File ภาพ ใหม่
-		$hFiles=array();
-		$hFiles['pictures']=array();
-		foreach($_FILES['pictures'] as $k=>$v){
-			foreach($v as $sk=>$sv){
-				$hFiles['pictures'][$sk][$k]=$sv;
-			}
-		}
-
-		$pictures=array();
-		$i=0;
-		foreach($hFiles['pictures'] as $pic){
-			if($pic['type']!='image/jpeg')continue;
-			$i++;
-			$pic_name=$file_name.'_'.$i.'.jpg';
-			$picture=$mettingFilePath.'images/'.$pic_name;
-			$pictures[]=$pic_name;
-			move_uploaded_file($pic['tmp_name'],$picture);
-		}
+		$path=FCPATH.'../images/meettingRecord/';
+            $pictures=uploadPic('pictures',$path);
+            $data['pictures']=implode(',',$pictures);
 		//อัพเดตข้อมูลไฟล์แนบ
-			$mRecord_id=$file_name;
+			$meettingData=$govModel->getMeettingData($mid);
+			$mRecord_id=$mid;
 			$data=array();
 			if(isset($pdf_file)&&$pdf_file!='')$data['meettingRecord']=$pdf_file;
-			if(isset($pictures)&&count($pictures)>0)$data['pictures']=implode(',',$pictures);
+			if(isset($pictures)&&count($pictures)>0){
+				$pics=implode(',',$pictures);
+				$data['pictures']=$meettingData->pictures!=''?$meettingData->pictures.','.$pics:$pics;
+			}
 			if(count($data)>0){
 				$govModel->meettingUpdate($mRecord_id,$data);
 			}
@@ -201,7 +191,7 @@ class Gov extends BaseController
 	public function viewMeettingRecord($id){		
 		$govModel = model('App\Models\GovModel');
 		$report=$govModel->getMeettingData([$id]);
-		$pdfUrl=site_url('meettingRecord/doc/'.$report->meettingRecord);
+		$pdfUrl=site_url('/docs/meettingRecord/'.$report->meettingRecord);
 		$data=array(
 			'title'=>'รายงานการประชุม อ.กรอ.อศ.',
 			'mainMenu'=>view('_menu'),
@@ -848,11 +838,12 @@ class Gov extends BaseController
 		$pics=explode(',',$pics);
 		$pictures=array();
 		foreach($pics as $pic){
-			$pictures[]['url']=site_url('meettingRecord/images/'.$pic);
+			$pictures[]['url']=site_url('/images/meettingRecord/'.$pic);
 		}
 		$data=array(
 			'galleryName'=>$meettingData->subject,
 			'pictures'=>$pictures,
+			'deleteLink'=>site_url('public/gov/delPicture/'.$meettingID.'/'),
 		);
 		$data=array(
 			'title'=>'ภาพประกอบรายงานการประชุม',

@@ -81,10 +81,10 @@ helper('user');
             'def'=>'',
         ),
         array(
-            'label'=>'แนบไฟล์รูปภาพ (อย่างน้อย 2 รูป)',
+            'label'=>'แนบไฟล์รูปภาพ (โปรดแนบรูปอย่างน้อย 2 รูป)',
             'type'=>'file',
-            'id'=>'attach_picture',
-            'accept'=>'image/jpeg',
+            'id'=>'pictures',
+            'accept'=>'image/jpeg,image/png',
             'def'=>'',
         ),
         array(

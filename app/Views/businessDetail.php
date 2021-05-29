@@ -26,14 +26,14 @@
             'id'=>'province_id',
             'items'=>$province,
             'noneLabel'=>'โปรดเลือกจังหวัด',
-            'def'=>isset($businessData->provice_id)?$businessData->provice_id:'',
+            'def'=>isset($businessData->province_id)?$businessData->province_id:'',
             'required'=>true,
              ),
          array(
             'label'=>'อำเภอ/เขต',
             'type'=>'select',
             'id'=>'district_id',
-            'items'=>array(),
+            'items'=>isset($district)?$district:array(),
             'noneLabel'=>'โปรดเลือกอำเภอ/เขต',
             'def'=>isset($businessData->district_id)?$businessData->district_id:'',
             'required'=>true,
@@ -42,7 +42,7 @@
             'label'=>'ตำบล/แขวง',
             'type'=>'select',
             'id'=>'subdistrict_id',
-            'items'=>array(),
+            'items'=>isset($subdistrict)?$subdistrict:array(),
             'noneLabel'=>'โปรดเลือกตำบล/แขวง',
             'def'=>isset($businessData->subdistrict_id)?$businessData->subdistrict_id:'',
             'required'=>true,
@@ -115,7 +115,8 @@
             'label'=>'ภาพถ่ายหน้าสถานประกอบการ',
             'type'=>'file',
             'id'=>'picture',
-            'def'=>'',
+            'multiple'=>true,
+            'def'=>isset($businessData->picture)?$businessData->picture:'',
              ),
          array(
              'label'=>'บันทึกข้อมูล',
@@ -124,15 +125,43 @@
     );
 
     $form=array(
+        'id'=>'business_form',
         'formName'=>'ข้อมูลสถานประกอบการ',
         'inputs'=>$data,
         'action'=>site_url('public/business/saveBusiness'),
         'method'=>'post',
+        'onSubmit'=>'return chk_dup();',
         'enctype'=>'multipart/form-data',
     );
     
-    $_SESSION['FOOTSYSTEM']='
-    <script>
+    $_SESSION['FOOTSCRIPT']='
+
+var last_check=false;
+function chk_dup(){
+  if(last_check==false){
+    $.post("'.site_url('public/business/check_duplicate').'",
+    {
+      businessName: $("#business_name").val(),
+      vat_id: $("#vat_id").val(),
+      province_id: $("#province_id").val(),
+      district_id: $("#district_id").val(),
+      subdistrict_id: $("#subdistrict_id").val(),
+    },
+    function(data, status){
+      var response=JSON.parse(data);
+        if(parseInt(response["percent"])<85){
+          last_check=true;
+          $("#business_form").submit();
+          last_check=false;
+        }else{
+          alert("555");
+        }
+      });
+    return false;
+  }else{
+    return true;
+  }
+}
     $("#province_id").change(function(){
         var p_code=$(this).val();
         $("#subdistrict_id").html("<option value=\"\">โปรดเลือกตำบล/แขวง</option>");
@@ -166,6 +195,6 @@
     
         })
     });
-    </script>';
+    ';
 
     print genForm($form);

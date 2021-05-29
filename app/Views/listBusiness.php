@@ -2,24 +2,38 @@
         helper('table');
         helper('modal');
         helper('form');
+        helper('string');
         $buninessRows=array();
         foreach($business as $k=>$v){
             if($v['district_id']==0)continue;
+
+            $disdric_label='อำเภอ';
+            $subdisdric_label='ตำบล';
+
+            if($v['province_id']==10){
+                $disdric_label='';
+                $subdisdric_label='แขวง';
+            }
             $buninessRows[]=array(
-                'business_name'=>$v['business_name'],
-                'address'=>'จังหวัด'.$province[$v['province_id']].
-                            ' อำเภอ'.$district[$v['district_id']].
-                            ' ตำบล'.isset($v['subdistrict_id'])&&$v['subdistrict_id']!='0'?$subdistrict[$v['subdistrict_id']]:"".
-                            ' ถนน'.($v['road']!=''?$v['road']:'-').
-                            ' เลขที่ '.($v['address_no']!=''?$v['address_no']:'-'),
-                '<a href="'.site_url('public/business/detail/'.$v['business_id']).'" class="btn btn-xs btn-warning waves-effect"><i class="material-icons">edit</i> แก้ไขข้อมูล</a>
-                <a href="'.site_url('public/mou/add/'.$v['business_id']).'" class="btn btn-xs btn-success waves-effect"><i class="material-icons">book</i>เพิ่มข้อมูล MOU</a>',
+                'business_name'=>strlim($v['business_name'],20),
+                'address'=>/*'จังหวัด'.$province[$v['province_id']].
+
+                            ' '.*/strlim($disdric_label.$district[$v['district_id']].
+                            ' '.$subdisdric_label.(isset($v['subdistrict_id'])&&$v['subdistrict_id']!='0'?$subdistrict[$v['subdistrict_id']]:"").
+                            ($v['road']!=''?" ถนน".$v['road']:'').
+                            ' เลขที่ '.($v['address_no']!=''?$v['address_no']:'-'),100),
+                (isset($v['location'])&&$v['location']!==''?'<a href="https://www.google.com/maps/place/'.$v['location'].'" target="_blank" class="btn btn-xs btn-success waves-effect"><i class="material-icons">location_on</i></a> ':'<a href="#" class="btn btn-xs btn-default"><i class="material-icons">location_on</i></a> ').
+                (isset($v['picture'])&&$v['picture']!==''?'<a href="'.site_url('public/business/picture/'.$v['business_id']).'" class="btn btn-xs btn-primary waves-effect"><i class="material-icons">image</i></a>':'<a href="#" class="btn btn-xs btn-default"><i class="material-icons">image</i></a> ')
+                ,'
+                <a href="'.site_url('public/business/detail/'.$v['business_id']).'" class="btn btn-xs btn-warning waves-effect"><i class="material-icons">edit</i></a>
+                <a href="'.site_url('public/mou/add/'.$v['business_id']).'" class="btn btn-xs btn-success waves-effect"><i class="material-icons">history_edu</i></a>',
             );
         }
         $businessArr=array('thead'=>array(
                                 'สถานประกอบการ',
                                 'ที่อยู่',
-                                'จัดการ',
+                                'พิกัด/ภาพถ่าย',
+                                'จัดการ<br>แก้ไข/ทำ MOU',
                         ),
                         'tbody'=>$buninessRows,
         );

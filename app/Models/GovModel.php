@@ -39,6 +39,7 @@ class GovModel extends Model
         $db = \Config\Database::connect();
         $builder = $db->table('meetting_record');
         $result=$builder->insert($data);
+        //print $db->getLastQuery();
         return $db->insertID();
     }
     public function meettingUpdate($id,$data){
@@ -60,7 +61,25 @@ class GovModel extends Model
         $db = \Config\Database::connect();
         $builder = $db->table('meetting_record');
         $builder->where('id',$id);
+        $mData=$builder->get()->getResult();
+        $builder->where('id',$id);
         $result=$builder->delete();
+        $pics=explode(',',$mData[0]->pictures);
+        $docs=$mData[0]->meettingRecord;
+        //ลบรูป, ไฟล์แนบ
+        chdir(FCPATH);
+        foreach($pics as $pic){
+            $picPath=realpath('../images/meettingRecord').'/'.$pic;
+            if(file_exists($picPath)){
+                unlink($picPath);
+            }
+        }
+
+        $docPath=realpath('../docs/meettingRecord').'/'.$docs;
+        if(file_exists($docPath)){
+            unlink($docPath);
+        }
+        //จบส่วนลบไฟล์
         return $result;
     }
     public function getPublic($data){
