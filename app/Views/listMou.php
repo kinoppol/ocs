@@ -1,6 +1,7 @@
 <?php
         helper('table');
         helper('modal');
+        helper('thai');
         $mouRows=array();
         //print_r($data['school']);
         $school=$data['school'];
@@ -16,19 +17,26 @@
             if(!isset($business[$mou['business_id']]))continue;
             $mouRows[]=array(
                 'business_id'=>$business[$mou['business_id']]['business_name'],
-                'school_id'=>$org_name,
-                'mou_date'=>$mou['mou_date'],
-                'mou_sign_place'=>$mou['mou_sign_place'],
+                /*'school_id'=>$org_name,*/
+                'mou_date'=>dateThai($mou['mou_date']),
+                'end_date'=>dateThai($mou['mou_end_date']),
+                /*'mou_sign_place'=>$mou['mou_sign_place'],*/
+                'attach'=>'
+                <a href="'.site_url('public/mou/viewMOU/'.$mou['mou_id']).'" class="btn btn-xs btn-danger waves-effect"><i class="material-icons">picture_as_pdf</i></a>
+                <a href="'.site_url('public/mou/viewPicture/'.$mou['mou_id']).'" class="btn btn-xs btn-success waves-effect"><i class="material-icons">image</i></a>',
+                
                 '<a href="'.site_url('public/mou/edit/'.$mou['mou_id']).'" class="btn btn-xs btn-warning waves-effect"><i class="material-icons">edit</i></a>
-                <a href="'.site_url('public/mou/pdf/'.$mou['mou_id']).'" target="_blank" class="btn btn-xs btn-danger waves-effect"><i class="material-icons">print</i></a>',
+                <a href="'.site_url('public/mou/delete/'.$mou['mou_id']).'" class="btn btn-xs btn-danger waves-effect" onClick="return confirm(\'ลบข้อมูล MOU\');"><i class="material-icons">delete</i></a>',
             );
         }
         $mouArr=array('thead'=>array(
                                 'สถานประกอบการ',
-                                'หน่วยงานภาครัฐ',
+                                /*'หน่วยงานภาครัฐ',*/
                                 'วันที่ลงนาม',
-                                'สถานที่ลงนาม',
-                                'จัดการ',
+                                'วันที่สิ้นสุด<br>ความร่วมมือ',
+                                'ไฟล์แนบ<br>(เอกสาร/รูปภาพ)',
+                                /*'สถานที่ลงนาม',*/
+                                'จัดการ<br>แก้ไข/ลบ',
                         ),
                         'tbody'=>$mouRows,
         );

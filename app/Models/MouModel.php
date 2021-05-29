@@ -14,6 +14,13 @@ class MouModel extends Model
         $mouCount=count($mou);
         return $mouCount;
     }
+    public function getMouData($id){
+        $db = \Config\Database::connect();
+        $builder=$db->table('mou');
+        $builder->where('mou_id',$id);
+        $mou = $builder->get()->getResult();
+        return $mou[0];
+    }
     public function getMou($data){
         //print_r($data);
         $db = \Config\Database::connect();
@@ -93,7 +100,7 @@ class MouModel extends Model
         $builder = $db->table('mou');
         $result=$builder->insert($data);
         //print $db->getLastQuery();
-        return $result;
+        return $db->insertID();
     }
     
     public function updateMou($mou_id,$data){
@@ -103,6 +110,13 @@ class MouModel extends Model
         $builder->where('mou_id',$mou_id);
         $result=$builder->update($data);
         //print $db->getLastQuery();
+        return $result?$mou_id:false;
+    }
+    public function deleteMou($id){
+        $db = \Config\Database::connect();
+        $builder = $db->table('mou');
+        $builder->where('mou_id',$id);
+        $result=$builder->delete();
         return $result;
     }
 

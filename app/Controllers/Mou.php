@@ -77,7 +77,9 @@ class Mou extends BaseController
 	}
 	public function save(){
 		//print_r($_POST);
+		helper('image');
 		$businessModel = model('App\Models\MouModel');
+		$mouModel = model('App\Models\MouModel');
 		$data=array(
 			'business_id'	=>$_POST['business_id'],
 			'school_id'		=>$_POST['org_id'],
@@ -110,9 +112,39 @@ class Mou extends BaseController
 			'benefits'		=>$_POST['benefits'],
 			'obligation'	=>$_POST['obligation'],
 		);
-		if(isset($_POST['mou_id'])&&$_POST['mou_id']!='')$result=$businessModel->updateMou($_POST['mou_id'],$data);
-		else $result=$businessModel->addMou($data);
-		return '<meta http-equiv="refresh" content="0;url='.site_url('public/mou/list').'">';
+		
+
+		if(isset($_POST['mou_id'])&&$_POST['mou_id']!=''){
+			$mouData=$mouModel->getMouData($_POST['mou_id']);
+			$result=$businessModel->updateMou($_POST['mou_id'],$data);
+		}else $result=$businessModel->addMou($data);
+		//print_r($_FILES);
+		if($_FILES['mou_file']['type']=='application/pdf'){
+			$mouFilePath=FCPATH.'../docs/mou/';
+			$pdf_file=$result.'.pdf';
+			$mouFile=$mouFilePath.$pdf_file;
+			move_uploaded_file($_FILES['mou_file']['tmp_name'],$mouFile);
+			$data=array(
+				'mou_file'=>$pdf_file,
+			);
+			$businessModel->updateMou($result,$data);
+			//print "UPLOAD";
+		}
+		$path=FCPATH.'../images/mou/';
+            $pictures=uploadPic('mou_picture',$path);
+			if(count($pictures)>0){
+            	$data['mou_picture']=(isset($mouData->mou_picture)&&$mouData->mou_picture!=''?$mouData->mou_picture.',':'').implode(',',$pictures);
+				$businessModel->updateMou($result,$data);
+			}
+
+		$data=array(
+			'title'=>'บันทึกข้อมูลการลงนามความร่วมมือ',
+			'mainMenu'=>view('_menu'),
+			'notification'=>'',
+			'task'=>'',
+			'content'=>$result?'บันทึกข้อมูลสำเร็จ <meta http-equiv="refresh" content="2;url='.site_url('public/mou/list').'">':'บันทึกข้อมูลไม่สำเร็จ',
+		);
+		return view('_main',$data);
 	}
 	public function pdf($id)
 	{		
@@ -249,6 +281,7 @@ class Mou extends BaseController
 			'curriculum_name'	=>$_POST['curriculum_name'],
 			'curriculum_type'	=>$_POST['curriculum_type'],
 			'curriculum_year'	=>$_POST['curriculum_year'],
+			'skill_gap'			=>$_POST['skill_gap'],
 			'skill_01'			=>isset($_POST['skill_01'])?$_POST['skill_01']:'N',
 			'skill_02'			=>isset($_POST['skill_02'])?$_POST['skill_02']:'N',
 			'skill_03'			=>isset($_POST['skill_03'])?$_POST['skill_03']:'N',
@@ -422,4 +455,104 @@ class Mou extends BaseController
 		return view('_main',$data);
 
 	} 
+	public function viewMOU($id){		
+		$mouModel = model('App\Models\MouModel');
+		$mou=$mouModel->getMouData($id);
+		$pdfUrl=site_url('/docs/mou/'.$mou->mou_file);
+		$data=array(
+			'title'=>'หนังสือการลงนามความร่วมมือ',
+			'mainMenu'=>view('_menu'),
+			'content'=>$mou->mou_file==''?'ขออภัยไม่พบไฟล์ที่ระบุ':'<iframe id="iframepdf" src="'.$pdfUrl.'" width="100%" height="600"></iframe>',
+		  'notification'=>'',
+		  'task'=>'',
+		);
+		return view('_main',$data);
+	}
+	public function viewPicture($id){
+		helper('thai');
+		$mouModel = model('App\Models\MouModel');
+		$mou=$mouModel->getMouData($id);
+		$pics=$mou->mou_picture;
+		$pics=explode(',',$pics);
+		$pictures=array();
+		foreach($pics as $pic){
+			if($pic=='')continue;
+			$pictures[]['url']=site_url('/images/mou/'.$pic);
+		}
+		$data=array(
+			'galleryName'=>'ภาพการลงนามความร่วมมือ วันที่ '.dateThai($mou->mou_date,true,false,true),
+			'pictures'=>$pictures,
+			'deleteLink'=>site_url('public/mou/delMouPicture/'.$id.'/'),
+		);
+		$data=array(
+			'title'=>'ภาพการลงนามความร่วมมือ',
+			'mainMenu'=>view('_menu'),
+			'content'=>view('gallery',$data),
+			'notification'=>'',
+			'task'=>'',
+		);
+
+		return view('_main',$data);
+	}
+	public function delete($id){
+
+		$mouModel = model('App\Models\MouModel');
+		$mouData = $mouModel->getMouData($id);
+			$result=$mouModel->deleteMou(['id'=>$id]);
+
+		$pics=explode(',',$mouData->mou_picture);
+		foreach($pics as $pic){
+			if($pic=='')continue;
+		chdir(FCPATH);
+        $picPath=realpath('../images/mou').'/'.$pic;
+			if(file_exists($picPath)){
+				unlink($picPath);
+			}
+		}
+		$mou_file=$mouData->mou_file;
+		chdir(FCPATH);
+        $mouPath=realpath('../docs/mou').'/'.$mou_file;
+			if(file_exists($mouPath)){
+				unlink($mouPath);
+			}
+		$data=array(
+			'title'=>'ลบข้อมูลการลงนามความร่วมมือ',
+			'mainMenu'=>view('_menu'),
+            'content'=>$result?'ลบข้อมูลสำเร็จ <meta http-equiv="refresh" content="2;url='.site_url('public/mou/list').'">':'ลบข้อมูลไม่สำเร็จ',
+			'notification'=>'',
+			'task'=>'',
+		);      
+		return view('_main',$data);
+
+	} 
+
+	public function delMouPicture($mou_id,$pictureName){
+		$mouModel = model('App\Models\MouModel');
+		$mou=$mouModel->getMouData($mou_id);
+		$pics=$mou->mou_picture;
+		$pics=explode(',',$pics);
+		
+        chdir(FCPATH);
+        $picPath=realpath('../images/mou').'/'.$pictureName;
+        //print $picPath;
+        if(file_exists($picPath)){
+            unlink($picPath);
+        }
+        unset($pics[(array_search($pictureName,$pics))]);
+
+        $data=array(
+            'mou_picture'=>implode(',',$pics),
+        );
+        
+        $result=$mouModel->updateMou($mou_id,$data);
+
+		$data=array(
+			'title'=>'ลบรูป',
+			'mainMenu'=>view('_menu'),
+            'content'=>$result?'ลบรูปภาพสำเร็จ <meta http-equiv="refresh" content="2;url='.site_url('public/mou/viewPicture/'.$mou_id).'">':'ลบรูปภาพไม่สำเร็จ',
+			'notification'=>'',
+			'task'=>'',
+		);      
+		return view('_main',$data);
+    }
 }
