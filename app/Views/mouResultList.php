@@ -58,7 +58,7 @@
                                     <div class="col-lg-2 col-md-3 col-sm-3 col-xs-3">
                                         <div class="form-group">
                                                 <!--<button  type="button" class="btn btn-warning" id="addBusiness"><i class="material-icons">add</i> เพิ่มรายงานการประชุม</button>-->
-                                                <a  href="<?php print site_url('public/mou/resultAdd'); ?>" class="btn btn-warning" id="addCurriculum"><i class="material-icons">add</i> เพิ่มข้อมูลผลลัพธ์</a>
+                                                <a  href="<?php print site_url('public/mou/resultAdd'); ?>" class="btn btn-warning" id="addCurriculum"><i class="material-icons">add</i> เพิ่มข้อมูลผลสัมฤทธิ์</a>
                                         </div>
                                     </div>
                                 </div>

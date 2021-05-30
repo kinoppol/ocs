@@ -116,6 +116,7 @@
              'items'=>$orgData,
              //'noneLabel'=>'โปรดเลือกต้นสังกัด/สถานศึกษา/กลุ่มอาชีพ',
              'required'=>true,
+             'search'=>true,
              'def'=>isset($userData->org_code)?$userData->org_code:false,
          ),
          array(
