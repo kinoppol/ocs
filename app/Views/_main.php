@@ -171,7 +171,7 @@ if(!$debug){
                             <li><a href="<?php print site_url('public/user/profile'); ?>"><i class="material-icons">person</i>โปรไฟล์</a></li>
                             <!-- <li role="separator" class="divider"></li>
                             <li><a href="javascript:void(0);"><i class="material-icons">group</i>Followers</a></li>-->
-                            <li><a href="<?php print site_url('public/manual.pdf'); ?>" target="_blank"><i class="material-icons">book</i>คู่มือ</a></li>
+                            <li><a href="https://drive.google.com/file/d/1QahFxIrOBTJ4TUQ6Humqv22xHcPnRaR-/view?usp=sharing" target="_blank"><i class="material-icons">book</i>คู่มือ</a></li>
                             <li><a href="#" data-toggle="modal" data-target="#aboutSystem"><i class="material-icons">info</i>เกี่ยวกับระบบ</a></li>-->
                             <li role="separator" class="divider"></li>
                             <li><a href="<?php print site_url('public/user/logout'); ?>"><i class="material-icons">input</i>ออกจากระบบ</a></li>

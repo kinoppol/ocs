@@ -9,7 +9,7 @@ function yearFilter($data){
 		</div>
 		<div class="col-lg-6 col-md-6 col-sm-6 col-xs-3">
 		<div class="form-group">
-		<div class="form-line">'.filterSelectYear('year',false,false,(isset($_POST['year'])?$_POST['year']:false)).'
+		<div class="form-line">'.filterSelectYear('year',false,false,(isset($_POST['year'])?$_POST['year']:date('Y'))).'
 		</div>
 		</div>
 		</div>

@@ -64,6 +64,11 @@
                 'file'=>'reportGov/gov_10',
                 'cond'=>current_user('user_type')=='gov'||current_user('user_type')=='boc',
                 ),
+            array(
+                'title'=>'การลงนามความร่วมมือจำแนกตามสถานประกอบการ',
+                'file'=>'reportMou/mou_01',
+                'cond'=>current_user('user_type')=='gov'||current_user('user_type')=='boc'||current_user('user_type')=='bord',
+                ),
         );
 
 
