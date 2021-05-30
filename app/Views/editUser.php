@@ -82,7 +82,7 @@
         'label'=>'สถานะ',
         'type'=>'select',
         'id'=>'user_active',
-        'class'=>'show-tick',
+        //'class'=>'show-tick',
         'items'=>array(
             'Y'=>'ใช้งานปรกติ',
             'N'=>'ยังไม่อนุมัติใช้งาน',
@@ -95,7 +95,7 @@
         'label'=>'ประเภทผู้ใช้งาน',
         'type'=>'select',
         'id'=>'user_type',
-        'class'=>'show-tick',
+        //'class'=>'show-tick',
         'items'=>array(
             'admin'=>'ผู้ดูและระบบ',
             'board'=>'ผู้บริหาร สอศ.',

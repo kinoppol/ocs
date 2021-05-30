@@ -126,7 +126,7 @@ function genInput_select($data){
     if(isset($data['search'])&&$data['search']==true){
         $search='data-live-search="true"';
         if(!isset($_SESSION['SEARCHLIB'])){
-            $_SESSION['SEARCHLIB']=true;
+            //constant $=true;
             $_SESSION['FOOTSYSTEM'].='
             <!-- Select Plugin Js -->
             <script src="'.site_url().'template/adminbsb/plugins/bootstrap-select/js/bootstrap-select.js"></script>';
