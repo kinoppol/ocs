@@ -83,7 +83,7 @@ class Gov extends BaseController
 
 		$student_school=array();
 		foreach($gov_school_id as $school_id){
-			$student_school[$school_id]=$schoolModel->getSumStudent($school_id,false,$data);
+			$student_school[$school_id]=$govData->gov_school_id==''?'0':$schoolModel->getSumStudent($school_id,false,$data);
 		}
 
 		$data=array(
