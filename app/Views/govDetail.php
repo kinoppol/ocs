@@ -68,6 +68,7 @@ helper('tab');
                                 if($gov_minor!=''){
                                         $gov_minor.='<br> ';
                                 }
+                                if($minor=='')continue;
                                 $gov_minor.='&nbsp;&nbsp;&nbsp;&nbsp;'.$i.'.) รหัสสาขางาน '.$minor.' ชื่อสาขางาน '.minor_name($minor);
                             }
                         }
