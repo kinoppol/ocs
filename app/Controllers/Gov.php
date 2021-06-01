@@ -94,8 +94,8 @@ class Gov extends BaseController
 
 		$data=array(
 			'govData'=>$govData,
-			'totalStudent'=>$sumStudentCount->count_val,
-			'totalDVEStudent'=>$sumStudentDVECount->count_dve_val,
+			'totalStudent'=>isset($sumStudentCount->count_val)?$sumStudentCount->count_val:'0',
+			'totalDVEStudent'=>isset($sumStudentDVECount->count_dve_val)?$sumStudentDVECount->count_dve_val:'0',
 			'student_school'=>$student_school,
 			'editForm'=>view('editGov',$data),
 		);
