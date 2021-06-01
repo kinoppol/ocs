@@ -99,12 +99,12 @@ $data=array(
         'text'=>'จัดการ',
         'url'=>site_url(),
         'bullet'=>'engineering',
-        'cond'=>current_user('user_type')=='admin',
+        'cond'=>current_user('user_type')=='admin'||current_user('user_type')=='boc',
         'items'=>array(
             'systemManage'=>array(
                 'text'=>'ตั้งค่าระบบ',
                 'url'=>site_url('public/admin/systemSetting'),
-                'cond'=>true,
+                'cond'=>current_user('user_type')=='admin',
                 ),
             'userManage'=>array(
                 'text'=>'จัดการผู้ใช้',

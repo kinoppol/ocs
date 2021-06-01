@@ -19,11 +19,16 @@ class Admin extends BaseController
 	}
 	public function userManage()
 	{
+		helper('user');
 		$userModel = model('App\Models\UserModel');
+		$data=array(
+			'onlyRegistered'=>true,
+			'except'=>current_user('user_type')=='admin'?'':array('admin','boc'),
+		);
 		$data=array(
 			'title'=>'ผู้ใช้งานระบบ',
 			'user_status'=>'registered',
-			'users'=>$userModel->getUsers($onlyRegistered=true),
+			'users'=>$userModel->getUsers($data),
 		);
 		$data2=array(
 			'title'=>'ผู้ใช้งานที่ยังไม่อนุมัติ',

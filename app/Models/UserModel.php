@@ -6,11 +6,12 @@ use CodeIgniter\Model;
 
 class UserModel extends Model
 {
-    public function getUsers($onlyRegistered=false){
+    public function getUsers($data=array()){
         $db = \Config\Database::connect();
         $builder = $db->table('userdata');
         $builder->select(['user_id','username','name','surname','email','user_type']);
-        if($onlyRegistered)$builder->where('user_type !=','user');
+        if(isset($data['onlyRegistered']))$builder->where('user_type !=','user');
+        if(isset($data['except']))$builder->whereNotIn('user_type',$data['except']);
         $users = $builder->get()->getResult();
         return $users;
     }

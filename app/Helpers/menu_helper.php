@@ -45,7 +45,7 @@ function genSubMenu($data,$def=''){
     $active='';
     foreach($data as $row){
         $active='';
-        if(!$row['cond']) return '';
+        if(!$row['cond']) continue;
         if(isset($row['items'])&&is_array($row['items'])){
             if(searchForUrl($def,$row['items']))$active=' class="active"';
         $ret.='
