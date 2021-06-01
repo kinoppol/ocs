@@ -2,7 +2,7 @@
 
 namespace App\Controllers;
 
-class institute extends BaseController
+class Institute extends BaseController
 {
     public function detail(){
 		helper('user');
