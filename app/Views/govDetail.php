@@ -58,6 +58,7 @@ helper('tab');
                                 if($gov_school!=''){
                                         $gov_school.='<br> ';
                                 }
+                                if($school=='')continue;
                                 $gov_school.='&nbsp;&nbsp;&nbsp;&nbsp;'.$i.'.) '.org_name($school).' ('.number_format((isset($student_school[$school]->count_val)?$student_school[$school]->count_val:'0'),0,".",",").' คน)';
                             }
                             $i=0;
