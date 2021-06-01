@@ -183,7 +183,7 @@ class MouModel extends Model
         $db = \Config\Database::connect();
         $builder = $db->table('mou_result');
         $result=$builder->insert($data);
-        //print $db->getLastQuery();
+        print $db->getLastQuery();
         return $result;
     }
     public function resultUpdate($id,$data){
