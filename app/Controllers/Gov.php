@@ -74,9 +74,9 @@ class Gov extends BaseController
 		$data=array(
 			'minor_code'=>isset($govData->gov_minor)?explode(',',$govData->gov_minor):array(),
 		);
-		$sumStudentCount=count($gov_school_id)>1?'0':$schoolModel->getSumStudent($gov_school_id,false,$data);
+		$sumStudentCount=count($gov_school_id)<1?'0':$schoolModel->getSumStudent($gov_school_id,false,$data);
 		//print $sumStudentCount->count_val;
-		$sumStudentDVECount=count($gov_school_id)>1?'0':$schoolModel->getSumStudent($gov_school_id,'dve',$data);
+		$sumStudentDVECount=count($gov_school_id)<1?'0':$schoolModel->getSumStudent($gov_school_id,'dve',$data);
 
 		$minorModel = model('App\Models\MinorModel');
 		$minors=$minorModel->getMinor();
