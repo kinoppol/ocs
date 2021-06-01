@@ -118,15 +118,17 @@ function genInput_check_group($data){
             </div>';
         return $ret;
 }
+$addSearchLib=false;
 
 function genInput_select($data){
     $multiple='';
     $search='';
     if(isset($data['multiple'])&&$data['multiple'])$multiple=' multiple';
     if(isset($data['search'])&&$data['search']==true){
-        $search='data-live-search="true"';
-        if(!isset($_SESSION['SEARCHLIB'])){
-            //constant $=true;
+        $search=' data-live-search="true"';
+        global $addSearchLib;
+        if(!$addSearchLib){
+            $addSearchLib=true;
             $_SESSION['FOOTSYSTEM'].='
             <!-- Select Plugin Js -->
             <script src="'.site_url().'template/adminbsb/plugins/bootstrap-select/js/bootstrap-select.js"></script>';
