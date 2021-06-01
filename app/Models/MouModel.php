@@ -99,7 +99,7 @@ class MouModel extends Model
         $db = \Config\Database::connect();
         $builder = $db->table('mou');
         $result=$builder->insert($data);
-        //print $db->getLastQuery();
+        print $db->getLastQuery();
         return $db->insertID();
     }
     
