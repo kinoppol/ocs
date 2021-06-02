@@ -60,7 +60,7 @@ helper('tab');
                                 }
                             $data='
                             <b>ผู้อำนวยการสถาบันการอาชีวศึกษา </b> '.$institute_data->director_name.'<br>
-                            <b>รองผู้อำนวยการสถาบันการอาชีวศึกษา </b> '.$institute_data->institute_name.'<br>
+                            <b>รองผู้อำนวยการสถาบันการอาชีวศึกษา </b> '.$institute_data->deputy_name.'<br>
                             <b>สถานศึกษาในสังกัดสถาบันการอาชีวศึกษา'.$institute_data->institute_name.'</b><br> '.$in_school.'<br>
                             ';
 
