@@ -78,7 +78,7 @@
 						</div>
 						<div class="col-lg-7">
 							<div class="home_left_img">
-								<img class="img-fluid" src="images/mou_table.jpg" alt="">
+								<img class="img-fluid" src="images/61090.jpg" alt="">
 							</div>
 						</div>
 					</div>
@@ -100,14 +100,14 @@
         				<div class="work_item">
         					<i class="lnr lnr-license"></i>
         					<a href="#"><h4>ประกาศ</h4></a>
-        					<p>ขอให้สถานศึกษาดำเนินการกรอกข้อมูลการลงนามความร่วมมือให้แล้วเสร็จภายในวันที่ 31 พฤษภาคม 2564</p>
+        					<p>ขอให้สถานศึกษาดำเนินการกรอกข้อมูลการลงนามความร่วมมือให้แล้วเสร็จภายในวันที่ ........... 2564</p>
         				</div>
         			</div>
         			<div class="col-lg-4">
         				<div class="work_item">
         					<i class="lnr lnr-license"></i>
         					<a href="#"><h4>ประกาศ</h4></a>
-        					<p>ขอให้ อ.กรอ.อศ. ดำเนินการกรอกข้อมูลการลงนามความร่วมมือให้แล้วเสร็จภายในวันที่ 31 พฤษภาคม 2564</p>
+        					<p>ขอให้ อ.กรอ.อศ. ดำเนินการกรอกข้อมูลการลงนามความร่วมมือให้แล้วเสร็จภายในวันที่ ........... 2564</p>
         				</div>
         			</div>
         			<div class="col-lg-4">
