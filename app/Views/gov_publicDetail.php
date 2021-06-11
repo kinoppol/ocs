@@ -86,6 +86,7 @@ helper('user');
             'id'=>'pictures',
             'accept'=>'image/jpeg,image/png',
             'def'=>'',
+            'multiple'=>true,
         ),
         array(
             'label'=>'บันทึกข้อมูล',

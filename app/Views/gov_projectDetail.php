@@ -115,6 +115,7 @@ helper('user');
             'id'=>'attach_file',
             'accept'=>'application/pdf',
             'def'=>'',
+            'multiple'=>true,
         ),
         array(
             'label'=>'แนบไฟล์รูปภาพ (โปรดแนบรูปอย่างน้อย 2 รูป)',
@@ -122,6 +123,7 @@ helper('user');
             'id'=>'picture',
             'accept'=>'image/jpeg,image/png',
             'def'=>'',
+            'multiple'=>true,
         ),
         array(
             'label'=>'บันทึกข้อมูล',

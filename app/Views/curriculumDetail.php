@@ -186,6 +186,7 @@
             'type'=>'file',
             'id'=>'pictures',
             'def'=>'',
+            'multiple'=>true,
              ),
          array(
             'label'=>'จำนวนผู้เข้ารับอบรม (กรอกเมื่อการดำเนินการอมรมเสร็จสิ้น)',
@@ -198,6 +199,7 @@
             'type'=>'file',
             'id'=>'training_pictures',
             'def'=>'',
+            'multiple'=>true,
              ),
          array(
              'label'=>'บันทึกข้อมูล',
