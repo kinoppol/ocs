@@ -6,23 +6,23 @@
         $reports=array(array(
             'title'=>'รายงานการลงนามความร่วมมือ',
             'file'=>'reportOrg/school_01',
-            'cond'=>current_user('user_type')=='school'||current_user('user_type')=='gov'||current_user('user_type')=='institute'||current_user('user_type')=='boc',
+            'cond'=>current_user('user_type')=='school'||current_user('user_type')=='gov'||current_user('user_type')=='institute'||current_user('user_type')=='boc'||current_user('user_type')=='board',
             ),
             array(
             'title'=>'รายงานการพัฒนาหลักสูตรร่วมกับสถานประกอบการ',
             'file'=>'reportOrg/school_02',
-            'cond'=>current_user('user_type')=='school'||current_user('user_type')=='gov'||current_user('user_type')=='institute'||current_user('user_type')=='boc',
+            'cond'=>current_user('user_type')=='school'||current_user('user_type')=='gov'||current_user('user_type')=='institute'||current_user('user_type')=='boc'||current_user('user_type')=='board',
             ),
             array(
             'title'=>'รายงานผลสัมฤทธิ์ของการร่วมมือกับสถานประกอบการ',
             'file'=>'reportOrg/school_03',
-            'cond'=>current_user('user_type')=='school'||current_user('user_type')=='gov'||current_user('user_type')=='institute'||current_user('user_type')=='boc',
+            'cond'=>current_user('user_type')=='school'||current_user('user_type')=='gov'||current_user('user_type')=='institute'||current_user('user_type')=='boc'||current_user('user_type')=='board',
             ),
 
             array(
                 'title'=>'สรุปรายการการประชุม อ.กรอ.อศ.',
                 'file'=>'reportGov/gov_01',
-                'cond'=>current_user('user_type')=='gov'||current_user('user_type')=='boc',
+                'cond'=>current_user('user_type')=='gov'||current_user('user_type')=='boc'||current_user('user_type')=='board',
                 ),/*
             array(
                 'title'=>'รายงานการพัฒนาหลักสูตรร่วมกับสถานประกอบการ',
@@ -37,32 +37,32 @@
             array(
                 'title'=>'รายงานการวิจัยความพึงพอใจของสถานประกอบการที่มีต่อผู้สำเร็จการศึกษา',
                 'file'=>'reportGov/gov_05',
-                'cond'=>current_user('user_type')=='gov'||current_user('user_type')=='boc',
+                'cond'=>current_user('user_type')=='gov'||current_user('user_type')=='boc'||current_user('user_type')=='board'|,
                 ),
             array(
                 'title'=>'รายงานการพัฒนาครูฝึกในสถานประกอบการ',
                 'file'=>'reportGov/gov_06',
-                'cond'=>current_user('user_type')=='gov'||current_user('user_type')=='boc',
+                'cond'=>current_user('user_type')=='gov'||current_user('user_type')=='boc'||current_user('user_type')=='board',
                 ),
             array(
                 'title'=>'รายงานการประชาสัมพันธ์เพิ่มผู้เรียนในกลุ่ม อ.กรอ.อศ.',
                 'file'=>'reportGov/gov_07',
-                'cond'=>current_user('user_type')=='gov'||current_user('user_type')=='boc',
+                'cond'=>current_user('user_type')=='gov'||current_user('user_type')=='boc'||current_user('user_type')=='board',
                 ),
             array(
                 'title'=>'รายงานการพัฒนาครูผู้สอนในสถานศึกษา',
                 'file'=>'reportGov/gov_08',
-                'cond'=>current_user('user_type')=='gov'||current_user('user_type')=='boc',
+                'cond'=>current_user('user_type')=='gov'||current_user('user_type')=='boc'||current_user('user_type')=='board',
                 ),
             array(
                 'title'=>'รายงานการพัฒนาผู้เรียน',
                 'file'=>'reportGov/gov_09',
-                'cond'=>current_user('user_type')=='gov'||current_user('user_type')=='boc',
+                'cond'=>current_user('user_type')=='gov'||current_user('user_type')=='boc'||current_user('user_type')=='board',
                 ),
             array(
                 'title'=>'รายงานดำเนินโครงการอื่น ๆ',
                 'file'=>'reportGov/gov_10',
-                'cond'=>current_user('user_type')=='gov'||current_user('user_type')=='boc',
+                'cond'=>current_user('user_type')=='gov'||current_user('user_type')=='boc'||current_user('user_type')=='board',
                 ),
             array(
                 'title'=>'การลงนามความร่วมมือจำแนกตามสถานประกอบการ',

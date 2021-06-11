@@ -70,7 +70,7 @@ $data=array(
         'text'=>'การลงนามความร่วมมือ',
         'url'=>site_url('public/mou/'),
         'bullet'=>'history_edu',
-        'cond'=>current_user('user_type')!='user'&&current_user('user_type')!='board',
+        'cond'=>current_user('user_type')!='user',
         'items'=>array(
             'list'=>array(
                 'text'=>'รายการ MOU',
@@ -166,31 +166,31 @@ $data=array(
                 'text'=>'ข้อมูลสถานศึกษา',
                 'url'=>site_url(),
                 'bullet'=>'school',
-                'cond'=>current_user('user_type')=='board',
+                'cond'=>false&&current_user('user_type')=='board',
                 ),
             'boardInstitute'=>array(
                 'text'=>'ข้อมูลสถาบันการอาชีวศึกษา',
                 'url'=>site_url(),
                 'bullet'=>'account_balance',
-                'cond'=>current_user('user_type')=='board',
+                'cond'=>false&&current_user('user_type')=='board',
                 ),
             'boardBusiness'=>array(
                 'text'=>'ข้อมูลสถานประกอบการ',
                 'url'=>site_url(),
                 'bullet'=>'apartment',
-                'cond'=>current_user('user_type')=='board',
+                'cond'=>false&&current_user('user_type')=='board',
                 ),
             'boardGov'=>array(
                 'text'=>'ข้อมูล อ.กรอ.อศ.',
                 'url'=>site_url(),
                 'bullet'=>'people',
-                'cond'=>current_user('user_type')=='board',
+                'cond'=>false&&current_user('user_type')=='board',
                 ),
             'boardMou'=>array(
                 'text'=>'ข้อมูลการลงนามความร่วมมือ',
                 'url'=>site_url(),
                 'bullet'=>'history_edu',
-                'cond'=>current_user('user_type')=='board',
+                'cond'=>false&&current_user('user_type')=='board',
                 ),
             'report'=>array(
                 'text'=>'รายงานผลการดำเนินงาน',
