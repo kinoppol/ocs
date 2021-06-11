@@ -37,7 +37,7 @@
             array(
                 'title'=>'รายงานการวิจัยความพึงพอใจของสถานประกอบการที่มีต่อผู้สำเร็จการศึกษา',
                 'file'=>'reportGov/gov_05',
-                'cond'=>current_user('user_type')=='gov'||current_user('user_type')=='boc'||current_user('user_type')=='board'|,
+                'cond'=>current_user('user_type')=='gov'||current_user('user_type')=='boc'||current_user('user_type')=='board',
                 ),
             array(
                 'title'=>'รายงานการพัฒนาครูฝึกในสถานประกอบการ',
