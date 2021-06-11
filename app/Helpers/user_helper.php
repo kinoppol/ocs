@@ -7,6 +7,7 @@ function current_user($key){
 
 function user_type($type){
     $userType=array(
+        'user'=>'ผู้ใช้งานยังไม่ลงทะเบียน',
         'admin'=>'ผู้ดูแลระบบ',
         'board'=>'ผู้บริหาร สอศ.',
         'boc'=>'สำนักความร่วมมือ',
