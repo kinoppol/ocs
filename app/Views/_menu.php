@@ -70,7 +70,7 @@ $data=array(
         'text'=>'การลงนามความร่วมมือ',
         'url'=>site_url('public/mou/'),
         'bullet'=>'history_edu',
-        'cond'=>current_user('user_type')!='user',
+        'cond'=>current_user('user_type')!='user'&&||current_user('user_type')!='board',
         'items'=>array(
             'list'=>array(
                 'text'=>'รายการ MOU',
