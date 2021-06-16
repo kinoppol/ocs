@@ -15,7 +15,7 @@
                 $subdisdric_label='แขวง';
             }
             $buninessRows[]=array(
-                'business_name'=>strlim($v['business_name'],20),
+                'business_name'=>strlim($v['business_name'],50),
                 'address'=>/*'จังหวัด'.$province[$v['province_id']].
 
                             ' '.*/strlim($disdric_label.$district[$v['district_id']].
