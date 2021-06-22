@@ -236,14 +236,32 @@ $data=array(array(
                     'min'=>date(('Y-m-d'),strtotime(' - 100 year')),
                     'required'=>true,
                 ),
+
                 array(
-                    'label'=>'วันที่สิ้นสุดความร่วมมือ',
-                    'type'=>'date',
-                    'id'=>'mou_end_date',
-                    'def'=>isset($mou_data->mou_end_date)?$mou_data->mou_end_date:date('Y-m-d',strtotime(' + 3 year')),
-                    'max'=>date(('Y-m-d'),strtotime(' + 10 year')),
-                    'min'=>date(('Y-m-d'),strtotime(' - 100 year')),
-                    'required'=>true,
+                    'label'=>'การลงนามความร่วมมือที่ไม่ได้กำหนดวันสิ้นสุด',
+                    'type'=>'check_group',
+                    'id'=>'dve',
+                    'items'=>array(
+                        'no_expire'=>array('text'=>'ไม่ได้กำหนดวันสิ้นสุด',
+                                                'value'=>'Y',
+                                                'checked'=>isset($mou_data)?$mou_data->no_expire=='Y'?true:false:false,
+                                                ),
+                ),
+                ),
+                array(
+                    'type'=>'div',
+                    'id'=>'mou_end',
+                    'items'=>array(  
+                    array(
+                        'label'=>'วันที่สิ้นสุดความร่วมมือ',
+                        'type'=>'date',
+                        'id'=>'mou_end_date',
+                        'def'=>isset($mou_data->mou_end_date)?$mou_data->mou_end_date:date('Y-m-d',strtotime(' + 3 year')),
+                        'max'=>date(('Y-m-d'),strtotime(' + 10 year')),
+                        'min'=>date(('Y-m-d'),strtotime(' - 100 year')),
+                        'required'=>true,
+                    ),
+                ),
                 ),
                 array(
                     'label'=>'สถานที่ลงนาม',
@@ -301,6 +319,12 @@ $(function(){
         $("#education_support").hide();
     }
 
+    if($("#no_expire").prop("checked") == false){
+        $("#mou_end").show();
+    }else{
+        $("#mou_end").hide();
+    }
+
 });
 
     $("#educationalSupport").click(function(){
@@ -310,6 +334,14 @@ $(function(){
         }else{
             $("#education_support").slideUp();
             //$("#dve_target").addAttr("required");​​​​​
+        }
+        });
+
+    $("#no_expire").click(function(){
+        if($("#no_expire").prop("checked") == false){
+            $("#mou_end").slideDown();
+        }else{
+            $("#mou_end").slideUp();
         }
         });
 </script>

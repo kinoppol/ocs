@@ -103,6 +103,7 @@ class Mou extends BaseController
 			'ceo_type'		=>$_POST['businessSignNamePosition'],
 			'mou_date'		=>$_POST['mou_date'],
 			'mou_start_date'=>$_POST['mou_start_date'],
+			'no_expire'		=>isset($_POST['no_expire'])&&$_POST['no_expire']=='Y'?'Y':'N',
 			'mou_end_date'	=>$_POST['mou_end_date'],
 			'mou_sign_place'=>$_POST['mou_sign_place'],
 			'major'			=>$_POST['major'],

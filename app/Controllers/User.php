@@ -75,7 +75,8 @@ class User extends BaseController
 				if($httpCode == 200) {
 					/* Handle 200 here. */
 					$img_path="images/user/".$result['data']['email'].".jpg";
-					$user_image=fopen(APPPATH.'../'.$img_path,"w");
+					$image_path=realpath(APPPATH.'../').'/'.$img_path;
+					$user_image=fopen($image_path,"w");
 					fwrite($user_image,$response);
 					fclose($user_image);
 
