@@ -248,7 +248,7 @@ function bocSignBox($data=array()){
 
 function filterSelectYear($id,$MAXY=false,$MINY=false,$def=false){
     if(!$MAXY)$MAXY=date('Y')+1;
-    if(!$MINY)$MINY=date('Y')-5;
+    if(!$MINY)$MINY=date('Y')-10;
     $ret='<select id="'.$id.'" name="'.$id.'" class="form-control">';
 
 $option='';
@@ -267,7 +267,7 @@ return $ret;
 
 function filterOptionYear($MAXY=false,$MINY=false){
     if(!$MAXY)$MAXY=date('Y')+1;
-    if(!$MINY)$MINY=date('Y')-5;
+    if(!$MINY)$MINY=date('Y')-10;
 $option=array();
     for($i=$MAXY;$i>$MINY;$i--){
         $option[$i]=$i+543;
