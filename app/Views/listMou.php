@@ -19,7 +19,7 @@
                 'business_id'=>$business[$mou['business_id']]['business_name'],
                 /*'school_id'=>$org_name,*/
                 'mou_date'=>dateThai($mou['mou_date']),
-                'end_date'=>dateThai($mou['mou_end_date']),
+                'end_date'=>$mou['no_expire']=='N'?dateThai($mou['mou_end_date']):'ไม่ได้ระบุ',
                 /*'mou_sign_place'=>$mou['mou_sign_place'],*/
                 'attach'=>'
                 <a href="'.site_url('public/mou/viewMOU/'.$mou['mou_id']).'" class="btn btn-xs btn-danger waves-effect"><i class="material-icons">picture_as_pdf</i></a>

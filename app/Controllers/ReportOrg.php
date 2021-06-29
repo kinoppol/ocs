@@ -101,7 +101,7 @@ class ReportOrg extends BaseController
 					'support_edu'=>$supEdu,
 					//'mou_date'=>dateThai($mou['mou_date']),
 					'mou_start_date'=>dateThai($mou['mou_start_date']),
-					'mou_end_date'=>dateThai($mou['mou_end_date']),
+					'mou_end_date'=>$mou['no_expire']=='N'?dateThai($mou['mou_end_date']):'ไม่ได้ระบุ',
 					'mou_sign_place'=>$mou['mou_sign_place'],
 					'note'=>$trainingPlace,
 				);
