@@ -76,6 +76,50 @@ function orgYearFilter($data){
 }
 
 
+function businessYearFilter($data){
+    helper('form');
+    helper('org');
+    $orgSelect=array(
+        'id'=>"org_id",
+        'label'=>"สถานประกอบการ",
+        'search'=>true,
+        'items'=>orgArr(isset($data['org_ids'])?$data['org_ids']:false),
+        'def'=>(isset($_POST['org_id']))?$_POST['org_id']:current_user('org_code'),
+    );
+    $yearSelect=array(
+        'id'=>'year',
+        'label'=>$data['label'],
+        'items'=>filterOptionYear(false,false),
+        'def'=>(isset($_POST['year'])?$_POST['year']:date('Y')),
+    );
+    $ret='
+		<div class="row clearfix">
+		<form method="post">
+		<input type="hidden" name="title" value="'.$data['title'].'">
+		<div class="col-lg-4 col-md-4 col-sm-4 col-xs-4">'.genInput_select($yearSelect).'
+		</div>
+		<div class="col-lg-4 col-md-4 col-sm-4 col-xs-4">'.genInput_select($orgSelect).'
+		</div>
+		<div class="col-lg-2 col-md-2 col-sm-2 col-xs-2"">
+		<div class="form-group">
+		<div class="form-line">
+		<button class="btn btn-primary form-control"><i class="material-icons">search</i> ตกลง</button>
+		</div>
+		</div>
+		</div>
+		<div class="col-lg-2 col-md-2 col-sm-2 col-xs-2"">
+		<div class="form-group">
+		<div class="form-line">
+		<button name="export" formaction="'.$data['title'].'/print" formtarget="_blank" class="btn btn-danger form-control"><i class="material-icons">picture_as_pdf</i> พิมพ์รายงาน</button>
+		</div>
+		</div>
+		</div>
+		</form>
+		</div>';
+    return $ret;
+}
+
+
 function govYearFilter($data){
     helper('form');
     helper('org');

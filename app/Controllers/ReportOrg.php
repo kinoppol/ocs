@@ -55,7 +55,7 @@ class ReportOrg extends BaseController
 			'วันที่เริ่ม<br>ความร่วมมือ',
 			'วันที่สิ้นสุด<br>ความร่วมมือ',
 			'สถานที่ลงนาม',
-			'หมายเหตุ',
+			'การฝึกงาน',
 		);
 		if(isset($_POST['year'])){
 
@@ -84,7 +84,7 @@ class ReportOrg extends BaseController
 				if($mou['support_no_specific']=='Y'){if($supEdu!='')$supEdu.='<br>'; $supEdu.='ไม่ระบุ';}
 
 				$trainingPlace='';
-				if($mou['support_local_training']=='Y')$trainingPlace='ฝึกงานในประเทศ';
+				if($mou['support_local_training']=='Y')$trainingPlace='ฝึกในประเทศ';
 				if($mou['support_oversea_training']=='Y'){if($trainingPlace!='')$trainingPlace.='<br>'; $trainingPlace.='ฝึกงานต่างประเทศ';}
 
 				$org_name='';

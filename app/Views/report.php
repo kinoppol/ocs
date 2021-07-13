@@ -66,7 +66,7 @@
                 ),
             array(
                 'title'=>'การลงนามความร่วมมือจำแนกตามสถานประกอบการ',
-                'file'=>'reportMou/mou_01',
+                'file'=>'reportMou/mou_02',
                 'cond'=>current_user('user_type')=='gov'||current_user('user_type')=='boc'||current_user('user_type')=='bord',
                 ),
         );
