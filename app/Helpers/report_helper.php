@@ -34,7 +34,7 @@ function yearFilter($data){
 
 function orgYearFilter($data){
     helper('form');
-    helper('org');
+    //helper('org');
     $orgSelect=array(
         'id'=>"org_id",
         'label'=>"หน่วยงาน",
@@ -80,17 +80,17 @@ function businessYearFilter($data){
     helper('form');
     helper('org');
     $orgSelect=array(
-        'id'=>"org_id",
+        'id'=>"business_id",
         'label'=>"สถานประกอบการ",
         'search'=>true,
-        'items'=>orgArr(isset($data['org_ids'])?$data['org_ids']:false),
-        'def'=>(isset($_POST['org_id']))?$_POST['org_id']:current_user('org_code'),
+        'items'=>(array(0=>'สถานประกอบการทุกแห่ง')+$data['business']),
+        'def'=>(isset($_POST['business_id']))?$_POST['business_id']:false,
     );
     $yearSelect=array(
         'id'=>'year',
         'label'=>$data['label'],
-        'items'=>filterOptionYear(false,false),
-        'def'=>(isset($_POST['year'])?$_POST['year']:date('Y')),
+        'items'=>(array(0=>'ช่วงปีใดก็ได้')+filterOptionYear(date('Y'),false)),
+        'def'=>(isset($_POST['year'])?$_POST['year']:0),
     );
     $ret='
 		<div class="row clearfix">

@@ -221,6 +221,7 @@ class ReportOrg extends BaseController
 		$data=array(
 			'title'=>$title,
 			'label'=>'ปีที่จัดอบรม',
+			'org_ids'=>org_ids(),
 		);
 		$form=orgYearFilter($data);
 		$result='';
@@ -232,7 +233,7 @@ class ReportOrg extends BaseController
 			'ปวส.',
 			'ทล.บ.',
 			'ระยะสั้น',
-			'ไม่กำหนด',
+			'ไม่กำหนด<br>ระดับการศึกษา',
 			'Skill Gap',
 			'S-Curve',
 			'จำนวน<br>ชั่วโมง',
@@ -407,7 +408,7 @@ class ReportOrg extends BaseController
 			'การสนับสนุน<br>การศึกษา',
 			'มูลค่าการสนับสนุน',
 			'การสนับสนุน<br>การศึกษาด้านอื่นๆ',
-			'หมายเหตุ',
+			//'หมายเหตุ',
 		);
 		if(isset($_POST['year'])){
 
@@ -429,14 +430,15 @@ class ReportOrg extends BaseController
 				$resultRows[]=array(
 					$i,
 					'business_id'=>$business[$res->business_id]['business_name'],
-					'trainee_majors'=>$res->trainee_majors,	
+					'trainee_majors'=>str_replace(['.',','],',<br>',(str_replace([' ',"\r"],'',$res->trainee_majors))),	
 					'trainee_amount'=>$res->trainee_amount,
-					'employee_majors'=>$res->employee_majors,
+					'employee_majors'=>str_replace(['.',','],',<br>',(str_replace([' ',"
+"],'',$res->employee_majors))),
 					'employee_amount'=>$res->employee_amount,
 					'donate_detail'=>$res->donate_detail,
 					'donate_value'=>'<div style="text-align:right;">'.number_format($res->donate_value,0,'.',',').($res->donate_value>0?' บาท':'').'</div>',
 					'donate_other'=>$res->donate_other,
-					'note'=>'',
+					//'note'=>'',
 				);
 			}
 

@@ -137,7 +137,7 @@ class ReportMou extends BaseController
 			<u>หมายเหตุ</u><br>
 			&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;ระดับ ๑ หมายถึง ดำเนินกิจกรรมเกี่ยวกับ CSR การฝึกงาน กิจกรรมเฉพาะกิจ (รวมระยะสั้น)<br>
 			&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;ระดับ ๒ หมายถึง ดำเนินกิจกรรมเกี่ยวกับ CSR การฝึกงาน กิจกรรมเฉพาะกิจ (รวมระยะสั้น) และจัดการเรียนการสอนทวิภาคี<br>
-			&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;ระดับ ๓ หมายถึง ดำเนินกิจกรรมเกี่ยวกับ CSR การฝึกงาน กิจกรรมเฉพาะกิจ (รวมระยะสั้น) และจัดการเรียนการสอนทวิภาคี และมีการร่วมลงทุนระหว่างสถานประกอบการและสถานศึกษา
+			&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;ระดับ ๓ หมายถึง ดำเนินกิจกรรมเกี่ยวกับ CSR การฝึกงาน กิจกรรมเฉพาะกิจ (รวมระยะสั้น) และจัดการเรียนการสอนทวิภาคี และมีการร่วมลงทุนระหว่างสถานประกอบการ และสถานศึกษา
 			</td>
 			</tr>
 			</table>
@@ -177,6 +177,7 @@ class ReportMou extends BaseController
 		helper('user');
 		helper('org');
 		helper('thai');
+		helper('org');
 		
 		$org_code=isset($_POST['org_id'])?$_POST['org_id']:current_user('org_code');
 		if($org_code=='all'){
@@ -201,33 +202,44 @@ class ReportMou extends BaseController
 		$org_type_name=org_type_name($data);
 		$signBox=signBox($data);
 
+		$locationModel = model('App\Models\LocationModel');
+		$province=$locationModel->getProvince();
+		$businessModel = model('App\Models\BusinessModel');
+		$businessData=$businessModel->listBusiness();
+		$business=array();
+		foreach($businessData as $row){
+			$business_filter[$row['business_id']]=$row['business_name'].' ('.$province[$row['province_id']].')';
+			$business[$row['business_id']]=$row['business_name'];
+		}
 		$data=array(
 			'title'=>$title,
 			'label'=>'ปีที่ลงนาม',
-			'org_ids'=>org_ids(),
+			'business'=>$business_filter,
 		);
 		$form=businessYearFilter($data);
 		$result='';
 		$resultHead=array(
 			'ที่',
-			'สถานประกอบการ',
-			'ลักษณะงาน',
+			'หน่วยงาน',
 			'ระดับ<br>ความร่วมมือ',
-			'การร่วมลงทุน<br>กับ'.$org_type_name,
+			'การร่วมลงทุน',
 			'ระดับ<br>การศึกษา',
 			//'วันที่ลงนาม',
 			'วันที่เริ่ม<br>ความร่วมมือ',
 			'วันที่สิ้นสุด<br>ความร่วมมือ',
 			'สถานที่ลงนาม',
-			'หมายเหตุ',
+			'การฝึกงาน',
 		);
 		if(isset($_POST['year'])){
-
-			$caption='<b>'.$title.'ระหว่าง'.$org_type_name.'และสถานประกอบการ ปี '.($_POST['year']+543).'</b><br>'.$org_name;
+			$orgData=orgArr();
+			//print_r($_POST);
+			$business_name=$_POST['business_id']==0?'':$business[$_POST['business_id']];
+			$yearWord=$_POST['year']==0?'':'ในปี '.($_POST['year']+543);
+			$caption='<b>'.$title.'ระหว่างสถานประกอบการ และหน่วยงานภาครัฐ '.$yearWord.'</b><br>'.$business_name;
 
 			$mouModel = model('App\Models\MouModel');
-			$resultData=$mouModel->getMou(['year'=>$_POST['year'],
-											'school_id'=>$org_id]);
+			$resultData=$mouModel->getMou(['year'=>$_POST['year']==0?false:$_POST['year'],
+											'business_id'=>$_POST['business_id']==0?false:array($_POST['business_id'])]);
 			
 			$school=$resultData['school'];
 			$business=$resultData['business'];
@@ -237,7 +249,7 @@ class ReportMou extends BaseController
 			foreach ($resultData['mou'] as $mou){
 				$mou = get_object_vars($mou);
 
-				if(!isset($business[$mou['business_id']]))continue;
+				if(!isset($orgData[$mou['school_id']]))continue;
 				$i++;
 
 				$supEdu='';
@@ -248,8 +260,8 @@ class ReportMou extends BaseController
 				if($mou['support_no_specific']=='Y'){if($supEdu!='')$supEdu.='<br>'; $supEdu.='ไม่ระบุ';}
 
 				$trainingPlace='';
-				if($mou['support_local_training']=='Y')$trainingPlace='ฝึกงานในประเทศ';
-				if($mou['support_oversea_training']=='Y'){if($trainingPlace!='')$trainingPlace.='<br>'; $trainingPlace.='ฝึกงานต่างประเทศ';}
+				if($mou['support_local_training']=='Y')$trainingPlace='ฝึกในประเทศ';
+				if($mou['support_oversea_training']=='Y'){if($trainingPlace!='')$trainingPlace.='<br>'; $trainingPlace.='ฝึกต่างประเทศ';}
 
 				$org_name='';
 					if(isset($school[$mou['school_id']]))$org_name=$school[$mou['school_id']];
@@ -258,8 +270,8 @@ class ReportMou extends BaseController
 					
 				$resultRows[]=array(
 					$i,
-					'business_id'=>$business[$mou['business_id']]['business_name'],
-					'job_description'=>$business[$mou['business_id']]['job_description'],
+					'org_name'=>$orgData[$mou['school_id']],
+					//'job_description'=>$business[$mou['business_id']]['job_description'],
 					'level'=>isset($mou['level'])&&$mou['level']!=''?'ระดับ '.$mou['level']:'',
 					'investment'=>isset($mou['investment'])&&$mou['investment']!=''?$mou['investment']:'ยังไม่มี',
 					'support_edu'=>$supEdu,
@@ -301,7 +313,7 @@ class ReportMou extends BaseController
 			<u>หมายเหตุ</u><br>
 			&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;ระดับ ๑ หมายถึง ดำเนินกิจกรรมเกี่ยวกับ CSR การฝึกงาน กิจกรรมเฉพาะกิจ (รวมระยะสั้น)<br>
 			&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;ระดับ ๒ หมายถึง ดำเนินกิจกรรมเกี่ยวกับ CSR การฝึกงาน กิจกรรมเฉพาะกิจ (รวมระยะสั้น) และจัดการเรียนการสอนทวิภาคี<br>
-			&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;ระดับ ๓ หมายถึง ดำเนินกิจกรรมเกี่ยวกับ CSR การฝึกงาน กิจกรรมเฉพาะกิจ (รวมระยะสั้น) และจัดการเรียนการสอนทวิภาคี และมีการร่วมลงทุนระหว่างสถานประกอบการและสถานศึกษา
+			&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;ระดับ ๓ หมายถึง ดำเนินกิจกรรมเกี่ยวกับ CSR การฝึกงาน กิจกรรมเฉพาะกิจ (รวมระยะสั้น) และจัดการเรียนการสอนทวิภาคี และมีการร่วมลงทุนระหว่างสถานประกอบการ และสถานศึกษา
 			</td>
 			</tr>
 			</table>
@@ -321,7 +333,7 @@ class ReportMou extends BaseController
 				'wartermark'=>'',
 				'wartermarkimage'=>'',
 				'footer'=>'เอกสารนี้ออกโดย'.SYSTEMNAME.' สำนักความร่วมมือ สำนักงานคณะกรรมการการอาชีวศึกษา '.date('Y-m-d H:i:s'),
-				'header'=>'<div style="text-align: right; font-weight: normal;"><b>แบบฟอร์มที่ 4</b> <br> หน้า{PAGENO}/{nbpg}</div>'
+				'header'=>'<div style="text-align: right; font-weight: normal;"><b>แบบฟอร์มที่  11</b> <br> หน้า{PAGENO}/{nbpg}</div>'
 			);
 			$location=FCPATH.'/pdf/';
 			$fname=$_POST['org_id'].'_school_01.pdf';

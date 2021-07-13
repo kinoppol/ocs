@@ -30,8 +30,11 @@ class MouModel extends Model
             $builder->where('school_id',$data['school_id']);
         }else if(isset($data['school_id'])&&is_array($data['school_id'])){
             $builder->where('school_id in ('.implode(',',$data['school_id']).')');
+        }else if(isset($data['business_id'])&&is_array($data['business_id'])){
+            $builder->where('business_id in ('.implode(',',$data['business_id']).')');
         }
-        if(isset($data['year']))$builder->like('mou_date',$data['year'],'after');
+        $builder->orderBy('business_id');
+        if(isset($data['year'])&&$data['year']!==0)$builder->like('mou_date',$data['year'],'after');
         $mou=$builder->get()->getResult();
         //print $db->getLastQuery();
         

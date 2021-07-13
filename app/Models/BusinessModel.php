@@ -51,6 +51,23 @@ class BusinessModel extends Model
             }
         return $datas;
     }
+
+    public function listBusiness($data=array()){
+        $db = \Config\Database::connect();
+        $builder = $db->table('business');
+        $data=$builder->get()->getResult();
+            $datas=array();
+            foreach($data as $row){
+                $datas[$row->business_id]=array(
+                    'business_id'=>$row->business_id,
+                    'business_name'=>$row->business_name,
+                    'province_id'=>$row->province_id,
+                    'district_id'=>$row->district_id,
+                );
+            }
+        return $datas;
+    }
+
     public function businessAdd($data){
         $db = \Config\Database::connect();
         $builder = $db->table('business');
