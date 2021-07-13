@@ -59,7 +59,7 @@ class ReportMou extends BaseController
 		);
 		if(isset($_POST['year'])){
 
-			$caption='<b>'.$title.'ระหว่าง'.$org_type_name.'และสถานประกอบการ ปี '.($_POST['year']+543).'</b><br>'.$org_name;
+			$caption='<b>'.$title.'</b><br>ระหว่างสถานประกอบการและ'.$org_name.' ปี พ.ศ. '.($_POST['year']+543).'<br>';
 
 			$mouModel = model('App\Models\MouModel');
 			$resultData=$mouModel->getMou(['year'=>$_POST['year'],
@@ -148,7 +148,7 @@ class ReportMou extends BaseController
 			$pdf_data=array(
 				'html'=>$result,
 				'size'=>"A4-L",
-				'fontsize'=>16,
+				'fontsize'=>14,
 				'marginL'=>20,
 				'marginR'=>10,
 				'marginT'=>25,
@@ -234,8 +234,9 @@ class ReportMou extends BaseController
 			$orgData=orgArr();
 			//print_r($_POST);
 			$business_name=$_POST['business_id']==0?'':$business[$_POST['business_id']];
-			$yearWord=$_POST['year']==0?'':'ในปี '.($_POST['year']+543);
-			$caption='<b>'.$title.'ระหว่างสถานประกอบการ และหน่วยงานภาครัฐ '.$yearWord.'</b><br>'.$business_name;
+			$yearWord=$_POST['year']==0?'':'ประจำปี พ.ศ. '.($_POST['year']+543);
+			$caption='<b>รายงานการลงนามความร่วมมือระหว่างสถานศึกษา สถาบันการอาชีวศึกษา อ.กรอ.อศ สำนักงานคณะกรรมการการอาชีวศึกษา<br>
+			และ '.$business_name.' '.$yearWord.'</b><br>';
 
 			$mouModel = model('App\Models\MouModel');
 			$resultData=$mouModel->getMou(['year'=>$_POST['year']==0?false:$_POST['year'],
@@ -324,7 +325,7 @@ class ReportMou extends BaseController
 			$pdf_data=array(
 				'html'=>$result,
 				'size'=>"A4-L",
-				'fontsize'=>16,
+				'fontsize'=>14,
 				'marginL'=>20,
 				'marginR'=>10,
 				'marginT'=>25,

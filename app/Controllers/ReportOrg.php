@@ -13,18 +13,19 @@ class ReportOrg extends BaseController
 		helper('user');
 		helper('org');
 		helper('thai');
+		helper('string');
 		
 		$org_code=isset($_POST['org_id'])?$_POST['org_id']:current_user('org_code');
 		if($org_code=='all'){
-			$org_name="สถานศึกษาทุกแห่งในสังกัด".org_name(current_user('org_code'));
+			$org_name="สถานศึกษาทุกแห่ง ในสังกัด".org_name(current_user('org_code'));
 			$org_id=$_SESSION['subORG'];
 		}else if(mb_substr($org_code,0,1)=='p'){
 			$province_code=mb_substr($org_code,1,mb_strlen($org_code));
-			$org_name="สถานศึกษาทุกแห่งในจังหวัด".provinceName($province_code);
+			$org_name="สถานศึกษาทุกแห่ง ในจังหวัด".provinceName($province_code);
 			$org_id=schoolInProvince($province_code);
 		}else if(mb_substr($org_code,0,1)=='z'){
 			$zone_id=mb_substr($org_code,1,mb_strlen($org_code));
-			$org_name="สถานศึกษาทุกแห่งในภาค".zoneName($zone_id);
+			$org_name="สถานศึกษาทุกแห่ง ในภาค".zoneName($zone_id);
 			$org_id=schoolInZone($zone_id);
 		}else{
 			$org_name=isset($_POST['org_id'])?org_name($_POST['org_id']):org_name(current_user('org_code'));
@@ -48,18 +49,18 @@ class ReportOrg extends BaseController
 			'ที่',
 			'สถานประกอบการ',
 			'ลักษณะงาน',
-			'ระดับ<br>ความร่วมมือ',
-			'การร่วมลงทุน<br>กับ'.$org_type_name,
-			'ระดับ<br>การศึกษา',
+			'ระดับ<br>ความ<br>ร่วมมือ',
+			'การร่วม<br>ลงทุน',
+			'ระดับ<br>การ<br>ศึกษา',
 			//'วันที่ลงนาม',
-			'วันที่เริ่ม<br>ความร่วมมือ',
-			'วันที่สิ้นสุด<br>ความร่วมมือ',
+			'วันที่เริ่ม<br>ความ<br>ร่วมมือ',
+			'วันที่สิ้นสุด<br>ความ<br>ร่วมมือ',
 			'สถานที่ลงนาม',
 			'การฝึกงาน',
 		);
 		if(isset($_POST['year'])){
 
-			$caption='<b>'.$title.'ระหว่าง'.$org_type_name.'และสถานประกอบการ ปี '.($_POST['year']+543).'</b><br>'.$org_name;
+			$caption='<b>'.$title.'</b><br>ระหว่าง สถานประกอบการและ'.$org_name.'ปี พ.ศ. '.($_POST['year']+543).'<br>';//.$org_name;
 
 			$mouModel = model('App\Models\MouModel');
 			$resultData=$mouModel->getMou(['year'=>$_POST['year'],
@@ -95,14 +96,14 @@ class ReportOrg extends BaseController
 				$resultRows[]=array(
 					$i,
 					'business_id'=>$business[$mou['business_id']]['business_name'],
-					'job_description'=>$business[$mou['business_id']]['job_description'],
+					'job_description'=>strlim($business[$mou['business_id']]['job_description'],30),
 					'level'=>isset($mou['level'])&&$mou['level']!=''?'ระดับ '.$mou['level']:'',
 					'investment'=>isset($mou['investment'])&&$mou['investment']!=''?$mou['investment']:'ยังไม่มี',
 					'support_edu'=>$supEdu,
 					//'mou_date'=>dateThai($mou['mou_date']),
 					'mou_start_date'=>dateThai($mou['mou_start_date']),
 					'mou_end_date'=>$mou['no_expire']=='N'?dateThai($mou['mou_end_date']):'ไม่ได้ระบุ',
-					'mou_sign_place'=>$mou['mou_sign_place'],
+					'mou_sign_place'=>strlim($mou['mou_sign_place'],30),
 					'note'=>$trainingPlace,
 				);
 			}
@@ -148,7 +149,7 @@ class ReportOrg extends BaseController
 			$pdf_data=array(
 				'html'=>$result,
 				'size'=>"A4-L",
-				'fontsize'=>16,
+				'fontsize'=>14,
 				'marginL'=>20,
 				'marginR'=>10,
 				'marginT'=>25,
@@ -192,6 +193,7 @@ class ReportOrg extends BaseController
 		helper('user');
 		helper('org');
 		helper('thai');
+		helper('string');
 		
 		$org_code=isset($_POST['org_id'])?$_POST['org_id']:current_user('org_code');
 		if($org_code=='all'){
@@ -216,7 +218,7 @@ class ReportOrg extends BaseController
 		$org_type_name=org_type_name($data);
 		$signBox=signBox($data);
 
-		$title='รายงานการพัฒนาหลักสูตรระหว่าง '.$org_type_name.' ร่วมกับสถานประกอบการ';
+		$title='<b>รายงานการพัฒนาหลักสูตร</b><br>ระหว่าง สถานประกอบการและ'.$org_name;
 
 		$data=array(
 			'title'=>$title,
@@ -229,21 +231,21 @@ class ReportOrg extends BaseController
 			'ที่',
 			'สถานประกอบการ',
 			'ชื่อหลักสูตร',
-			'ปวช.',
-			'ปวส.',
-			'ทล.บ.',
-			'ระยะสั้น',
-			'ไม่กำหนด<br>ระดับการศึกษา',
+			'ระดับ<br>ปวช.',
+			'ระดับ<br>ปวส.',
+			'ระดับ<br>ทล.บ.',
+			'ระยะ<br>สั้น',
+			'ไม่ระบุ<br>ระดับ',
 			'Skill Gap',
 			'S-Curve',
 			'จำนวน<br>ชั่วโมง',
 			'เป้าหมาย<br>(คน)',
-			'ผู้เข้าอบรม<br>(คน)',
-			'หมายเหตุ',
+			'ผู้เข้า<br>อบรม<br>(คน)',
+			//'หมายเหตุ',
 		);
 		if(isset($_POST['year'])){
 
-			$caption='<b>'.$title.' ปี '.($_POST['year']+543).' </b><br>'.$org_name;
+			$caption=$title.' ปี พ.ศ. '.($_POST['year']+543);
 
 			$mouModel = model('App\Models\MouModel');
 			$resultData=$mouModel->curriculumGet(['curriculum_year'=>$_POST['year'],
@@ -273,19 +275,19 @@ class ReportOrg extends BaseController
 
 				$resultRows[]=array(
 					$i,
-					'business_id'=>$business[$cur->business_id]['business_name'],
-					'curriculum_name'=>$cur->curriculum_name,	
+					'business_id'=>strlim($business[$cur->business_id]['business_name'],35),
+					'curriculum_name'=>strlim($cur->curriculum_name,25),	
 					'support_vc_edu'=>$cur->support_vc_edu=='Y'?$check:'',
 					'support_hvc_edu'=>$cur->support_hvc_edu=='Y'?$check:'',
 					'support_btech_edu'=>$cur->support_btech_edu=='Y'?$check:'',
 					'support_short_course'=>$cur->support_short_course=='Y'?$check:'',
 					'support_no_specific'=>$cur->support_no_specific=='Y'?$check:'',	
-					'Skill_Gap'=>$cur->skill_gap,			
+					'Skill_Gap'=>strlim($cur->skill_gap,20),			
 					'scurve'=>$KG,			
 					'curriculum_hour'=>$cur->curriculum_hour,			
 					'curriculum_target'=>$cur->curriculum_target,	
 					'training_amount'=>$cur->training_amount,
-					'note'=>'',
+					//'note'=>'',
 				);
 			}
 
@@ -319,7 +321,7 @@ class ReportOrg extends BaseController
 			$pdf_data=array(
 				'html'=>$result,
 				'size'=>"A4-L",
-				'fontsize'=>16,
+				'fontsize'=>14,
 				'marginL'=>20,
 				'marginR'=>10,
 				'marginT'=>10,
@@ -349,6 +351,7 @@ class ReportOrg extends BaseController
 		helper('user');
 		helper('org');
 		helper('thai');
+		helper('string');
 		
 		$org_code=isset($_POST['org_id'])?$_POST['org_id']:current_user('org_code');
 		if($org_code=='all'){
@@ -390,7 +393,7 @@ class ReportOrg extends BaseController
 		}
 
 		
-		$title='รายงานผลสัมฤทธิ์ของการร่วมมือระหว่าง '.$org_type_name.' ร่วมกับสถานประกอบการ';
+		$title='<b>รายงานผลสัมฤทธิ์ของการร่วมมือ</b><br>ระหว่างสถานประกอบการและ';
 		$data=array(
 			'title'=>$title,
 			'label'=>'ปีที่เกิดผลสัมฤทธิ์',
@@ -402,17 +405,17 @@ class ReportOrg extends BaseController
 			'ที่',
 			'สถานประกอบการ',
 			'สาขาที่รับ<br>นร.นศ. ฝึกงาน/ฝึกอาชีพ',
-			'รับนร.นศ.<br> ฝึกงาน/ฝึกอาชีพ (คน)',
-			'สาขาที่รับ<br>ผู้สำเร็จการศึกษา เข้าทำงาน',
-			'รับ<br>ผู้สำเร็จการศึกษา เข้าทำงาน (คน)',
-			'การสนับสนุน<br>การศึกษา',
-			'มูลค่าการสนับสนุน',
-			'การสนับสนุน<br>การศึกษาด้านอื่นๆ',
+			'รับ<br>นร.นศ.<br> ฝึกงาน/<br>ฝึกอาชีพ <br>(คน)',
+			'สาขาที่รับ<br>ผู้สำเร็จ<br>การศึกษา<br>เข้าทำงาน',
+			'รับ<br>ผู้สำเร็จ<br>การศึกษา<br>เข้าทำงาน<br>(คน)',
+			'การ<br>สนับสนุน<br>การศึกษา',
+			'มูลค่า<br>การสนับสนุน',
+			'การสนับสนุน<br>การศึกษา<br>ด้านอื่นๆ',
 			//'หมายเหตุ',
 		);
 		if(isset($_POST['year'])){
 
-			$caption='<b>'.$title.' ปี '.($_POST['year']+543).' </b><br>'.$org_name;
+			$caption=$title.$org_name.' ปี พ.ศ. '.($_POST['year']+543).'<br>';
 
 			$mouModel = model('App\Models\MouModel');
 			$resultData=$mouModel->resultGet(['result_year'=>$_POST['year'],
@@ -426,18 +429,30 @@ class ReportOrg extends BaseController
 			foreach ($resultData['result'] as $res){
 				//$cur = get_object_vars($curriculum);
 				$i++;
+				$tm=explode(',',$res->trainee_majors);
+				$t_m='';
+				foreach($tm as $m){
+					if($t_m!='')$t_m.=',<br>';
+					$t_m.=strlim(trim($m),40);
+				}
+
+				$em=explode(',',$res->employee_majors);
+				$e_m='';
+				foreach($em as $m){
+					if($e_m!='')$t_m.=',<br>';
+					$e_m.=strlim(trim($m),25);
+				}
 
 				$resultRows[]=array(
 					$i,
-					'business_id'=>$business[$res->business_id]['business_name'],
-					'trainee_majors'=>str_replace(['.',','],',<br>',(str_replace([' ',"\r"],'',$res->trainee_majors))),	
+					'business_id'=>strlim($business[$res->business_id]['business_name'],35),
+					'trainee_majors'=>$t_m,	
 					'trainee_amount'=>$res->trainee_amount,
-					'employee_majors'=>str_replace(['.',','],',<br>',(str_replace([' ',"
-"],'',$res->employee_majors))),
+					'employee_majors'=>$e_m,
 					'employee_amount'=>$res->employee_amount,
 					'donate_detail'=>$res->donate_detail,
 					'donate_value'=>'<div style="text-align:right;">'.number_format($res->donate_value,0,'.',',').($res->donate_value>0?' บาท':'').'</div>',
-					'donate_other'=>$res->donate_other,
+					'donate_other'=>$res->donate_other==''?'&nbsp;&nbsp;&nbsp;':$res->donate_other,
 					//'note'=>'',
 				);
 			}
@@ -472,7 +487,7 @@ class ReportOrg extends BaseController
 			$pdf_data=array(
 				'html'=>$result,
 				'size'=>"A4-L",
-				'fontsize'=>16,
+				'fontsize'=>14,
 				'marginL'=>20,
 				'marginR'=>10,
 				'marginT'=>10,
