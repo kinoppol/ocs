@@ -205,7 +205,7 @@ class ReportMou extends BaseController
 		$locationModel = model('App\Models\LocationModel');
 		$province=$locationModel->getProvince();
 		$businessModel = model('App\Models\BusinessModel');
-		$businessData=$businessModel->listBusiness();
+		$businessData=$businessModel->listBusiness(['withMOU'=>'Y']);
 		$business=array();
 		foreach($businessData as $row){
 			$business_filter[$row['business_id']]=$row['business_name'].' ('.$province[$row['province_id']].')';

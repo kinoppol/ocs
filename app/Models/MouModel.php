@@ -9,10 +9,14 @@ class MouModel extends Model
     public function getMouCount($data=false){
         $db = \Config\Database::connect();
         $builder=$db->table('mou');
+        $builder->select('count(*) as c');
         if(isset($data['org_code']))$builder->where('school_id',$data['org_code']);
+        if(isset($data['active'])){
+            $builder->where('(mou_end_date>="'.date('Y-m-d').'" OR no_expire="Y")');
+        }
         $mou = $builder->get()->getResult();
-        $mouCount=count($mou);
-        return $mouCount;
+        //print $db->getLastQuery();
+        return $mou[0]->c;
     }
     public function getMouData($id){
         $db = \Config\Database::connect();
@@ -81,10 +85,13 @@ class MouModel extends Model
     public function getMouYearCount($data){
         $db = \Config\Database::connect();
         $builder = $db->table('mou');
-        if(isset($data['org_code']))$builder->where('school_id',$data['org_code']);
+        if(isset($data['org_code'])&&!is_array($data['org_code']))$builder->where('school_id',$data['org_code']);
+        if(isset($data['org_code'])&&is_array($data['org_code']))$builder->whereIn('school_id',$data['org_code']);
+        if(isset($data['level']))$builder->where('level',$data['level']);
         $builder->like('mou_date',$data['year'],'after');
         $mou=$builder->get()->getResult();
         $mouCount=count($mou);
+        //print $db->getLastQuery();
         return $mouCount;
     }
     public function getBusinessCount($data=false){
@@ -241,5 +248,44 @@ class MouModel extends Model
         $builder->where('id',$id);
         $result=$builder->delete();
         return $result;
+    }
+
+    public function getResultTraineeYear($data){
+        $db = \Config\Database::connect();
+        $builder = $db->table('mou_result');
+        $builder->select('sum(trainee_amount) as c');
+        if(isset($data['org_code'])&&!is_array($data['org_code']))$builder->where('school_id',$data['org_code']);
+        if(isset($data['org_code'])&&is_array($data['org_code']))$builder->whereIn('school_id',$data['org_code']);
+        $builder->where('result_year',$data['year']);
+        $mou=$builder->get()->getResult();
+        //print $db->getLastQuery();
+        return $mou[0]->c;
+
+    }
+
+    public function getResultEmployeeYear($data){
+        $db = \Config\Database::connect();
+        $builder = $db->table('mou_result');
+        $builder->select('sum(employee_amount) as c');
+        if(isset($data['org_code'])&&!is_array($data['org_code']))$builder->where('school_id',$data['org_code']);
+        if(isset($data['org_code'])&&is_array($data['org_code']))$builder->whereIn('school_id',$data['org_code']);
+        $builder->where('result_year',$data['year']);
+        $mou=$builder->get()->getResult();
+        //print $db->getLastQuery();
+        return $mou[0]->c;
+
+    }
+
+    public function getResultDonateYear($data){
+        $db = \Config\Database::connect();
+        $builder = $db->table('mou_result');
+        $builder->select('sum(donate_value) as c');
+        if(isset($data['org_code'])&&!is_array($data['org_code']))$builder->where('school_id',$data['org_code']);
+        if(isset($data['org_code'])&&is_array($data['org_code']))$builder->whereIn('school_id',$data['org_code']);
+        $builder->where('result_year',$data['year']);
+        $mou=$builder->get()->getResult();
+        //print $db->getLastQuery();
+        return $mou[0]->c;
+
     }
 }

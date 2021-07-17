@@ -55,6 +55,9 @@ class BusinessModel extends Model
     public function listBusiness($data=array()){
         $db = \Config\Database::connect();
         $builder = $db->table('business');
+        if(isset($data['withMOU'])){
+            $builder->join('mou','business.business_id=mou.business_id','right');
+        }
         $data=$builder->get()->getResult();
             $datas=array();
             foreach($data as $row){

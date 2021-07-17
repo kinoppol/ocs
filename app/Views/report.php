@@ -67,7 +67,12 @@
             array(
                 'title'=>'การลงนามความร่วมมือจำแนกตามสถานประกอบการ',
                 'file'=>'reportMou/mou_02',
-                'cond'=>current_user('user_type')=='gov'||current_user('user_type')=='boc'||current_user('user_type')=='bord',
+                'cond'=>current_user('user_type')=='boc'||current_user('user_type')=='bord',
+                ),
+            array(
+                'title'=>'สรุปข้อมูลการลงนามความร่วมมือจำแนกตามภาค',
+                'file'=>'reportSummary/sum_01',
+                'cond'=>current_user('user_type')=='boc'||current_user('user_type')=='bord',
                 ),
         );
 

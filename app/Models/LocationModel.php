@@ -41,4 +41,22 @@ class LocationModel extends Model
 
         return $subdistrict;
     }
+
+
+    public function getZone(){
+        $db = \Config\Database::connect();
+        $builder = $db->table('data_zone');
+        $result = $builder->get()->getResult();
+        return $result;
+    }
+
+
+    public function getSchoolZone($zoneID){
+        $db = \Config\Database::connect();
+        $builder = $db->table('school');
+        $builder->select('school_id,school_name');
+        $builder->where('zone',$zoneID);
+        $result = $builder->get()->getResult();
+        return $result;
+    }
 }
