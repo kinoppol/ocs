@@ -95,10 +95,10 @@ class ReportOrg extends BaseController
 					
 				$resultRows[]=array(
 					$i,
-					'business_id'=>$business[$mou['business_id']]['business_name'],
+					'business_id'=>strlim($business[$mou['business_id']]['business_name'],35),
 					'job_description'=>strlim($business[$mou['business_id']]['job_description'],30),
 					'level'=>isset($mou['level'])&&$mou['level']!=''?'ระดับ '.$mou['level']:'',
-					'investment'=>isset($mou['investment'])&&$mou['investment']!=''?$mou['investment']:'ยังไม่มี',
+					'investment'=>strlim(isset($mou['investment'])&&$mou['investment']!=''?$mou['investment']:'ยังไม่มี',10),
 					'support_edu'=>$supEdu,
 					//'mou_date'=>dateThai($mou['mou_date']),
 					'mou_start_date'=>dateThai($mou['mou_start_date']),
