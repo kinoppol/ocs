@@ -267,10 +267,15 @@ class Home extends BaseController
 			$zone2_id++;
 			$zone2[$zone2_id]=array(
 				'zone_id'=>$row['zone_id'],
+				'type'=>'target',
 				'zone_name'=>$row['zone_name'].' (เป้าหมาย)',
 			);
 			$zone2_id++;
-			$zone2[$zone2_id]=$row['zone_name'].' (ผู้เข้ารับการอบรม)';
+			$zone2[$zone2_id]=array(
+				'zone_id'=>$row['zone_id'],
+				'type'=>'training',
+				'zone_name'=>$row['zone_name'].' (ผู้เข้ารับการอบรม)',
+			);
 		}
 		foreach($dzm as $row){
 			$mr=array(
@@ -326,9 +331,8 @@ class Home extends BaseController
 			$cz_year=array(
 				'period'=>$y+543,
 			);
-		foreach($zone2 as $k=>$v){
-			$real_zone_id=if($k%2)
-            $school=$locationModel->getSchoolZone($row['zone_id']); 
+		foreach($zone2 as $k=>$z2){
+            $school=$locationModel->getSchoolZone($z2['zone_id']); 
 			$org_id=array();
             foreach($school as $srow){
                 $org_id[]=$srow->school_id;
@@ -337,10 +341,12 @@ class Home extends BaseController
 				'year'=>$y,
 				'org_code'=>$org_id,
 			);
-			$target=$MouModel->getCurriculumTargetYear($data);
-			$training=$MouModel->getCurriculumTrainingYear($data);
-			$cz_year[$row['zone_id']]=$target;
-			$cz_year[$row['zone_id']+5]=$training;
+			if($z2['type']=='target'){
+				$cz_year[$k]=$MouModel->getCurriculumTargetYear($data);
+			}
+			if($z2['type']=='training'){
+				$cz_year[$k]=$MouModel->getCurriculumTrainingYear($data);
+			}
 		}
 		$head[]=$y+543;
 
@@ -348,18 +354,20 @@ class Home extends BaseController
 		}
 		$cRows=array();
 		$color=array();
-		foreach($dzm as $row){
+		$label2=array();
+		foreach($zone2 as $k=>$v){
 			$cr=array(
-				'color'=>color2($row['zone_id']-1),
-				'label'=>$row['zone_name'],
+				'color'=>color2($k-1),
+				'label'=>$v['zone_name'],
 			);
+			$label2[]='ภาค'.$v['zone_name'];
 			foreach($cz_data as $cy){
-				$cr['data'][]=$cy[$row['zone_id']];
+				$cr['data'][]=$cy[$k];
 				
 			}
 			$cRows[]=$cr;
 
-			$color[]=color2($row['zone_id']-1);
+			$color[]=color2($k-1);
 		}
 
 		$czData=array(
