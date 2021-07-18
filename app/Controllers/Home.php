@@ -224,8 +224,12 @@ class Home extends BaseController
 			)
 		);
 		$myz_data=array();
-		for($y=date('Y')-10;$y<=date('Y');$y++){
+		$dyz_data=array();
+		for($y=date('Y')-9;$y<=date('Y');$y++){
 			$myz_year=array(
+				'period'=>$y+543,
+			);
+			$dyz_year=array(
 				'period'=>$y+543,
 			);
 
@@ -240,9 +244,12 @@ class Home extends BaseController
 				'org_code'=>$org_id,
 			);
 			$MOU=$MouModel->getMouYearCount($data);
+			$DONATE=$MouModel->getResultDonateYear($data);
 			$myz_year[$row['zone_id']]=$MOU;
+			$dyz_year[$row['zone_id']]=$DONATE;
 		}
 			$myz_data[]=$myz_year;
+			$dyz_data[]=$dyz_year;
 		}
 		$color=array();
 		$label=array();
@@ -252,9 +259,19 @@ class Home extends BaseController
 		}
 		$myzData=array(
 			'id'=>'ln_myz',
-			'caption'=>'การลงนามความร่วมมือระหว่างสถานประกอบการและสถานศึกษาแต่ละปี',
+			'caption'=>' MOU ระหว่างสถานประกอบการและสถานศึกษาแต่ละปี',
 			'data'=>array(
 				'data'=>$myz_data,
+				'color'=>$color,
+				'label'=>$label,
+			),
+		);
+
+		$dyzData=array(
+			'id'=>'ln_dyz',
+			'caption'=>'การสนับสนุนการศึกษาจากสถานประกอบการแต่ละปี (บาท)',
+			'data'=>array(
+				'data'=>$dyz_data,
 				'color'=>$color,
 				'label'=>$label,
 			),
@@ -268,6 +285,7 @@ class Home extends BaseController
 			'content'=>	view('dashboard',$data1).
 						view('dashboard',$data2).
 						view('chart_ln',$myzData).
+						view('chart_ln',$dyzData).
 						view('chart_dn',$schoolChartData).
 						view('chart_dn',$studentChartData).
 						view('chart_dn',$chartData).

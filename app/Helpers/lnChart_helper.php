@@ -7,7 +7,8 @@ function ln_gen_data($data){
             $r='';
             foreach($row as $k=>$v){
                 if($r!='')$r.=',';
-                    $r.=$k.':"'.$v.'"';
+                    if($v)$r.=$k.':"'.$v.'"';
+                    else $r.=$k.':0';
             }
             $ret.='{'.$r.'}';
         }
