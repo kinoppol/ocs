@@ -22,6 +22,16 @@ helper('lnChart');
                         </div>
                         <div class="body">
                             <div id="line_chart_<?php print $id; ?>" class="graph"></div>
+                            <?php
+                                if(isset($table)){
+                                    $tableArr=array(
+                                        'caption'=>$caption,
+                                        'head'=>$table['head'],
+                                        'rows'=>$table['rows'],
+                                    );
+                                    print ln_table($tableArr,$export=false,$noFoot=true);
+                                }
+                            ?>
                         </div>
                     </div>
                 </div>
@@ -42,44 +52,6 @@ if(!isset($_SESSION['LIB']['MORRIS_CART_LIB'])){
     <script src="'.site_url("template/adminbsb/plugins/flot-charts/jquery.flot.time.js").'"></script>';
 
 }
-
-$lc=array(
-        'data'=>array(
-                array(
-                'period'=>'2560',
-                '2'=>160,
-                '5'=>60,
-                ),
-                array(
-                'period'=>'2561',
-                '2'=>170,
-                '5'=>70,
-                ),
-                array(
-                'period'=>'2562',
-                '2'=>170,
-                '5'=>70,
-                ),
-                array(
-                'period'=>'2563',
-                '2'=>170,
-                '5'=>70,
-                ),
-                array(
-                'period'=>'2564',
-                '2'=>170,
-                '5'=>70,
-                ),
-            ),
-        'color'=>array(
-            'red',
-            'blue',
-        ),
-        'label'=>array(
-            'ภาคเหนือ',
-            'ภาคใต้',
-        ),
-);
 
 $_SESSION['FOOTSYSTEM'].='
             <script>

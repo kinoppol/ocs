@@ -52,3 +52,26 @@ function ln_gen_param($data,$lineWidth=3){
     return $ret;
 
 }
+
+
+function ln_table($table){
+    helper('string');
+    $ret='<table width="100%" class="table table-bordered table-striped table-hover"  border="1" cellspacing="0" style="overflow: wrap; border-collapse: collapse; ">';
+        $ret.='<thead><tr>';
+        foreach($table['head'] as $th){
+            $ret.='<th>'.$th.'</th>';
+        }
+        $ret.='</tr></thead><tbody>';
+        foreach($table['rows'] as $tr){
+            $data_rows='';
+            foreach($tr['data'] as $d){
+                $data_rows.='<td align="right">'.number_format($d,0).'</td>';
+            }
+
+            $ret.='<tr>';
+                $ret.='<td style="color:'.(isset($tr['color'])?$tr['color']:'black').';">'.strlim($tr['label'],20).'</td>'.$data_rows;
+            $ret.='</tr>';
+        }
+    $ret.='</tbody></table>';
+    return $ret;
+}

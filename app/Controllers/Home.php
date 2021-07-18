@@ -225,13 +225,17 @@ class Home extends BaseController
 		);
 		$myz_data=array();
 		$dyz_data=array();
-		for($y=date('Y')-9;$y<=date('Y');$y++){
+		$head=array('ภาค / ปี');
+
+		
+		for($y=date('Y')-4;$y<=date('Y');$y++){
 			$myz_year=array(
 				'period'=>$y+543,
 			);
 			$dyz_year=array(
 				'period'=>$y+543,
 			);
+			$head[]=$y+543;
 
 		foreach($dzm as $row){
             $school=$locationModel->getSchoolZone($row['zone_id']); 
@@ -253,9 +257,30 @@ class Home extends BaseController
 		}
 		$color=array();
 		$label=array();
+		$mRows=array();
+		$dRows=array();
 		foreach($dzm as $row){
 			$color[]=color($row['zone_id']+2);
 			$label[]='ภาค'.$row['zone_name'];
+		}
+		foreach($dzm as $row){
+			$mr=array(
+				'color'=>color($row['zone_id']+2),
+				'label'=>'ภาค'.$row['zone_name'],
+			);
+			$dr=array(
+				'color'=>color($row['zone_id']+2),
+				'label'=>'ภาค'.$row['zone_name'],
+			);
+			foreach($myz_data as $my){
+				$mr['data'][]=$my[$row['zone_id']];
+				
+			}
+			$mRows[]=$mr;
+			foreach($dyz_data as $dy){
+				$dr['data'][]=$dy[$row['zone_id']];
+			}
+			$dRows[]=$dr;
 		}
 		$myzData=array(
 			'id'=>'ln_myz',
@@ -265,6 +290,10 @@ class Home extends BaseController
 				'color'=>$color,
 				'label'=>$label,
 			),
+			'table'=>array(
+				'head'=>$head,
+				'rows'=>$mRows,
+			)
 		);
 
 		$dyzData=array(
@@ -275,6 +304,10 @@ class Home extends BaseController
 				'color'=>$color,
 				'label'=>$label,
 			),
+			'table'=>array(
+				'head'=>$head,
+				'rows'=>$dRows,
+			)
 		);
 
 		$data=array(
