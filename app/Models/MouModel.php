@@ -98,11 +98,18 @@ class MouModel extends Model
         $db = \Config\Database::connect();
         $builder = $db->table('mou');
         $builder->select('business_id');
-        if(isset($data['org_code']))$builder->where('school_id',$data['org_code']);
+        if(isset($data['org_code'])&&!is_array($data['org_code']))$builder->where('school_id',$data['org_code']);
+        if(isset($data['org_code'])&&is_array($data['org_code']))$builder->whereIn('school_id',$data['org_code']);
+        if(isset($data['year']))$builder->like('mou_date',$data['year'],'after');
         $builder->distinct();
         $business=$builder->get()->getResult();
-        $businessCount=count($business);
-        return $businessCount;
+        //$businessCount=count($business);
+        //print $db->getLastQuery();
+        $business_ids=array();
+        foreach($business as $row){
+            $business_ids[$row->business_id]=$row->business_id;
+        }
+        return $business_ids;
     }
     public function addMou($data){
 		//print_r($data);

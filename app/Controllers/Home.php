@@ -38,7 +38,7 @@ class Home extends BaseController
 			'mouCount'=>$MouModel->getMouCount(['active'=>'Y']),
 			'mouLastYearCount'=>$MouModel->getMouYearCount(['year'=>$currentYear-1]),
 			'mouYearCount'=>$MouModel->getMouYearCount(['year'=>$currentYear]),
-			'businessCount'=>$MouModel->getBusinessCount(),
+			'businessCount'=>count($MouModel->getBusinessCount()),
 		);		
 		$data2=array(
 			'title'=>'ส่วนของ'.$org_name,
@@ -46,7 +46,7 @@ class Home extends BaseController
 			'mouCount'=>$MouModel->getMouCount(['org_code'=>current_user('org_code'),'active'=>'Y']),
 			'mouLastYearCount'=>$MouModel->getMouYearCount(['org_code'=>current_user('org_code'),'year'=>$currentYear-1]),
 			'mouYearCount'=>$MouModel->getMouYearCount(['org_code'=>current_user('org_code'),'year'=>$currentYear]),
-			'businessCount'=>$MouModel->getBusinessCount(['org_code'=>current_user('org_code')]),
+			'businessCount'=>count($MouModel->getBusinessCount(['org_code'=>current_user('org_code')])),
 		);
 
 		$dzm=$DashboardModel->getDivZoneMOU();
@@ -160,44 +160,44 @@ class Home extends BaseController
 
 		$chartData=array(
 			'id'=>'dn_mou',
-			'caption'=>'การลงนามความร่วมมือจำแนกรายภาค',
+			'caption'=>'การลงนามความร่วมมือ',
 			'dn_data'=>$dnm_data,
 			'alt'=>'การลงนามความร่วมมือที่ยังมีผลอยู่ทั้งหมด '.number_format($sum_mou,0).' MOU',
 		);
 
 		$schoolChartData=array(
 			'id'=>'dn_school',
-			'caption'=>'จำนวนสถานศึกษาจำแนกรายภาค',
+			'caption'=>'สถานศึกษาจำแนกรายภาค',
 			'dn_data'=>$dns_data,
 			'alt'=>'สถานศึกษาภาครัฐทั้งหมด '.number_format($sum_school,0).' แห่ง',
 		);
 
 		$studentChartData=array(
 			'id'=>'dn_student',
-			'caption'=>'จำนวนผู้เรียนอาชีวศึกษาจำแนกรายภาค',
+			'caption'=>'ผู้เรียนอาชีวศึกษาภาครัฐ',
 			'dn_data'=>$dnstd_data,
 			'alt'=>'ผู้เรียนอาชีวศึกษาภาครัฐทั้งหมด '.number_format($studentTotal,0).' คน',
 		);
 
 		$donateChartData=array(
 			'id'=>'dn_donate',
-			'caption'=>'มูลค่าการสนับสนุนการศึกษาจำแนกรายภาค',
+			'caption'=>'มูลค่าการสนับสนุนการศึกษา',
 			'dn_data'=>$dnd_data,
-			'alt'=>'มูลค่าการสนับสนุนการศึกษาทั้งหมด '.number_format($donateTotalYear,0).' บาท',
+			'alt'=>'มูลค่าการสนับสนุนการศึกษารวม '.number_format($donateTotalYear,0).' บาท',
 		);
 
 		$traineeChartData=array(
 			'id'=>'dn_trainee',
-			'caption'=>'การรับนักศึกษาฝึกงาน',
+			'caption'=>'การรับนักศึกษาฝึกงาน/ฝึกอาชีพ',
 			'dn_data'=>$dnt_data,
-			'alt'=>'มีการรับนักศึกษาฝึกงานภายใต้ MOU '.number_format($traineeTotalYear,0).' คน',
+			'alt'=>'การรับนักศึกษาฝึกงานภายใต้ MOU '.number_format($traineeTotalYear,0).' คน',
 		);
 
 		$employeeChartData=array(
 			'id'=>'dn_employee',
 			'caption'=>'การรับผู้สำเร็จการศึกษาเข้าทำงาน',
 			'dn_data'=>$dne_data,
-			'alt'=>'มีการรับผู้สำเร็จการศึกษาเข้าทำงานภายใต้ MOU '.number_format($employeeTotalYear,0).' คน',
+			'alt'=>'การรับผู้สำเร็จการศึกษาเข้าทำงาน '.number_format($employeeTotalYear,0).' คน',
 		);
 
 		$data=array(

@@ -35,7 +35,8 @@ class ReportSummary extends BaseController
 		$result='';
 		$resultHead=array(
 			'ภาค',
-			'สถานศึกษา',
+			'สถานศึกษา<br>(แห่ง)',
+			'สถาน<br>ประกอบการ<br>(แห่ง)',
 			'การลงนาม<br>ความร่วมมือ<br>(MOU)',
 			'ความ<br>ร่วมมือ<br>ระดับ 1',
 			'ความ<br>ร่วมมือ<br>ระดับ 2',
@@ -53,7 +54,7 @@ class ReportSummary extends BaseController
 		    $zone=$locationModel->getZone();
 		
         $resultRows=array();
-
+			$business_ids=array();
 		foreach($zone as $row){
             $school=$locationModel->getSchoolZone($row->zone_id);
             $org_id=array();
@@ -65,6 +66,12 @@ class ReportSummary extends BaseController
                 'year'=>$_POST['year'],
                 'org_code'=>$org_id,
             );
+			$businessCount=$mouModel->getBusinessCount($data);
+			//print_r($businessCount);
+			//print "<br>";
+			foreach($businessCount as $k=>$v){
+				$business_ids[$k]=$v;
+			}
             $mouYear=$mouModel->getMouYearCount($data);
             $data['level']=1;
             $mouYearLevel1=$mouModel->getMouYearCount($data);
@@ -72,7 +79,7 @@ class ReportSummary extends BaseController
             $mouYearLevel2=$mouModel->getMouYearCount($data);
             $data['level']=3;
             $mouYearLevel3=$mouModel->getMouYearCount($data);
-
+			
             $data=array(
                 'year'=>$_POST['year'],
                 'org_code'=>$org_id,
@@ -82,8 +89,9 @@ class ReportSummary extends BaseController
             $employeeYear=$mouModel->getResultEmployeeYear($data);
             $donateYear=$mouModel->getResultDonateYear($data);
             $resultRows[]=array(
-				'zone'=>$row->zone_name,
+				'zone'=>'ภาค'.$row->zone_name,
                 'school'=>count($school),
+				'business'=>number_format(count($businessCount),0),
                 'mou'=>number_format($mouYear,0),
                 'mouLevel1'=>number_format($mouYearLevel1,0),
                 'mouLevel2'=>number_format($mouYearLevel2,0),
@@ -94,6 +102,17 @@ class ReportSummary extends BaseController
                 //'&nbsp;',
 			);
 		}
+		$resultRows[]=array('zone'=>'<center>รวม</center>',
+							'school'=>number_format(array_sum(str_replace(',','',array_column($resultRows,'school'))),0),
+							'business'=>'*'.number_format(count($business_ids),0),
+							'mou'=>number_format(array_sum(str_replace(',','',array_column($resultRows,'mou'))),0),
+							'mouLevel1'=>number_format(array_sum(str_replace(',','',array_column($resultRows,'mouLevel1'))),0),
+							'mouLevel2'=>number_format(array_sum(str_replace(',','',array_column($resultRows,'business'))),0),
+							'mouLevel3'=>number_format(array_sum(str_replace(',','',array_column($resultRows,'mouLevel3'))),0),
+							'donate'=>number_format(array_sum(str_replace(',','',array_column($resultRows,'donate'))),0),
+							'trainee'=>number_format(array_sum(str_replace(',','',array_column($resultRows,'business'))),0),
+							'employee'=>number_format(array_sum(str_replace(',','',array_column($resultRows,'employee'))),0),
+	);
 
 			$mouArr=array(
 					'caption'=>$caption,
@@ -105,6 +124,8 @@ class ReportSummary extends BaseController
 
 			$result='โปรดกดปุม "ตกลง" เพื่อดูรายงาน';
 		}
+
+		$result.='<u>หมายเหตุ</u> * สถานประกอบการหนึ่งแห่งสามารถทำ MOU ได้หลายฉบับ และสามารถทำ MOU กับสถานศึกษาได้หลายแห่ง หลายภาค';
 		$data=array(
 			'form'=>$form,
 			'result'=>$result,

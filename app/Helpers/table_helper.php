@@ -34,6 +34,7 @@ function genTable($arr,$export=false,$noFoot=false){
             $align='';
             $td_n=str_replace(',','',$td);
             $td_n=str_replace('.','',$td_n);
+            $td_n=str_replace('*','',$td_n);
                 if(is_numeric($td_n)){
                     $align=' style="text-align:right"';
                 }
