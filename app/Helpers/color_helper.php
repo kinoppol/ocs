@@ -6,3 +6,12 @@ function color($number){
     $n=$number%count($c);
     return $c[$n];
 } 
+
+
+function color2($number){
+    $c=array(
+        'red','pink','blue','cyan','navy','teal','orange','yellow','brown','grey'
+    );
+    $n=$number%count($c);
+    return $c[$n];
+} 

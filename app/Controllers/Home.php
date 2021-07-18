@@ -259,18 +259,27 @@ class Home extends BaseController
 		$label=array();
 		$mRows=array();
 		$dRows=array();
+		$zone2=array();
+		$zone2_id=0;
 		foreach($dzm as $row){
 			$color[]=color($row['zone_id']+2);
 			$label[]='ภาค'.$row['zone_name'];
+			$zone2_id++;
+			$zone2[$zone2_id]=array(
+				'zone_id'=>$row['zone_id'],
+				'zone_name'=>$row['zone_name'].' (เป้าหมาย)',
+			);
+			$zone2_id++;
+			$zone2[$zone2_id]=$row['zone_name'].' (ผู้เข้ารับการอบรม)';
 		}
 		foreach($dzm as $row){
 			$mr=array(
 				'color'=>color($row['zone_id']+2),
-				'label'=>'ภาค'.$row['zone_name'],
+				'label'=>$row['zone_name'],
 			);
 			$dr=array(
 				'color'=>color($row['zone_id']+2),
-				'label'=>'ภาค'.$row['zone_name'],
+				'label'=>$row['zone_name'],
 			);
 			foreach($myz_data as $my){
 				$mr['data'][]=$my[$row['zone_id']];
@@ -310,6 +319,63 @@ class Home extends BaseController
 			)
 		);
 
+		$cz_data=array();
+
+		$head=array('ภาค / ปี');
+		for($y=date('Y')-4;$y<=date('Y');$y++){
+			$cz_year=array(
+				'period'=>$y+543,
+			);
+		foreach($zone2 as $k=>$v){
+			$real_zone_id=if($k%2)
+            $school=$locationModel->getSchoolZone($row['zone_id']); 
+			$org_id=array();
+            foreach($school as $srow){
+                $org_id[]=$srow->school_id;
+            }
+			$data=array(
+				'year'=>$y,
+				'org_code'=>$org_id,
+			);
+			$target=$MouModel->getCurriculumTargetYear($data);
+			$training=$MouModel->getCurriculumTrainingYear($data);
+			$cz_year[$row['zone_id']]=$target;
+			$cz_year[$row['zone_id']+5]=$training;
+		}
+		$head[]=$y+543;
+
+		$cz_data[]=$cz_year;
+		}
+		$cRows=array();
+		$color=array();
+		foreach($dzm as $row){
+			$cr=array(
+				'color'=>color2($row['zone_id']-1),
+				'label'=>$row['zone_name'],
+			);
+			foreach($cz_data as $cy){
+				$cr['data'][]=$cy[$row['zone_id']];
+				
+			}
+			$cRows[]=$cr;
+
+			$color[]=color2($row['zone_id']-1);
+		}
+
+		$czData=array(
+			'id'=>'bar_cz',
+			'caption'=>'การพัฒนาหลักสูตรร่วมกันและการจัดอบรม เป้าหมาย/ผู้เข้ารับการอบรม (คน)',
+			'data'=>array(
+				'data'=>$cz_data,
+				'color'=>$color,
+				'label'=>$label2,
+			),
+			'table'=>array(
+				'head'=>$head,
+				'rows'=>$cRows,
+			)
+		);
+
 		$data=array(
 			'title'=>'ภาพรวม',
 			'task'=>'',
@@ -319,6 +385,7 @@ class Home extends BaseController
 						view('dashboard',$data2).
 						view('chart_ln',$myzData).
 						view('chart_ln',$dyzData).
+						view('chart_bar',$czData).
 						view('chart_dn',$schoolChartData).
 						view('chart_dn',$studentChartData).
 						view('chart_dn',$chartData).

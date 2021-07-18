@@ -295,4 +295,26 @@ class MouModel extends Model
         return $mou[0]->c;
 
     }
+
+    public function getCurriculumTargetYear($data){
+        $db = \Config\Database::connect();
+        $builder = $db->table('curriculum');
+        $builder->select('sum(curriculum_target) as c');
+        if(isset($data['org_code'])&&!is_array($data['org_code']))$builder->where('school_id',$data['org_code']);
+        if(isset($data['org_code'])&&is_array($data['org_code']))$builder->whereIn('school_id',$data['org_code']);
+        $builder->where('curriculum_year',$data['year']);
+        $result=$builder->get()->getResult();
+        return $result[0]->c;
+    }
+
+    public function getCurriculumTrainingYear($data){
+        $db = \Config\Database::connect();
+        $builder = $db->table('curriculum');
+        $builder->select('sum(training_amount) as c');
+        if(isset($data['org_code'])&&!is_array($data['org_code']))$builder->where('school_id',$data['org_code']);
+        if(isset($data['org_code'])&&is_array($data['org_code']))$builder->whereIn('school_id',$data['org_code']);
+        $builder->where('curriculum_year',$data['year']);
+        $result=$builder->get()->getResult();
+        return $result[0]->c;
+    }
 }
