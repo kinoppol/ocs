@@ -48,6 +48,9 @@ $debug=false;
     <!-- Bootstrap Select Css -->
     <link href="<?php print site_url();?>template/adminbsb/plugins/bootstrap-select/css/bootstrap-select.css" rel="stylesheet" />
 
+    
+    <!-- Morris Css -->
+    <link href="<?php print site_url();?>template/adminbsb/plugins/morrisjs/morris.css" rel="stylesheet" />
     <!-- Custom Css -->
     <link href="<?php print site_url();?>template/adminbsb/css/style.css?lo=thai" rel="stylesheet">
 

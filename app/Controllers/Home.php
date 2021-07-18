@@ -162,7 +162,11 @@ class Home extends BaseController
 			'id'=>'dn_mou',
 			'caption'=>'การลงนามความร่วมมือ',
 			'dn_data'=>$dnm_data,
-			'alt'=>'การลงนามความร่วมมือที่ยังมีผลอยู่ทั้งหมด '.number_format($sum_mou,0).' MOU',
+			'alt'=>'การลงนามความร่วมมือที่มีผลอยู่ '.number_format($sum_mou,0).' MOU',
+			'table'=>array(
+				'head'=>array('ภาค','%'),
+				'rows'=>$dnm_data,
+			)
 		);
 
 		$schoolChartData=array(
@@ -170,6 +174,10 @@ class Home extends BaseController
 			'caption'=>'สถานศึกษาจำแนกรายภาค',
 			'dn_data'=>$dns_data,
 			'alt'=>'สถานศึกษาภาครัฐทั้งหมด '.number_format($sum_school,0).' แห่ง',
+			'table'=>array(
+				'head'=>array('ภาค','%'),
+				'rows'=>$dns_data,
+			)
 		);
 
 		$studentChartData=array(
@@ -177,6 +185,10 @@ class Home extends BaseController
 			'caption'=>'ผู้เรียนอาชีวศึกษาภาครัฐ',
 			'dn_data'=>$dnstd_data,
 			'alt'=>'ผู้เรียนอาชีวศึกษาภาครัฐทั้งหมด '.number_format($studentTotal,0).' คน',
+			'table'=>array(
+				'head'=>array('ภาค','%'),
+				'rows'=>$dnstd_data,
+			)
 		);
 
 		$donateChartData=array(
@@ -184,6 +196,10 @@ class Home extends BaseController
 			'caption'=>'มูลค่าการสนับสนุนการศึกษา',
 			'dn_data'=>$dnd_data,
 			'alt'=>'มูลค่าการสนับสนุนการศึกษารวม '.number_format($donateTotalYear,0).' บาท',
+			'table'=>array(
+				'head'=>array('ภาค','%'),
+				'rows'=>$dnd_data,
+			)
 		);
 
 		$traineeChartData=array(
@@ -191,6 +207,10 @@ class Home extends BaseController
 			'caption'=>'การรับนักศึกษาฝึกงาน/ฝึกอาชีพ',
 			'dn_data'=>$dnt_data,
 			'alt'=>'การรับนักศึกษาฝึกงานภายใต้ MOU '.number_format($traineeTotalYear,0).' คน',
+			'table'=>array(
+				'head'=>array('ภาค','%'),
+				'rows'=>$dnt_data,
+			)
 		);
 
 		$employeeChartData=array(
@@ -198,6 +218,46 @@ class Home extends BaseController
 			'caption'=>'การรับผู้สำเร็จการศึกษาเข้าทำงาน',
 			'dn_data'=>$dne_data,
 			'alt'=>'การรับผู้สำเร็จการศึกษาเข้าทำงาน '.number_format($employeeTotalYear,0).' คน',
+			'table'=>array(
+				'head'=>array('ภาค','%'),
+				'rows'=>$dne_data,
+			)
+		);
+		$myz_data=array();
+		for($y=date('Y')-10;$y<=date('Y');$y++){
+			$myz_year=array(
+				'period'=>$y+543,
+			);
+
+		foreach($dzm as $row){
+            $school=$locationModel->getSchoolZone($row['zone_id']); 
+			$org_id=array();
+            foreach($school as $srow){
+                $org_id[]=$srow->school_id;
+            }
+			$data=array(
+				'year'=>$y,
+				'org_code'=>$org_id,
+			);
+			$MOU=$MouModel->getMouYearCount($data);
+			$myz_year[$row['zone_id']]=$MOU;
+		}
+			$myz_data[]=$myz_year;
+		}
+		$color=array();
+		$label=array();
+		foreach($dzm as $row){
+			$color[]=color($row['zone_id']+2);
+			$label[]='ภาค'.$row['zone_name'];
+		}
+		$myzData=array(
+			'id'=>'ln_myz',
+			'caption'=>'การลงนามความร่วมมือระหว่างสถานประกอบการและสถานศึกษาแต่ละปี',
+			'data'=>array(
+				'data'=>$myz_data,
+				'color'=>$color,
+				'label'=>$label,
+			),
 		);
 
 		$data=array(
@@ -207,6 +267,7 @@ class Home extends BaseController
 			'mainMenu'=>view('_menu'),
 			'content'=>	view('dashboard',$data1).
 						view('dashboard',$data2).
+						view('chart_ln',$myzData).
 						view('chart_dn',$schoolChartData).
 						view('chart_dn',$studentChartData).
 						view('chart_dn',$chartData).

@@ -120,12 +120,13 @@ class ReportSummary extends BaseController
 					'tbody'=>$resultRows,
 			);
 			$result=genTable($mouArr,$export=true,$noFoot=true);
+			$result.='<u>หมายเหตุ</u> * สถานประกอบการหนึ่งแห่งสามารถทำ MOU ได้หลายฉบับ และสามารถทำ MOU กับสถานศึกษาได้หลายแห่ง หลายภาค';
+		
 		}else{
 
 			$result='โปรดกดปุม "ตกลง" เพื่อดูรายงาน';
 		}
 
-		$result.='<u>หมายเหตุ</u> * สถานประกอบการหนึ่งแห่งสามารถทำ MOU ได้หลายฉบับ และสามารถทำ MOU กับสถานศึกษาได้หลายแห่ง หลายภาค';
 		$data=array(
 			'form'=>$form,
 			'result'=>$result,
