@@ -10,7 +10,7 @@ function color($number){
 
 function color2($number){
     $c=array(
-        'red','pink','blue','cyan','navy','teal','orange','yellow','brown','grey'
+        'red','pink','blue','cyan','navy','teal','brown','orange','black','grey'
     );
     $n=$number%count($c);
     return $c[$n];
