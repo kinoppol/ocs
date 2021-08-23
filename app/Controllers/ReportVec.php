@@ -63,7 +63,7 @@ class ReportVec extends BaseController
 											'school_id'=>$org_id]);
 			
 
-            $govModel = model('App\Models\GOVModel');
+            $govModel = model('App\Models\GovModel');
 
 			$school=$resultData['school'];
 			$business=$resultData['business'];
