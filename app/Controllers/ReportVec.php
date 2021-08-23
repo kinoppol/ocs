@@ -71,6 +71,7 @@ class ReportVec extends BaseController
 			$resultRows=array();
 			$i=0;
             //print_r($org_id);
+            if(!is_array($org_id))$org_id=array($org_id);
 			foreach ($org_id as $orgId){
                 $i++;
                 $meettingRecord=$govModel->getMeetting(['year'=>$_POST['year'],
