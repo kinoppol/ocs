@@ -15,6 +15,20 @@ function org_name($org_id=false){
         return $_SESSION['ORG'][$org_id];
 }
 
+function allOrg(){
+
+    $orgModel = model('App\Models\OrgModel');
+            $schools=$orgModel->getSchool();
+            $institute=$orgModel->getInstitute();
+            $govs=$orgModel->getGov();
+            $_SESSION['subORG']=$govs+$institute+$schools;
+            $data=array();
+            foreach($_SESSION['subORG'] as $k=>$v){
+                array_push($data,$k);
+            }
+            return $data;
+}
+
 function orgArr($orgIds=array()){
     $orgModel = model('App\Models\OrgModel');
 

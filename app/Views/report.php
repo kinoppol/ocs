@@ -74,6 +74,11 @@
                 'file'=>'reportSummary/sum_01',
                 'cond'=>current_user('user_type')=='boc'||current_user('user_type')=='bord',
                 ),
+            array(
+                'title'=>'รายงานการใช้งานระบบ',
+                'file'=>'reportVec/vec_01',
+                'cond'=>current_user('user_type')=='boc'||current_user('user_type')=='bord',
+                ),
         );
 
 

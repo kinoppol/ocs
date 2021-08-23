@@ -14,6 +14,9 @@ class MouModel extends Model
         if(isset($data['active'])){
             $builder->where('(mou_end_date>="'.date('Y-m-d').'" OR no_expire="Y")');
         }
+        if(isset($data['year'])){
+            $builder->like('mou_start_date',$data['year'],'after');
+        }
         $mou = $builder->get()->getResult();
         //print $db->getLastQuery();
         return $mou[0]->c;
