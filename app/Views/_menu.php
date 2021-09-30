@@ -147,7 +147,7 @@ $data=array(
                     ),
                 'research'=>array(
                     'text'=>'การวิจัยความพึงพอใจ',
-                    'url'=>site_url('public/gov/research'),
+                    'url'=>'https://docs.google.com/forms/d/e/1FAIpQLSfBvhtXlbLZS6uh9vqA3FdkRpdPK6xgeyivwdCHQKJ5tv_KoQ/viewform',
                     'cond'=>true,
                     ),
                 'projectRecord'=>array(
