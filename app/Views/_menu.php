@@ -66,6 +66,13 @@ $data=array(
         'cond'=>current_user('user_type')!='board',
 
     ),
+	
+	'research'=>array(
+				'text'=>'การวิจัยความพึงพอใจ',
+				'url'=>'https://docs.google.com/forms/d/e/1FAIpQLSfBvhtXlbLZS6uh9vqA3FdkRpdPK6xgeyivwdCHQKJ5tv_KoQ/viewform',
+        			'bullet'=>'assignment',
+				'cond'=>current_user('user_type')=='admin'||current_user('user_type')=='boc',
+				),
     'mou'=>array(
         'text'=>'การลงนามความร่วมมือ',
         'url'=>site_url('public/mou/'),
@@ -113,12 +120,6 @@ $data=array(
                 ),
             ),
         ),
-	'research'=>array(
-				'text'=>'การวิจัยความพึงพอใจ',
-				'url'=>'https://docs.google.com/forms/d/e/1FAIpQLSfBvhtXlbLZS6uh9vqA3FdkRpdPK6xgeyivwdCHQKJ5tv_KoQ/viewform',
-        			'bullet'=>'assignment',
-				'cond'=>current_user('user_type')=='admin'||current_user('user_type')=='boc',
-				),
     
         'gov'=>array(
             'text'=>'การดำเนินงานของ อ.กรอ.อศ.',
