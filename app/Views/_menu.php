@@ -106,6 +106,11 @@ $data=array(
                 'url'=>site_url('public/admin/systemSetting'),
                 'cond'=>current_user('user_type')=='admin',
                 ),
+			'research'=>array(
+				'text'=>'การวิจัยความพึงพอใจ',
+				'url'=>'https://docs.google.com/forms/d/e/1FAIpQLSfBvhtXlbLZS6uh9vqA3FdkRpdPK6xgeyivwdCHQKJ5tv_KoQ/viewform',
+				'cond'=>true,
+				),
             'userManage'=>array(
                 'text'=>'จัดการผู้ใช้',
                 'url'=>site_url('public/admin/userManage'),
