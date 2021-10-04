@@ -106,11 +106,6 @@ $data=array(
                 'url'=>site_url('public/admin/systemSetting'),
                 'cond'=>current_user('user_type')=='admin',
                 ),
-			'research'=>array(
-				'text'=>'การวิจัยความพึงพอใจ',
-				'url'=>'https://docs.google.com/forms/d/e/1FAIpQLSfBvhtXlbLZS6uh9vqA3FdkRpdPK6xgeyivwdCHQKJ5tv_KoQ/viewform',
-				'cond'=>true,
-				),
             'userManage'=>array(
                 'text'=>'จัดการผู้ใช้',
                 'url'=>site_url('public/admin/userManage'),
@@ -118,6 +113,12 @@ $data=array(
                 ),
             ),
         ),
+	'research'=>array(
+				'text'=>'การวิจัยความพึงพอใจ',
+				'url'=>'https://docs.google.com/forms/d/e/1FAIpQLSfBvhtXlbLZS6uh9vqA3FdkRpdPK6xgeyivwdCHQKJ5tv_KoQ/viewform',
+        			'bullet'=>'assignment',
+				'cond'=>current_user('user_type')=='admin'||current_user('user_type')=='boc',
+				),
     
         'gov'=>array(
             'text'=>'การดำเนินงานของ อ.กรอ.อศ.',
