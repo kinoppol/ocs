@@ -23,7 +23,7 @@ class Admin extends BaseController
 		$userModel = model('App\Models\UserModel');
 		$data=array(
 			'onlyRegistered'=>true,
-			'except'=>current_user('user_type')=='admin'?'':array('admin','boc'),
+			'except'=>current_user('user_type')=='admin'?array():array('admin','boc'),
 		);
 		$data=array(
 			'title'=>'ผู้ใช้งานระบบ',

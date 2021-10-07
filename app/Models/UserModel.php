@@ -11,7 +11,7 @@ class UserModel extends Model
         $builder = $db->table('userdata');
         $builder->select(['user_id','username','name','surname','email','user_type']);
         if(isset($data['onlyRegistered']))$builder->where('user_type !=','user');
-        if(isset($data['except']))$builder->whereNotIn('user_type',$data['except']);
+        if(isset($data['except'])&&count($data['except'])>0)$builder->whereNotIn('user_type',$data['except']);
         $users = $builder->get()->getResult();
         return $users;
     }

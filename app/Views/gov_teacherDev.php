@@ -17,7 +17,7 @@
                 'attach'=>'
                 <a href="'.site_url('public/gov/viewTeacherDev/'.$v->id).'" target="_blank" class="btn btn-xs btn-danger waves-effect"><i class="material-icons">picture_as_pdf</i>PDF</a>
                 <a href="'.site_url('public/gov/viewTeacherDevPicture/'.$v->id).'" class="btn btn-xs btn-success waves-effect"><i class="material-icons">image</i>PIC</a>',
-                'personCount'=>0,
+                'personCount'=>$v->person,
                 'manage'=>'
                 <a href="'.site_url('public/gov/teacherDevPerson/'.$v->id).'" class="btn btn-xs btn-warning waves-effect"><i class="material-icons">groups</i></a>
                 <a href="'.site_url('public/gov/teacherDevReport/'.$v->id).'" target="_blank" class="btn btn-xs btn-primary waves-effect"><i class="material-icons">print</i></a>

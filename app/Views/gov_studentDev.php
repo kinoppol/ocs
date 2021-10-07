@@ -14,7 +14,7 @@
                 'studentDev_duration'=>dateThai($v->start_date,true,false,true).' ถึง<br>'.dateThai($v->end_date,true,false,true),
                 'studentDev_plcae'=>$v->dev_place,
                 'studentDev_subject'=>$v->subject,
-                'personCount'=>0,
+                'personCount'=>$v->person,
                 'manage'=>'
                 <a href="'.site_url('public/gov/studentDevPerson/'.$v->id).'" class="btn btn-xs btn-primary waves-effect"><i class="material-icons">groups</i></a>
                 <a href="'.site_url('public/gov/studentDevDetail/'.$v->id).'" class="btn btn-xs btn-warning waves-effect"><i class="material-icons">edit</i></a>

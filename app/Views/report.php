@@ -36,7 +36,8 @@
                 ),*/
             array(
                 'title'=>'รายงานการวิจัยความพึงพอใจของสถานประกอบการที่มีต่อผู้สำเร็จการศึกษา',
-                'file'=>'reportGov/gov_05',
+                //'file'=>'reportGov/gov_05',
+                'url'=>'https://docs.google.com/spreadsheets/d/1PxKDFVSQRkbQCJLWU-zi0N855Fn6J86sESqua_YE0Bk/edit?usp=sharing',
                 'cond'=>current_user('user_type')=='gov'||current_user('user_type')=='boc'||current_user('user_type')=='board',
                 ),
             array(
@@ -87,11 +88,21 @@
         foreach($reports as $row){
             if(!$row['cond'])continue;
             $i++;
-            $reportRows[]=array(
-                'i'=>$i,
-                'reportName'=>$row['title'],
-                'manage'=>'<a href="'.site_url('public/'.$row['file']).'/'.$row['title'].'" class="btn btn-primary"> <i class="material-icons">search</i> ดูรายงาน</a>'
-            );
+            if(isset($row['url'])&&$row['url']!=''){
+                
+                $reportRows[]=array(
+                    'i'=>$i,
+                    'reportName'=>$row['title'],
+                    'manage'=>'<a href="'.$row['url'].'" target="_blank" class="btn btn-primary"> <i class="material-icons">search</i> ดูรายงาน</a>'
+                );
+
+            }else{
+                $reportRows[]=array(
+                    'i'=>$i,
+                    'reportName'=>$row['title'],
+                    'manage'=>'<a href="'.site_url('public/'.$row['file']).'/'.$row['title'].'" class="btn btn-primary"> <i class="material-icons">search</i> ดูรายงาน</a>'
+                );
+            }
         }
         $reportArr=array('thead'=>array(
                                 'ที่',

@@ -54,6 +54,13 @@ helper('user');
            'required'=>true,
             ),  
         array(
+           'label'=>'จำนวนผู้เข้ารับการอบรม',
+           'type'=>'number',
+           'id'=>'person',
+           'def'=>isset($studentDevData->person)?$studentDevData->person:0,
+           'required'=>true,
+            ),  
+        array(
             'label'=>'แนบไฟล์เอกสารประกอบ(สแกนเป็น PDF ไฟล์)',
             'type'=>'file',
             'id'=>'attach_file',
