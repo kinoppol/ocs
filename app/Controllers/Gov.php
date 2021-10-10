@@ -65,6 +65,8 @@ class Gov extends BaseController
 
 		$orgModel = model('App\Models\OrgModel');
 		$schools=$orgModel->getSchool();
+		$govs=$orgModel->getGov();
+		$institute=$orgModel->getInstitute();
 
 		$govData=$govModel->getGovData(current_user('org_code'));
 		$gov_school_id=explode(',',$govData->gov_school_id);
@@ -74,6 +76,7 @@ class Gov extends BaseController
 		$data=array(
 			'minor_code'=>isset($govData->gov_minor)?explode(',',$govData->gov_minor):array(),
 		);
+		$data['minor_code']=array_filter($data['minor_code']);
 		$sumStudentCount=$govData->gov_school_id==''?'0':$schoolModel->getSumStudent($gov_school_id,false,$data);
 		//print $sumStudentCount->count_val;
 		$sumStudentDVECount=$govData->gov_school_id==''?'0':$schoolModel->getSumStudent($gov_school_id,'dve',$data);
@@ -88,7 +91,8 @@ class Gov extends BaseController
 
 		$data=array(
 			'govData'=>$govData,
-			'schools'=>$schools,
+			'schools'=>array('สถานศึกษา'=>$schools,
+							  'สถบันการอาขีวศึกษา'=>$institute),
 			'minors'=>$minors,
 		);
 
@@ -116,8 +120,10 @@ class Gov extends BaseController
 		//print_r($_POST);
 		foreach($_POST as $k=>$v){
 			if($k=='gov_school_id'){
+				$v=array_filter($v);//ลบค่าว่าง
 				$data[$k]=implode(',',$v);
 			}else if($k=='gov_minor'){
+				$v=array_filter($v);//ลบสาขาว่าง
 				$data[$k]=implode(',',$v);				
 			}else{
 				$data[$k]=$v;

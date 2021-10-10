@@ -14,12 +14,12 @@
         'def'=>$govData->gov_id,
          ),
         array(
-        'label'=>'สถานศึกษาเลขานุการ อ.กรอ.อศ.',
+        'label'=>'สถานศึกษา/หน่วยงาน เลขานุการ อ.กรอ.อศ.',
         'type'=>'select',
         'id'=>'secretary_school_id',
         'class'=>'show-tick',
         'items'=>$schools,
-        'noneLabel'=>'โปรดเลือกสถานศึกษาที่ทำหน้าที่เลขานุการฯ',
+        'noneLabel'=>'โปรดเลือกสถานศึกษา/หน่วยงานที่ทำหน้าที่เลขานุการฯ',
         'def'=>$govData->secretary_school_id,
         'required'=>true,
         ),
@@ -29,7 +29,7 @@
         'id'=>'secretary_position',
         'class'=>'show-tick',
         'items'=>array(
-            'director'=>'ผู้อำนวยการวิทยาลัย',
+            'director'=>'ผู้อำนวยการวิทยาลัย/หน่วยงาน',
             'deputy_academic'=>'รองฯ ฝ่ายวิชาการ',
             'deputy_activity'=>'รองฯ ฝ่ายพัฒนากิจการนักเรียนนักศึกษา',
             'deputy_resources'=>'รองฯ ฝ่ายบริหารทรัพยากร',
