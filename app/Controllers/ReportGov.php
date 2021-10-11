@@ -13,15 +13,28 @@ class ReportGov extends BaseController
 		helper('user');
 		helper('org');
 		helper('thai');
+		helper('string');
 		
-		$org_code=isset($_POST['org_id'])?$_POST['org_id']:current_user('org_code');
-		$org_name=isset($_POST['org_id'])?org_name($_POST['org_id']):'';
+		
+
+		if(isset($_POST['org_id'])&&$_POST['org_id']=='0'){
+			$org_code=0;
+			$org_name='ทุกกลุ่ม กรอ.อศ.';
+		}else{
+			$org_code=isset($_POST['org_id'])?$_POST['org_id']:current_user('org_code');
+			$org_name=isset($_POST['org_id'])?org_name($_POST['org_id']):'';
+		}
+
 		$data=array(
 			'org_code'=>$org_code,
 			'org_name'=>$org_name,
 		);
 		$org_type_name=org_type_name($data);
-		$signBox=signBox($data);
+		if($org_code!=0){
+			$signBox=signBox($data);
+		}else{
+			$signBox='';
+		}
 
 		$data=array(
 			'title'=>$title,
@@ -37,22 +50,29 @@ class ReportGov extends BaseController
 			'หัวข้อการประชุม',
 			'หมายเหตุ',
 		);
+		if($org_code==0){
+			$resultHead[0]='กลุ่ม กรอ.อศ.';
+		}
 		if(isset($_POST['year'])){
 
 			$caption='<b>'.$title.' ปี '.($_POST['year']+543).'</b><br>'.$org_name;
 
 
 		    $govModel = model('App\Models\GovModel');
-            $resultData=$govModel->getMeetting(['gov_id'=>$_POST['org_id'],'year'=>$_POST['year']]);
+            if($org_code!=0){
+				$resultData=$govModel->getMeetting(['gov_id'=>$_POST['org_id'],'year'=>$_POST['year']]);
+			}else{
+				$resultData=$govModel->getMeetting(['year'=>$_POST['year']]);
+			}
 			$i=0;
             $resultRows=array();
 			foreach ($resultData as $meetting){
 				$i++;
 				$resultRows[]=array(
-					$i,
+					$org_code!=0?$i:strLim(org_name($meetting['gov_id']),$print?30:false),
 					'meetting_date'=>dateThai($meetting['meetting_date'],true,false,true),
-					'meetting_place'=>$meetting['meetting_place'],
-					'subject'=>$meetting['subject'],
+					'meetting_place'=>strLim($meetting['meetting_place'],$print?30:false),
+					'subject'=>strLim($meetting['subject'],$print?30:false),
 					'note'=>'',
 				);
 			}
@@ -90,7 +110,7 @@ class ReportGov extends BaseController
 				'fontsize'=>16,
 				'marginL'=>20,
 				'marginR'=>10,
-				'marginT'=>10,
+				'marginT'=>25,
 				'marginB'=>10,
 				'header'=>'',
 				'wartermark'=>'',
@@ -116,15 +136,27 @@ class ReportGov extends BaseController
 		helper('user');
 		helper('org');
 		helper('thai');
+		helper('string');
 		
-		$org_code=isset($_POST['org_id'])?$_POST['org_id']:current_user('org_code');
-		$org_name=isset($_POST['org_id'])?org_name($_POST['org_id']):'';
+		if(isset($_POST['org_id'])&&$_POST['org_id']=='0'){
+			$org_code=0;
+			$org_name='ทุกกลุ่ม กรอ.อศ.';
+		}else{
+			$org_code=isset($_POST['org_id'])?$_POST['org_id']:current_user('org_code');
+			$org_name=isset($_POST['org_id'])?org_name($_POST['org_id']):'';
+		}
+
 		$data=array(
 			'org_code'=>$org_code,
 			'org_name'=>$org_name,
 		);
 		$org_type_name=org_type_name($data);
-		$signBox=signBox($data);
+
+		if($org_code!=0){
+			$signBox=signBox($data);
+		}else{
+			$signBox='';
+		}
 
 		$data=array(
 			'title'=>$title,
@@ -141,14 +173,23 @@ class ReportGov extends BaseController
 			'จำนวนผู้เข้า<br>รับการพัฒนา',
 			'หมายเหตุ',
 		);
+		if($org_code==0){
+			$resultHead[0]='กลุ่ม กรอ.อศ.';
+		}
 		if(isset($_POST['year'])){
 
 			$caption='<b>'.$title.' ปี '.($_POST['year']+543).'</b><br>'.$org_name;
 
-			$data=array(
-				'gov_id'=>$_POST['org_id'],
-				'year'=>$_POST['year'],
-			);
+			if($org_code!=0){
+				$data=array(
+					'gov_id'=>$_POST['org_id'],
+					'year'=>$_POST['year'],
+				);
+			}else{
+				$data=array(
+					'year'=>$_POST['year'],
+				);
+			}
 		    $govModel = model('App\Models\GovModel');
             $resultData=$govModel->getTrainerDev($data);
 			$i=0;
@@ -156,10 +197,10 @@ class ReportGov extends BaseController
 			foreach ($resultData as $td){
 				$i++;
 				$resultRows[]=array(
-					$i,
+					$org_code!=0?$i:strLim(org_name($td->gov_id),$print?30:false),
 					'dev_date'=>dateThai($td->start_date,true,false,true).' ถึง <br>'.dateThai($td->end_date,true,false,true),
-					'dev_place'=>$td->dev_place,
-					'subject'=>$td->subject,
+					'dev_place'=>strLim($td->dev_place,$print?30:false),
+					'subject'=>strLim($td->subject,$print?30:false),
 					'person_count'=>0,
 					'note'=>'',
 				);
@@ -224,15 +265,26 @@ class ReportGov extends BaseController
 		helper('user');
 		helper('org');
 		helper('thai');
+		helper('string');
 		
-		$org_code=isset($_POST['org_id'])?$_POST['org_id']:current_user('org_code');
-		$org_name=isset($_POST['org_id'])?org_name($_POST['org_id']):'';
+		if(isset($_POST['org_id'])&&$_POST['org_id']=='0'){
+			$org_code=0;
+			$org_name='ทุกกลุ่ม กรอ.อศ.';
+		}else{
+			$org_code=isset($_POST['org_id'])?$_POST['org_id']:current_user('org_code');
+			$org_name=isset($_POST['org_id'])?org_name($_POST['org_id']):'';
+		}
+
 		$data=array(
 			'org_code'=>$org_code,
 			'org_name'=>$org_name,
 		);
 		$org_type_name=org_type_name($data);
-		$signBox=signBox($data);
+		if($org_code!=0){
+			$signBox=signBox($data);
+		}else{
+			$signBox='';
+		}
 
 		$data=array(
 			'title'=>$title,
@@ -249,14 +301,25 @@ class ReportGov extends BaseController
 			'จำนวนผู้เรียน<br>เป้าหมาย (คน)',
 			'จำนวนผู้เรียน<br>ที่สมัครเรียน (คน)',
 		);
+		if($org_code==0){
+			$resultHead[0]='กลุ่ม กรอ.อศ.';
+		}
 		if(isset($_POST['year'])){
 
 			$caption='<b>'.$title.' ปี '.($_POST['year']+543).'</b><br>'.$org_name;
 
-			$data=array(
-				'gov_id'=>$_POST['org_id'],
-				'year'=>$_POST['year'],
-			);
+			
+			if($org_code!=0){
+				$data=array(
+					'gov_id'=>$_POST['org_id'],
+					'year'=>$_POST['year'],
+				);
+			}else{
+				$data=array(
+					'year'=>$_POST['year'],
+				);
+			}
+
 		    $govModel = model('App\Models\GovModel');
             $resultData=$govModel->getPublic($data);
 			$i=0;
@@ -264,7 +327,8 @@ class ReportGov extends BaseController
 			foreach ($resultData as $pr){
 				$i++;
 				$resultRows[]=array(
-					$i,
+					
+					$org_code!=0?$i:strLim(org_name($pr->gov_id),$print?30:false),
 					'date'=>dateThai($pr->start_date,true,false,true).' ถึง <br>'.dateThai($pr->end_date,true,false,true),
 					'place'=>$pr->public_place,
 					'method'=>$pr->public_method,
@@ -332,15 +396,30 @@ class ReportGov extends BaseController
 		helper('user');
 		helper('org');
 		helper('thai');
+		helper('string');
 		
-		$org_code=isset($_POST['org_id'])?$_POST['org_id']:current_user('org_code');
-		$org_name=isset($_POST['org_id'])?org_name($_POST['org_id']):'';
+		
+		if(isset($_POST['org_id'])&&$_POST['org_id']=='0'){
+			$org_code=0;
+			$org_name='ทุกกลุ่ม กรอ.อศ.';
+		}else{
+			$org_code=isset($_POST['org_id'])?$_POST['org_id']:current_user('org_code');
+			$org_name=isset($_POST['org_id'])?org_name($_POST['org_id']):'';
+		}
+		
+		
+
 		$data=array(
 			'org_code'=>$org_code,
 			'org_name'=>$org_name,
 		);
+
 		$org_type_name=org_type_name($data);
-		$signBox=signBox($data);
+		if($org_code!=0){
+			$signBox=signBox($data);
+		}else{
+			$signBox='';
+		}
 
 		$data=array(
 			'title'=>$title,
@@ -357,14 +436,23 @@ class ReportGov extends BaseController
 			'จำนวนผู้<br>เข้ารับการอบรม (คน)',
 			'หมายเหตุ',
 		);
+		if($org_code==0){
+			$resultHead[0]='กลุ่ม กรอ.อศ.';
+		}
 		if(isset($_POST['year'])){
 
 			$caption='<b>'.$title.' ปี '.($_POST['year']+543).'</b><br>'.$org_name;
 
-			$data=array(
-				'gov_id'=>$_POST['org_id'],
-				'year'=>$_POST['year'],
-			);
+			if($org_code!=0){
+				$data=array(
+					'gov_id'=>$_POST['org_id'],
+					'year'=>$_POST['year'],
+				);
+			}else{
+				$data=array(
+					'year'=>$_POST['year'],
+				);
+			}
 		    $govModel = model('App\Models\GovModel');
             $resultData=$govModel->getTeacherDev($data);
 			$i=0;
@@ -372,7 +460,8 @@ class ReportGov extends BaseController
 			foreach ($resultData as $td){
 				$i++;
 				$resultRows[]=array(
-					$i,
+					
+					$org_code!=0?$i:strLim(org_name($td->gov_id),$print?30:false),
 					'date'=>dateThai($td->start_date,true,false,true).' ถึง <br>'.dateThai($td->end_date,true,false,true),
 					'place'=>$td->dev_place,
 					'subject'=>$td->subject,
@@ -440,15 +529,27 @@ class ReportGov extends BaseController
 		helper('user');
 		helper('org');
 		helper('thai');
+		helper('string');
 		
-		$org_code=isset($_POST['org_id'])?$_POST['org_id']:current_user('org_code');
-		$org_name=isset($_POST['org_id'])?org_name($_POST['org_id']):'';
+		if(isset($_POST['org_id'])&&$_POST['org_id']=='0'){
+			$org_code=0;
+			$org_name='ทุกกลุ่ม กรอ.อศ.';
+		}else{
+			$org_code=isset($_POST['org_id'])?$_POST['org_id']:current_user('org_code');
+			$org_name=isset($_POST['org_id'])?org_name($_POST['org_id']):'';
+		}
+
 		$data=array(
 			'org_code'=>$org_code,
 			'org_name'=>$org_name,
 		);
+
 		$org_type_name=org_type_name($data);
-		$signBox=signBox($data);
+		if($org_code!=0){
+			$signBox=signBox($data);
+		}else{
+			$signBox='';
+		}
 
 		$data=array(
 			'title'=>$title,
@@ -465,14 +566,24 @@ class ReportGov extends BaseController
 			'จำนวนผู้<br>เข้ารับการอบรม (คน)',
 			'หมายเหตุ',
 		);
+		if($org_code==0){
+			$resultHead[0]='กลุ่ม กรอ.อศ.';
+		}
 		if(isset($_POST['year'])){
 
 			$caption='<b>'.$title.' ปี '.($_POST['year']+543).'</b><br>'.$org_name;
 
-			$data=array(
-				'gov_id'=>$_POST['org_id'],
-				'year'=>$_POST['year'],
-			);
+			if($org_code!=0){
+				$data=array(
+					'gov_id'=>$_POST['org_id'],
+					'year'=>$_POST['year'],
+				);
+			}else{
+				$data=array(
+					'year'=>$_POST['year'],
+				);
+			}
+
 		    $govModel = model('App\Models\GovModel');
             $resultData=$govModel->getStudentDev($data);
 			$i=0;
@@ -480,7 +591,8 @@ class ReportGov extends BaseController
 			foreach ($resultData as $td){
 				$i++;
 				$resultRows[]=array(
-					$i,
+					
+					$org_code!=0?$i:strLim(org_name($td->gov_id),$print?30:false),
 					'date'=>dateThai($td->start_date,true,false,true).' ถึง <br>'.dateThai($td->end_date,true,false,true),
 					'place'=>$td->dev_place,
 					'subject'=>$td->subject,
@@ -549,15 +661,28 @@ class ReportGov extends BaseController
 		helper('user');
 		helper('org');
 		helper('thai');
+		helper('string');
 		
-		$org_code=isset($_POST['org_id'])?$_POST['org_id']:current_user('org_code');
-		$org_name=isset($_POST['org_id'])?org_name($_POST['org_id']):'';
+		
+		if(isset($_POST['org_id'])&&$_POST['org_id']=='0'){
+			$org_code=0;
+			$org_name='ทุกกลุ่ม กรอ.อศ.';
+		}else{
+			$org_code=isset($_POST['org_id'])?$_POST['org_id']:current_user('org_code');
+			$org_name=isset($_POST['org_id'])?org_name($_POST['org_id']):'';
+		}
+
 		$data=array(
 			'org_code'=>$org_code,
 			'org_name'=>$org_name,
 		);
+
 		$org_type_name=org_type_name($data);
-		$signBox=signBox($data);
+		if($org_code!=0){
+			$signBox=signBox($data);
+		}else{
+			$signBox='';
+		}
 
 		$data=array(
 			'title'=>$title,
@@ -579,14 +704,23 @@ class ReportGov extends BaseController
 			'ผลลัพธ์',
 			'หมายเหตุ',
 		);
+		if($org_code==0){
+			$resultHead[0]='กลุ่ม กรอ.อศ.';
+		}
 		if(isset($_POST['year'])){
 
 			$caption='<b>'.$title.' ปี '.($_POST['year']+543).'</b><br>'.$org_name;
 
-			$data=array(
-				'gov_id'=>$_POST['org_id'],
-				'year'=>$_POST['year'],
-			);
+			if($org_code!=0){
+				$data=array(
+					'gov_id'=>$_POST['org_id'],
+					'year'=>$_POST['year'],
+				);
+			}else{
+				$data=array(
+					'year'=>$_POST['year'],
+				);
+			}
 		    $govModel = model('App\Models\GovModel');
             $resultData=$govModel->getProject($data);
 			$i=0;
@@ -594,7 +728,8 @@ class ReportGov extends BaseController
 			foreach ($resultData as $td){
 				$i++;
 				$resultRows[]=array(
-					$i,
+					
+					$org_code!=0?$i:strLim(org_name($td->gov_id),$print?30:false),
 					'subject'=>$td->subject,
 					'date'=>dateThai($td->start_date).' ถึง <br>'.dateThai($td->end_date),
 					'place'=>$td->project_place,

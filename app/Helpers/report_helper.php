@@ -127,7 +127,7 @@ function govYearFilter($data){
         'id'=>"org_id",
         'label'=>"หน่วยงาน",
         'search'=>true,
-        'items'=>govArr(isset($data['org_ids'])?$data['org_ids']:false),
+        'items'=>array('0'=>'ทุกกลุ่ม กรอ.อศ.')+govArr(isset($data['org_ids'])?$data['org_ids']:false),
         'def'=>(isset($_POST['org_id']))?$_POST['org_id']:current_user('org_code'),
     );
     $yearSelect=array(
