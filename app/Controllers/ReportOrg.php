@@ -58,6 +58,7 @@ class ReportOrg extends BaseController
 			'สถานที่ลงนาม',
 			'การฝึกงาน',
 		);
+		if(!$print)array_push($resultHead,'ไฟล์ MOU');
 		if(isset($_POST['year'])){
 
 			$caption='<b>'.$title.'</b><br>ระหว่าง สถานประกอบการและ'.$org_name.'ปี พ.ศ. '.($_POST['year']+543).'<br>';//.$org_name;
@@ -93,7 +94,7 @@ class ReportOrg extends BaseController
 					else if(isset($gov[$mou['school_id']]))$org_name=$gov[$mou['school_id']];
 
 					
-				$resultRows[]=array(
+				$arow=array(
 					$i,
 					'business_id'=>strlim($business[$mou['business_id']]['business_name'],35),
 					'job_description'=>strlim($business[$mou['business_id']]['job_description'],30),
@@ -106,6 +107,8 @@ class ReportOrg extends BaseController
 					'mou_sign_place'=>strlim($mou['mou_sign_place'],30),
 					'note'=>$trainingPlace,
 				);
+				if(!$print)array_push($arow,$mou['mou_file']),
+				$resultRows[]=$arow;
 			}
 
 			$mouArr=array(
