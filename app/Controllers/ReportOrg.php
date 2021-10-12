@@ -69,6 +69,7 @@ class ReportOrg extends BaseController
 											'school_id'=>$org_id]);
 			
 			$school=$resultData['school'];
+			array_push($school,array('1300000000'=>'สอศ.'));
 			$business=$resultData['business'];
 			$gov=$resultData['gov'];
 			$resultRows=array();
