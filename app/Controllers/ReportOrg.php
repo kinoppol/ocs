@@ -107,7 +107,7 @@ class ReportOrg extends BaseController
 					'mou_sign_place'=>strlim($mou['mou_sign_place'],30),
 					'note'=>$trainingPlace,
 				);
-				if(!$print)array_push($arow,'<a href="'.site_url('docs/mou/'.$mou['mou_file']).'" class="btn btn-danger" target="_blank">ดูไฟล์</a>');
+				if(!$print)array_push($arow,'<a href="'.site_url('docs/mou/'.$mou['mou_file']).'" class="btn btn-danger" target="_blankf"><i class="material-icons">picture_as_pdf</i> ดูไฟล์</a>');
 				$resultRows[]=$arow;
 			}
 
