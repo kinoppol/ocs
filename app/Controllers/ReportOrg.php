@@ -74,6 +74,7 @@ class ReportOrg extends BaseController
 			$gov=$resultData['gov'];
 			$resultRows=array();
 			$i=0;
+			$orgArr=orgArr();
 			foreach ($resultData['mou'] as $mou){
 				$mou = get_object_vars($mou);
 
@@ -98,7 +99,7 @@ class ReportOrg extends BaseController
 					
 				$arow=array(
 					$i,
-					'school_id'=>strlim($org_name,35),
+					'school_id'=>strlim($orgArr[$mou['school_id']],35),
 					'business_id'=>strlim($business[$mou['business_id']]['business_name'],35),
 					'job_description'=>strlim($business[$mou['business_id']]['job_description'],30),
 					'level'=>isset($mou['level'])&&$mou['level']!=''?'ระดับ '.$mou['level']:'',
