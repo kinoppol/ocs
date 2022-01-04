@@ -134,7 +134,7 @@ class Home extends BaseController
 			$donate=$MouModel->getResultDonateYear($data);
 			$dnd_data[]=array(
 				'label'=>'ภาค'.$row['zone_name'].' ('.number_format($donate,0).' บาท)',
-				'percent'=>$donate/$donateTotalYear*100,
+				'percent'=>empty($donate)?0:$donate/$donateTotalYear*100,
 				'color'=>color($row['zone_id']+2),
 			);
 		}
@@ -152,7 +152,7 @@ class Home extends BaseController
 			$student=$summaryModel->getSummaryStudent($data);
 			$dnstd_data[]=array(
 				'label'=>'ภาค'.$row['zone_name'].' ('.number_format($student,0).' คน)',
-				'percent'=>$student/$studentTotal*100,
+				'percent'=>empty($student)?0:$student/$studentTotal*100,
 				'color'=>color($row['zone_id']+2),
 			);
 		}
