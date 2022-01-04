@@ -114,7 +114,7 @@ class Home extends BaseController
 			$employee=$MouModel->getResultEmployeeYear($data);
 			$dne_data[]=array(
 				'label'=>'ภาค'.$row['zone_name'].' ('.number_format($employee,0).' คน)',
-				'percent'=>$employee/$employeeTotalYear*100,
+				'percent'=>empty($employee)?0:$employee/$employeeTotalYear*100,
 				'color'=>color($row['zone_id']+2),
 			);
 		}
