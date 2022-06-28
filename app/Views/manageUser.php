@@ -19,7 +19,7 @@
         $user = get_object_vars($user);
         $editLink='<a href="'.site_url('public/admin/editUser/'.$user['user_id']).'" class="btn btn-xs btn-warning waves-effect"><i class="material-icons">edit</i> แก้ไข</a>';
         if($user_status=='registered'){
-            array_push($user,$editLink);
+            $user['mlink']=$editLink;
             $user['user_type']=user_type($user['user_type']);
         }
         else if($user_status=='unregister'){
