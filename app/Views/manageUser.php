@@ -40,7 +40,7 @@
             $user['name'].' '.$user['surname'],
             $user['email'],
             $user['user_type'],
-            empty($user['org_code'])?'':empty($schools[$user['org_code']]['school_name'])?'':$schools[$user['org_code']]['school_name'],
+            empty($schools[$user['org_code']])?'':empty($schools[$user['org_code']]['school_name'])?'':$schools[$user['org_code']]['school_name'],
             $user['mlink']
         );
     }
