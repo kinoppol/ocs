@@ -33,13 +33,14 @@
             }
                                                              $user['user_type']=isset($userRegData[$user['user_id']]['user_type'])?user_type($userRegData[$user['user_id']]['user_type']):false;                                     
             }
+            $schools[]
         $userRows[]=array(
             $user['user_id'],
             $user['username'],
             $user['name'].' '.$user['surname'],
             $user['email'],
             $user['user_type'],
-            $user['org_code'],
+            $schools[$user['org_code']]['school_name'],
             $user['mlink']
         );
     }

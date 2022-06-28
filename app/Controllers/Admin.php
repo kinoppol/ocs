@@ -21,6 +21,8 @@ class Admin extends BaseController
 	{
 		helper('user');
 		$userModel = model('App\Models\UserModel');
+		$orgModel = model('App\Models\OrgModel');
+		$schools=$orgModel->getSchool();
 		$data=array(
 			'onlyRegistered'=>true,
 			'except'=>current_user('user_type')=='admin'?array():array('admin','boc'),
@@ -29,12 +31,14 @@ class Admin extends BaseController
 			'title'=>'ผู้ใช้งานระบบ',
 			'user_status'=>'registered',
 			'users'=>$userModel->getUsers($data),
+			'schools'=>$schools,
 		);
 		$data2=array(
 			'title'=>'ผู้ใช้งานที่ยังไม่อนุมัติ',
 			'user_status'=>'unregister',
 			'registerData'=>$userModel->getRegister(),
 			'users'=>$userModel->getUnregisterUsers(),
+			'schools'=>$schools,
 		);
 		$data=array(
 			'title'=>'จัดการผู้ใช้',
