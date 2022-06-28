@@ -33,13 +33,18 @@
             }
                                                              $user['user_type']=isset($userRegData[$user['user_id']]['user_type'])?user_type($userRegData[$user['user_id']]['user_type']):false;                                     
             }
-        $userRows[]=$user;
+        $userRows[]=array(
+            $user['user_id'],
+            $user['username'],
+            $user['name'].' '.$user['surname'],
+            $user['email'],
+            $user['user_type']
+        );
     }
     $userArr=array('thead'=>array(
                             'ID',
                             'ชื่อผู้ใช้',
-                            'ชื่อ',
-                            'สกุล',
+                            'ชื่อ-สกุล',
                             'อีเมล',
                             'ประเภทผู้ใช้',
                             'จัดการ',
