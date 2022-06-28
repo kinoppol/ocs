@@ -34,6 +34,8 @@ class Admin extends BaseController
 			'user_status'=>'registered',
 			'users'=>$userModel->getUsers($data),
 			'schools'=>$schools,
+			'govs'=>$govs,
+			'institutes'=>$institutes,
 		);
 		$data2=array(
 			'title'=>'ผู้ใช้งานที่ยังไม่อนุมัติ',
