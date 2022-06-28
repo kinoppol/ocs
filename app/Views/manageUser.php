@@ -49,6 +49,9 @@
                 );
                 $org_name=$org_n[$user['org_code']];
             }
+            if(empty($org_name)){
+                $org_name=$user['org_code'];
+            }
         $userRows[]=array(
             $user['user_id'],
             $user['username'],
