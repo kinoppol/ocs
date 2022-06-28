@@ -16,8 +16,8 @@
         }
 
         //print_r($schools);
-        print_r($govs);
-        print_r($institutes);
+        //print_r($govs);
+        //print_r($institutes);
     foreach($users as $user){
         $user = get_object_vars($user);
         $editLink='<a href="'.site_url('public/admin/editUser/'.$user['user_id']).'" class="btn btn-xs btn-warning waves-effect"><i class="material-icons">edit</i> แก้ไข</a>';
@@ -42,6 +42,12 @@
             }
             if(empty($org_name)){
                 $org_name=$institutes[$user['org_code']];
+            }
+            if(empty($org_name)){
+                $org_n=array(
+                    '1300000000'=>'สำนักงานคณะกรรมการการอาชีวศึกษา';
+                );
+                $org_name=$org_n[$user['org_code']];
             }
         $userRows[]=array(
             $user['user_id'],
