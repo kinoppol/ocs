@@ -9,7 +9,7 @@ class UserModel extends Model
     public function getUsers($data=array()){
         $db = \Config\Database::connect();
         $builder = $db->table('userdata');
-        $builder->select(['user_id','username','name','surname','email','user_type']);
+        $builder->select(['user_id','username','name','surname','email','user_type','org_code']);
         if(isset($data['onlyRegistered']))$builder->where('user_type !=','user');
         if(isset($data['except'])&&count($data['except'])>0)$builder->whereNotIn('user_type',$data['except']);
         $users = $builder->get()->getResult();

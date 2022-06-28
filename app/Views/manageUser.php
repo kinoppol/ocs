@@ -26,10 +26,10 @@
             
 
             if(isset($userRegData[$user['user_id']]['register_status'])&&$userRegData[$user['user_id']]['register_status']=='request'){
-                array_push($user,'<a href="'.site_url('public/admin/approveUser/'.$user['user_id']).'" class="btn btn-xs btn-success waves-effect"><i class="material-icons">check</i> อนุมัติ</a>
-                                                             <a href="'.site_url('public/admin/disapproveUser/'.$user['user_id']).'" onClick="return confirm(\'ยืนยันการปฏิเสธการลงทะเบียน\')" class="btn btn-xs btn-danger waves-effect"><i class="material-icons">close</i> ปฏิเสธ</a> '.$editLink);
+                $user['mlink']='<a href="'.site_url('public/admin/approveUser/'.$user['user_id']).'" class="btn btn-xs btn-success waves-effect"><i class="material-icons">check</i> อนุมัติ</a>
+                                                             <a href="'.site_url('public/admin/disapproveUser/'.$user['user_id']).'" onClick="return confirm(\'ยืนยันการปฏิเสธการลงทะเบียน\')" class="btn btn-xs btn-danger waves-effect"><i class="material-icons">close</i> ปฏิเสธ</a> '.$editLink;
             }else{
-                array_push($user,'<button class="btn btn-default">ผู้ใช้ยังไม่ลงทะเบียน</button> '.$editLink);
+                $user['mlink']='<button class="btn btn-default">ผู้ใช้ยังไม่ลงทะเบียน</button> '.$editLink;
             }
                                                              $user['user_type']=isset($userRegData[$user['user_id']]['user_type'])?user_type($userRegData[$user['user_id']]['user_type']):false;                                     
             }
@@ -38,7 +38,8 @@
             $user['username'],
             $user['name'].' '.$user['surname'],
             $user['email'],
-            $user['user_type']
+            $user['user_type'],
+            $user['org_code']
         );
     }
     $userArr=array('thead'=>array(
@@ -47,6 +48,7 @@
                             'ชื่อ-สกุล',
                             'อีเมล',
                             'ประเภทผู้ใช้',
+                            'หน่วยงาน',
                             'จัดการ',
                     ),
                     'tbody'=>$userRows,
