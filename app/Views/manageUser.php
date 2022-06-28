@@ -16,6 +16,8 @@
         }
 
         //print_r($schools);
+        print_r($govs);
+        print_r($institutes);
     foreach($users as $user){
         $user = get_object_vars($user);
         $editLink='<a href="'.site_url('public/admin/editUser/'.$user['user_id']).'" class="btn btn-xs btn-warning waves-effect"><i class="material-icons">edit</i> แก้ไข</a>';
