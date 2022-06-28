@@ -40,7 +40,7 @@
             $user['name'].' '.$user['surname'],
             $user['email'],
             $user['user_type'],
-            $user['org_code'],
+            $schools[$user['org_code']],
             $user['mlink']
         );
     }
