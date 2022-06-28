@@ -15,7 +15,7 @@
             
         }
 
-        print_r($schools);
+        //print_r($schools);
     foreach($users as $user){
         $user = get_object_vars($user);
         $editLink='<a href="'.site_url('public/admin/editUser/'.$user['user_id']).'" class="btn btn-xs btn-warning waves-effect"><i class="material-icons">edit</i> แก้ไข</a>';
@@ -34,13 +34,20 @@
             }
                                                              $user['user_type']=isset($userRegData[$user['user_id']]['user_type'])?user_type($userRegData[$user['user_id']]['user_type']):false;                                     
             }
+            $org_name=$schools[$user['org_code']];
+            if(empty($org_name)){
+                $org_name=$govs[$user['org_code']];
+            }
+            if(empty($org_name)){
+                $org_name=$institutes[$user['org_code']];
+            }
         $userRows[]=array(
             $user['user_id'],
             $user['username'],
             $user['name'].' '.$user['surname'],
             $user['email'],
             $user['user_type'],
-            $schools[$user['org_code']],
+            $org_name,
             $user['mlink']
         );
     }
