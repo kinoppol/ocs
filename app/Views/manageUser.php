@@ -33,7 +33,7 @@
             }
                                                              $user['user_type']=isset($userRegData[$user['user_id']]['user_type'])?user_type($userRegData[$user['user_id']]['user_type']):false;                                     
             }
-
+            print_r($schools);
         $userRows[]=array(
             $user['user_id'],
             $user['username'],
