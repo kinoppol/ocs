@@ -15,6 +15,7 @@
             
         }
 
+        print_r($schools);
     foreach($users as $user){
         $user = get_object_vars($user);
         $editLink='<a href="'.site_url('public/admin/editUser/'.$user['user_id']).'" class="btn btn-xs btn-warning waves-effect"><i class="material-icons">edit</i> แก้ไข</a>';
@@ -33,7 +34,6 @@
             }
                                                              $user['user_type']=isset($userRegData[$user['user_id']]['user_type'])?user_type($userRegData[$user['user_id']]['user_type']):false;                                     
             }
-            print_r($schools);
         $userRows[]=array(
             $user['user_id'],
             $user['username'],
