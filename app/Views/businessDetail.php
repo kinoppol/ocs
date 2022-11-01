@@ -1,6 +1,20 @@
 <?php
     //print_r($schoolData);
     helper('form');
+    $emp_num_group=array(
+        50=>"ไม่เกิน 50 คน",
+        100=>"50-100 คน",
+        200=>"101-200 คน",
+        300=>"มากกว่า 200 คน",
+    );
+    
+    if(empty($emp_num_group[$businessData->amount_emp])){
+        if($businessData->amount_emp<50)$businessData->amount_emp=50;
+        else if($businessData->amount_emp<100)$businessData->amount_emp=100;
+        else if($businessData->amount_emp<200)$businessData->amount_emp=200;
+        else $businessData->amount_emp=300;
+    }
+
     $data=array(array(
         'label'=>'ชื่อสถานประกอบการ',
         'type'=>'text',
@@ -71,8 +85,10 @@
              ),
          array(
             'label'=>'จำนวนพนักงาน',
-            'type'=>'number',
+            'type'=>'select',
             'id'=>'amount_emp',
+            'noneLabel'=>'โปรดเลือกจำนวนพนักงาน(โดยประมาณ)',
+            'items'=>$emp_num_group,
             'def'=>isset($businessData->amount_emp)?$businessData->amount_emp:'',
             'required'=>true,
              ),
