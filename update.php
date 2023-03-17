@@ -39,5 +39,5 @@ if($zip->open($zip_file) != "true")
  exit();
 } 
 
-$zip->extractSubdirTo($extractPath,'ocs-master/');
+$zip->extractSubdirTo($extractPath,'ocs-main/');
 $zip->close();

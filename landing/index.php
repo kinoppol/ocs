@@ -52,6 +52,7 @@
 						<ul class="nav navbar-nav menu_nav justify-content-center">
 <li class="nav-item active"><a class="nav-link" href="../public/dashboard/index" href="index.html">ข้อมูลภาพรวม</a></li>
 <li class="nav-item active"><a class="nav-link" href="../public/mou/index" href="index.html">ค้นหา MOU</a></li>
+<li class="nav-item active"><a class="nav-link" href="../public/business/index" href="index.html">ค้นหาสถานประกอบการ</a></li>
 <li class="nav-item active"><a class="nav-link" href="../public/about/index" href="index.html">เกี่ยวกับระบบ</a></li>
 </ul>
 							<ul class="nav navbar-nav navbar-right">
