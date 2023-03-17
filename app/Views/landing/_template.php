@@ -126,22 +126,22 @@
         
         <!-- Optional JavaScript -->
         <!-- jQuery first, then Popper.js, then Bootstrap JS -->
-        <script src="<?php print site_url("js/jquery-3.2.1.min.js"); ?>"></script>
-        <script src="<?php print site_url("js/popper.js"); ?>"></script>
-        <script src="<?php print site_url("js/bootstrap.min.js"); ?>"></script>
-        <script src="<?php print site_url("js/stellar.js"); ?>"></script>
-        <script src="<?php print site_url("vendors/lightbox/simpleLightbox.min.js"); ?>"></script>
-        <script src="<?php print site_url("vendors/nice-select/js/jquery.nice-select.min.js"); ?>"></script>
-        <script src="<?php print site_url("vendors/isotope/imagesloaded.pkgd.min.js"); ?>"></script>
-        <script src="<?php print site_url("vendors/isotope/isotope-min.js"); ?>"></script>
-        <script src="<?php print site_url("vendors/owl-carousel/owl.carousel.min.js"); ?>"></script>
-        <script src="<?php print site_url("js/jquery.ajaxchimp.min.js"); ?>"></script>
-        <script src="<?php print site_url("vendors/counter-up/jquery.waypoints.min.js"); ?>"></script>
-        <script src="<?php print site_url("vendors/counter-up/jquery.counterup.min.js"); ?>"></script>
-        <script src="<?php print site_url("js/mail-script.js"); ?>"></script>
+        <script src="<?php print site_url("landing/js/jquery-3.2.1.min.js"); ?>"></script>
+        <script src="<?php print site_url("landing/js/popper.js"); ?>"></script>
+        <script src="<?php print site_url("landing/js/bootstrap.min.js"); ?>"></script>
+        <script src="<?php print site_url("landing/js/stellar.js"); ?>"></script>
+        <script src="<?php print site_url("landing/vendors/lightbox/simpleLightbox.min.js"); ?>"></script>
+        <script src="<?php print site_url("landing/vendors/nice-select/js/jquery.nice-select.min.js"); ?>"></script>
+        <script src="<?php print site_url("landing/vendors/isotope/imagesloaded.pkgd.min.js"); ?>"></script>
+        <script src="<?php print site_url("landing/vendors/isotope/isotope-min.js"); ?>"></script>
+        <script src="<?php print site_url("landing/vendors/owl-carousel/owl.carousel.min.js"); ?>"></script>
+        <script src="<?php print site_url("landing/js/jquery.ajaxchimp.min.js"); ?>"></script>
+        <script src="<?php print site_url("landing/vendors/counter-up/jquery.waypoints.min.js"); ?>"></script>
+        <script src="<?php print site_url("landing/vendors/counter-up/jquery.counterup.min.js"); ?>"></script>
+        <script src="<?php print site_url("landing/js/mail-script.js"); ?>"></script>
         <!--gmaps Js-->
         <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCjCGmQ0Uq4exrzdcL6rvxywDDOvfAu6eE"></script>
-        <script src="<?php print site_url("js/gmaps.min.js"); ?>"></script>
-        <script src="<?php print site_url("js/theme.js"); ?>"></script>
+        <script src="<?php print site_url("landing/js/gmaps.min.js"); ?>"></script>
+        <script src="<?php print site_url("landing/js/theme.js"); ?>"></script>
     </body>
 </html>
