@@ -4,20 +4,20 @@
         <!-- Required meta tags -->
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-        <link rel="icon" href="img/favicon.png" type="image/png">
+        <link rel="icon" href="<?php print site_url("landing/img/favicon.png" type="image/png">
         <title>OCS:ระบบฐานข้อมูลสำนักความร่วมมือ</title>
         <!-- Bootstrap CSS -->
-        <link rel="stylesheet" href="css/bootstrap.css">
-        <link rel="stylesheet" href="vendors/linericon/style.css">
-        <link rel="stylesheet" href="css/font-awesome.min.css">
-        <link rel="stylesheet" href="vendors/owl-carousel/owl.carousel.min.css">
-        <link rel="stylesheet" href="vendors/lightbox/simpleLightbox.css">
-        <link rel="stylesheet" href="vendors/nice-select/css/nice-select.css">
-        <link rel="stylesheet" href="vendors/animate-css/animate.css">
-        <link rel="stylesheet" href="vendors/flaticon/flaticon.css">
+        <link rel="stylesheet" href="<?php print site_url("landing/css/bootstrap.css"); ?>">
+        <link rel="stylesheet" href="<?php print site_url("landing/vendors/linericon/style.css"); ?>">
+        <link rel="stylesheet" href="<?php print site_url("landing/css/font-awesome.min.css"); ?>">
+        <link rel="stylesheet" href="<?php print site_url("landing/vendors/owl-carousel/owl.carousel.min.css"); ?>">
+        <link rel="stylesheet" href="<?php print site_url("landing/vendors/lightbox/simpleLightbox.css"); ?>">
+        <link rel="stylesheet" href="<?php print site_url("landing/vendors/nice-select/css/nice-select.css"); ?>">
+        <link rel="stylesheet" href="<?php print site_url("landing/vendors/animate-css/animate.css"); ?>">
+        <link rel="stylesheet" href="<?php print site_url("landing/vendors/flaticon/flaticon.css"); ?>">
         <!-- main css -->
-        <link rel="stylesheet" href="css/style.css">
-		<link rel="stylesheet" href="css/responsive.css">
+        <link rel="stylesheet" href="<?php print site_url("landing/css/style.css"); ?>">
+		<link rel="stylesheet" href="<?php print site_url("landing/css/responsive.css"); ?>">
 		<script>
 			function order(){
 				alert("นักเรียน-นักศึกษา ครู-อาจารย์ และบุคลากรทางการศึกษา ติดต่อขอใช้บริการได้ที่งานศูนย์ข้อมูลสารสนเทศ หรือที่ศูนย์บางนาอินเตอร์เน็ต");
