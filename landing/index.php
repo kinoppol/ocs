@@ -50,8 +50,9 @@
 						<!-- Collect the nav links, forms, and other content for toggling -->
 						<div class="collapse navbar-collapse offset" id="navbarSupportedContent">
 						<ul class="nav navbar-nav menu_nav justify-content-center">
-<li class="nav-item active"><a class="nav-link" href="../public/dashboard/index"" href="index.html">ข้อมูลภาพรวม</a></li>
-<li class="nav-item active"><a class="nav-link" href="../public/about/index"" href="index.html">เกี่ยวกับระบบ</a></li>
+<li class="nav-item active"><a class="nav-link" href="../public/dashboard/index" href="index.html">ข้อมูลภาพรวม</a></li>
+<li class="nav-item active"><a class="nav-link" href="../public/mou/index" href="index.html">ค้นหา MOU</a></li>
+<li class="nav-item active"><a class="nav-link" href="../public/about/index" href="index.html">เกี่ยวกับระบบ</a></li>
 </ul>
 							<ul class="nav navbar-nav navbar-right">
 								<li class="nav-item"><a href="../public/user/loginSelector" class="tickets_btn">ลงชื่อเข้าใช้</a ></li>
