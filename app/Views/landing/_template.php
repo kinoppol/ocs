@@ -50,15 +50,15 @@
 						<!-- Collect the nav links, forms, and other content for toggling -->
 						<div class="collapse navbar-collapse offset" id="navbarSupportedContent">
 						<ul class="nav navbar-nav menu_nav justify-content-center">
-<li class="nav-item active"><a class="nav-link" href="../public/dashboard/index" href="index.html">ข้อมูลภาพรวม</a></li>
-<li class="nav-item active"><a class="nav-link" href="../public/dashboard/mou" href="index.html">ค้นหา MOU</a></li>
-<li class="nav-item active"><a class="nav-link" href="../public/dashboard/business" href="index.html">สถานประกอบการ</a></li>
-<li class="nav-item active"><a class="nav-link" href="../public/dashboard/school" href="index.html">สถานศึกษา</a></li>
-<li class="nav-item active"><a class="nav-link" href="../public/dashboard/inv" href="index.html">กรอ.อศ.</a></li>
-<li class="nav-item active"><a class="nav-link" href="../public/dashboard/about" href="index.html">เกี่ยวกับระบบ</a></li>
+<li class="nav-item active"><a class="nav-link" href="<?php print site_url("public/dashboard/index"); ?>" href="index.html">ข้อมูลภาพรวม</a></li>
+<li class="nav-item active"><a class="nav-link" href="<?php print site_url("public/dashboard/mou"); ?>" href="index.html">ค้นหา MOU</a></li>
+<li class="nav-item active"><a class="nav-link" href="<?php print site_url("public/dashboard/business"); ?>" href="index.html">สถานประกอบการ</a></li>
+<li class="nav-item active"><a class="nav-link" href="<?php print site_url("public/dashboard/school"); ?>" href="index.html">สถานศึกษา</a></li>
+<li class="nav-item active"><a class="nav-link" href="<?php print site_url("public/dashboard/inv"); ?>" href="index.html">กรอ.อศ.</a></li>
+<li class="nav-item active"><a class="nav-link" href="<?php print site_url("public/dashboard/about"); ?>" href="index.html">เกี่ยวกับระบบ</a></li>
 </ul>
 							<ul class="nav navbar-nav navbar-right">
-								<li class="nav-item"><a href="../public/user/loginSelector" class="tickets_btn">ลงชื่อเข้าใช้</a ></li>
+								<li class="nav-item"><a href="<?php print site_url("public/user/loginSelector"); ?>" class="tickets_btn">ลงชื่อเข้าใช้</a ></li>
 							</ul>
 						</div> 
 					</div>
@@ -126,22 +126,22 @@
         
         <!-- Optional JavaScript -->
         <!-- jQuery first, then Popper.js, then Bootstrap JS -->
-        <script src="js/jquery-3.2.1.min.js"></script>
-        <script src="js/popper.js"></script>
-        <script src="js/bootstrap.min.js"></script>
-        <script src="js/stellar.js"></script>
-        <script src="vendors/lightbox/simpleLightbox.min.js"></script>
-        <script src="vendors/nice-select/js/jquery.nice-select.min.js"></script>
-        <script src="vendors/isotope/imagesloaded.pkgd.min.js"></script>
-        <script src="vendors/isotope/isotope-min.js"></script>
-        <script src="vendors/owl-carousel/owl.carousel.min.js"></script>
-        <script src="js/jquery.ajaxchimp.min.js"></script>
-        <script src="vendors/counter-up/jquery.waypoints.min.js"></script>
-        <script src="vendors/counter-up/jquery.counterup.min.js"></script>
-        <script src="js/mail-script.js"></script>
+        <script src="<?php print site_url("js/jquery-3.2.1.min.js"); ?>"></script>
+        <script src="<?php print site_url("js/popper.js"); ?>"></script>
+        <script src="<?php print site_url("js/bootstrap.min.js"); ?>"></script>
+        <script src="<?php print site_url("js/stellar.js"); ?>"></script>
+        <script src="<?php print site_url("vendors/lightbox/simpleLightbox.min.js"); ?>"></script>
+        <script src="<?php print site_url("vendors/nice-select/js/jquery.nice-select.min.js"); ?>"></script>
+        <script src="<?php print site_url("vendors/isotope/imagesloaded.pkgd.min.js"); ?>"></script>
+        <script src="<?php print site_url("vendors/isotope/isotope-min.js"); ?>"></script>
+        <script src="<?php print site_url("vendors/owl-carousel/owl.carousel.min.js"); ?>"></script>
+        <script src="<?php print site_url("js/jquery.ajaxchimp.min.js"); ?>"></script>
+        <script src="<?php print site_url("vendors/counter-up/jquery.waypoints.min.js"); ?>"></script>
+        <script src="<?php print site_url("vendors/counter-up/jquery.counterup.min.js"); ?>"></script>
+        <script src="<?php print site_url("js/mail-script.js"); ?>"></script>
         <!--gmaps Js-->
         <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCjCGmQ0Uq4exrzdcL6rvxywDDOvfAu6eE"></script>
-        <script src="js/gmaps.min.js"></script>
-        <script src="js/theme.js"></script>
+        <script src="<?php print site_url("js/gmaps.min.js"); ?>"></script>
+        <script src="<?php print site_url("js/theme.js"); ?>"></script>
     </body>
 </html>
