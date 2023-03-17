@@ -17,4 +17,17 @@ class Dashboard extends BaseController
 		);
 		return view('_authen',$data);
 	}
+	public function mou()
+	{
+
+        helper('system');
+		$data=array(
+			'title'=>'ข้อมูลการลงนามความร่วมมือ',
+			'mainMenu'=>'',
+			'content'=>view('dashboard/mou'),
+			'notification'=>'',
+			'task'=>'',
+		);
+		return view('_authen',$data);
+	}
 }
