@@ -1,6 +1,5 @@
 <div class="container-fluid">
             <div class="block-header">
-                <h2 style="text-align:left;float:left;"><?php print $title;?></h2><h2 style="text-align:right;float:right;"><?php /* print $_SERVER['PATH_INFO']; */ ?></h2>
                 <hr style="clear:both;"/>
 <div class="row clearfix">
                 <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
