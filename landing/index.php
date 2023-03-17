@@ -53,7 +53,10 @@
 								
 							</ul>
 							<ul class="nav navbar-nav navbar-right">
-								<li class="nav-item"><a href="../public/user/loginSelector" class="tickets_btn">ลงชื่อเข้าใช้</a></li>
+								<li class="nav-item"><a href="../public/dashboard/index" class="tickets_btn">ข้อมูลาพรวม</a></li>
+							</ul>
+							<ul class="nav navbar-nav navbar-right">
+								<li class="nav-item"><a href="../public/user/loginSelector" class="tickets_btn">ลงชื่อเข้าใช้</a ></li>
 							</ul>
 						</div> 
 					</div>
