@@ -41,7 +41,7 @@
             	<nav class="navbar navbar-expand-lg navbar-light">
 					<div class="container box_1620">
 						<!-- Brand and toggle get grouped for better mobile display -->
-						<a class="navbar-brand logo_h" href="./"><img src="img/ocs_logo.png" alt="" width="100"></a>
+						<a class="navbar-brand logo_h" href="./"><img src="<?php print site_url("landing/img/ocs_logo.png"); ?>" alt="" width="100"></a>
 						<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
 							<span class="icon-bar"></span>
 							<span class="icon-bar"></span>
@@ -66,6 +66,18 @@
             </div>
         </header>
         <!--================Header Menu Area =================-->
+		<!--================Home Banner Area =================-->
+        <section class="home_banner_area">
+            <div class="banner_inner">
+				<div class="container">
+					<div class="row">
+						<div class="col-lg-5">
+					
+					</div>
+				</div>
+            </div>
+        </section>
+        <!--================End Home Banner Area =================-->
         
         <?php print $content; ?>
         
