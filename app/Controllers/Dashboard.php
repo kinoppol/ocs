@@ -7,6 +7,7 @@ class Dashboard extends BaseController
 	public function index()
 	{
 
+        helper('system');
 		$data=array(
 			'title'=>'ภาพรวม',
 			'mainMenu'=>view('_menu'),
