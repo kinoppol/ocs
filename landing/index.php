@@ -51,9 +51,6 @@
 						<div class="collapse navbar-collapse offset" id="navbarSupportedContent">
 						<ul class="nav navbar-nav menu_nav justify-content-center">
 <li class="nav-item active"><a class="nav-link" href="../public/dashboard/index"" href="index.html">ข้อมูลภาพรวม</a></li>
-<li class="nav-item"><a class="nav-link" href="#">เกี่ยวกับ</a></li>
-<li class="nav-item"><a class="nav-link" href="https://web.bncc.ac.th:10000/">ระบบจัดการ</a>
-<li class="nav-item"><a class="nav-link" href="../phpmyadmin">phpMyAdmin</a>
 </ul>
 							<ul class="nav navbar-nav navbar-right">
 								<li class="nav-item"><a href="../public/user/loginSelector" class="tickets_btn">ลงชื่อเข้าใช้</a ></li>
