@@ -72,7 +72,19 @@
 				<div class="container">
 					<div class="row">
 						<div class="col-lg-5">
-					
+							<div class="banner_content">
+								<h2>ระบบฐานข้อมูล <br />สำนักความร่วมมือ</h2>
+								<p>ระบบจัดการฐานขอมูลการลงนามความร่วมมือ (MOU) ระหว่างสถานศึกษาถาครัฐและสถานประกอบการ ข้อมูลผู้เรียนอาชีวศึกษา และข้อมูล อ.กรอ.อศ. ของสำนักความร่วมมือ สำนักงานคณะกรรมการการอาชีวศึกษา
+								</p>
+								<a class="banner_btn2" href="../public/user/registerNewUser">สมัครสมาชิก</a>
+								<a class="banner_btn" href="../public/user/loginSelector">ลงชื่อเข้าใช้</a>
+							</div>
+						</div>
+						<div class="col-lg-7">
+							<div class="home_left_img">
+								<img class="img-fluid" src="images/61090.jpg" alt="">
+							</div>
+						</div>
 					</div>
 				</div>
             </div>
