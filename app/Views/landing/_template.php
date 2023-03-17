@@ -74,7 +74,6 @@
 					<div class="row">
 						<div class="col-lg-5">
 							<div class="banner_content">
-								<h2>ระบบฐานข้อมูล <br />สำนักความร่วมมือ</h2>
 							</div>
 						</div>
 						<div class="col-lg-7">
