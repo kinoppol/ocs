@@ -9,7 +9,7 @@ class Dashboard extends BaseController
 
 		$data=array(
 			'title'=>'ภาพรวม',
-			//'mainMenu'=>view('_menu'),
+			'mainMenu'=>view('_menu'),
 			'content'=>view('dashboard/summary'),
 			'notification'=>'',
 			'task'=>'',
