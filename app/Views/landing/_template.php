@@ -74,6 +74,7 @@
 					<div class="row">
 						<div class="col-lg-5">
 							<div class="banner_content">
+								Hello
 							</div>
 						</div>
 						<div class="col-lg-7">
