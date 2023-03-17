@@ -15,6 +15,6 @@ class Dashboard extends BaseController
 			'notification'=>'',
 			'task'=>'',
 		);
-		return view('_main',$data);
+		return view('_authen',$data);
 	}
 }
