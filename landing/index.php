@@ -51,11 +51,11 @@
 						<div class="collapse navbar-collapse offset" id="navbarSupportedContent">
 						<ul class="nav navbar-nav menu_nav justify-content-center">
 <li class="nav-item active"><a class="nav-link" href="../public/dashboard/index" href="index.html">ข้อมูลภาพรวม</a></li>
-<li class="nav-item active"><a class="nav-link" href="../public/mou/index" href="index.html">ค้นหา MOU</a></li>
-<li class="nav-item active"><a class="nav-link" href="../public/business/index" href="index.html">สถานประกอบการ</a></li>
-<li class="nav-item active"><a class="nav-link" href="../public/school/index" href="index.html">สถานศึกษา</a></li>
-<li class="nav-item active"><a class="nav-link" href="../public/inv/index" href="index.html">กรอ.อศ.</a></li>
-<li class="nav-item active"><a class="nav-link" href="../public/about/index" href="index.html">เกี่ยวกับระบบ</a></li>
+<li class="nav-item active"><a class="nav-link" href="../public/dashboard/mou" href="index.html">ค้นหา MOU</a></li>
+<li class="nav-item active"><a class="nav-link" href="../public/dashboard/business" href="index.html">สถานประกอบการ</a></li>
+<li class="nav-item active"><a class="nav-link" href="../public/dashboard/school" href="index.html">สถานศึกษา</a></li>
+<li class="nav-item active"><a class="nav-link" href="../public/dashboard/inv" href="index.html">กรอ.อศ.</a></li>
+<li class="nav-item active"><a class="nav-link" href="../public/dashboard/about" href="index.html">เกี่ยวกับระบบ</a></li>
 </ul>
 							<ul class="nav navbar-nav navbar-right">
 								<li class="nav-item"><a href="../public/user/loginSelector" class="tickets_btn">ลงชื่อเข้าใช้</a ></li>
