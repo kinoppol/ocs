@@ -72,7 +72,12 @@
             <div class="banner_inner">
 				<div class="container">
 					<div class="row">
-					
+						<div class="col-lg-5">
+							<div class="banner_content">
+							</div>
+						</div>
+						<div class="col-lg-7">
+						</div>
 					</div>
 				</div>
             </div>
