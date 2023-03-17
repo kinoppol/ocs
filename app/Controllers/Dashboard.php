@@ -28,6 +28,6 @@ class Dashboard extends BaseController
 			'notification'=>'',
 			'task'=>'',
 		);
-		return view('_authen',$data);
+		return view('landing/_template',$data);
 	}
 }
