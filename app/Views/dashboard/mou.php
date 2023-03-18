@@ -1,3 +1,13 @@
+<?php 
+$aval_chk='';
+$exp_chk='';
+	if((!empty($_GET['s'])&&$_GET['s']=='aval')||!empty($_POST['aval'])){
+		$aval_chk=' checked';
+	}
+	if((!empty($_GET['s'])&&$_GET['s']=='exp')||!empty($_POST['exp'])){
+		$exp_chk=' checked';
+	}
+?>
 <div class="container-fluid">
 <div class="row">
 		<div class="col-md-12">
@@ -9,13 +19,12 @@
 				<div class="col-md-10">
                 <input type="text" class="form-control" id="q" name="q" />
 				<div class="checkbox">
-					 
-					 <label>
-						 <input type="checkbox" />แสดง MOU ที่หมดอายุ
-					 </label>					 
-					 <label>
-						 <input type="checkbox" />แสดง MOU ที่มีผล
+					<label>
+						 <input type="checkbox" name="aval" value="show"<?php print $exp_chk; ?>/> แสดง MOU ที่มีผล
 					 </label>
+					 <label>
+						 <input type="checkbox" name="exp" value="show"<?php print $exp_chk; ?>/> แสดง MOU ที่หมดอายุ
+					 </label>			
 				 </div> 
 				</div>
 				<div class="col-md-2">
