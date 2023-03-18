@@ -15,8 +15,8 @@
 				<span class="info-box-text">MOU ทั้งหมด</span>
 				<span class="info-box-number">1,410</span>
 				</div>
-				ดูรายละเอียด
 		  </div>
+				ดูรายละเอียด
 		  </div>
 		  </div>
 		<div class="col-md-4">
