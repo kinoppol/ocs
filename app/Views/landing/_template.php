@@ -31,6 +31,9 @@
 				body{
 					font-family: 'Kanit', sans-serif;
 				}
+				.spacing {
+				padding: 15px;
+				}
 			</style>
     </head>
     <body style="font-family: 'Kanit', sans-serif;">
