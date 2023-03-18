@@ -14,6 +14,8 @@
 				<div class="info-box-content">
 				<span class="info-box-text">Messages</span>
 				<span class="info-box-number">1,410</span>
+				</div>
+		  </div>
 		  </div>
 		  </div>
 		<div class="col-md-4">
