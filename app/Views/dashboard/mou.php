@@ -38,7 +38,7 @@ $exp_chk='';
 				</div>
 				<div class="col-md-2">
 					 
-					<button type="button" class="btn btn-success btn-block">
+					<button type="submit" class="btn btn-success btn-block">
 						ค้นหา
 					</button>
 				</div>
