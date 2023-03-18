@@ -20,7 +20,6 @@
 70% Increase in 30 Days
 </span>
 </div>
-</div>
 
 </div>
 
