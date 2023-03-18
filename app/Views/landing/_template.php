@@ -19,7 +19,6 @@
         <link rel="stylesheet" href="<?php print site_url("landing/css/style.css"); ?>">
 		<link rel="stylesheet" href="<?php print site_url("landing/css/responsive.css"); ?>">
 		<link rel="stylesheet" href="https://adminlte.io/themes/AdminLTE/dist/css/AdminLTE.min.css">
-		<link rel="stylesheet" href="https://adminlte.io/themes/AdminLTE/dist/css/skins/_all-skins.min.css">
 		
 		<script>
 			function order(){
