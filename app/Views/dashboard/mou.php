@@ -2,7 +2,7 @@
 $aval_chk='';
 $mexp_chk='';
 $exp_chk='';
-	if(empty($_GET['s'])&&empty($_POST['exp'])||(!empty($_GET['s'])&&($_GET['s']=='aval'||$_GET['s']=='all'))||!empty($_POST['aval'])){
+	if((empty($_GET['s'])&&empty($_POST['exp'])&&empty($_POST['mexp']))||(!empty($_GET['s'])&&($_GET['s']=='aval'||$_GET['s']=='all'))||!empty($_POST['aval'])){
 		$aval_chk=' checked';
 		$mexp_chk=' checked';
 	}
