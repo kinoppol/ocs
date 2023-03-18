@@ -8,6 +8,18 @@
 			<div class="row">
 				<div class="col-md-10">
                 <input type="text" class="form-control" id="q" name="q" />
+				<div class="checkbox">
+					 
+					 <label>
+						 <input type="checkbox" />แสดง MOU ที่หมดอายุ
+					 </label>
+				 </div> 
+				 <div class="checkbox">
+					 
+					 <label>
+						 <input type="checkbox" />แสดง MOU ที่มีผล
+					 </label>
+				 </div> 
 				</div>
 				<div class="col-md-2">
 					 
