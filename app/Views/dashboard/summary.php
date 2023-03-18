@@ -16,8 +16,8 @@
 				<span class="info-box-number">1,410</span>
 				</div>
 		  </div>
-		  </div>
 				ดูรายละเอียด
+		  </div>
 		  </div>
 		<div class="col-md-4">
 		<div class="card">
