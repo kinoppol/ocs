@@ -9,7 +9,7 @@
 	<div class="row">
 		<div class="col-md-4">
 <div class="info-box bg-success">
-<span class="info-box-icon"><i class="far fa-thumbs-up"></i></span>
+<span class="info-box-icon"><i class="fa fa-book"></i></span>
 <div class="info-box-content">
 <span class="info-box-text">Likes</span>
 <span class="info-box-number">41,410</span>
