@@ -1,7 +1,7 @@
 <?php 
 $aval_chk='';
 $exp_chk='';
-	if((!empty($_GET['s'])&&($_GET['s']=='aval'||$_GET['s']=='all'))||!empty($_POST['aval'])){
+	if(empty($_GET['s'])||(!empty($_GET['s'])&&($_GET['s']=='aval'||$_GET['s']=='all'))||!empty($_POST['aval'])){
 		$aval_chk=' checked';
 	}
 	if((!empty($_GET['s'])&&($_GET['s']=='exp'||$_GET['s']=='all'))||!empty($_POST['exp'])){
