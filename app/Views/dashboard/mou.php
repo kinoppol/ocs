@@ -1,10 +1,10 @@
 <?php 
 $aval_chk='';
 $exp_chk='';
-	if((!empty($_GET['s'])&&$_GET['s']=='aval')||!empty($_POST['aval'])){
+	if((!empty($_GET['s'])&&($_GET['s']=='aval'||$_GET['s']=='all'))||!empty($_POST['aval'])){
 		$aval_chk=' checked';
 	}
-	if((!empty($_GET['s'])&&$_GET['s']=='exp')||!empty($_POST['exp'])){
+	if((!empty($_GET['s'])&&($_GET['s']=='exp'||$_GET['s']=='all'))||!empty($_POST['exp'])){
 		$exp_chk=' checked';
 	}
 ?>
@@ -20,7 +20,7 @@ $exp_chk='';
                 <input type="text" class="form-control" id="q" name="q" />
 				<div class="checkbox">
 					<label>
-						 <input type="checkbox" name="aval" value="show"<?php print $exp_chk; ?>/> แสดง MOU ที่มีผล
+						 <input type="checkbox" name="aval" value="show"<?php print $aval_chk; ?>/> แสดง MOU ที่มีผล
 					 </label>
 					 <label>
 						 <input type="checkbox" name="exp" value="show"<?php print $exp_chk; ?>/> แสดง MOU ที่หมดอายุ
