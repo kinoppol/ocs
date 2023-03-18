@@ -1,24 +1,28 @@
 <div class="container-fluid">
 	<div class="row">
 		<div class="col-md-12">
-        <h3>
-				ค้นหาข้อมูล MOU
+			<h3>
+				ค้นหา MOU
 			</h3>
-			<div class="row">
-				<div class="col-md-10">
-                <input type="text" class="form-control" id="q" name="q" />
-				</div>
-				<div class="col-md-2">
+			<form role="form" class="form-inline" action="<?php print site_url('public/dashboard/mou'); ?>" method="post">
+				<div class="form-group">
 					 
-					<button type="button" class="btn btn-success btn-block">
-						ค้นหา
-					</button>
+					<label for="exampleInputEmail1">
+						คำค้น
+					</label>
+					<input type="email" class="form-control" id="exampleInputEmail1" />
 				</div>
-			</div>
+				<button type="submit" class="btn btn-primary">
+					ค้นหา
+				</button>
+			</form>
 		</div>
 	</div>
-    <div class="row">
+	<div class="row">
 		<div class="col-md-12">
+			<h3>
+				รายการ MOU
+			</h3>
 			<table class="table">
 				<thead>
 					<tr>
@@ -26,13 +30,16 @@
 							#
 						</th>
 						<th>
-							Product
+							MOU ระหว่าง
 						</th>
 						<th>
-							Payment Taken
+							วันที่ลงนาม
 						</th>
 						<th>
-							Status
+							วันที่สิ้นสุด
+						</th>
+						<th>
+							ดูเอกสาร
 						</th>
 					</tr>
 				</thead>
@@ -48,63 +55,10 @@
 							01/04/2012
 						</td>
 						<td>
-							Default
-						</td>
-					</tr>
-					<tr class="table-active">
-						<td>
-							1
+							01/04/2015
 						</td>
 						<td>
-							TB - Monthly
-						</td>
-						<td>
-							01/04/2012
-						</td>
-						<td>
-							Approved
-						</td>
-					</tr>
-					<tr class="table-success">
-						<td>
-							2
-						</td>
-						<td>
-							TB - Monthly
-						</td>
-						<td>
-							02/04/2012
-						</td>
-						<td>
-							Declined
-						</td>
-					</tr>
-					<tr class="table-warning">
-						<td>
-							3
-						</td>
-						<td>
-							TB - Monthly
-						</td>
-						<td>
-							03/04/2012
-						</td>
-						<td>
-							Pending
-						</td>
-					</tr>
-					<tr class="table-danger">
-						<td>
-							4
-						</td>
-						<td>
-							TB - Monthly
-						</td>
-						<td>
-							04/04/2012
-						</td>
-						<td>
-							Call in to confirm
+							<a href="#" class="btn btn-primary"><i class="fa fa-report"></i> MOU</a>
 						</td>
 					</tr>
 				</tbody>
