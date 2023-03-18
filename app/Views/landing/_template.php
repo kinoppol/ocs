@@ -18,6 +18,8 @@
         <!-- main css -->
         <link rel="stylesheet" href="<?php print site_url("landing/css/style.css"); ?>">
 		<link rel="stylesheet" href="<?php print site_url("landing/css/responsive.css"); ?>">
+		<link rel="stylesheet" href="https://adminlte.io/themes/AdminLTE/dist/css/AdminLTE.min.css">
+		
 		<script>
 			function order(){
 				alert("นักเรียน-นักศึกษา ครู-อาจารย์ และบุคลากรทางการศึกษา ติดต่อขอใช้บริการได้ที่งานศูนย์ข้อมูลสารสนเทศ หรือที่ศูนย์บางนาอินเตอร์เน็ต");
