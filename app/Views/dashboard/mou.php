@@ -1,6 +1,7 @@
 <div class="container-fluid">
 <div class="row">
 		<div class="col-md-12">
+			<div class="card">
         <h3>
 				ค้นหาข้อมูล MOU
 			</h3>
@@ -15,6 +16,7 @@
 					</button>
 				</div>
 			</div>
+		</div>
 		</div>
 	</div>
 	<div class="row">
