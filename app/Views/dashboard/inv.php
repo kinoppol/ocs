@@ -20,7 +20,7 @@
 	<div class="row">
 		<div class="col-md-12">
 			<h3>
-            อ.กรอ.อศ
+            อ.กรอ.อศ.
 			</h3>
 			<table class="table">
 				<thead>
