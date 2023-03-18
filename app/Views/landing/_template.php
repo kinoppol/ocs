@@ -31,9 +31,11 @@
 				body{
 					font-family: 'Kanit', sans-serif;
 				}
-				.spacing {
-				padding: 15px;
+				.row {
+				display: flex;
+				justify-content: space-between;
 				}
+				.row div { padding: 1em; }
 			</style>
     </head>
     <body style="font-family: 'Kanit', sans-serif;">
