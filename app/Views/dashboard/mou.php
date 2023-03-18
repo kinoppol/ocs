@@ -1,5 +1,3 @@
-<div class="row clearfix">
-                <div class="col-lg-8 col-md-8 col-sm-8 col-xs-8">
                     <div class="card">
                     <div class="header">
                                <form action="<?php print site_url('public/'.$_SERVER['PATH_INFO']); ?>" method="post">
@@ -11,7 +9,7 @@
                                             </div>
                                         </div>
                                     </div>
-                                    <div class="col-lg-1 col-md-2 col-sm-2 col-xs-3">
+                                    <div class="col-lg-4 col-md-2 col-sm-2 col-xs-3">
                                         <div class="form-group">
                                                 <button class="btn btn-primary"><i class="material-icons">search</i> แสดง</button>
                                         </div>
@@ -31,5 +29,3 @@
                             </div>
                     </div>
                             </div>
-                            </div>
-                    </div>
