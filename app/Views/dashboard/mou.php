@@ -14,8 +14,8 @@ $exp_chk='';
 	}
 ?>
 <div class="container-fluid">
-<div class="row">
 	<form action="<?php print site_url('public/dashboard/mou'); ?>" method="post">
+<div class="row">
 		<div class="col-md-12">
 			<div class="card">
         <h3>
@@ -45,8 +45,8 @@ $exp_chk='';
 			</div>
 		</div>
 		</div>
-</form>
 	</div>
+</form>
 	<div class="row">
 		<div class="col-md-12">
 			<div class="card">
