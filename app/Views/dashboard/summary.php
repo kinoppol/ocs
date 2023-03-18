@@ -28,6 +28,7 @@
 				<span class="info-box-number">810</span>
 				</div>
 		  </div>
+				ดูรายละเอียด..
 		  </div>
 		</div>
 		<div class="col-md-3">
@@ -39,9 +40,9 @@
 				<span class="info-box-number">450</span>
 				</div>
 		  </div>
+				ดูรายละเอียด..
 		  </div>
 		</div>
-	</div>
 		<div class="col-md-3">
 		<div class="card">
 				<div class="info-box">
@@ -51,6 +52,7 @@
 				<span class="info-box-number">290</span>
 				</div>
 		  </div>
+				ดูรายละเอียด..
 		  </div>
 		</div>
 	</div>
