@@ -1,6 +1,5 @@
-                <hr style="clear:both;"/>
 <div class="row clearfix">
-                <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                <div class="col-lg-8 col-md-8 col-sm-8 col-xs-8">
                     <div class="card">
                     <div class="header">
                                <form action="<?php print site_url('public/'.$_SERVER['PATH_INFO']); ?>" method="post">
