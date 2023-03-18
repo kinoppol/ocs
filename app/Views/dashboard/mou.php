@@ -12,10 +12,7 @@
 					 
 					 <label>
 						 <input type="checkbox" />แสดง MOU ที่หมดอายุ
-					 </label>
-				 </div> 
-				 <div class="checkbox">
-					 
+					 </label>					 
 					 <label>
 						 <input type="checkbox" />แสดง MOU ที่มีผล
 					 </label>
