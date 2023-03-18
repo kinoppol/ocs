@@ -8,6 +8,8 @@
 	</div>
 	<div class="row">
 		<div class="col-md-4">
+
+		<div class="card">
 		<div class="info-box bg-aqua">
 <span class="info-box-icon"><i class="fa fa-bookmark-o"></i></span>
 <div class="info-box-content">
@@ -19,6 +21,7 @@
 <span class="progress-description">
 70% Increase in 30 Days
 </span>
+</div>
 </div>
 
 </div>
