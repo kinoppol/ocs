@@ -6,7 +6,7 @@ $exp_chk='';
 		$aval_chk=' checked';
 		$mexp_chk=' checked';
 	}
-	if(!empty($_GET['s'])&&($_GET['s']=='mexp'||!empty($_POST['mexp']))){
+	if((!empty($_GET['s'])&&($_GET['s']=='mexp')||!empty($_POST['mexp']))){
 		$mexp_chk=' checked';
 	}
 	if((!empty($_GET['s'])&&($_GET['s']=='exp'||$_GET['s']=='all'))||!empty($_POST['exp'])){
