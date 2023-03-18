@@ -21,6 +21,7 @@
 	</div>
 	<div class="row">
 		<div class="col-md-12">
+			<div class="card">
 			<h3>
 				รายการ MOU
 			</h3>
@@ -65,5 +66,6 @@
 				</tbody>
 			</table>
 		</div>
+	</div>
 	</div>
 </div>

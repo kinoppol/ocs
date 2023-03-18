@@ -1,6 +1,7 @@
 <div class="container-fluid">
 	<div class="row">
 		<div class="col-md-12">
+			<div class="card">
 			 
 			<address>
 				 <h3>ระบบฐานข้อมูลสำนักความร่วมมือ</h3><a href="https://www.vec.go.th" target="_blank">
@@ -12,4 +13,5 @@
 			</address>
 		</div>
 	</div>
+</div>
 </div>

@@ -1,6 +1,7 @@
 <div class="container-fluid">
 <div class="row">
 		<div class="col-md-12">
+			<div class="card">
         <h3>
 				ค้นหาข้อมูลสถานประกอบการ
 			</h3>
@@ -17,8 +18,10 @@
 			</div>
 		</div>
 	</div>
+	</div>
 	<div class="row">
 		<div class="col-md-12">
+			<div class="card">
 			<h3>
 				สถานประกอบการ
 			</h3>
@@ -63,5 +66,6 @@
 				</tbody>
 			</table>
 		</div>
+	</div>
 	</div>
 </div>
