@@ -1,21 +1,20 @@
 <div class="container-fluid">
-	<div class="row">
+<div class="row">
 		<div class="col-md-12">
-			<h3>
-				ค้นหา MOU
+        <h3>
+				ค้นหาข้อมูล MOU
 			</h3>
-			<form role="form" class="form-inline" action="<?php print site_url('public/dashboard/mou'); ?>" method="post">
-				<div class="form-group">
-					 
-					<label for="exampleInputEmail1">
-						คำค้น
-					</label>
-					<input type="email" class="form-control" id="exampleInputEmail1" />
+			<div class="row">
+				<div class="col-md-10">
+                <input type="text" class="form-control" id="q" name="q" />
 				</div>
-				<button type="submit" class="btn btn-primary">
-					ค้นหา
-				</button>
-			</form>
+				<div class="col-md-2">
+					 
+					<button type="button" class="btn btn-success btn-block">
+						ค้นหา
+					</button>
+				</div>
+			</div>
 		</div>
 	</div>
 	<div class="row">
@@ -58,7 +57,7 @@
 							01/04/2015
 						</td>
 						<td>
-							<a href="#" class="btn btn-primary"><i class="fa fa-report"></i> MOU</a>
+							<a href="#" class="btn btn-primary"><i class="fa fa-book"></i> MOU</a>
 						</td>
 					</tr>
 				</tbody>
