@@ -12,41 +12,35 @@
 				<div class="info-box">
 				<span class="info-box-icon bg-aqua"><i class="fa fa-envelope-o"></i></span>
 				<div class="info-box-content">
-				<span class="info-box-text">MOU</span>
+				<span class="info-box-text">MOU ทั้งหมด</span>
 				<span class="info-box-number">1,410</span>
 				</div>
 		  </div>
 		  </div>
 		  </div>
 		<div class="col-md-4">
-			<div class="card">
-				<h5 class="card-header">
-					MOU ที่ยังมีผล
-				</h5>
-				<div class="card-body">
-					<p class="card-text">
-						Card content
-					</p>
+		<div class="card">
+				<div class="info-box">
+				<span class="info-box-icon bg-green"><i class="fa fa-envelope-o"></i></span>
+				<div class="info-box-content">
+				<span class="info-box-text">MOU ที่มีผล</span>
+				<span class="info-box-number">810</span>
 				</div>
-				<div class="card-footer">
-					<a href="#">ดูรายละเอียด</a>
-				</div>
-			</div>
+		  </div>
+		  </div>
+		  </div>
 		</div>
 		<div class="col-md-4">
-			<div class="card">
-				<h5 class="card-header">
-					MOU ที่หมดอายุ
-				</h5>
-				<div class="card-body">
-					<p class="card-text">
-						Card content
-					</p>
+		<div class="card">
+				<div class="info-box">
+				<span class="info-box-icon bg-red"><i class="fa fa-envelope-o"></i></span>
+				<div class="info-box-content">
+				<span class="info-box-text">MOU ที่หมดอายุ</span>
+				<span class="info-box-number">290</span>
 				</div>
-				<div class="card-footer">
-					<a href="#">ดูรายละเอียด</a>
-				</div>
-			</div>
+		  </div>
+		  </div>
+		  </div>
 		</div>
 	</div>
 	<div class="row">
