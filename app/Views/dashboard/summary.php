@@ -8,11 +8,11 @@
 	</div>
 	<div class="row">
 		<div class="col-md-4">
-			<div class="card bg-primary">
+			<div class="card bg-default">
 				<h5 class="card-header">
 					จำนวน MOU ทั้งหมด
 				</h5>
-				<div class="card-body">
+				<div class="card-body bg-primary">
 					<p class="card-text">
 						Card content
 					</p>
@@ -23,7 +23,7 @@
 			</div>
 		</div>
 		<div class="col-md-4">
-			<div class="card bg-success">
+			<div class="card">
 				<h5 class="card-header">
 					MOU ที่ยังมีผล
 				</h5>
@@ -38,7 +38,7 @@
 			</div>
 		</div>
 		<div class="col-md-4">
-			<div class="card bg-danger">
+			<div class="card">
 				<h5 class="card-header">
 					MOU ที่หมดอายุ
 				</h5>
