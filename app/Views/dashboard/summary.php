@@ -16,7 +16,7 @@
 				<span class="info-box-number">1,410</span>
 				</div>
 		  </div>
-				ดูรายละเอียด..
+				<a href="<?php print site_url('public/dashboard/mou/all'); ?>">ดูรายละเอียด..</a>
 		  </div>
 		  </div>
 		<div class="col-md-3">
@@ -28,7 +28,7 @@
 				<span class="info-box-number">810</span>
 				</div>
 		  </div>
-				ดูรายละเอียด..
+				<a href="<?php print site_url('public/dashboard/mou/aval'); ?>">ดูรายละเอียด..</a>
 		  </div>
 		</div>
 		<div class="col-md-3">
@@ -40,7 +40,7 @@
 				<span class="info-box-number">450</span>
 				</div>
 		  </div>
-				ดูรายละเอียด..
+				<a href="<?php print site_url('public/dashboard/mou/mexp'); ?>">ดูรายละเอียด..</a>
 		  </div>
 		</div>
 		<div class="col-md-3">
@@ -52,7 +52,7 @@
 				<span class="info-box-number">290</span>
 				</div>
 		  </div>
-				ดูรายละเอียด..
+				<a href="<?php print site_url('public/dashboard/mou/exp'); ?>">ดูรายละเอียด..</a>
 		  </div>
 		</div>
 	</div>
