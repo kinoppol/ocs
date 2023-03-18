@@ -9,7 +9,7 @@
 	<div class="row">
 	<div class="col-md-4">
 		  <div class="card">
-		    <div class="info-box bg-aqua">
+		    <div class="info-box bg-primary">
 		      <span class="info-box-icon">
 		        <i class="fa fa-bookmark-o"></i>
 		      </span>
