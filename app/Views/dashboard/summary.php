@@ -8,18 +8,24 @@
 	</div>
 	<div class="row">
 		<div class="col-md-4">
-			<div class="card bg-default">
-				<h5 class="card-header">
-					จำนวน MOU ทั้งหมด
-				</h5>
-				<div class="card-body bg-primary">
-					<p class="card-text">
-						Card content
-					</p>
-				</div>
-				<div class="card-footer">
-					<a href="#">ดูรายละเอียด</a>
-				</div>
+		<div class="col-md-3 col-sm-6 col-12">
+<div class="info-box bg-success">
+<span class="info-box-icon"><i class="far fa-thumbs-up"></i></span>
+<div class="info-box-content">
+<span class="info-box-text">Likes</span>
+<span class="info-box-number">41,410</span>
+<div class="progress">
+<div class="progress-bar" style="width: 70%"></div>
+</div>
+<span class="progress-description">
+70% Increase in 30 Days
+</span>
+</div>
+
+</div>
+
+</div>
+
 			</div>
 		</div>
 		<div class="col-md-4">
