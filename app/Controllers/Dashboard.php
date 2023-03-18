@@ -69,4 +69,17 @@ class Dashboard extends BaseController
 		);
 		return view('landing/_template',$data);
 	}
+	public function about()
+	{
+
+        helper('system');
+		$data=array(
+			'title'=>'เกี่ยวกับระบบ',
+			'mainMenu'=>'',
+			'content'=>view('dashboard/about'),
+			'notification'=>'',
+			'task'=>'',
+		);
+		return view('landing/_template',$data);
+	}
 }
