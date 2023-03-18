@@ -28,7 +28,6 @@
 				</div>
 		  </div>
 		  </div>
-		  </div>
 		</div>
 		<div class="col-md-4">
 		<div class="card">
@@ -38,7 +37,6 @@
 				<span class="info-box-text">MOU ที่หมดอายุ</span>
 				<span class="info-box-number">290</span>
 				</div>
-		  </div>
 		  </div>
 		  </div>
 		</div>
