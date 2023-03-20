@@ -34,6 +34,8 @@ class Dashboard extends BaseController
 			$detail=array(
 				'keyword'=>!empty($_POST['q'])?$_POST['q']:'',
 			);
+		}else{
+			$detail=array();
 		}
 		if(!empty($_POST['s'])){
 			if($_POST['s']=='aval'){
