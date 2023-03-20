@@ -3,7 +3,7 @@
 helper('thai');
 helper('org');
 ?>
-<table class="dataTable">
+<table class="table dataTable">
 				<thead>
 					<tr>
 						<th>
