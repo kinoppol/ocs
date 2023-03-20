@@ -13,7 +13,7 @@ class Dashboard extends BaseController
 			'mouCountAll'=>$MouModel->getMouCount(),
 			'mouCountActive'=>$MouModel->getMouCount(['active'=>'Y']),
 			'mouCountCloseToExpiration'=>$MouModel->getMouCount(['active'=>'Y','ref_date'=>date('Y-m-d',strtotime('+90 days'))]),
-			'lastestMOU'=>$MouModel->getMouCount(['limit'=>10,'orderBy'=>'mou_start_date desc']);
+			'lastestMOU'=>$MouModel->getMouCount(['limit'=>10,'orderBy'=>'mou_start_date desc']),
 		);
 		$data=array(
 			'title'=>'ภาพรวม',
