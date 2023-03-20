@@ -54,7 +54,7 @@ $exp_chk='';
 				รายการ MOU
 			</h3>
 			<?php 
-				if(empty($_POST['q'])&&empty($_GET['a'])){
+				if(empty($_POST['q'])&&empty($_GET['s'])){
 					print "<div align=\"center\"><h3>โปรดระบุคำค้น แล้วกดปุ่มค้นหา</h3></div>";
 				}else{
 					print $mouTable;
