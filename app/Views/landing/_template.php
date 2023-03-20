@@ -169,5 +169,33 @@
         <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCjCGmQ0Uq4exrzdcL6rvxywDDOvfAu6eE"></script>
         <script src="<?php print site_url("landing/js/gmaps.min.js"); ?>"></script>
         <script src="<?php print site_url("landing/js/theme.js"); ?>"></script>
+
+		    <!-- Jquery DataTable Plugin Js -->
+	<script src="<?php print site_url();?>template/adminbsb/plugins/jquery-datatable/jquery.dataTables.js"></script>
+    <script src="<?php print site_url();?>template/adminbsb/plugins/jquery-datatable/skin/bootstrap/js/dataTables.bootstrap.js"></script>
+    <script src="<?php print site_url();?>template/adminbsb/plugins/jquery-datatable/extensions/export/dataTables.buttons.min.js"></script>
+    <script src="<?php print site_url();?>template/adminbsb/plugins/jquery-datatable/extensions/export/buttons.flash.min.js"></script>
+    <script src="<?php print site_url();?>template/adminbsb/plugins/jquery-datatable/extensions/export/jszip.min.js"></script>
+    <script src="<?php print site_url();?>template/adminbsb/plugins/jquery-datatable/extensions/export/pdfmake.min.js"></script>
+    <script src="<?php print site_url();?>template/adminbsb/plugins/jquery-datatable/extensions/export/vfs_fonts.js"></script>
+    <script src="<?php print site_url();?>template/adminbsb/plugins/jquery-datatable/extensions/export/buttons.html5.min.js"></script>
+    <script src="<?php print site_url();?>template/adminbsb/plugins/jquery-datatable/extensions/export/buttons.print.min.js"></script>
+
+<script>
+	$(function () {
+    //$('.js-example-basic-single').select2();
+    $('.dataTable').DataTable( {
+                    "oLanguage": {
+                    "sLengthMenu": "แสดง _MENU_ รายการ ต่อหน้า",
+                    "sZeroRecords": "ไม่เจอข้อมูลที่ค้นหา",
+                    "sInfo": "แสดง _START_ ถึง _END_ ของ _TOTAL_ รายการ",
+                    "sInfoEmpty": "แสดง 0 ถึง 0 ของ 0 รายการ",
+                    "sInfoFiltered": "(จากรายการทั้งหมด _MAX_ รายการ)",
+                    "sSearch": "<i class=\"material-icons\">filter_list</i> กรอง :"
+                                  }
+                } );
+			}
+	);
+			</script>
     </body>
 </html>
