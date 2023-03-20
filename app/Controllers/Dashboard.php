@@ -32,19 +32,20 @@ class Dashboard extends BaseController
 		$MouModel = model('App\Models\MouModel');
 		$detail=array();
 		if(!empty($_POST['q'])){
-			$detai['keyword']=$_POST['q'];
+			$detail['keyword']=$_POST['q'];
 			
 		}
 		if(!empty($_GET['s'])){
 			if($_GET['s']=='aval'){
-				$detai['active']='Y';
+				$detail['active']='Y';
 			}else if($_GET['s']=='mexp'){
-				$detai['active']='C';
-				$detai['ref_date']=date('Y-m-d',strtotime('+90 days'));
+				$detail['active']='C';
+				$detail['ref_date']=date('Y-m-d',strtotime('+90 days'));
 			}else if($_GET['s']=='exp'){
-				$detai['active']='N';
+				$detail['active']='N';
 			}
 		}
+		
 			if(!empty($detail)){
 				print_r($detail);
 				$data=array(
