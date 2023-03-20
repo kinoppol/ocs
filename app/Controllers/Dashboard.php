@@ -12,7 +12,7 @@ class Dashboard extends BaseController
 		$data=array(
 			'mouCountAll'=>$MouModel->getMouCount(),
 			'mouCountActive'=>$MouModel->getMouCount(['active'=>'Y']),
-			'mouCountCloseToExpiration'=>$MouModel->getMouCount(['active'=>'Y','ref_date'=>date('Y-m-d',strtotime('+90 days'))]),
+			'mouCountActiveOver90Days'=>$MouModel->getMouCount(['active'=>'Y','ref_date'=>date('Y-m-d',strtotime('+90 days'))]),
 			'lastestMOU'=>$MouModel->getMou(['limit'=>10,'orderBy'=>'mou_date desc']),
 		);
 		$data=array(
