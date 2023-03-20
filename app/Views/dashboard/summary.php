@@ -123,7 +123,7 @@
 				</tbody>
 			</table>
 						<?php
-						print_r($lastestMOU);
+						//print_r($lastestMOU);
 						?>
 					</p>
 				</div>
