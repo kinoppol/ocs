@@ -38,6 +38,7 @@
 				<div class="info-box-content">
 				<span class="info-box-text">MOU ใกล้หมดอายุ</span>
 				<span class="info-box-number"><?php print number_format($mouCountCloseToExpiration-($mouCountAll-$mouCountActive)); ?> ฉบับ</span>
+				<span class="info-box-text">* กำลังจะหมดอายุใน 90 วัน</span>
 				</div>
 		  </div>
 				<a href="<?php print site_url('public/dashboard/mou?s=mexp'); ?>">ดูรายละเอียด..</a>
