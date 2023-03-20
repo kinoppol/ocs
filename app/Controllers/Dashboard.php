@@ -30,16 +30,20 @@ class Dashboard extends BaseController
 	public function mou()
 	{
 		$MouModel = model('App\Models\MouModel');
-		$detail=array(
-			'keyword'=>!empty($_POST['q'])?$_POST['q']:'',
-		);
-		$data=array(
-			'resultMOU'=>$MouModel->getMou($detail),
-		);
-		$data=array(
-			'resultMOU'=>$MouModel->getMou($detail),
-			'mouTable'=>view('dashboard/mouTable',$data),
-		);
+		if(!empty($_POST['q'])){
+			$detail=array(
+				'keyword'=>!empty($_POST['q'])?$_POST['q']:'',
+			);
+			$data=array(
+				'resultMOU'=>$MouModel->getMou($detail),
+			);
+			$data=array(
+				//'resultMOU'=>$MouModel->getMou($detail),
+				'mouTable'=>view('dashboard/mouTable',$data),
+			);
+		}else{
+			$data=array('mouTable'=>'');
+		}
         helper('system');
 		$data=array(
 			'title'=>'ข้อมูลการลงนามความร่วมมือ',
