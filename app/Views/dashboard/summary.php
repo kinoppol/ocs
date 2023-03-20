@@ -68,7 +68,9 @@
 				</h5>
 				<div class="card-body">
 					<p class="card-text">
-						Card content
+						<?php
+						print_r($lastestMOU);
+						?>
 					</p>
 				</div>
 				<div class="card-footer">
