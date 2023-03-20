@@ -53,12 +53,9 @@ class MouModel extends Model
             }else if($data['active']=='C'){
                 $ref_start_date=date('Y-m-d');
                 $ref_end_date=$data['ref_date'];
-                $builder->where('mou_end_date>"',$ref_start_date);
-                $builder->where('mou_end_date<"',$ref_end_date);
-                $builder->where('no_expire','N');
+                $builder->where('(mou_end_date>="'.$ref_start_date.'" AND mou_end_date<="'.$ref_end_date.'" AND no_expire="N")');
             }else if($data['active']=='N'){
-                $builder->where('mou_end_date<="',$ref_date);
-                $builder->where('no_expire','N');
+                $builder->where('(mou_end_date<="'.$ref_date.' AND no_expire="N")');
             }
         }
 
