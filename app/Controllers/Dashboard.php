@@ -26,6 +26,7 @@ class Dashboard extends BaseController
 	}
 	public function mou()
 	{
+		$MouModel = model('App\Models\MouModel');
 		$detail=array(
 			'keyword'=>$_POST['q'],
 		);

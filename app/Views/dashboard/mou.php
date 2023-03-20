@@ -57,6 +57,7 @@ $exp_chk='';
 				if(empty($_POST['q'])&&empty($_GET['a'])){
 					print "<div align=\"center\"><h3>โปรดระบุคำค้น แล้วกดปุ่มค้นหา</h3></div>";
 				}else{
+					print_r($resultMOU);
 			?>
 			<table class="table">
 				<thead>
