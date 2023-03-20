@@ -43,7 +43,11 @@ helper('org');
                                     print org_name($mou->school_id);
                                 }
 							}else{
-								print $resultMOU['school'][$mou->school_id];
+                                if(!empty($resultMOU['school'][$mou->school_id])){
+								    print $resultMOU['school'][$mou->school_id];
+                                }else{
+                                    print org_name($mou->school_id);
+                                }
 							}
 							print " และ ";
 								print $resultMOU['business'][$mou->business_id]['business_name'];
