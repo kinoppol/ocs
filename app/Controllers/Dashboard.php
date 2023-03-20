@@ -35,7 +35,7 @@ class Dashboard extends BaseController
 				'keyword'=>!empty($_POST['q'])?$_POST['q']:'',
 			);
 		}
-		if(!empty($_POST['s'])){
+		if(!empty($_GET['s'])){
 			if($_GET['s']=='aval'){
 				$detail=array(['active'=>'Y']);
 			}else if($_GET['s']=='mexp'){
