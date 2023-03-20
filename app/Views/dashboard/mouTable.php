@@ -1,3 +1,7 @@
+<?php 
+
+helper('thai');
+?>
 <table class="table">
 				<thead>
 					<tr>
