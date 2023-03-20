@@ -34,6 +34,16 @@ class Dashboard extends BaseController
 			$detail=array(
 				'keyword'=>!empty($_POST['q'])?$_POST['q']:'',
 			);
+		}
+		if(!empty($_POST['s'])){
+			if($_POST['s']=='aval'){
+				$detail=array(['active'=>'Y']);
+			}else if($_POST['s']=='mexp'){
+				$detail=array(['active'=>'C','ref_date'=>date('Y-m-d',strtotime('+90 days'))]);
+			}else if($_POST['s']=='exp'){
+				$detail=array(['active'=>'N']);
+			}
+		}
 			$data=array(
 				'resultMOU'=>$MouModel->getMou($detail),
 			);
@@ -41,9 +51,6 @@ class Dashboard extends BaseController
 				//'resultMOU'=>$MouModel->getMou($detail),
 				'mouTable'=>view('dashboard/mouTable',$data),
 			);
-		}else{
-			$data=array('mouTable'=>'');
-		}
         helper('system');
 		$data=array(
 			'title'=>'ข้อมูลการลงนามความร่วมมือ',

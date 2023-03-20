@@ -16,7 +16,7 @@ class MouModel extends Model
             if(!empty($data['ref_date'])){
                 $ref_date=$data['ref_date'];
             }
-            $builder->where('(mou_end_date>="'.$ref_date.'" OR no_expire="Y")');
+            $builder->where('(mou_end_date>"'.$ref_date.'" OR no_expire="Y")');
         }
         if(isset($data['year'])){
             $builder->like('mou_start_date',$data['year'],'after');
@@ -45,6 +45,20 @@ class MouModel extends Model
             $builder->where('business_id in ('.implode(',',$data['business_id']).')');
         }else if(isset($data['keyword'])){
             $builder->like('mou_sign_place',$data['keyword']);
+        }
+        if(!empty($data['active'])){
+            $ref_date=date('Y-m-d');
+            if($data['active']=='Y'){
+                $builder->where('(mou_end_date>"'.$ref_date.'" OR no_expire="Y")');
+            }else if($data['active']=='C'){
+                $ref_start_date=date('Y-m-d');
+                $ref_end_date=$data['ref_date'];
+                $builder->where('mou_end_date>"',$ref_start_date);
+                $builder->where('mou_end_date<"',$ref_end_date);
+                $builder->where('no_expire','N');
+            }else if($data['active']=='N'){
+                $builder->where('(mou_end_date<="'.$ref_date.'" AND no_expire="N")');
+            }
         }
 
         if(!empty($data['orderBy'])){
