@@ -14,7 +14,7 @@
 				<div class="info-box-content">
 				<span class="info-box-text">MOU ทั้งหมด</span>
 				<span class="info-box-number"><?php print number_format($mouCountAll); ?> ฉบับ</span>
-				<span class="info-box-text"></span>
+				<span class="info-box-text">&nbsp;</span>
 				</div>
 		  </div>
 				<a href="<?php print site_url('public/dashboard/mou?s=all'); ?>">ดูรายละเอียด..</a>
@@ -27,7 +27,7 @@
 				<div class="info-box-content">
 				<span class="info-box-text">MOU ที่มีผล</span>
 				<span class="info-box-number"><?php print number_format($mouCountActive); ?> ฉบับ</span>
-				<span class="info-box-text"></span>
+				<span class="info-box-text">&nbsp;</span>
 				</div>
 		  </div>
 				<a href="<?php print site_url('public/dashboard/mou?s=aval'); ?>">ดูรายละเอียด..</a>
@@ -53,7 +53,7 @@
 				<div class="info-box-content">
 				<span class="info-box-text">MOU ที่หมดอายุ</span>
 				<span class="info-box-number"><?php print number_format($mouCountAll-$mouCountActive); ?> ฉบับ</span>
-				<span class="info-box-text"></span>
+				<span class="info-box-text">&nbsp;</span>
 				</div>
 		  </div>
 				<a href="<?php print site_url('public/dashboard/mou?s=exp'); ?>">ดูรายละเอียด..</a>
