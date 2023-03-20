@@ -28,7 +28,7 @@ helper('org');
 				</thead>
 				<tbody>
 					<?php 
-					foreach($resultMOU['mou'] as $mou){
+					if(!empty($resultMOU['mou']))foreach($resultMOU['mou'] as $mou){
 					?>
 					<tr>
 						<td>
