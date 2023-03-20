@@ -116,10 +116,10 @@
 						</a>
 						</td>
 						<td>
-						<?php print $mou->mou_date; ?>
+						<?php print dateThai($mou->mou_date); ?>
 						</td>
 						<td>
-						<?php print $mou->mou_end_date; ?>
+						<?php print dateThai($mou->mou_end_date); ?>
 						</td>
 						<td>
 							<?php 
