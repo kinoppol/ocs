@@ -23,7 +23,7 @@
 		<div class="col-md-3">
 		<div class="card">
 				<div class="info-box">
-				<span class="info-box-icon bg-green"><i class="fa fa-book"></i></span>
+				<span class="info-box-icon bg-green"><i class="fa fa-calendar-check-o"></i></span>
 				<div class="info-box-content">
 				<span class="info-box-text">MOU ที่มีผล</span>
 				<span class="info-box-number"><?php print number_format($mouCountActive); ?> ฉบับ</span>
@@ -36,7 +36,7 @@
 		<div class="col-md-3">
 		<div class="card">
 				<div class="info-box">
-				<span class="info-box-icon bg-yellow"><i class="fa fa-book"></i></span>
+				<span class="info-box-icon bg-yellow"><i class="fa fa-hourglass-half"></i></span>
 				<div class="info-box-content">
 				<span class="info-box-text">MOU ใกล้หมดอายุ</span>
 				<span class="info-box-number"><?php print number_format($mouCountCloseToExpiration-($mouCountAll-$mouCountActive)); ?> ฉบับ</span>
@@ -49,7 +49,7 @@
 		<div class="col-md-3">
 		<div class="card">
 				<div class="info-box">
-				<span class="info-box-icon bg-red"><i class="fa fa-book"></i></span>
+				<span class="info-box-icon bg-red"><i class="fa fa-calendar-times-o"></i></span>
 				<div class="info-box-content">
 				<span class="info-box-text">MOU ที่หมดอายุ</span>
 				<span class="info-box-number"><?php print number_format($mouCountAll-$mouCountActive); ?> ฉบับ</span>
