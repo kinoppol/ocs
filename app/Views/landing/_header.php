@@ -18,6 +18,9 @@
         <!-- main css -->
         <link rel="stylesheet" href="css/style.css">
 		<link rel="stylesheet" href="css/responsive.css">
+
+
+		<link href="<?php print site_url();?>template/adminbsb/plugins/jquery-datatable/skin/bootstrap/css/dataTables.bootstrap.css" rel="stylesheet">
 		<script>
 			function order(){
 				alert("นักเรียน-นักศึกษา ครู-อาจารย์ และบุคลากรทางการศึกษา ติดต่อขอใช้บริการได้ที่งานศูนย์ข้อมูลสารสนเทศ หรือที่ศูนย์บางนาอินเตอร์เน็ต");

@@ -58,7 +58,7 @@ $exp_chk='';
 					print "<div align=\"center\"><h3>โปรดระบุคำค้น แล้วกดปุ่มค้นหา</h3></div>";
 				}else{
 					print $mouTable;
-					print_r($resultMOU);
+					//print_r($resultMOU);
 				}
 			?>
 		</div>
