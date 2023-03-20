@@ -43,6 +43,8 @@ class MouModel extends Model
             $builder->where('school_id in ('.implode(',',$data['school_id']).')');
         }else if(isset($data['business_id'])&&is_array($data['business_id'])){
             $builder->where('business_id in ('.implode(',',$data['business_id']).')');
+        }else if(isset($data['keyword'])){
+            $builder->like('mou_sign_place',$data['keyword']);
         }
 
         if(!empty($data['orderBy'])){

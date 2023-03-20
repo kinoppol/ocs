@@ -26,7 +26,12 @@ class Dashboard extends BaseController
 	}
 	public function mou()
 	{
-
+		$detail=array(
+			'keyword'=>$_POST['q'],
+		);
+		$data=array(
+			'resultMOU'=>$MouModel->getMou($detail),
+		);
         helper('system');
 		$data=array(
 			'title'=>'ข้อมูลการลงนามความร่วมมือ',
