@@ -13,7 +13,7 @@
 				<span class="info-box-icon bg-aqua"><i class="fa fa-book"></i></span>
 				<div class="info-box-content">
 				<span class="info-box-text">MOU ทั้งหมด</span>
-				<span class="info-box-number"><?php print $mouCountAll; ?></span>
+				<span class="info-box-number"><?php print number_format($mouCountAll); ?></span>
 				</div>
 		  </div>
 				<a href="<?php print site_url('public/dashboard/mou?s=all'); ?>">ดูรายละเอียด..</a>
@@ -25,7 +25,7 @@
 				<span class="info-box-icon bg-green"><i class="fa fa-book"></i></span>
 				<div class="info-box-content">
 				<span class="info-box-text">MOU ที่มีผล</span>
-				<span class="info-box-number">810</span>
+				<span class="info-box-number"><?php print number_format($mouCountActive); ?></span>
 				</div>
 		  </div>
 				<a href="<?php print site_url('public/dashboard/mou?s=aval'); ?>">ดูรายละเอียด..</a>
@@ -49,7 +49,7 @@
 				<span class="info-box-icon bg-red"><i class="fa fa-book"></i></span>
 				<div class="info-box-content">
 				<span class="info-box-text">MOU ที่หมดอายุ</span>
-				<span class="info-box-number">290</span>
+				<span class="info-box-number"><?php print number_format($mouCountAll-$mouCountActive); ?></span>
 				</div>
 		  </div>
 				<a href="<?php print site_url('public/dashboard/mou?s=exp'); ?>">ดูรายละเอียด..</a>
