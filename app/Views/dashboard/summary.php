@@ -123,7 +123,7 @@ helper('thai');
 						<?php print dateThai($mou->mou_date,false,false,true); ?>
 						</td>
 						<td>
-						<?php print dateThai($mou->mou_end_date,false,false,true)); ?>
+						<?php print dateThai($mou->mou_end_date,false,false,true); ?>
 						</td>
 						<td>
 							<?php 
