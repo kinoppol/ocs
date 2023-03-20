@@ -142,7 +142,7 @@
 					</p>
 				</div>
 				<div class="card-footer">
-					<a href="#">ดูรายละเอียด</a>
+					<a href="<?php print site_url('public/dashboard/mou?orderBy=mou_date desc'); ?>">ดูเพิ่มเติม</a>
 				</div>
 			</div>
 		</div>
