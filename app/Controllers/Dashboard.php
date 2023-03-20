@@ -34,8 +34,6 @@ class Dashboard extends BaseController
 			$detail=array(
 				'keyword'=>!empty($_POST['q'])?$_POST['q']:'',
 			);
-		}else{
-			$detail=array();
 		}
 		if(!empty($_POST['s'])){
 			if($_POST['s']=='aval'){
@@ -46,9 +44,15 @@ class Dashboard extends BaseController
 				$detail=array(['active'=>'N']);
 			}
 		}
-			$data=array(
-				'resultMOU'=>$MouModel->getMou($detail),
-			);
+			if(!empty($detail)){
+				$data=array(
+					'resultMOU'=>$MouModel->getMou($detail),
+				);
+			}else{
+				$data=array(
+					'resultMOU'=>'',
+				);
+			}
 			$data=array(
 				//'resultMOU'=>$MouModel->getMou($detail),
 				'mouTable'=>view('dashboard/mouTable',$data),
