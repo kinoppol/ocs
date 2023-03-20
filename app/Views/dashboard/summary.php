@@ -111,7 +111,7 @@
 							?>
 						</td>
 						<td>
-						<?php print $mou->mou_place; ?>
+						<?php print $mou->mou_sign_place; ?>
 						</td>
 						<td>
 						<?php print $mou->mou_date; ?>
