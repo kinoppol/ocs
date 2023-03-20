@@ -36,11 +36,11 @@ class Dashboard extends BaseController
 			);
 		}
 		if(!empty($_POST['s'])){
-			if($_POST['s']=='aval'){
+			if($_GET['s']=='aval'){
 				$detail=array(['active'=>'Y']);
-			}else if($_POST['s']=='mexp'){
+			}else if($_GET['s']=='mexp'){
 				$detail=array(['active'=>'C','ref_date'=>date('Y-m-d',strtotime('+90 days'))]);
-			}else if($_POST['s']=='exp'){
+			}else if($_GET['s']=='exp'){
 				$detail=array(['active'=>'N']);
 			}
 		}
