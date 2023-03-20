@@ -37,7 +37,7 @@ class Dashboard extends BaseController
 		$data=array(
 			'title'=>'ข้อมูลการลงนามความร่วมมือ',
 			'mainMenu'=>'',
-			'content'=>view('dashboard/mou'),
+			'content'=>view('dashboard/mou',$data),
 			'notification'=>'',
 			'task'=>'',
 		);
