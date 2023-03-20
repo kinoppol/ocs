@@ -19,7 +19,6 @@
         <link rel="stylesheet" href="<?php print site_url("landing/css/style.css"); ?>">
 		<link rel="stylesheet" href="<?php print site_url("landing/css/responsive.css"); ?>">
 
-<link href="<?php print site_url();?>template/adminbsb/plugins/jquery-datatable/skin/bootstrap/css/dataTables.bootstrap.css" rel="stylesheet">
 		<link rel="stylesheet" href="https://adminlte.io/themes/AdminLTE/dist/css/AdminLTE.min.css">
 
 		
