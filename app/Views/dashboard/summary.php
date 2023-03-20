@@ -97,7 +97,11 @@
 							<?php print $mou->mou_id; ?>
 						</td>
 						<td>
-							TB - Monthly
+							<?php 
+							print $lastestMOU['school'][$mou->school_id];
+							print " และ ";
+							print $lastestMOU['business'][$mou->business_id];
+							?>
 						</td>
 						<td>
 						<?php print $mou->mou_date; ?>
