@@ -21,6 +21,8 @@
 
 		<link rel="stylesheet" href="https://adminlte.io/themes/AdminLTE/dist/css/AdminLTE.min.css">
 
+    <!-- JQuery DataTable Css -->
+    <link href="<?php print site_url();?>template/adminbsb/plugins/jquery-datatable/skin/bootstrap/css/dataTables.bootstrap.css" rel="stylesheet">
 		
 		<script>
 			function order(){
