@@ -122,7 +122,13 @@
 						<?php print $mou->mou_end_date; ?>
 						</td>
 						<td>
+							<?php 
+							if(!empty($mou->mou_file)){
+							?>
 							<a href="<?php print site_url().'docs/mou/'.$mou->mou_file; ?>" class="btn btn-primary" target="_blank"><i class="fa fa-book"></i> MOU</a>
+							<?php
+							}
+							?>
 						</td>
 					</tr>
 					<?php 
