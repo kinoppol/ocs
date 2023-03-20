@@ -8,12 +8,15 @@ class Dashboard extends BaseController
 	{
 
         helper('system');
+		$MouModel = model('App\Models\MouModel');
 		$data=array(
 			'title'=>'ภาพรวม',
 			'mainMenu'=>'',
 			'content'=>view('dashboard/summary'),
 			'notification'=>'',
 			'task'=>'',
+			'mouCountAll'=>$MouModel->getMouCount(['active'=>'Y']),
+			'mouCountActive'=>$MouModel->getMouCount(['active'=>'Y']),
 		);
 		return view('landing/_template',$data);
 	}

@@ -13,7 +13,7 @@
 				<span class="info-box-icon bg-aqua"><i class="fa fa-book"></i></span>
 				<div class="info-box-content">
 				<span class="info-box-text">MOU ทั้งหมด</span>
-				<span class="info-box-number">1,410</span>
+				<span class="info-box-number"><?php print $mouCountAll; ?></span>
 				</div>
 		  </div>
 				<a href="<?php print site_url('public/dashboard/mou?s=all'); ?>">ดูรายละเอียด..</a>
