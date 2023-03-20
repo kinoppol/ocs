@@ -100,7 +100,7 @@
 							<?php 
 							print $lastestMOU['school'][$mou->school_id];
 							print " และ ";
-							print $lastestMOU['business'][$mou->business_id];
+							//print $lastestMOU['business'][$mou->business_id];
 							?>
 						</td>
 						<td>
