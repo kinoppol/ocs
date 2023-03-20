@@ -64,10 +64,56 @@
 		<div class="col-md-12">
 			<div class="card">
 				<h5 class="card-header">
-					การลงนามความร่วมมือ
+					การลงนามความร่วมมือล่าสุด
 				</h5>
 				<div class="card-body">
 					<p class="card-text">
+					<table class="table">
+				<thead>
+					<tr>
+						<th>
+							#
+						</th>
+						<th>
+							MOU ระหว่าง
+						</th>
+						<th>
+							วันที่ลงนาม
+						</th>
+						<th>
+							วันที่สิ้นสุด
+						</th>
+						<th>
+							ดูเอกสาร
+						</th>
+					</tr>
+				</thead>
+				<tbody>
+					<?php 
+					foreach($lastestMOU['mou'] as $mou){
+					?>
+					<tr>
+						<td>
+							<?php print $mou['mou_id'] ?>
+						</td>
+						<td>
+							TB - Monthly
+						</td>
+						<td>
+						<?php print $mou['mou_date'] ?>
+						</td>
+						<td>
+						<?php print $mou['mou_end_date'] ?>
+						</td>
+						<td>
+							<a href="<?php print site_url('public/pdf/'.$mou['mou_file'],true); ?>" class="btn btn-primary" target="_blank"><i class="fa fa-book"></i> MOU</a>
+						</td>
+					</tr>
+					<?php 
+					}
+					?>
+				</tbody>
+			</table>
 						<?php
 						print_r($lastestMOU);
 						?>
