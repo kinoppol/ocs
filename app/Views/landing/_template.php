@@ -5,6 +5,8 @@
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
         <link rel="icon" href="<?php print site_url("landing/img/favicon.png"); ?>" type="image/png">
+
+		<link href="<?php print site_url();?>template/adminbsb/plugins/jquery-datatable/skin/bootstrap/css/dataTables.bootstrap.css" rel="stylesheet">
         <title>OCS:ระบบฐานข้อมูลสำนักความร่วมมือ</title>
         <!-- Bootstrap CSS -->
         <link rel="stylesheet" href="<?php print site_url("landing/css/bootstrap.css"); ?>">
@@ -20,7 +22,6 @@
 		<link rel="stylesheet" href="<?php print site_url("landing/css/responsive.css"); ?>">
 		<link rel="stylesheet" href="https://adminlte.io/themes/AdminLTE/dist/css/AdminLTE.min.css">
 
-		<link href="<?php print site_url();?>template/adminbsb/plugins/jquery-datatable/skin/bootstrap/css/dataTables.bootstrap.css" rel="stylesheet">
 		
 		<script>
 			function order(){
