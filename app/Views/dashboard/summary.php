@@ -111,7 +111,9 @@
 							?>
 						</td>
 						<td>
+						<a href="https://www.google.co.th/maps/search/<?php print $mou->mou_sign_place; ?>" target="_blank">
 						<?php print $mou->mou_sign_place; ?>
+						</a>
 						</td>
 						<td>
 						<?php print $mou->mou_date; ?>
