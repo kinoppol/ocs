@@ -19,7 +19,7 @@
         <link rel="stylesheet" href="<?php print site_url("landing/css/style.css"); ?>">
 		<link rel="stylesheet" href="<?php print site_url("landing/css/responsive.css"); ?>">
 
-		<!-- <link rel="stylesheet" href="https://adminlte.io/themes/AdminLTE/dist/css/AdminLTE.min.css"> -->
+		<link rel="stylesheet" href="https://adminlte.io/themes/AdminLTE/dist/css/AdminLTE.min.css">
 
     <!-- JQuery DataTable Css -->
     <link href="<?php print site_url();?>template/adminbsb/plugins/jquery-datatable/skin/bootstrap/css/dataTables.bootstrap.css" rel="stylesheet">
@@ -175,9 +175,10 @@
         <script src="<?php print site_url("landing/js/theme.js"); ?>"></script>
 
 		    <!-- Jquery DataTable Plugin Js -->
-	<script src="<?php print site_url();?>template/adminbsb/plugins/jquery-datatable/jquery.dataTables.js"></script><!--
-    <script src="<?php print site_url();?>template/adminbsb/plugins/jquery-datatable/skin/bootstrap/js/dataTables.bootstrap.js"></script>
+	<script src="<?php print site_url();?>template/adminbsb/plugins/jquery-datatable/jquery.dataTables.js"></script>
     <script src="<?php print site_url();?>template/adminbsb/plugins/jquery-datatable/extensions/export/dataTables.buttons.min.js"></script>
+	<!--
+    <script src="<?php print site_url();?>template/adminbsb/plugins/jquery-datatable/skin/bootstrap/js/dataTables.bootstrap.js"></script>
     <script src="<?php print site_url();?>template/adminbsb/plugins/jquery-datatable/extensions/export/buttons.flash.min.js"></script>
     <script src="<?php print site_url();?>template/adminbsb/plugins/jquery-datatable/extensions/export/jszip.min.js"></script>
     <script src="<?php print site_url();?>template/adminbsb/plugins/jquery-datatable/extensions/export/pdfmake.min.js"></script>
@@ -195,7 +196,13 @@
                     "sInfo": "แสดงรายการที่ &nbsp; _START_ &nbsp;ถึง&nbsp; _END_ &nbsp;จากทั้งหมด&nbsp; _TOTAL_ &nbsp;รายการ",
                     "sInfoEmpty": "แสดงรายการที่&nbsp; 0 &nbsp;ถึงรายการที่&nbsp; 0 &nbsp;จากทั้งหมด&nbsp; 0 &nbsp;รายการ",
                     "sInfoFiltered": "(จากรายการทั้งหมด&nbsp; _MAX_ &nbsp;รายการ)",
-                    "sSearch": "<i class=\"material-icons\">filter_list</i> กรอง :"
+                    "sSearch": "<i class=\"material-icons\">filter_list</i> กรอง :",
+					"oPaginate": {
+                            "sFirst": "เริ่มต้น",
+                            "sPrevious": "ก่อนหน้า",
+                            "sNext": "ถัดไป",
+                            "sLast": "สุดท้าย"
+              		}
                                   }
                 } );
 			}
