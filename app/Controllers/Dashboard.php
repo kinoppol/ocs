@@ -10,7 +10,7 @@ class Dashboard extends BaseController
         helper('system');
 		$MouModel = model('App\Models\MouModel');
 		$data=array(
-			'mouCountAll'=>$MouModel->getMouCount(['active'=>'Y']),
+			'mouCountAll'=>$MouModel->getMouCount(),
 			'mouCountActive'=>$MouModel->getMouCount(['active'=>'Y']),
 		);
 		$data=array(
