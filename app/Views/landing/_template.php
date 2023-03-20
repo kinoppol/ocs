@@ -23,6 +23,8 @@
 
     <!-- JQuery DataTable Css -->
     <link href="<?php print site_url();?>template/adminbsb/plugins/jquery-datatable/skin/bootstrap/css/dataTables.bootstrap.css" rel="stylesheet">
+
+	<link href="https://www.okler.net/previews/porto-admin/4.0.0/vendor/datatables/media/css/dataTables.bootstrap5.css" rel="stylesheet">
 		
 		<script>
 			function order(){
@@ -176,8 +178,7 @@
 
 		    <!-- Jquery DataTable Plugin Js -->
 	<script src="<?php print site_url();?>template/adminbsb/plugins/jquery-datatable/jquery.dataTables.js"></script>
-    <script src="<?php print site_url();?>template/adminbsb/plugins/jquery-datatable/extensions/export/dataTables.buttons.min.js"></script>
-	<!--
+    <!--<script src="<?php print site_url();?>template/adminbsb/plugins/jquery-datatable/extensions/export/dataTables.buttons.min.js"></script>
     <script src="<?php print site_url();?>template/adminbsb/plugins/jquery-datatable/skin/bootstrap/js/dataTables.bootstrap.js"></script>
     <script src="<?php print site_url();?>template/adminbsb/plugins/jquery-datatable/extensions/export/buttons.flash.min.js"></script>
     <script src="<?php print site_url();?>template/adminbsb/plugins/jquery-datatable/extensions/export/jszip.min.js"></script>
@@ -189,7 +190,22 @@
 <script>
 	$(function () {
     //$('.js-example-basic-single').select2();
-    $('.dataTable').DataTable(  );
+    $('.dataTable').DataTable( {
+                    "oLanguage": {
+                    "sLengthMenu": "แสดง&nbsp; _MENU_ &nbsp;รายการ ต่อหน้า",
+                    "sZeroRecords": "ไม่พบข้อมูลที่ค้นหา",
+                    "sInfo": "แสดงรายการที่ &nbsp; _START_ &nbsp;ถึง&nbsp; _END_ &nbsp;จากทั้งหมด&nbsp; _TOTAL_ &nbsp;รายการ",
+                    "sInfoEmpty": "แสดงรายการที่&nbsp; 0 &nbsp;ถึงรายการที่&nbsp; 0 &nbsp;จากทั้งหมด&nbsp; 0 &nbsp;รายการ",
+                    "sInfoFiltered": "(จากรายการทั้งหมด&nbsp; _MAX_ &nbsp;รายการ)",
+                    "sSearch": "<i class=\"material-icons\">filter_list</i> กรอง :",
+					"oPaginate": {
+                            "sFirst": "เริ่มต้น",
+                            "sPrevious": "ก่อนหน้า",
+                            "sNext": "ถัดไป",
+                            "sLast": "สุดท้าย"
+              		}
+                                  }
+                } );
 			}
 	);
 			</script>
