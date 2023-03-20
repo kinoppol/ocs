@@ -120,10 +120,10 @@ helper('thai');
 						</a>
 						</td>
 						<td>
-						<?php print dateThai($mou->mou_date); ?>
+						<?php print dateThai($mou->mou_date,false,false,true); ?>
 						</td>
 						<td>
-						<?php print dateThai($mou->mou_end_date); ?>
+						<?php print dateThai($mou->mou_end_date,false,false,true)); ?>
 						</td>
 						<td>
 							<?php 
