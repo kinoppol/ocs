@@ -1,6 +1,7 @@
 <?php 
 
 helper('thai');
+helper('org');
 ?>
 <table class="table">
 				<thead>
@@ -36,7 +37,11 @@ helper('thai');
 						<td>
 							<?php 
 							if(mb_strlen($mou->school_id)<10){
-								print $resultMOU['gov'][$mou->school_id];
+                                if(!empty($resultMOU['gov'][$mou->school_id])){
+								    print $resultMOU['gov'][$mou->school_id];
+                                }else{
+                                    print org_name($mou->school_id);
+                                }
 							}else{
 								print $resultMOU['school'][$mou->school_id];
 							}
