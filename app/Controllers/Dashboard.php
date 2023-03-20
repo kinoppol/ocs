@@ -8,6 +8,7 @@ class Dashboard extends BaseController
 	{
 
         helper('system');
+        helper('thai');
 		$MouModel = model('App\Models\MouModel');
 		$data=array(
 			'mouCountAll'=>$MouModel->getMouCount(),
