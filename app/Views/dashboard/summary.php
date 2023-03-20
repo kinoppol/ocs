@@ -114,7 +114,7 @@
 						<?php print $mou->mou_end_date; ?>
 						</td>
 						<td>
-							<a href="<?php print site_url('docs/mou/'.$mou->mou_file,true); ?>" class="btn btn-primary" target="_blank"><i class="fa fa-book"></i> MOU</a>
+							<a href="<?php print site_url().'docs/mou/'.$mou->mou_file; ?>" class="btn btn-primary" target="_blank"><i class="fa fa-book"></i> MOU</a>
 						</td>
 					</tr>
 					<?php 
