@@ -31,7 +31,7 @@ class Dashboard extends BaseController
 	{
 		$MouModel = model('App\Models\MouModel');
 		$detail=array(
-			'keyword'=>$_POST['q'],
+			'keyword'=>!empty($_POST['q'])?$_POST['q']:'',
 		);
 		$data=array(
 			'resultMOU'=>$MouModel->getMou($detail),
