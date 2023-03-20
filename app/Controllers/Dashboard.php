@@ -47,11 +47,11 @@ class Dashboard extends BaseController
 		}
 		
 			if(!empty($detail)){
-				print_r($detail);
+				//print_r($detail);
 				$data=array(
 					'resultMOU'=>$MouModel->getMou($detail),
 				);
-				print_r($this->db->last_query()); 
+			
 			}else{
 				$data=array(
 					'resultMOU'=>'',
