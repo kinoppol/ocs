@@ -94,19 +94,19 @@
 					?>
 					<tr>
 						<td>
-							<?php print $mou['mou_id'] ?>
+							<?php print $mou->mou_id; ?>
 						</td>
 						<td>
 							TB - Monthly
 						</td>
 						<td>
-						<?php print $mou['mou_date'] ?>
+						<?php print $mou->mou_date; ?>
 						</td>
 						<td>
-						<?php print $mou['mou_end_date'] ?>
+						<?php print $mou->mou_end_date; ?>
 						</td>
 						<td>
-							<a href="<?php print site_url('public/pdf/'.$mou['mou_file'],true); ?>" class="btn btn-primary" target="_blank"><i class="fa fa-book"></i> MOU</a>
+							<a href="<?php print site_url('public/pdf/'.$mou->mou_file,true); ?>" class="btn btn-primary" target="_blank"><i class="fa fa-book"></i> MOU</a>
 						</td>
 					</tr>
 					<?php 
