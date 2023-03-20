@@ -12,6 +12,10 @@ class MouModel extends Model
         $builder->select('count(*) as c');
         if(isset($data['org_code']))$builder->where('school_id',$data['org_code']);
         if(isset($data['active'])){
+            $ref_date=date('Y-m-d');
+            if(!empty($data['ref_date'])){
+                $ref_date=$data['ref_date'];
+            }
             $builder->where('(mou_end_date>="'.date('Y-m-d').'" OR no_expire="Y")');
         }
         if(isset($data['year'])){
