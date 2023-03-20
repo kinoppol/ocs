@@ -98,7 +98,11 @@
 						</td>
 						<td>
 							<?php 
-							print $lastestMOU['school'][$mou->school_id];
+							if(mb_strlen($mou->school_id)<10){
+								print $lastestMOU['gov'][$mou->school_id];
+							}else{
+								print $lastestMOU['school'][$mou->school_id];
+							}
 							print " และ ";
 							//print $lastestMOU['business'][$mou->business_id];
 							?>
