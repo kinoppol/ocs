@@ -16,7 +16,7 @@ class MouModel extends Model
             if(!empty($data['ref_date'])){
                 $ref_date=$data['ref_date'];
             }
-            $builder->where('(mou_end_date>="'.date('Y-m-d').'" OR no_expire="Y")');
+            $builder->where('(mou_end_date>="'.$ref_date.'" OR no_expire="Y")');
         }
         if(isset($data['year'])){
             $builder->like('mou_start_date',$data['year'],'after');
