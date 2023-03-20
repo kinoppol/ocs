@@ -45,9 +45,9 @@ class Dashboard extends BaseController
 			}
 		}
 			if(!empty($detail)){
-				print_r($detail);
+				//print_r($detail);
 				$data=array(
-					'resultMOU'=>''//$MouModel->getMou($detail),
+					'resultMOU'=>$MouModel->getMou($detail),
 				);
 			}else{
 				$data=array(

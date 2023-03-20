@@ -57,7 +57,8 @@ class MouModel extends Model
                 $builder->where('mou_end_date<"',$ref_end_date);
                 $builder->where('no_expire','N');
             }else if($data['active']=='N'){
-                $builder->where('(mou_end_date<="'.$ref_date.'" AND no_expire="N")');
+                $builder->where('mou_end_date<="',$ref_date);
+                $builder->where('no_expire','N');
             }
         }
 
