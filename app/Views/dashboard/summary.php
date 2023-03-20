@@ -78,6 +78,9 @@
 							MOU ระหว่าง
 						</th>
 						<th>
+							สถานที่ลงนาม
+						</th>
+						<th>
 							วันที่ลงนาม
 						</th>
 						<th>
@@ -106,6 +109,9 @@
 							print " และ ";
 								print $lastestMOU['business'][$mou->business_id]['business_name'];
 							?>
+						</td>
+						<td>
+						<?php print $mou->mou_place; ?>
 						</td>
 						<td>
 						<?php print $mou->mou_date; ?>
