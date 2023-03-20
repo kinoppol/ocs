@@ -23,7 +23,7 @@ $exp_chk='';
 			</h3>
 			<div class="row">
 				<div class="col-md-10">
-                <input type="text" class="form-control" id="q" name="q" />
+                <input type="text" class="form-control" id="q" name="q" <?php if(!empty($_POST['q'])) print ' value="'.$_POST['q'].'"' ?>/>
 				<div class="checkbox">
 					<label>
 						 <input type="checkbox" name="aval" value="show"<?php print $aval_chk; ?>/> แสดง MOU ที่มีผล
@@ -57,49 +57,8 @@ $exp_chk='';
 				if(empty($_POST['q'])&&empty($_GET['a'])){
 					print "<div align=\"center\"><h3>โปรดระบุคำค้น แล้วกดปุ่มค้นหา</h3></div>";
 				}else{
+					print $mouTable;
 					print_r($resultMOU);
-			?>
-			<table class="table">
-				<thead>
-					<tr>
-						<th>
-							#
-						</th>
-						<th>
-							MOU ระหว่าง
-						</th>
-						<th>
-							วันที่ลงนาม
-						</th>
-						<th>
-							วันที่สิ้นสุด
-						</th>
-						<th>
-							ดูเอกสาร
-						</th>
-					</tr>
-				</thead>
-				<tbody>
-					<tr>
-						<td>
-							1
-						</td>
-						<td>
-							TB - Monthly
-						</td>
-						<td>
-							01/04/2012
-						</td>
-						<td>
-							01/04/2015
-						</td>
-						<td>
-							<a href="#" class="btn btn-primary"><i class="fa fa-book"></i> MOU</a>
-						</td>
-					</tr>
-				</tbody>
-			</table>
-			<?php 
 				}
 			?>
 		</div>

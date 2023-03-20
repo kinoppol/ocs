@@ -10,10 +10,13 @@ class Dashboard extends BaseController
         helper('system');
 		$MouModel = model('App\Models\MouModel');
 		$data=array(
+			'resultMOU'=>$MouModel->getMou(['limit'=>10,'orderBy'=>'mou_date desc']),
+		);
+		$data=array(
 			'mouCountAll'=>$MouModel->getMouCount(),
 			'mouCountActive'=>$MouModel->getMouCount(['active'=>'Y']),
 			'mouCountActiveOver90Days'=>$MouModel->getMouCount(['active'=>'Y','ref_date'=>date('Y-m-d',strtotime('+90 days'))]),
-			'lastestMOU'=>$MouModel->getMou(['limit'=>10,'orderBy'=>'mou_date desc']),
+			'mouTable'=>view('dashboard/mouTable',$data),
 		);
 		$data=array(
 			'title'=>'ภาพรวม',
@@ -32,6 +35,10 @@ class Dashboard extends BaseController
 		);
 		$data=array(
 			'resultMOU'=>$MouModel->getMou($detail),
+		);
+		$data=array(
+			'resultMOU'=>$MouModel->getMou($detail),
+			'mouTable'=>view('dashboard/mouTable',$data),
 		);
         helper('system');
 		$data=array(
