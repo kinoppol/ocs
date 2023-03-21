@@ -4,7 +4,7 @@
     <meta http-equiv="content-type" content="text/html; charset=UTF-8">
     <title>Country Map Example</title>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.3/jquery.min.js"></script>
-    <script src="<?php print site_url();?>map/mapdata.js"></script>
+    <script src="<?php print site_url();?>map/mapdata.php"></script>
     <script src="<?php print site_url();?>map/countrymap.js"></script>
   </head>
   <body>
