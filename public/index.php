@@ -58,6 +58,7 @@ $allowNoneLoginUser=array(
     '/dashboard/school',
     '/dashboard/inv',
     '/dashboard/about'
+    '/dashboard/map'
 );
 if(!isset($_COOKIE['current_user'])) {
     if(!is_numeric(array_search($_SERVER['PATH_INFO'],$allowNoneLoginUser))){
