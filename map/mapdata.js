@@ -16,7 +16,7 @@ var simplemaps_countrymap_mapdata={
       all_states_zoomable: "yes",
       
       //Location defaults
-      location_description: "Location description",
+      location_description: "รายละเอียด",
       location_url: "",
       location_color: "#0fef72",
       location_opacity: 0.8,
@@ -386,7 +386,7 @@ var simplemaps_countrymap_mapdata={
       "0": {
         lat: "13.753979",
         lng: "100.501444",
-        name: "Bangkok"
+        name: "กรุงเทพ"
       }
     },
     labels: {},
