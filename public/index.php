@@ -57,7 +57,7 @@ $allowNoneLoginUser=array(
     '/dashboard/business',
     '/dashboard/school',
     '/dashboard/inv',
-    '/dashboard/about'
+    '/dashboard/about',
     '/dashboard/map'
 );
 if(!isset($_COOKIE['current_user'])) {
