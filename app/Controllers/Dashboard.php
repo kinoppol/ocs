@@ -123,4 +123,7 @@ class Dashboard extends BaseController
 		);
 		return view('landing/_template',$data);
 	}
+	public function map(){
+		return view('dashboard/map');
+	} 
 }
