@@ -88,7 +88,7 @@
 				</h5>
 				<div class="card-body">
 					<p class="card-text">
-					<div class="embed-responsive" style="--bs-aspect-ratio: 150%;">
+					<div class="embed-responsive embed-responsive-1by1">
   						<iframe class="embed-responsive-item" src="<?php print site_url('public/dashboard/map?disp=embed'); ?>"></iframe>
 					</div>
 					</p>
