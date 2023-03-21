@@ -1,13 +1,14 @@
-var simplemaps_countrymap_mapdata={
+<?php
+print 'var simplemaps_countrymap_mapdata={
     main_settings: {
      //General settings
-      width: "responsive", //'700' or 'responsive'
+      width: "responsive", //\'700\' or \'responsive\'
       background_color: "#FFFFFF",
       background_transparent: "yes",
-      border_color: "#ffffff",
+      border_color: "#000000",
       
       //State defaults
-      state_description: "State description",
+      state_description: "รายละเอียด",
       state_color: "#88A4BC",
       state_hover_color: "#3B729F",
       state_url: "",
@@ -74,19 +75,19 @@ var simplemaps_countrymap_mapdata={
     state_specific: {
       THA374: {
         color: "#00ff1c",
-        name: "Mae Hong Son"
+        name: "แม่ฮ่องสอน"
       },
       THA375: {
         color: "#00ff1c",
-        name: "Chumphon"
+        name: "ชุมพร"
       },
       THA376: {
         color: "#009911",
-        name: "Nakhon Si Thammarat"
+        name: "นครศรีธรรมราช"
       },
       THA377: {
         color: "#00ff1c",
-        name: "Phuket"
+        name: "ภูเก็ต"
       },
       THA378: {
         name: "Phangnga",
@@ -405,3 +406,5 @@ var simplemaps_countrymap_mapdata={
       }
     }
   };
+  ';
+  ?>
