@@ -61,7 +61,7 @@
 		</div>
 	</div>
 	<div class="row">
-		<div class="col-md-12">
+		<div class="col-md-6">
 			<div class="card">
 				<h5 class="card-header">
 					การลงนามความร่วมมือล่าสุด
@@ -77,6 +77,24 @@
 				</div>
 				<div class="card-footer">
 					<a href="<?php print site_url('public/dashboard/mou?orderBy=mou_date desc'); ?>">ดูเพิ่มเติม</a>
+				</div>
+			</div>
+		</div>
+
+		<div class="col-md-6">
+			<div class="card">
+				<h5 class="card-header">
+					แผนที่แสดงจำนวน MOU
+				</h5>
+				<div class="card-body">
+					<p class="card-text">
+					<div class="embed-responsive ">
+  						<iframe class="embed-responsive-item" src="<?php print site_url('public/dashboard/map?disp=embed'); ?>"></iframe>
+					</div>
+					</p>
+				</div>
+				<div class="card-footer">
+					<a href="<?php print site_url('public/dashboard/map'); ?>">ดูเพิ่มเติม</a>
 				</div>
 			</div>
 		</div>
