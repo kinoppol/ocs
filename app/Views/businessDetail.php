@@ -8,7 +8,7 @@
         300=>"มากกว่า 200 คน",
     );
     
-    if(empty($emp_num_group[$businessData->amount_emp])){
+    if(empty($businessData)||empty($emp_num_group[$businessData->amount_emp])){
         if($businessData->amount_emp<50)$businessData->amount_emp=50;
         else if($businessData->amount_emp<100)$businessData->amount_emp=100;
         else if($businessData->amount_emp<200)$businessData->amount_emp=200;
