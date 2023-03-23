@@ -38,7 +38,8 @@
             }
             if(empty($user['org_code'])){
                 $org_name='';
-            }
+            }else{
+
             if(!empty($schools[$user['org_code']])){
                 $org_name=$schools[$user['org_code']];
             }
@@ -53,6 +54,7 @@
                     '1300000000'=>'สำนักงานคณะกรรมการการอาชีวศึกษา'
                 );
                 $org_name=$org_n[$user['org_code']];
+            }
             }
             if(empty($org_name)){
                 $org_name=$user['org_code'];
