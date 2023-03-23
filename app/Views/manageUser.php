@@ -40,10 +40,10 @@
                 $org_name=$schools[$user['org_code']];
             }
             if(empty($org_name)){
-                $org_name=$govs[$user['org_code']];
+                if(!empty($govs[$user['org_code']])) $org_name=$govs[$user['org_code']];
             }
             if(empty($org_name)){
-                $org_name=$institutes[$user['org_code']];
+                if(!empty($institutes[$user['org_code']])) $org_name=$institutes[$user['org_code']];
             }
             if(empty($org_name)){
                 $org_n=array(
