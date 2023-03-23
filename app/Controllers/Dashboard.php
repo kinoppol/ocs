@@ -139,6 +139,7 @@ class Dashboard extends BaseController
 		$ProvinceModel = model('App\Models\ProvinceModel');
 		$data=array(
 			'provinces'=>$ProvinceModel->getProvince(),
+			'mou'=>$ProvinceModel->getProvinceMouCount(),
 		);
 		return view('dashboard/mapdata',$data);
 	}

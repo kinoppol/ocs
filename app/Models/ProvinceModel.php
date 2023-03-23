@@ -11,4 +11,15 @@ class SummaryModel extends Model
         $data=$builder->get()->getResult();
         return $data;
     }
+    public function getProvinceMouCount($by='school'){
+        $db = \Config\Database::connect();
+        $builder = $db->table($by);
+        $builder->select('mapcode as p, count(*) as c');
+        $builder->join('mou','mou.school_id=school.school_id');
+        $builder->join('data_province','data_province.province_code=school.province_id');
+        $builder->groupBy('p');
+        $data=$builder->get()->getResult();
+        return $data;
+    }
+    
 }
