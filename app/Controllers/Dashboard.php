@@ -131,7 +131,12 @@ class Dashboard extends BaseController
 		return view('landing/_template',$data);
 	}
 	public function map(){
-		return view('dashboard/map');
+		
+		$ProvinceModel = model('App\Models\ProvinceModel');
+		$data=array(
+			'mou'=>$ProvinceModel->getProvinceMouCount(),
+		);
+		return view('dashboard/map',$data);
 	} 
 	public function mapdata()
 	{

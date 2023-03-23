@@ -11,7 +11,7 @@ $province_str='';
 foreach($provinces as $p){
     if(!empty($province_str))$province_str.=",\n";
     $province_str.=$p->mapcode.': {
-        color: "'.mapPercentageToColor($mc[$p->mapcode]/$max_mou*100).'",
+        color: "'.mapPercentageToGreen($mc[$p->mapcode]/$max_mou*100).'",
         name: "'.$p->province_name.'",
         description: "'.$mc[$p->mapcode].'"
       }';

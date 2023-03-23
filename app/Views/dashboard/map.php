@@ -1,3 +1,13 @@
+<?php
+
+helper('color');
+$mc=array();
+foreach($mou as $m){
+  $mc[$m->p]=$m->c;
+}
+$max_mou=max($mc);
+$half=round($max_mou/2);
+?>
 <!DOCTYPE html>
 <html lang="en">
   <head>
@@ -9,6 +19,10 @@
   </head>
   <body>
     <div id="map"></div>
+    <mark style="background-color:#ffffff;">MOU 0 ฉบับ</mark>
+    
+    <mark style="background-color:<?php print mapPercentageToGreen($half/$max_mou*100); ?>;">MOU <?php print $half; ?> ฉบับ</mark>
+    <mark style="background-color:<?php print mapPercentageToGreen(100); ?>">MOU <?php print $max_mou; ?> ฉบับ</mark>
     <style type="text/css">
 .legend{color: black; width: 100%px; font-family: arial; font-size: 14px;}    
 .legend_color {display: table; width: 100%; background: white; list-style: none; margin: 0px; padding: 0px; }
