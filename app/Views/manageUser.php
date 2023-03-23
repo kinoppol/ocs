@@ -57,7 +57,8 @@
             }
             }
             if(empty($org_name)){
-                $org_name=$user['org_code'];
+                if(!empty($user['org_code']))$org_name=$user['org_code'];
+                else $org_name='';
             }
         $userRows[]=array(
             $user['user_id'],
