@@ -48,9 +48,16 @@ class Dashboard extends BaseController
 		
 			if(!empty($detail)){
 				//print_r($detail);
-				$data=array(
-					'resultMOU'=>$MouModel->getMou($detail),
-				);
+				if($detail['active']=='Y'&&empty($_POST['q'])){
+
+					$data=array(
+						'resultMOU'=>'',
+					);
+				}else{
+					$data=array(
+						'resultMOU'=>$MouModel->getMou($detail),
+					);
+				}
 			
 			}else{
 				$data=array(
@@ -126,4 +133,13 @@ class Dashboard extends BaseController
 	public function map(){
 		return view('dashboard/map');
 	} 
+	public function mapdata()
+	{
+		
+		$ProvinceModel = model('App\Models\ProvinceModel');
+		$data=array(
+			'provinces'=>$ProvinceModel->getProvince(),
+		);
+		return view('dashboard/mapdata',$data);
+	}
 }

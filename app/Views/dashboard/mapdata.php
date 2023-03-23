@@ -19,12 +19,12 @@ print 'var simplemaps_countrymap_mapdata={
       //Location defaults
       location_description: "รายละเอียด",
       location_url: "",
-      location_color: "#0fef72",
+      location_color: "#0000ff",
       location_opacity: 0.8,
       location_hover_opacity: 1,
-      location_size: 15,
+      location_size: 10,
       location_type: "square",
-      location_image_source: "frog.png",
+      location_image_source: "'.site_url('images/mou.png').'",
       location_border_color: "#FFFFFF",
       location_border: 2,
       location_hover_border: 2.5,
@@ -74,8 +74,12 @@ print 'var simplemaps_countrymap_mapdata={
     },
     state_specific: {
       THA374: {
-        color: "#00ff1c",
-        name: "แม่ฮ่องสอน"
+        color: "#990000",
+        name: "แม่ฮ่องสอน",
+        hover_color: "#000099",
+        description: "MOU 51 ฉบับ",
+        url: "http://google.com",
+        image_url: "http://localhost/ocs/images/mou.png",
       },
       THA375: {
         color: "#00ff1c",
