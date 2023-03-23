@@ -15,7 +15,7 @@ $half=round($max_mou/2);
     <title>Country Map Example</title>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.3/jquery.min.js"></script>
     <script src="<?php print site_url('public/dashboard/mapdata');?>"></script>
-    <script src="<?php print site_url();?>map/countrymap.js"></script>
+    <script src="<?php print site_url();?>map/countrymap.js?d=<?php print date('Y-m-d'); ?>"></script>
   </head>
   <body>
     <div id="map"></div>
