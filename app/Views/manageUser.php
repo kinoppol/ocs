@@ -36,6 +36,9 @@
             }
                                                              $user['user_type']=isset($userRegData[$user['user_id']]['user_type'])?user_type($userRegData[$user['user_id']]['user_type']):false;                                     
             }
+            if(empty($user['org_code'])){
+                $org_name='';
+            }
             if(!empty($schools[$user['org_code']])){
                 $org_name=$schools[$user['org_code']];
             }
