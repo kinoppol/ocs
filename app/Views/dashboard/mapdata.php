@@ -7,13 +7,14 @@ foreach($mou as $m){
 }
 $max_mou=max($mc);
 
+
 $province_str='';
 foreach($provinces as $p){
     if(!empty($province_str))$province_str.=",\n";
     $province_str.=$p->mapcode.': {
         color: "'.mapPercentageToGreen($mc[$p->mapcode]/$max_mou*100).'",
         name: "'.$p->province_name.'",
-        description: "'.$mc[$p->mapcode].'"
+        description: "มี '.$mc[$p->mapcode].' ฉบับ"
       }';
 }
 
