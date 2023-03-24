@@ -2,8 +2,10 @@
 //print_r($mou);
 helper('color');
 $mc=array();
+$province_code=array();
 foreach($mou as $m){
   $mc[$m->p]=$m->c;
+  $province_code[$m->p]=$m->province_code;
 }
 $max_mou=max($mc);
 
@@ -14,7 +16,8 @@ foreach($provinces as $p){
     $province_str.=$p->mapcode.': {
         color: "'.mapPercentageToGreen($mc[$p->mapcode]/$max_mou*100).'",
         name: "'.$p->province_name.'",
-        description: "มี '.$mc[$p->mapcode].' ฉบับ"
+        description: "มี MOU '.$mc[$p->mapcode].' ฉบับ",
+        url: "'.site_url('public/dashboard/mou/?province='.$province_code[$p->mapcode]).'"
       }';
 }
 
