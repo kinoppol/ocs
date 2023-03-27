@@ -45,10 +45,34 @@ class Dashboard extends BaseController
 				$detail['active']='N';
 			}
 		}
+
+		if(!empty($_POST['aval'])&&!empty($_POST['mexp'])&&!empty($_POST['exp'])){
+			//print 'DEFAULT';
+		}else if(!empty($_POST['exp'])&&empty($_POST['aval'])&&empty($_POST['mexp'])){
+			$detail['active']='N';
+		}else if(empty($_POST['exp'])&&empty($_POST['aval'])&&!empty($_POST['mexp'])){
+			$detail['active']='C';
+			$detail['ref_date']=date('Y-m-d',strtotime('+90 days'));
+			//print 555;
+		}else if(empty($_POST['exp'])&&!empty($_POST['aval'])&&empty($_POST['mexp'])){
+			$detail['active']='Y';
+		}
+		//print_r($detail);
+		$province_code='';
+		if(!empty($_POST['province_code'])){
+			$province_code=$_POST['province_code'];
+		}
 		
+		if(!empty($_GET['province'])){
+			$province_code=$_GET['province'];
+		}
+		if(!empty($province_code)){
+			$detail['province_code']=$province_code;
+		}
+
 			if(!empty($detail)){
 				//print_r($detail);
-				if($detail['active']=='Y'&&empty($_POST['q'])){
+				if(isset($detail['active'])&&$detail['active']=='Y'&&empty($_POST['q'])&&empty($detail['province_code'])){
 
 					$data=array(
 						'resultMOU'=>'',
@@ -64,11 +88,18 @@ class Dashboard extends BaseController
 					'resultMOU'=>'',
 				);
 			}
+			
+			$orgModel = model('App\Models\OrgModel');
+			$province = $orgModel->getProvince();
+
 			$data=array(
+				'province_code'=>$province_code,
+				'province'=>$province,
 				//'resultMOU'=>$MouModel->getMou($detail),
 				'mouTable'=>view('dashboard/mouTable',$data),
 			);
         helper('system');
+		
 		$data=array(
 			'title'=>'ข้อมูลการลงนามความร่วมมือ',
 			'mainMenu'=>'',

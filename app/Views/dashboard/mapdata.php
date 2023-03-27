@@ -36,7 +36,7 @@ print 'var simplemaps_countrymap_mapdata={
       state_url: "",
       border_size: 1.5,
       all_states_inactive: "no",
-      all_states_zoomable: "yes",
+      all_states_zoomable: "no",
       
       //Location defaults
       location_description: "รายละเอียด",

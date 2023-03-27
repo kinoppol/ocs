@@ -36,6 +36,11 @@ class MouModel extends Model
         //print_r($data);
         $db = \Config\Database::connect();
         $builder = $db->table('mou');
+        
+        if(!empty($data['province_code'])){
+            $builder->join('school','school.school_id=mou.school_id');
+            $builder->where('school.province_id',$data['province_code']);
+        }
         if(isset($data['mou_id']))$builder->where('mou_id',$data['mou_id']);
         if(isset($data['school_id'])&&!is_array($data['school_id'])&&$data['school_id']!='*'){
             $builder->where('school_id',$data['school_id']);
@@ -46,11 +51,13 @@ class MouModel extends Model
         }else if(isset($data['keyword'])){
             $builder->like('mou_sign_place',$data['keyword']);
         }
+        
+        $ref_date=date('Y-m-d');
+        if(empty($data['active'])||(!empty($data['active'])&&$data['active']=='Y')){
+            $builder->where('(mou_end_date>"'.$ref_date.'" OR no_expire="Y")');
+        }
         if(!empty($data['active'])){
-            $ref_date=date('Y-m-d');
-            if($data['active']=='Y'){
-                $builder->where('(mou_end_date>"'.$ref_date.'" OR no_expire="Y")');
-            }else if($data['active']=='C'){
+            if($data['active']=='C'){
                 $ref_start_date=date('Y-m-d');
                 $ref_end_date=$data['ref_date'];
                 $builder->where('(mou_end_date>="'.$ref_start_date.'" AND mou_end_date<="'.$ref_end_date.'" AND no_expire="N")');

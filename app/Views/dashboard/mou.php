@@ -15,6 +15,7 @@ $exp_chk='';
 	if((!empty($_GET['s'])&&($_GET['s']=='exp'||$_GET['s']=='all'))||!empty($_POST['exp'])){
 		$exp_chk=' checked';
 	}
+
 ?>
 <div class="container-fluid">
 	<form action="<?php print site_url('public/dashboard/mou'); ?>" method="post">
@@ -25,9 +26,30 @@ $exp_chk='';
 				ค้นหาข้อมูล MOU
 			</h3>
 			<div class="row">
-				<div class="col-md-10">
+				<div class="col-md-8">
                 <input type="text" class="form-control" id="q" name="q" <?php if(!empty($_POST['q'])) print ' value="'.$_POST['q'].'"' ?>/>
-				<div class="checkbox">
+			
+								 
+				</div>
+				<div class="col-md-2">
+					 <select name="province_code" class="form-select" >
+							<option value="">แสดงทุกจังหวัด</option>
+							<?php print genOption($province,$province_code);
+							?>
+						 </select>
+
+				</div>
+				<div class="col-md-2">
+					 
+					<button type="submit" class="btn btn-success btn-block">
+						ค้นหา
+					</button>
+				</div>
+			</div>
+			
+			<div class="row">
+				<div class="col-md-10">
+									<div class="checkbox">
 					<label>
 						 <input type="checkbox" name="aval" value="show"<?php print $aval_chk; ?>/> แสดง MOU ที่มีผล
 					 </label>
@@ -40,10 +62,6 @@ $exp_chk='';
 				 </div> 
 				</div>
 				<div class="col-md-2">
-					 
-					<button type="submit" class="btn btn-success btn-block">
-						ค้นหา
-					</button>
 				</div>
 			</div>
 		</div>
@@ -57,7 +75,7 @@ $exp_chk='';
 				รายการ MOU
 			</h3>
 			<?php 
-				if(empty($_POST['q'])&&(empty($_GET['s'])||(!empty($_GET['s'])&&$_GET['s']=='aval'||$_GET['s']=='all'||$_GET['s']=='exp'))){
+				if(empty($province_code)&&empty($_POST['q'])&&(empty($_GET['s'])||(!empty($_GET['s'])&&$_GET['s']=='aval'||$_GET['s']=='all'||$_GET['s']=='exp'))){
 					print "<div align=\"center\"><h3>โปรดระบุคำค้น แล้วกดปุ่มค้นหา</h3></div>";
 				}else{
 					print $mouTable;
