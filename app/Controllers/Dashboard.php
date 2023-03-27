@@ -35,29 +35,35 @@ class Dashboard extends BaseController
 			$detail['keyword']=$_POST['q'];
 			
 		}
-		if(!empty($_GET['s'])){
-			if($_GET['s']=='aval'){
-				$detail['active']='Y';
-			}else if($_GET['s']=='mexp'){
+		if(empty($_POST['spc'])){
+			if(!empty($_GET['s'])){
+				if($_GET['s']=='aval'){
+					$detail['active']='Y';
+				}else if($_GET['s']=='mexp'){
+					$detail['active']='C';
+					$detail['ref_date']=date('Y-m-d',strtotime('+90 days'));
+				}else if($_GET['s']=='exp'){
+					$detail['active']='N';
+				}
+			}
+
+			if(!empty($_POST['aval'])&&!empty($_POST['mexp'])&&!empty($_POST['exp'])){
+				//print 'DEFAULT';
+			}else if(!empty($_POST['exp'])&&empty($_POST['aval'])&&empty($_POST['mexp'])){
+				$detail['active']='N';
+			}else if(empty($_POST['exp'])&&empty($_POST['aval'])&&!empty($_POST['mexp'])){
 				$detail['active']='C';
 				$detail['ref_date']=date('Y-m-d',strtotime('+90 days'));
-			}else if($_GET['s']=='exp'){
-				$detail['active']='N';
+				//print 555;
+			}else if(empty($_POST['exp'])&&!empty($_POST['aval'])&&empty($_POST['mexp'])){
+				$detail['active']='Y';
 			}
+			//print_r($detail);
+		}else{
+			$detail['ref_date']=$_POST['end_date'];
+			$detail['available_date']=$_POST['start_date'];
 		}
 
-		if(!empty($_POST['aval'])&&!empty($_POST['mexp'])&&!empty($_POST['exp'])){
-			//print 'DEFAULT';
-		}else if(!empty($_POST['exp'])&&empty($_POST['aval'])&&empty($_POST['mexp'])){
-			$detail['active']='N';
-		}else if(empty($_POST['exp'])&&empty($_POST['aval'])&&!empty($_POST['mexp'])){
-			$detail['active']='C';
-			$detail['ref_date']=date('Y-m-d',strtotime('+90 days'));
-			//print 555;
-		}else if(empty($_POST['exp'])&&!empty($_POST['aval'])&&empty($_POST['mexp'])){
-			$detail['active']='Y';
-		}
-		//print_r($detail);
 		$province_code='';
 		if(!empty($_POST['province_code'])){
 			$province_code=$_POST['province_code'];

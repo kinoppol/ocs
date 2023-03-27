@@ -11,6 +11,10 @@ class MouModel extends Model
         $builder=$db->table('mou');
         $builder->select('count(*) as c');
         if(isset($data['org_code']))$builder->where('school_id',$data['org_code']);
+        if(isset($data['ref_date'])&&isset($data['available_date'])){
+            $builder->where('(mou_end_date>"'.$data['ref_date'].'" OR no_expire="Y")');
+            $builder->where('mou_end_date<"'.$data['available_date'].'"');
+        }
         if(isset($data['active'])){
             $ref_date=date('Y-m-d');
             if(!empty($data['ref_date'])){
@@ -52,17 +56,22 @@ class MouModel extends Model
             $builder->like('mou_sign_place',$data['keyword']);
         }
         
-        $ref_date=date('Y-m-d');
-        if(empty($data['active'])||(!empty($data['active'])&&$data['active']=='Y')){
-            $builder->where('(mou_end_date>"'.$ref_date.'" OR no_expire="Y")');
-        }
-        if(!empty($data['active'])){
-            if($data['active']=='C'){
-                $ref_start_date=date('Y-m-d');
-                $ref_end_date=$data['ref_date'];
-                $builder->where('(mou_end_date>="'.$ref_start_date.'" AND mou_end_date<="'.$ref_end_date.'" AND no_expire="N")');
-            }else if($data['active']=='N'){
-                $builder->where('(mou_end_date<="'.$ref_date.'" AND no_expire="N")');
+        if(isset($data['ref_date'])&&isset($data['available_date'])){
+            $builder->where('(mou_end_date>"'.$data['ref_date'].'" OR no_expire="Y")');
+            $builder->where('mou_date>="'.$data['available_date'].'"');
+        }else{
+            $ref_date=date('Y-m-d');
+            if(empty($data['active'])||(!empty($data['active'])&&$data['active']=='Y')){
+                $builder->where('(mou_end_date>"'.$ref_date.'" OR no_expire="Y")');
+            }
+            if(!empty($data['active'])){
+                if($data['active']=='C'){
+                    $ref_start_date=date('Y-m-d');
+                    $ref_end_date=$data['ref_date'];
+                    $builder->where('(mou_end_date>="'.$ref_start_date.'" AND mou_end_date<="'.$ref_end_date.'" AND no_expire="N")');
+                }else if($data['active']=='N'){
+                    $builder->where('(mou_end_date<="'.$ref_date.'" AND no_expire="N")');
+                }
             }
         }
 
