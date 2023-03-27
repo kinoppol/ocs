@@ -40,7 +40,7 @@ $spc_chk='';
 								 
 				</div>
 				<div class="col-md-2">
-					 <select name="province_code" class="form-select" >
+					 <select name="province_code" class="form-control" >
 							<option value="">แสดงทุกจังหวัด</option>
 							<?php print genOption($province,$province_code);
 							?>

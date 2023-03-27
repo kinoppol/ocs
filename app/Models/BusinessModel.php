@@ -49,6 +49,7 @@ class BusinessModel extends Model
                     'picture'=>$row->picture,
                 );
             }
+            //print $db->getLastQuery();
         return $datas;
     }
 

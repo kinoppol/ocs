@@ -12,7 +12,6 @@
         <link rel="stylesheet" href="<?php print site_url("landing/css/font-awesome.min.css"); ?>">
         <link rel="stylesheet" href="<?php print site_url("landing/vendors/owl-carousel/owl.carousel.min.css"); ?>">
         <link rel="stylesheet" href="<?php print site_url("landing/vendors/lightbox/simpleLightbox.css"); ?>">
-        <link rel="stylesheet" href="<?php print site_url("landing/vendors/nice-select/css/nice-select.css"); ?>">
         <link rel="stylesheet" href="<?php print site_url("landing/vendors/animate-css/animate.css"); ?>">
         <link rel="stylesheet" href="<?php print site_url("landing/vendors/flaticon/flaticon.css"); ?>">
         <!-- main css -->
@@ -163,7 +162,6 @@
         <script src="<?php print site_url("landing/js/bootstrap.min.js"); ?>"></script>
         <script src="<?php print site_url("landing/js/stellar.js"); ?>"></script>
         <script src="<?php print site_url("landing/vendors/lightbox/simpleLightbox.min.js"); ?>"></script>
-        <script src="<?php print site_url("landing/vendors/nice-select/js/jquery.nice-select.min.js"); ?>"></script>
         <script src="<?php print site_url("landing/vendors/isotope/imagesloaded.pkgd.min.js"); ?>"></script>
         <script src="<?php print site_url("landing/vendors/isotope/isotope-min.js"); ?>"></script>
         <script src="<?php print site_url("landing/vendors/owl-carousel/owl.carousel.min.js"); ?>"></script>

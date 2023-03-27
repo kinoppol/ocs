@@ -119,23 +119,89 @@ class Dashboard extends BaseController
 	{
 
         helper('system');
+		
+		$businessModel = model('App\Models\BusinessModel');
+		$locationModel = model('App\Models\LocationModel');
+		$MouModel = model('App\Models\MouModel');
+		$orgModel = model('App\Models\OrgModel');
+		$province = $orgModel->getProvince();
+
+		$province_code='';
+		if(!empty($_POST['province_code'])){
+			$province_code=$_POST['province_code'];
+		}
+
+		$province=$locationModel->getProvince();
+		if(empty($_POST['q'])){
+			$business=array();			
+		}else{
+			$business=$businessModel->searchBusiness(['province_id'=>$_POST['province_code'],'q'=>$_POST['q']]);
+		}
+		$mc=array();
+		foreach($business as $b){
+			//print $b['business_id'];
+			$c=$MouModel->getMouCount(['business_id'=>$b['business_id']]);
+			//print $c;
+			$mc[$b['business_id']]=$c;
+		}
+		//print_r($mc);
+		if(!empty($_POST['q'])){
+			$data=array(
+				'business'=>$business,
+				'province_code'=>$province_code,
+				'province'=>$province,
+				'mouCount'=>$mc,
+			);
+			$data=array(
+				'businessTable'=>view('dashboard/businessTable',$data),
+			);
+		}else{
+			$data=array(
+				'province_code'=>$province_code,
+				'province'=>$province,
+			);
+		}
+		$data=array(
+			'title'=>'รายชื่อสถานประกอบการ',
+			'mainMenu'=>'',
+            'content'=>view('dashboard/business',$data),
+			'notification'=>'',
+			'task'=>'',
+		);        
+		/*
 		$data=array(
 			'title'=>'ข้อมูลสถานประกอบการ',
 			'mainMenu'=>'',
 			'content'=>view('dashboard/business'),
 			'notification'=>'',
 			'task'=>'',
-		);
+		);*/
 		return view('landing/_template',$data);
 	}
 	public function school()
 	{
-
+		
+		$orgModel = model('App\Models\OrgModel');
+		$province = $orgModel->getProvince();
+		$sc=$orgModel->getSchool();
+		$school=array();
+		foreach($sc as $k=>$v){
+			$school[$k]=$orgModel->schoolData($k);
+		}
+		$data=array(
+			'school'=>$school,
+			'province'=>$province,
+		);
+		
+		
+		$data=array(
+			'schoolTable'=>view('dashboard/schoolTable',$data),
+		);
         helper('system');
 		$data=array(
 			'title'=>'ข้อมูลสถานศึกษา',
 			'mainMenu'=>'',
-			'content'=>view('dashboard/school'),
+			'content'=>view('dashboard/school',$data),
 			'notification'=>'',
 			'task'=>'',
 		);

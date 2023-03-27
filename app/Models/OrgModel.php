@@ -62,6 +62,7 @@ class OrgModel extends Model
         foreach($data as $row){
             $ret[$row->province_code]=$row->province_name;
         }
+        ksort($ret);
             return $ret;
 
     }

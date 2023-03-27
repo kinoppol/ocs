@@ -14,7 +14,7 @@ class LocationModel extends Model
         foreach($result as $row){
             $province[$row->province_code]=$row->province_name;
         }
-
+        ksort($province);
         return $province;
     }
 
