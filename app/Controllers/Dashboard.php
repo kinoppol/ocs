@@ -182,15 +182,21 @@ class Dashboard extends BaseController
 	{
 		
 		$orgModel = model('App\Models\OrgModel');
+		$MouModel = model('App\Models\MouModel');
 		$province = $orgModel->getProvince();
 		$sc=$orgModel->getSchool();
-		$school=array();
+		$school=array();		
+		$mc=array();
 		foreach($sc as $k=>$v){
 			$school[$k]=$orgModel->schoolData($k);
+			$c=$MouModel->getMouCount(['org_code'=>$k]);
+			$mc[$k]=$c;
 		}
+
 		$data=array(
 			'school'=>$school,
 			'province'=>$province,
+			'mouCount'=>$mc,
 		);
 		
 		
