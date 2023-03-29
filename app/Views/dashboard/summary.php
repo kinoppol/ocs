@@ -61,6 +61,60 @@
 		</div>
 	</div>
 	<div class="row">
+		<div class="col-md-3">
+		  <div class="card">
+				<div class="info-box">
+				<span class="info-box-icon bg-red"><img src="https://esaraban.vec.go.th/media/logos/logo_VEC.png" width="80"></span>
+				<div class="info-box-content">
+				<span class="info-box-text">MOU ระดับ สอศ.</span>
+				<span class="info-box-number"><?php print number_format($mouCountVec); ?> ฉบับ</span>
+				<span class="info-box-text">&nbsp;</span>
+				</div>
+		  </div>
+				<a href="<?php print site_url('public/dashboard/mou?l=vec'); ?>">ดูรายละเอียด..</a>
+		  </div>
+		  </div>
+		  <div class="col-md-3">
+		  <div class="card">
+				<div class="info-box">
+				<span class="info-box-icon bg-blue"><i class="fa fa-bank"></i></span>
+				<div class="info-box-content">
+				<span class="info-box-text">ระดับสถาบันฯ</span>
+				<span class="info-box-number"><?php print number_format($mouCountInstitute); ?> ฉบับ</span>
+				<span class="info-box-text">&nbsp;</span>
+				</div>
+		  </div>
+				<a href="<?php print site_url('public/dashboard/mou?l=institute'); ?>">ดูรายละเอียด..</a>
+		  </div>
+		  </div>
+		  <div class="col-md-3">
+		  <div class="card">
+				<div class="info-box">
+				<span class="info-box-icon bg-aqua"><i class="fa fa-bank"></i></span>
+				<div class="info-box-content">
+				<span class="info-box-text">ระดับสถานศึกษา</span>
+				<span class="info-box-number"><?php print number_format($mouCountSchool); ?> ฉบับ</span>
+				<span class="info-box-text">&nbsp;</span>
+				</div>
+		  </div>
+				<a href="<?php print site_url('public/dashboard/mou?l=school'); ?>">ดูรายละเอียด..</a>
+		  </div>
+		  </div>
+		  <div class="col-md-3">
+		  <div class="card">
+				<div class="info-box">
+				<span class="info-box-icon bg-green"><i class="fa fa-briefcase"></i></span>
+				<div class="info-box-content">
+				<span class="info-box-text">ระดับ อ.กรอ.อศ.</span>
+				<span class="info-box-number"><?php print number_format($mouCountGov); ?> ฉบับ</span>
+				<span class="info-box-text">&nbsp;</span>
+				</div>
+		  </div>
+				<a href="<?php print site_url('public/dashboard/mou?l=gov'); ?>">ดูรายละเอียด..</a>
+		  </div>
+		  </div>
+	</div>
+	<div class="row">
 		<div class="col-md-6">
 			<div class="card">
 				<h5 class="card-header">

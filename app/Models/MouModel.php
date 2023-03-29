@@ -26,6 +26,19 @@ class MouModel extends Model
         if(isset($data['year'])){
             $builder->like('mou_start_date',$data['year'],'after');
         }
+        if(!empty($data['level'])){
+            if($data['level']=='vec'){
+                $builder->where('school_id','1300000000');
+            }else if($data['level']=='institute'){
+                $builder->like('school_id','1300000');
+            }else if($data['level']=='school'){
+                $builder->like('school_id','13________');
+                $builder->notlike('school_id','1300000');
+            }else if($data['level']=='gov'){
+                $builder->notlike('school_id','13_____');
+            }
+
+        }
         $mou = $builder->get()->getResult();
         //print $db->getLastQuery();
         return $mou[0]->c;
@@ -55,6 +68,20 @@ class MouModel extends Model
             $builder->where('business_id in ('.implode(',',$data['business_id']).')');
         }else if(isset($data['keyword'])){
             $builder->like('mou_sign_place',$data['keyword']);
+        }
+
+        if(!empty($data['level'])){
+            if($data['level']=='vec'){
+                $builder->where('school_id','1300000000');
+            }else if($data['level']=='institute'){
+                $builder->like('school_id','1300000');
+            }else if($data['level']=='school'){
+                $builder->like('school_id','13________');
+                $builder->notlike('school_id','1300000');
+            }else if($data['level']=='gov'){
+                $builder->notlike('school_id','13_____');
+            }
+
         }
         
         if(isset($data['ref_date'])&&isset($data['available_date'])){

@@ -9,17 +9,17 @@ $spc_chk='';
 $selectedSt='';
 
 
-	if((empty($_GET['s'])&&empty($_POST['exp'])&&empty($_POST['mexp']))||(!empty($_GET['s'])&&($_GET['s']=='aval'||$_GET['s']=='all'))||!empty($_POST['aval'])){
+	if((empty($_GET['s'])&&empty($_POST['exp'])&&empty($_POST['mexp']))||(!empty($_POST['status'])&&$_POST['status']=='available')){
 		/*$aval_chk=' checked';
 		$mexp_chk=' checked';
 		*/
 		$selectedSt='available';
 	}
-	if((!empty($_GET['s'])&&($_GET['s']=='mexp')||!empty($_POST['mexp']))){
+	if((!empty($_GET['s'])&&($_GET['s']=='mexp')||(!empty($_POST['status'])&&$_POST['status']=='closeExpire'))){
 		//$mexp_chk=' checked';
 		$selectedSt='closeExpire';
 	}
-	if((!empty($_GET['s'])&&($_GET['s']=='exp'||$_GET['s']=='all'))||!empty($_POST['exp'])){
+	if((!empty($_GET['s'])&&($_GET['s']=='exp')||(!empty($_POST['status'])&&$_POST['status']=='expired'))){
 		//$exp_chk=' checked';
 		$selectedSt='expired';
 	}
@@ -56,7 +56,7 @@ $selectedSt='';
 			</h3>
 			<div class="row">
 				<div class="col-md-8">
-                <input type="text" class="form-control" id="q" name="q" <?php if(!empty($_POST['q'])) print ' value="'.$_POST['q'].'"' ?>/>
+                <input type="text" class="form-control" id="q" name="q" <?php if(!empty($_POST['q'])) print ' value="'.$_POST['q'].'"' ?> required/>
 			
 								 
 				</div>
@@ -80,12 +80,11 @@ $selectedSt='';
 				
 			<div class="col-md-2">
 				<div class="form-group">
-					 	
 				<label>
-						 <input type="radio" name="showBy" id="byStatus" value="byStatus"<?php print $spc_chk; ?>/> แสดงตามสถานะ MOU 
+						 <input type="radio" name="showBy" id="byStatus" value="byStatus"/> แสดงตามสถานะ MOU 
 					 </label>	
 					 <label>
-						 <input type="radio" name="showBy" id="bySpc" value="bySpc"<?php print $spc_chk; ?>/> แสดงตามวันที่ระบุ
+						 <input type="radio" name="showBy" id="bySpc" value="bySpc"/> แสดงตามวันที่ระบุ
 					 </label>	
 				 </div>
 				</div>
@@ -96,7 +95,7 @@ $selectedSt='';
 					 <label for="exampleInputPassword1">
 					 แสดงตามสถานะของ MOU 
 					 </label>
-					 <select type="date" name="status" class="form-control">
+					 <select name="status" class="form-control">
 						<?php
 						$st_option=array(
 							'available'=>'MOU ที่ยังมีผลอยู่',
@@ -143,6 +142,26 @@ $selectedSt='';
 				</div>
 				
 				<div class="col-md-4">
+				<div class="form-group">
+	
+					<label for="exampleInputPassword1">
+					ระดับการลงนามความร่วมมือ 
+					</label>
+					<select name="level" class="form-control">
+					<?php
+					$selectedLv='';
+					if(!empty($level))$selectedLv=$level;
+					$level_option=array(
+						''=>'ทุกระดับ',
+						'vec'=>'สำนักงานคณะกรรมการการอาชีวศึกษา',
+						'institute'=>'สถาบันการอาชีวศึกษา',
+						'school'=>'สถานศึกษา',
+						'gov'=>'อ.กรอ.อศ.',
+					);
+						print genOption($level_option,$selectedLv);
+					?>
+					</select>
+				</div>
 				</div>
 			</div>
 		</div>

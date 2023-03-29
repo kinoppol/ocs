@@ -17,6 +17,9 @@ class Dashboard extends BaseController
 			'mouCountActive'=>$MouModel->getMouCount(['active'=>'Y']),
 			'mouCountActiveOver90Days'=>$MouModel->getMouCount(['active'=>'Y','ref_date'=>date('Y-m-d',strtotime('+90 days'))]),
 			'mouTable'=>view('dashboard/mouTable',$data),
+			'mouCountVec'=>$MouModel->getMouCount(['active'=>'Y','level'=>'vec']),
+			'mouCountInstitute'=>$MouModel->getMouCount(['active'=>'Y','level'=>'institute']),
+			'mouCountSchool'=>$MouModel->getMouCount(['active'=>'Y','level'=>'school']),'mouCountGov'=>$MouModel->getMouCount(['active'=>'Y','level'=>'gov']),
 		);
 		$data=array(
 			'title'=>'ภาพรวม',
@@ -47,21 +50,27 @@ class Dashboard extends BaseController
 				}
 			}
 
-			if(!empty($_POST['aval'])&&!empty($_POST['mexp'])&&!empty($_POST['exp'])){
+			if(empty($_POST['status'])){
 				//print 'DEFAULT';
-			}else if(!empty($_POST['exp'])&&empty($_POST['aval'])&&empty($_POST['mexp'])){
-				$detail['active']='N';
-			}else if(empty($_POST['exp'])&&empty($_POST['aval'])&&!empty($_POST['mexp'])){
+			}else if(!empty($_POST['status'])&&$_POST['status']=='avaliable'){
+				$detail['active']='Y';
+			}else if(!empty($_POST['status'])&&$_POST['status']=='closeExpire'){
 				$detail['active']='C';
 				$detail['ref_date']=date('Y-m-d',strtotime('+90 days'));
 				//print 555;
-			}else if(empty($_POST['exp'])&&!empty($_POST['aval'])&&empty($_POST['mexp'])){
-				$detail['active']='Y';
+			}else if(!empty($_POST['status'])&&$_POST['status']=='expired'){
+				$detail['active']='N';
 			}
 			//print_r($detail);
 		}else{
 			$detail['ref_date']=$_POST['end_date'];
 			$detail['available_date']=$_POST['start_date'];
+		}
+		if(!empty($_POST['level'])){
+			$detail['level']=$_POST['level'];
+		}
+		if(!empty($_GET['l'])){
+			$detail['level']=$_GET['l'];
 		}
 
 		$province_code='';
@@ -102,6 +111,7 @@ class Dashboard extends BaseController
 				'province_code'=>$province_code,
 				'province'=>$province,
 				//'resultMOU'=>$MouModel->getMou($detail),
+				'level'=>!empty($detail['level'])?$detail['level']:'',
 				'mouTable'=>view('dashboard/mouTable',$data),
 			);
         helper('system');
