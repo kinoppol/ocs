@@ -6,22 +6,43 @@ $aval_chk='';
 $mexp_chk='';
 $exp_chk='';
 $spc_chk='';
+$selectedSt='';
+
+
 	if((empty($_GET['s'])&&empty($_POST['exp'])&&empty($_POST['mexp']))||(!empty($_GET['s'])&&($_GET['s']=='aval'||$_GET['s']=='all'))||!empty($_POST['aval'])){
-		$aval_chk=' checked';
+		/*$aval_chk=' checked';
 		$mexp_chk=' checked';
+		*/
+		$selectedSt='available';
 	}
 	if((!empty($_GET['s'])&&($_GET['s']=='mexp')||!empty($_POST['mexp']))){
-		$mexp_chk=' checked';
+		//$mexp_chk=' checked';
+		$selectedSt='closeExpire';
 	}
 	if((!empty($_GET['s'])&&($_GET['s']=='exp'||$_GET['s']=='all'))||!empty($_POST['exp'])){
-		$exp_chk=' checked';
+		//$exp_chk=' checked';
+		$selectedSt='expired';
 	}
 
-	if(!empty($_POST['spc'])){
+	if(!empty($_POST['showBy'])&&$_POST['showBy']=='bySpc'){
 		$spc_chk=' checked';
 		$aval_chk='';
 		$mexp_chk='';
 		$exp_chk='';
+		$_SESSION['FOOTSCRIPT'].='
+			$(function(){
+				bySpc();
+					$("#bySpc").prop("checked",true);
+			});
+		';
+	}else{
+		$_SESSION['FOOTSCRIPT'].='
+		$(function(){
+			bySt();
+				$("#byStatus").prop("checked",true);
+		});
+	';
+
 	}
 
 ?>
@@ -76,9 +97,14 @@ $spc_chk='';
 					 แสดงตามสถานะของ MOU 
 					 </label>
 					 <select type="date" name="status" class="form-control">
-							<option value="available">MOU ที่ยังมีผลอยู่</option>
-							<option value="closeExpire">MOU ที่ใกล้หมดอายุ (หมดอายุภายใน 90 วัน)</option>
-							<option value="expired">MOU ที่หมดอายุแล้ว</option>
+						<?php
+						$st_option=array(
+							'available'=>'MOU ที่ยังมีผลอยู่',
+							'closeExpire'=>'MOU ที่ใกล้หมดอายุ',
+							'expired'=>'MOU ที่หมดอายุแล้ว',
+						);
+							print genOption($st_option,$selectedSt);
+						?>
 					 </select>
 				 </div>
 				</div>
@@ -142,10 +168,8 @@ $spc_chk='';
 	</div>
 </div>
 <?php
-$_SESSION['FOOTSCRIPT']='
+$_SESSION['FOOTSCRIPT'].='
 		$(function(){
-			bySt();
-			$("#byStatus").prop("checked",true);
 			$("#byStatus").change(function(){
 				if($("#byStatus").is(":checked")){
 					bySt();
