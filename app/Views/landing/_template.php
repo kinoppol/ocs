@@ -206,6 +206,8 @@
                 } );
 			}
 	);
+	<?php print $_SESSION['FOOTSCRIPT']; ?>
 			</script>
+            <?php print $_SESSION['FOOTSYSTEM']; ?>
     </body>
 </html>

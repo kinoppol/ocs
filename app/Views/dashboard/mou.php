@@ -56,33 +56,35 @@ $spc_chk='';
 			</div>
 			
 			<div class="row">
-				<div class="col-md-4">
-									<div class="checkbox">
-					<label>
-						 <input type="checkbox" name="aval" value="show"<?php print $aval_chk; ?>/> แสดง MOU ที่มีผล
-					 </label>
-					 <label>
-						 <input type="checkbox" name="mexp" value="show"<?php print $mexp_chk; ?>/> แสดง MOU ที่ใกล้หมดอายุ
-					 </label>			
-					 <label>
-						 <input type="checkbox" name="exp" value="show"<?php print $exp_chk; ?>/> แสดง MOU ที่หมดอายุ
-					 </label>	
-					 
-					
-				 </div> 
-				</div>
 				
-				<div class="col-md-2">
+			<div class="col-md-2">
 				<div class="form-group">
 					 	
 				<label>
-						 <input type="checkbox" name="spc" value="show"<?php print $spc_chk; ?>/> แสดง MOU ที่มีผลตามวันที่ระบุ
+						 <input type="radio" name="showBy" id="byStatus" value="byStatus"<?php print $spc_chk; ?>/> แสดงตามสถานะ MOU 
 					 </label>	
-
+					 <label>
+						 <input type="radio" name="showBy" id="bySpc" value="bySpc"<?php print $spc_chk; ?>/> แสดงตามวันที่ระบุ
+					 </label>	
 				 </div>
 				</div>
 
-				<div class="col-md-2">
+			<div class="col-md-4" id="statusOption">
+				<div class="form-group">
+	
+					 <label for="exampleInputPassword1">
+					 แสดงตามสถานะของ MOU 
+					 </label>
+					 <select type="date" name="status" class="form-control">
+							<option value="available">MOU ที่ยังมีผลอยู่</option>
+							<option value="closeExpire">MOU ที่ใกล้หมดอายุ (หมดอายุภายใน 90 วัน)</option>
+							<option value="expired">MOU ที่หมดอายุแล้ว</option>
+					 </select>
+				 </div>
+				</div>
+				
+
+				<div class="col-md-2" id="dateStartOption">
 				<div class="form-group">
 					 
 					 <label for="exampleInputPassword1">
@@ -98,7 +100,7 @@ $spc_chk='';
 				 </div>
 				</div>
 
-				<div class="col-md-2">
+				<div class="col-md-2" id="dateEndOption">
 				<div class="form-group">
 	
 					 <label for="exampleInputPassword1">
@@ -114,7 +116,7 @@ $spc_chk='';
 				 </div>
 				</div>
 				
-				<div class="col-md-2">
+				<div class="col-md-4">
 				</div>
 			</div>
 		</div>
@@ -139,3 +141,34 @@ $spc_chk='';
 	</div>
 	</div>
 </div>
+<?php
+$_SESSION['FOOTSCRIPT']='
+		$(function(){
+			bySt();
+			$("#byStatus").prop("checked",true);
+			$("#byStatus").change(function(){
+				if($("#byStatus").is(":checked")){
+					bySt();
+				}
+			});
+
+			
+			$("#bySpc").change(function(){
+				if($("#bySpc").is(":checked")){
+					bySpc();
+				}
+			});
+		});
+
+		function bySt(){
+			$("#statusOption").show();
+			$("#dateStartOption").hide();
+			$("#dateEndOption").hide();
+		}
+
+		function bySpc(){
+			$("#statusOption").hide();
+			$("#dateStartOption").show();
+			$("#dateEndOption").show();
+		}
+';
