@@ -47,7 +47,7 @@ helper('org');
                             print $s->latitude_longitude;
                             ?>" class="btn btn-success" target="_blank" title="ที่ตั้ง"><i class="fa fa-map-marker"></i></a>
 							<a href="<?php
-                            print site_url('dashboard/school_detail').'?id='.$s->school_id;
+                            print site_url('public/dashboard/mou').'?gid='.$s->school_id;
                             ?>" class="btn btn-warning" title="รายละเอียด"><i class="fa fa-file-text-o"></i></a>
 						</td>
 					</tr>

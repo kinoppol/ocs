@@ -84,10 +84,14 @@ class Dashboard extends BaseController
 		if(!empty($province_code)){
 			$detail['province_code']=$province_code;
 		}
+		
+		if(!empty($_GET['gid'])){
+			$detail['school_id']=$_GET['gid'];
+		}
 
 			if(!empty($detail)){
 				//print_r($detail);
-				if(isset($detail['active'])&&$detail['active']=='Y'&&empty($_POST['q'])&&empty($detail['province_code'])){
+				if(isset($detail['active'])&&$detail['active']=='Y'&&empty($_POST['q'])&&empty($detail['province_code'])&&empty($_GET['gid'])){
 
 					$data=array(
 						'resultMOU'=>'',
@@ -199,7 +203,7 @@ class Dashboard extends BaseController
 		$mc=array();
 		foreach($sc as $k=>$v){
 			$school[$k]=$orgModel->schoolData($k);
-			$c=$MouModel->getMouCount(['org_code'=>$k]);
+			$c=$MouModel->getMouCount(['org_code'=>$k,'active'=>'Y']);
 			$mc[$k]=$c;
 		}
 
