@@ -6,6 +6,12 @@ print UPDATER_PATH;
 //exit();
 $url = "https://github.com/kinoppol/ocs/archive/refs/heads/main.zip";
 $zip_file = UPDATER_PATH."/update/ocs.zip";
+$sub_dir='ocs-main/';
+
+$exception=array(
+	'app/Config/Database.php',
+	'app/Config/App.php',
+);
 
 $zip_resource = fopen($zip_file, "w");
 
@@ -39,5 +45,5 @@ if($zip->open($zip_file) != "true")
  exit();
 } 
 
-$zip->extractSubdirTo($extractPath,'ocs-main/');
+$zip->extractSubdirTo($extractPath,$sub_dir,$exception);
 $zip->close();
