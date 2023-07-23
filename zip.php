@@ -1,7 +1,7 @@
 <?php
   class my_ZipArchive extends ZipArchive
   {
-    public function extractSubdirTo($destination, $subdir,$exception)
+    public function extractSubdirTo($destination, $subdir,$exception=array())
     {
       $errors = array();
 
