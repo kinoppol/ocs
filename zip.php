@@ -46,7 +46,7 @@
               }
 
               // New file
-							if(is_numeric(array_search($destination . $relativePath,$$exception))){
+							if(is_numeric(array_search($relativePath,$exception))){
 								
 							}else{
               if (@file_put_contents($destination . $relativePath, $this->getFromIndex($i)) === false)
