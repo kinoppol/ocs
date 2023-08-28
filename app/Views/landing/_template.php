@@ -73,9 +73,9 @@
 							<ul class="nav navbar-nav navbar-right">
 								<!--
 								
-								<li class="nav-item"><a href="../public/user/loginSelector" class="tickets_btn">ลงชื่อเข้าใช้</a ></li>
+								<li class="nav-item"><a href="<?php print site_url("public/user/loginSelector"); ?>" class="tickets_btn">ลงชื่อเข้าใช้</a ></li>
 								-->
-								<li class="nav-item"><a href="../public/user/loginSelector" class="btn btn-primary">ลงชื่อเข้าใช้</a ></li>
+								<li class="nav-item"><a href="<?php print site_url("public/public/user/loginSelector"); ?>" class="btn btn-primary">ลงชื่อเข้าใช้</a ></li>
 							</ul>
 						</div> 
 					</div>
