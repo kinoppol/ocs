@@ -20,11 +20,11 @@
 
 		<link rel="stylesheet" href="https://adminlte.io/themes/AdminLTE/dist/css/AdminLTE.min.css">
 
-    <!-- JQuery DataTable Css 
+    <!-- JQuery DataTable Css -->
     <link href="<?php print site_url();?>template/adminbsb/plugins/jquery-datatable/skin/bootstrap/css/dataTables.bootstrap.css" rel="stylesheet">
 
 	<link href="https://www.okler.net/previews/porto-admin/4.0.0/vendor/datatables/media/css/dataTables.bootstrap5.css" rel="stylesheet">
-		-->
+		
 		<script>
 			function order(){
 				alert("นักเรียน-นักศึกษา ครู-อาจารย์ และบุคลากรทางการศึกษา ติดต่อขอใช้บริการได้ที่งานศูนย์ข้อมูลสารสนเทศ หรือที่ศูนย์บางนาอินเตอร์เน็ต");
@@ -37,12 +37,12 @@
 			<style>
 				body{
 					font-family: 'Kanit', sans-serif;
-				}
+				}/*
 				.row {
 				display: flex;
 				justify-content: space-between;
 				}
-				.row div { padding: 1em; }
+				.row div { padding: 1em; }*/
 			</style>
     </head>
     <body style="font-family: 'Kanit', sans-serif;">
