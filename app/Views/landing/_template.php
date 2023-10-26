@@ -14,12 +14,12 @@
         <link rel="stylesheet" href="<?php print site_url("landing/vendors/lightbox/simpleLightbox.css"); ?>">
         <link rel="stylesheet" href="<?php print site_url("landing/vendors/animate-css/animate.css"); ?>">
         <link rel="stylesheet" href="<?php print site_url("landing/vendors/flaticon/flaticon.css"); ?>">
-        <!-- main css -->
+        <!-- main css 
         <link rel="stylesheet" href="<?php print site_url("landing/css/style.css"); ?>">
 		<link rel="stylesheet" href="<?php print site_url("landing/css/responsive.css"); ?>">
 
 		<link rel="stylesheet" href="https://adminlte.io/themes/AdminLTE/dist/css/AdminLTE.min.css">
-
+-->
     <!-- JQuery DataTable Css -->
     <link href="<?php print site_url();?>template/adminbsb/plugins/jquery-datatable/skin/bootstrap/css/dataTables.bootstrap.css" rel="stylesheet">
 
