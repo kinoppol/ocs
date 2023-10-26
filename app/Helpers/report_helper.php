@@ -304,7 +304,7 @@ $option='';
     }
     $select='';
     if($def=="all")$select=' selected';
-    $option.='<option value="all"'.$select.'>'.($i+543).'</option>';
+    $option.='<option value="all"'.$select.'>ทุกปี</option>';
     
 
 $ret.=$option.'</select>  ';
@@ -319,6 +319,7 @@ $option=array();
     for($i=$MAXY;$i>$MINY;$i--){
         $option[$i]=$i+543;
     }
+    $option.='<option value="all"'.$select.'>ทุกปี</option>';
 
 return $option;
 }
