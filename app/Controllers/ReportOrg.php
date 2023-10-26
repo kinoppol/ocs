@@ -96,19 +96,19 @@ class ReportOrg extends BaseController
 					if(isset($school[$mou['school_id']]))$org_name=$school[$mou['school_id']];
 					else if(isset($gov[$mou['school_id']]))$org_name=$gov[$mou['school_id']];
 
-					
+					$lim=1000;
 				$arow=array(
 					$i,
-					'school_id'=>strlim($orgArr[$mou['school_id']],35),
-					'business_id'=>$business[$mou['business_id']]['business_name'],//strlim($business[$mou['business_id']]['business_name'],35),
-					'job_description'=>strlim($business[$mou['business_id']]['job_description'],30),
+					'school_id'=>strlim($orgArr[$mou['school_id']],$lim),
+					'business_id'=>strlim($business[$mou['business_id']]['business_name'],$lim),
+					'job_description'=>strlim($business[$mou['business_id']]['job_description'],$lim),
 					'level'=>isset($mou['level'])&&$mou['level']!=''?'ระดับ '.$mou['level']:'',
 					'investment'=>strlim(isset($mou['investment'])&&$mou['investment']!=''?$mou['investment']:'ยังไม่มี',10),
 					'support_edu'=>$supEdu,
 					//'mou_date'=>dateThai($mou['mou_date']),
 					'mou_start_date'=>dateThai($mou['mou_start_date']),
 					'mou_end_date'=>$mou['no_expire']=='N'?dateThai($mou['mou_end_date']):'ไม่ได้ระบุ',
-					'mou_sign_place'=>strlim($mou['mou_sign_place'],30),
+					'mou_sign_place'=>strlim($mou['mou_sign_place'],$lim),
 					'note'=>$trainingPlace,
 				);
 				if(!$print)array_push($arow,'<a href="'.site_url('docs/mou/'.$mou['mou_file']).'" class="btn btn-danger" target="_blankf"><i class="material-icons">picture_as_pdf</i> ดูไฟล์</a>');
@@ -279,17 +279,17 @@ class ReportOrg extends BaseController
 				if($cur->skill_08=='Y'){if($KG!='')$KG.='<br>';$KG.=$skill['8'];}				
 				if($cur->skill_09=='Y'){if($KG!='')$KG.='<br>';$KG.=$skill['9'];}				
 				if($cur->skill_10=='Y'){if($KG!='')$KG.='<br>';$KG.=$skill['10'];}
-
+				$lim=1000;
 				$resultRows[]=array(
 					$i,
-					'business_id'=>$business[$cur->business_id]['business_name'],//strlim($business[$cur->business_id]['business_name'],35),
-					'curriculum_name'=>strlim($cur->curriculum_name,25),	
+					'business_id'=>strlim($business[$cur->business_id]['business_name'],$lim),
+					'curriculum_name'=>strlim($cur->curriculum_name,$lim),	
 					'support_vc_edu'=>$cur->support_vc_edu=='Y'?$check:'',
 					'support_hvc_edu'=>$cur->support_hvc_edu=='Y'?$check:'',
 					'support_btech_edu'=>$cur->support_btech_edu=='Y'?$check:'',
 					'support_short_course'=>$cur->support_short_course=='Y'?$check:'',
 					'support_no_specific'=>$cur->support_no_specific=='Y'?$check:'',	
-					'Skill_Gap'=>strlim($cur->skill_gap,20),			
+					'Skill_Gap'=>strlim($cur->skill_gap,$lim),			
 					'scurve'=>$KG,			
 					'curriculum_hour'=>$cur->curriculum_hour,			
 					'curriculum_target'=>$cur->curriculum_target,	
