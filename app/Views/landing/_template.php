@@ -219,7 +219,9 @@
         dom: 'Bfrtip',
         responsive: true,
         buttons: [
-             'excel', /*{ // กำหนดพิเศษเฉพาะปุ่ม pdf
+             {"extend": 'excel', // ปุ่มสร้าง pdf ไฟล์
+                "text": ' Excel ', // ข้อความที่แสดง
+			}, /*{ // กำหนดพิเศษเฉพาะปุ่ม pdf
                 "extend": 'pdf', // ปุ่มสร้าง pdf ไฟล์
                 "text": 'PDF', // ข้อความที่แสดง
                 "pageSize": 'A4',   // ขนาดหน้ากระดาษเป็น A4           
