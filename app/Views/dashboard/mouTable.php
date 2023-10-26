@@ -3,7 +3,7 @@
 helper('thai');
 helper('org');
 ?>
-<table class="table dataTable">
+<table class="table js-exportable dataTable">
 				<thead>
 					<tr>
 						<th>
