@@ -319,7 +319,7 @@ $option=array();
     for($i=$MAXY;$i>$MINY;$i--){
         $option[$i]=$i+543;
     }
-    //$option.='<option value="all">ทุกปี</option>';
+    $option['all']='ทุกปี';
 
 return $option;
 }
