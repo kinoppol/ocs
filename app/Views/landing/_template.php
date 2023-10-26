@@ -221,7 +221,7 @@
         buttons: [
              'excel', { // กำหนดพิเศษเฉพาะปุ่ม pdf
                 "extend": 'pdf', // ปุ่มสร้าง pdf ไฟล์
-                "text": '<span class="glyphicon glyphicon-pencil"></span>',"className": 'btn btn-default btn-xs', // ข้อความที่แสดง
+                "text": 'PDF', // ข้อความที่แสดง
                 "pageSize": 'A4',   // ขนาดหน้ากระดาษเป็น A4           
                 "pageOrientation": 'landscape', 
                 "customize":function(doc){ // ส่วนกำหนดเพิ่มเติม ส่วนนี้จะใช้จัดการกับ pdfmake
