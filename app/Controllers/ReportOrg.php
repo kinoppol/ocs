@@ -61,12 +61,16 @@ class ReportOrg extends BaseController
 		);
 		if(!$print)array_push($resultHead,'ไฟล์ MOU');
 		if(isset($_POST['year'])){
-
-			$caption='<b>'.$title.'</b><br>ระหว่าง สถานประกอบการและ'.$org_name.'ปี พ.ศ. '.($_POST['year']+543).'<br>';//.$org_name;
+			$year_str='';
+			if($_POST['year']!='all'){
+				$year_str='ปี พ.ศ. '.($_POST['year']+543);
+			}
+			$caption='<b>'.$title.'</b><br>ระหว่าง สถานประกอบการและ'.$org_name.$year_str.'<br>';//.$org_name;
 
 			$mouModel = model('App\Models\MouModel');
-			$resultData=$mouModel->getMou(['year'=>$_POST['year'],
-											'school_id'=>$org_id]);
+			$filter['school_id']=$org_id;
+			if($_POST['year']!='all')$filter['year']=$_POST['year'];
+			$resultData=$mouModel->getMou($filter);
 			
 			$school=$resultData['school'];
 			$school['1300000000']='สอศ.';
@@ -252,11 +256,12 @@ class ReportOrg extends BaseController
 		);
 		if(isset($_POST['year'])){
 
-			$caption=$title.' ปี พ.ศ. '.($_POST['year']+543);
-
+			$caption=$title;
+			if($_POST['year']!='all')$caption.=' ปี พ.ศ. '.($_POST['year']+543);
 			$mouModel = model('App\Models\MouModel');
-			$resultData=$mouModel->curriculumGet(['curriculum_year'=>$_POST['year'],
-											'school_id'=>$org_id]);
+			$filter['school_id']=$org_id;
+			if($_POST['year']!='all')$filter['curriculum_year']=$_POST['year'];
+			$resultData=$mouModel->curriculumGet($filter);
 			
 			//$school=$resultData['school'];
 			$business=$resultData['business'];
@@ -422,11 +427,12 @@ class ReportOrg extends BaseController
 		);
 		if(isset($_POST['year'])){
 
-			$caption=$title.$org_name.' ปี พ.ศ. '.($_POST['year']+543).'<br>';
-
+			$caption=$title.$org_name;
+			if($_POST['year']!='all')$caption.=' ปี พ.ศ. '.($_POST['year']+543).'<br>';
 			$mouModel = model('App\Models\MouModel');
-			$resultData=$mouModel->resultGet(['result_year'=>$_POST['year'],
-											'school_id'=>$org_id]);
+			$filter['school_id']=$org_id;
+			if($_POST['year']!='all')$filter['result_year']=$_POST['year'];
+			$resultData=$mouModel->resultGet($filter);
 			
 			//$school=$resultData['school'];
 			$business=$resultData['business'];
