@@ -193,21 +193,15 @@
 	$(function () {
     //$('.js-example-basic-single').select2();
     $('.dataTable').DataTable( {
-                    "oLanguage": {
-                    "sLengthMenu": "แสดง&nbsp; _MENU_ &nbsp;รายการ ต่อหน้า",
-                    "sZeroRecords": "ไม่พบข้อมูลที่ค้นหา",
-                    "sInfo": "แสดงรายการที่ &nbsp; _START_ &nbsp;ถึง&nbsp; _END_ &nbsp;จากทั้งหมด&nbsp; _TOTAL_ &nbsp;รายการ",
-                    "sInfoEmpty": "แสดงรายการที่&nbsp; 0 &nbsp;ถึงรายการที่&nbsp; 0 &nbsp;จากทั้งหมด&nbsp; 0 &nbsp;รายการ",
-                    "sInfoFiltered": "(จากรายการทั้งหมด&nbsp; _MAX_ &nbsp;รายการ)",
+        "oLanguage": {
+                    "sLengthMenu": "แสดง _MENU_ รายการ ต่อหน้า",
+                    "sZeroRecords": "ไม่เจอข้อมูลที่ค้นหา",
+                    "sInfo": "แสดง _START_ ถึง _END_ ของ _TOTAL_ รายการ",
+                    "sInfoEmpty": "แสดง 0 ถึง 0 ของ 0 รายการ",
+                    "sInfoFiltered": "(จากรายการทั้งหมด _MAX_ รายการ)",
                     "sSearch": "<i class=\"material-icons\">filter_list</i> กรอง :",
-					"oPaginate": {
-                            "sFirst": "เริ่มต้น",
-                            "sPrevious": "ก่อนหน้า",
-                            "sNext": "ถัดไป",
-                            "sLast": "สุดท้าย"
-              		}
                                   },
-								  dom: 'Bfrtip',
+        dom: 'Bfrtip',
         responsive: true,
         buttons: [
              'excel', { // กำหนดพิเศษเฉพาะปุ่ม pdf
@@ -225,7 +219,7 @@
             }, // สิ้นสุดกำหนดพิเศษปุ่ม pdf
              'print'
         ]
-                });
+    });
 			}
 	);
 	<?php print $_SESSION['FOOTSCRIPT']; ?>
