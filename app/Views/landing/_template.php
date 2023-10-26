@@ -220,7 +220,7 @@
         responsive: true,
         buttons: [
              {"extend": 'excel', // ปุ่มสร้าง pdf ไฟล์
-                "text": '<button> Excel </button>', // ข้อความที่แสดง
+                "text": '<button class="btn btn-success btn-xs"> Excel </button>', // ข้อความที่แสดง
 			}, /*{ // กำหนดพิเศษเฉพาะปุ่ม pdf
                 "extend": 'pdf', // ปุ่มสร้าง pdf ไฟล์
                 "text": 'PDF', // ข้อความที่แสดง
