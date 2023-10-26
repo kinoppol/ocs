@@ -100,7 +100,7 @@ class ReportOrg extends BaseController
 				$arow=array(
 					$i,
 					'school_id'=>strlim($orgArr[$mou['school_id']],35),
-					'business_id'=>strlim($business[$mou['business_id']]['business_name'],35),
+					'business_id'=>$business[$mou['business_id']]['business_name'],//strlim($business[$mou['business_id']]['business_name'],35),
 					'job_description'=>strlim($business[$mou['business_id']]['job_description'],30),
 					'level'=>isset($mou['level'])&&$mou['level']!=''?'ระดับ '.$mou['level']:'',
 					'investment'=>strlim(isset($mou['investment'])&&$mou['investment']!=''?$mou['investment']:'ยังไม่มี',10),
