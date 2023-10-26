@@ -237,6 +237,7 @@
              'print'
         ]
     });
+	$('.buttons-pdf').html('<span class="glyphicon glyphicon-file" data-toggle="tooltip" title="Export To Excel"/>');
 			}
 	);
 	<?php print $_SESSION['FOOTSCRIPT']; ?>
