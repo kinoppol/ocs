@@ -23,8 +23,6 @@
 		<link href="https://ocs.ovec.go.th/template/adminbsb/plugins/jquery-datatable/skin/bootstrap/css/dataTables.bootstrap.css" rel="stylesheet">
     <!-- JQuery DataTable Css -->
     <link href="<?php print site_url();?>template/adminbsb/plugins/jquery-datatable/skin/bootstrap/css/dataTables.bootstrap.css" rel="stylesheet">
-
-	<link href="https://www.okler.net/previews/porto-admin/4.0.0/vendor/datatables/media/css/dataTables.bootstrap5.css" rel="stylesheet">
 		
 		<script>
 			function order(){
@@ -237,7 +235,6 @@
              'print'
         ]
     });
-	$('.buttons-pdf').html('<span class="glyphicon glyphicon-file" data-toggle="tooltip" title="Export To Excel"/>');
 			}
 	);
 	<?php print $_SESSION['FOOTSCRIPT']; ?>
