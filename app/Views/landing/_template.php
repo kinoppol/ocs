@@ -6,20 +6,20 @@
         <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
         <link rel="icon" href="<?php print site_url("images/handshake.png"); ?>" type="image/png">
         <title>OCS:ระบบฐานข้อมูลสำนักความร่วมมือ</title>
-        <!-- Bootstrap CSS -->
+        <!-- Bootstrap CSS 
         <link rel="stylesheet" href="<?php print site_url("landing/css/bootstrap.css"); ?>">
         <link rel="stylesheet" href="<?php print site_url("landing/vendors/linericon/style.css"); ?>">
         <link rel="stylesheet" href="<?php print site_url("landing/css/font-awesome.min.css"); ?>">
         <link rel="stylesheet" href="<?php print site_url("landing/vendors/owl-carousel/owl.carousel.min.css"); ?>">
         <link rel="stylesheet" href="<?php print site_url("landing/vendors/lightbox/simpleLightbox.css"); ?>">
         <link rel="stylesheet" href="<?php print site_url("landing/vendors/animate-css/animate.css"); ?>">
-        <link rel="stylesheet" href="<?php print site_url("landing/vendors/flaticon/flaticon.css"); ?>">
-        <!-- main css 
+        <link rel="stylesheet" href="<?php print site_url("landing/vendors/flaticon/flaticon.css"); ?>"> -->
+        <!-- main css -->
         <link rel="stylesheet" href="<?php print site_url("landing/css/style.css"); ?>">
 		<link rel="stylesheet" href="<?php print site_url("landing/css/responsive.css"); ?>">
 
 		<link rel="stylesheet" href="https://adminlte.io/themes/AdminLTE/dist/css/AdminLTE.min.css">
--->
+
     <!-- JQuery DataTable Css -->
     <link href="<?php print site_url();?>template/adminbsb/plugins/jquery-datatable/skin/bootstrap/css/dataTables.bootstrap.css" rel="stylesheet">
 
