@@ -452,7 +452,7 @@ class ReportOrg extends BaseController
 
 				$resultRows[]=array(
 					$i,
-					'business_id'=>strlim($business[$res->business_id]['business_name'],35),
+					'business_id'=>$business[$res->business_id]['business_name'],//strlim($business[$res->business_id]['business_name'],35),
 					'trainee_majors'=>$t_m,	
 					'trainee_amount'=>$res->trainee_amount,
 					'employee_majors'=>$e_m,
