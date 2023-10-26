@@ -302,6 +302,9 @@ $option='';
         $option.='<option value="'.$i.'"'.$select.'>'.($i+543).'</option>
         ';
     }
+    $select='';
+    if($def=="all")$select=' selected';
+    $option.='<option value="all"'.$select.'>'.($i+543).'</option>';
     
 
 $ret.=$option.'</select>  ';
