@@ -19,7 +19,8 @@
 		<link rel="stylesheet" href="<?php print site_url("landing/css/responsive.css"); ?>">
 
 		<link rel="stylesheet" href="https://adminlte.io/themes/AdminLTE/dist/css/AdminLTE.min.css">
-
+		<!-- JQuery DataTable Css -->
+		<link href="https://ocs.ovec.go.th/template/adminbsb/plugins/jquery-datatable/skin/bootstrap/css/dataTables.bootstrap.css" rel="stylesheet">
     <!-- JQuery DataTable Css -->
     <link href="<?php print site_url();?>template/adminbsb/plugins/jquery-datatable/skin/bootstrap/css/dataTables.bootstrap.css" rel="stylesheet">
 
@@ -37,12 +38,12 @@
 			<style>
 				body{
 					font-family: 'Kanit', sans-serif;
-				}/*
+				}
 				.row {
 				display: flex;
 				justify-content: space-between;
 				}
-				.row div { padding: 1em; }*/
+				.row div { padding: 1em; }
 			</style>
     </head>
     <body style="font-family: 'Kanit', sans-serif;">
