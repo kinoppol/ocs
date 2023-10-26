@@ -234,7 +234,9 @@
                     };
                 }
             }, // สิ้นสุดกำหนดพิเศษปุ่ม pdf*/
-             'print'
+			{"extend": 'print', // ปุ่มสร้าง pdf ไฟล์
+                "text": '<button class="btn btn-primary btn-xs"> พิมพ์ </button>', // ข้อความที่แสดง
+			}
         ]
     });
 			}
