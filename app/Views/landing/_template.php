@@ -200,12 +200,7 @@
                     "sInfoEmpty": "แสดงรายการที่&nbsp; 0 &nbsp;ถึงรายการที่&nbsp; 0 &nbsp;จากทั้งหมด&nbsp; 0 &nbsp;รายการ",
                     "sInfoFiltered": "(จากรายการทั้งหมด&nbsp; _MAX_ &nbsp;รายการ)",
                     "sSearch": "<i class=\"material-icons\">filter_list</i> กรอง :",
-					"oPaginate": {
-                            "sFirst": "เริ่มต้น",
-                            "sPrevious": "ก่อนหน้า",
-                            "sNext": "ถัดไป",
-                            "sLast": "สุดท้าย"
-              		}
+
                                   },
 								  dom: 'Bfrtip',
         responsive: true,
