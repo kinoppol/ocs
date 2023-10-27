@@ -32,7 +32,7 @@ class BusinessModel extends Model
     public function searchBusiness($data){
         $db = \Config\Database::connect();
         $builder = $db->table('business');
-        if(isset($data['province_id'])&&$data['province_id']!='0')$builder->where('province_id', $data['province_id']);
+        if(isset($data['province_id'])&&$data['province_id']!='all')$builder->where('province_id', $data['province_id']);
         if(isset($data['q']))$builder->like('business_name', $data['q'], 'both');
         $data=$builder->get()->getResult();
             $datas=array();
