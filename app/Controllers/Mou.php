@@ -7,7 +7,7 @@ class Mou extends BaseController
 	public function list($year='')
 	{
 		helper('user');
-		if($year=='')$year=date('Y');
+		if($year=='')$year='all';//$year=date('Y');
 		$mouModel = model('App\Models\MouModel');
 		$filter=array('school_id'=>current_user('org_code'));
 		if($year!='')$filter['year']=$year;
