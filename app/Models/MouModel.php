@@ -109,7 +109,7 @@ class MouModel extends Model
             $builder->orderBy('business_id');
         }
         
-        if(isset($data['year'])&&$data['year']!==0)$builder->like('mou_date',$data['year'],'after');
+        if(isset($data['year'])&&$data['year']!=='all')$builder->like('mou_date',$data['year'],'after');
 
         if(!empty($data['limit'])){
             $builder->limit($data['limit']);
