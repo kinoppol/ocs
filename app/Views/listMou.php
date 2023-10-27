@@ -57,7 +57,7 @@
                                     <div class="form-line">
                                 <select id="selectYearMou" class="form-control">
                                 <?php
-                                $option='';
+                                $option='<option value="all">- ทุกปี -</option>';
                                     for($i=date('Y');$i>date('Y')-10;$i--){
                                         $select='';
                                         if($year==$i)$select=' selected';

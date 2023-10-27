@@ -9,8 +9,10 @@ class Mou extends BaseController
 		helper('user');
 		if($year=='')$year=date('Y');
 		$mouModel = model('App\Models\MouModel');
+		$filter=array('school_id'=>current_user('org_code'));
+		if($year!='')$filter['year']=$year;
 		$data=array(
-			'data'=>$mouModel->getMou(['year'=>$year,'school_id'=>current_user('org_code')]),
+			'data'=>$mouModel->getMou($filter),
 			'year'=>$year,
 		);
 		$data=array(
