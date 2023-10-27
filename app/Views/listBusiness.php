@@ -50,7 +50,7 @@
                                             <div class="form-line">
                                                 <select name="province_id" id="province_id" class="form-control">
                                                     <?php
-                                                    $province['all']=' - ทุกจังหวัด - ';
+                                                    $province['0']=' - ทุกจังหวัด - ';
                                                         print genOption($province,isset($_POST['province_id'])?$_POST['province_id']:'10');
                                                     ?>
                                                 </select>
