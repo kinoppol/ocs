@@ -48,7 +48,7 @@ $data=array(array(
                     'required'=>true,
                 ),
                 array(
-                    'label'=>'ชนามสกุล',
+                    'label'=>'นามสกุล',
                     'type'=>'text',
                     'id'=>'surname',
                     'def'=>current_user('surname'),
