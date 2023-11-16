@@ -199,6 +199,7 @@ class MouModel extends Model
 		//print_r($data);
         $db = \Config\Database::connect();
         $builder = $db->table('mou');
+	unset($data['school_id']);//ป้องกันการเปลี่ยนหน่วยงานที่ทำ MOU
         $builder->where('mou_id',$mou_id);
         $result=$builder->update($data);
         //print $db->getLastQuery();
