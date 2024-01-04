@@ -94,7 +94,7 @@ class Home extends BaseController
 			$trainee=$MouModel->getResultTraineeYear($data);
 			$dnt_data[]=array(
 				'label'=>'ภาค'.$row['zone_name'].' ('.number_format($trainee,0).' คน)',
-				'percent'=>$trainee/$traineeTotalYear*100,
+				'percent'=>$traineeTotalYear==0?100:$trainee/$traineeTotalYear*100,
 				'color'=>color($row['zone_id']+2),
 			);
 		}
